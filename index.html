@@ -173,39 +173,59 @@
 
     <!-- JavaScript Logic -->
     <script>
-        let cartItemCount = 0;
+    let cartItemCount = 0;
 
-        function addToCart() {
-            cartItemCount++;
-            document.getElementById("cartCount").innerText = cartItemCount;
-            openModal();
+    function addToCart() {
+        cartItemCount++;
+        document.getElementById("cartCount").innerText = cartItemCount;
+        openModal();
+    }
+
+    function openModal() {
+        document.getElementById("checkoutModal").classList.remove("hidden");
+        document.getElementById("checkoutModal").classList.add("flex");
+    }
+
+    function closeModal() {
+        document.getElementById("checkoutModal").classList.add("hidden");
+        document.getElementById("checkoutModal").classList.remove("flex");
+    }
+
+    // WhatsApp Direct Order Logic
+    function handleCheckout(event) {
+        event.preventDefault();
+
+        // Target WhatsApp Number (Client's Number)
+        const ownerPhoneNumber = "8801700000000"; // Change this to client's WhatsApp number
+
+        // Form Inputs
+        const name = document.getElementById("custName").value;
+        const phone = document.getElementById("custPhone").value;
+        const address = document.getElementById("custAddress").value;
+
+        // Custom WhatsApp Message Format
+        const message = `Hello! I would like to place an order.%0A%0A` +
+                        `*Customer Details:*%0A` +
+                        `- Name: ${encodeURIComponent(name)}%0A` +
+                        `- Phone: ${encodeURIComponent(phone)}%0A` +
+                        `- Address: ${encodeURIComponent(address)}%0A%0A` +
+                        `*Total Items in Cart:* ${cartItemCount}`;
+
+        // Redirect to WhatsApp
+        const whatsappURL = `https://wa.me/${ownerPhoneNumber}?text=${message}`;
+        window.open(whatsappURL, '_blank');
+
+        closeModal();
+    }
+
+    function setBrandName(customName) {
+        const brandTitle = document.getElementById("brandName");
+        if (brandTitle) {
+            brandTitle.innerText = customName;
         }
+    }
 
-        function openModal() {
-            document.getElementById("checkoutModal").classList.remove("hidden");
-            document.getElementById("checkoutModal").classList.add("flex");
-        }
-
-        function closeModal() {
-            document.getElementById("checkoutModal").classList.add("hidden");
-            document.getElementById("checkoutModal").classList.remove("flex");
-        }
-
-        function handleCheckout(event) {
-            event.preventDefault();
-            const name = document.getElementById("custName").value;
-            alert(`Thank you ${name}! Your order has been placed successfully.`);
-            closeModal();
-        }
-
-        function setBrandName(customName) {
-            const brandTitle = document.getElementById("brandName");
-            if (brandTitle) {
-                brandTitle.innerText = customName;
-            }
-        }
-
-        setBrandName("Style Nest");
+    setBrandName("Style Nest");
     </script>
 </body>
 </html>
