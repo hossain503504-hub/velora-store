@@ -32,6 +32,14 @@
             box-shadow: 0 0 25px rgba(168, 85, 247, 0.4);
         }
     </style>
+
+    <!-- EmailJS SDK (নতুন যুক্ত হলো) -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("YOUR_PUBLIC_KEY");
+        })();
+    </script>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans pb-20 selection:bg-purple-500 selection:text-white">
 
@@ -145,13 +153,13 @@
         </div>
     </section>
 
-    <!-- Glassmorphic Checkout Modal -->
+<!-- Glassmorphic Checkout Modal -->
     <div id="checkoutModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md hidden items-center justify-center p-4 z-50">
         <div class="glass-card w-full max-w-sm rounded-3xl p-6 shadow-2xl relative border border-purple-500/30">
             <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white font-bold text-xl">&times;</button>
             
             <h3 class="text-xl font-black text-white tracking-wide mb-1">Instant Checkout</h3>
-            <p class="text-xs text-slate-400 mb-5">Confirm your order directly via WhatsApp.</p>
+            <p class="text-xs text-slate-400 mb-5">Confirm your order directly via WhatsApp & Email.</p>
 
             <form onsubmit="handleCheckout(event)" class="space-y-4">
                 <div>
@@ -168,7 +176,7 @@
                 </div>
 
                 <button type="submit" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold py-3.5 rounded-xl hover:shadow-lg hover:shadow-emerald-500/20 transition active:scale-95">
-                    Order via WhatsApp
+                    Order via WhatsApp & Email
                 </button>
             </form>
         </div>
@@ -194,6 +202,7 @@
             document.getElementById("checkoutModal").classList.remove("flex");
         }
 
+        // Combined WhatsApp & Email Automation Logic
         function handleCheckout(event) {
             event.preventDefault();
 
@@ -203,6 +212,22 @@
             const phone = document.getElementById("custPhone").value;
             const address = document.getElementById("custAddress").value;
 
+            // 1. Send Email via EmailJS
+            const templateParams = {
+                to_name: name,
+                cust_phone: phone,
+                cust_address: address,
+                cart_count: cartItemCount
+            };
+
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                }, function(error) {
+                    console.log('FAILED...', error);
+                });
+
+            // 2. Open WhatsApp Message
             const message = `Hello! I would like to place an order.%0A%0A` +
                             `*Customer Details:*%0A` +
                             `- Name: ${encodeURIComponent(name)}%0A` +
@@ -214,6 +239,7 @@
             window.open(whatsappURL, '_blank');
 
             closeModal();
+            alert("Order placed successfully! Confirmation email & WhatsApp triggered.");
         }
 
         function setBrandName(customName) {
@@ -224,6 +250,9 @@
         }
 
         setBrandName("Style Nest");
+    </script>
+</body>
+</html>
     </script>
 </body>
 </html>
