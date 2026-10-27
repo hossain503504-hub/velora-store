@@ -1,257 +1,905 @@
+```html
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Style Nest - Ultra Futuristic Fashion Store</title>
-    <meta name="description" content="Experience high-end luxury fashion with our ultra-modern glassmorphic online store.">
-    
+    <title>Style Nest | Modern Clothing & Apparel Store</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- EmailJS SDK CDN -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
     <script>
+        // Tailwind Configuration for Custom Theme
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        neonPurple: '#a855f7',
-                        neonCyan: '#06b6d4',
-                        glassBg: 'rgba(15, 23, 42, 0.75)',
+                        brand: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                            accent: '#ff2a6d',
+                            glass: 'rgba(255, 255, 255, 0.85)',
+                            glassDark: 'rgba(15, 23, 42, 0.85)',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
     <style>
-        .glass-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        /* Custom Styles for Aesthetics */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
-        .glow-effect:hover {
-            box-shadow: 0 0 25px rgba(168, 85, 247, 0.4);
+
+        .font-display {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Glassmorphism Classes */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .dark .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .dark .glass-nav {
+            background: rgba(15, 23, 42, 0.9);
+            border-top: 1px solid rgba(51, 65, 85, 0.6);
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
+
+        /* Hide scrollbars for slick horizontal scroll */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Pulse Badge Animation */
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.08); opacity: 0.85; }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 2s infinite ease-in-out;
         }
     </style>
-
-    <!-- EmailJS SDK (নতুন যুক্ত হলো) -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function() {
-            emailjs.init("YOUR_PUBLIC_KEY");
-        })();
-    </script>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans pb-20 selection:bg-purple-500 selection:text-white">
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300 pb-24 md:pb-12">
 
-    <!-- Glassmorphic Header -->
-    <header class="w-full glass-card sticky top-0 z-50 p-4 border-b border-slate-800">
-        <div class="max-w-md mx-auto flex justify-between items-center">
-            <h1 id="brandName" class="text-2xl font-black tracking-widest bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent uppercase">
-                Style Nest
-            </h1>
-            
-            <button onclick="openModal()" class="relative bg-gradient-to-r from-purple-600 to-cyan-600 text-white px-4 py-2 rounded-xl text-xs font-bold shadow-lg shadow-purple-500/20 active:scale-95 transition">
-                🛒 Cart (<span id="cartCountBadge">0</span>)
-            </button>
+    <!-- TOP HEADER / SEARCH BAR -->
+    <header class="sticky top-0 z-40 glass-panel shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+            <!-- Brand Logo -->
+            <div class="flex items-center gap-2 cursor-pointer" onclick="filterCategory('All')">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 to-amber-500 flex items-center justify-center text-white shadow-md shadow-brand-500/20 font-display font-bold text-xl">
+                    S
+                </div>
+                <span class="font-display text-xl font-extrabold tracking-tight hidden sm:block">STYLE<span class="text-brand-600">NEST</span></span>
+            </div>
+
+            <!-- Search Bar (Daraz Style) -->
+            <div class="flex-1 max-w-2xl relative">
+                <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Search hoodies, drop-shoulders, oversized tees..." 
+                    class="w-full bg-slate-100 dark:bg-slate-800/80 text-sm pl-10 pr-10 py-2.5 rounded-full border border-slate-200 dark:border-slate-700/60 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition-all">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                <button onclick="clearSearch()" id="clearSearchBtn" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                    <i class="fa-solid fa-circle-xmark text-sm"></i>
+                </button>
+            </div>
+
+            <!-- Header Action Controls -->
+            <div class="flex items-center gap-2">
+                <!-- Theme Switcher -->
+                <button onclick="toggleDarkMode()" class="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+                    <i class="fa-solid fa-moon dark:hidden"></i>
+                    <i class="fa-solid fa-sun hidden dark:block text-amber-400"></i>
+                </button>
+
+                <!-- Header Quick Cart (Desktop) -->
+                <button onclick="toggleCartModal()" class="hidden md:flex relative p-2 text-slate-700 dark:text-slate-200 hover:text-brand-600 transition">
+                    <i class="fa-solid fa-bag-shopping text-xl"></i>
+                    <span id="desktopCartBadge" class="absolute -top-1 -right-1 bg-brand-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white dark:border-slate-900 hidden">0</span>
+                </button>
+            </div>
         </div>
     </header>
 
-    <!-- Ultra Neon Announcement Bar -->
-    <section class="max-w-md mx-auto px-3 mt-4">
-        <div class="relative overflow-hidden rounded-2xl p-0.5 bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 shadow-2xl">
-            <div class="bg-slate-900 rounded-[14px] p-4 text-center">
-                <span class="bg-purple-500/20 text-purple-300 text-[10px] font-bold px-3 py-1 rounded-full border border-purple-500/30 uppercase tracking-widest">
-                    ⚡ Cyber Edition 2026
-                </span>
-                <h2 class="text-xl font-extrabold mt-2 text-white tracking-wide">
-                    Future of Streetwear
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 pt-4 space-y-6">
+
+        <!-- PAYDAY / PROMO BANNER SECTION -->
+        <section class="relative rounded-2xl overflow-hidden shadow-xl bg-gradient-to-r from-rose-600 via-purple-600 to-indigo-700 text-white p-6 md:p-8">
+            <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div class="space-y-2 max-w-lg">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-xs font-semibold uppercase tracking-wider">
+                        <i class="fa-solid fa-bolt text-amber-300"></i> Payday Flash Sale Live
+                    </div>
+                    <h1 class="text-2xl md:text-4xl font-display font-extrabold leading-tight">UP TO 50% OFF ON URBAN STREETWEAR</h1>
+                    <p class="text-xs md:text-sm text-rose-100">Use promo code <span class="bg-amber-400 text-slate-900 font-bold px-2 py-0.5 rounded text-xs">EID50</span> for instant 50% discount at checkout!</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="applyBannerPromo()" class="px-5 py-2.5 rounded-xl bg-white text-rose-600 font-bold text-sm hover:bg-rose-50 shadow-lg hover:shadow-xl transition transform active:scale-95">
+                        Claim Discount
+                    </button>
+                </div>
+            </div>
+            <!-- Decorative Accent circles -->
+            <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="absolute -left-10 -top-10 w-40 h-40 bg-amber-400/20 rounded-full blur-2xl pointer-events-none"></div>
+        </section>
+
+        <!-- CATEGORIES SLIDER -->
+        <section class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1" id="categoryContainer">
+            <!-- Dynamic Category Chips loaded via JavaScript -->
+        </section>
+
+        <!-- FLASH SALE / SHERA DEALS HEADER -->
+        <section class="flex items-center justify-between pt-2">
+            <div class="flex items-center gap-3">
+                <h2 class="font-display text-xl md:text-2xl font-bold flex items-center gap-2">
+                    <span>Fla<span class="text-brand-600">sh</span> Sale</span>
+                    <i class="fa-solid fa-fire text-brand-500 animate-pulse"></i>
                 </h2>
-                <p class="text-xs text-slate-400 mt-1">Get 50% Instant Discount | Code: <span class="text-cyan-400 font-mono font-bold">CYBER50</span></p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Category Pills -->
-    <section class="max-w-md mx-auto px-3 my-5">
-        <div class="flex gap-2 overflow-x-auto no-scrollbar py-1">
-            <span class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-xs font-bold px-4 py-2 rounded-xl whitespace-nowrap shadow-md">🔥 All Releases</span>
-            <span class="glass-card text-slate-300 text-xs font-medium px-4 py-2 rounded-xl whitespace-nowrap hover:text-white transition">Hoodies</span>
-            <span class="glass-card text-slate-300 text-xs font-medium px-4 py-2 rounded-xl whitespace-nowrap hover:text-white transition">Jackets</span>
-            <span class="glass-card text-slate-300 text-xs font-medium px-4 py-2 rounded-xl whitespace-nowrap hover:text-white transition">T-Shirts</span>
-        </div>
-    </section>
-
-    <!-- Futuristic Product Grid (2 per row) -->
-    <section id="products" class="max-w-md mx-auto px-3 my-4">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="font-extrabold text-base tracking-wider text-slate-200 flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> Exclusive Collection
-            </h3>
-            <span class="text-xs text-purple-400 font-bold hover:underline cursor-pointer">Explore &rarr;</span>
-        </div>
-
-        <div class="grid grid-cols-2 gap-3">
-            <!-- Product 1 -->
-            <div class="glass-card p-3 rounded-2xl glow-effect transition-all duration-300 flex flex-col justify-between">
-                <div>
-                    <div class="relative overflow-hidden rounded-xl mb-3">
-                        <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500" alt="Casual Cotton T-Shirt" class="h-40 w-full object-cover rounded-xl hover:scale-110 transition duration-500">
-                        <span class="absolute top-2 left-2 bg-slate-950/80 backdrop-blur-md text-cyan-400 text-[9px] font-bold px-2 py-0.5 rounded-md border border-cyan-500/30">Top Seller</span>
-                    </div>
-                    <h4 class="text-xs font-bold text-slate-200 line-clamp-1">Casual Cyber Tee</h4>
-                    <p class="text-purple-400 font-extrabold text-sm mt-1">$25.00</p>
+                <!-- Countdown Timer -->
+                <div class="flex items-center gap-1 text-xs font-bold text-white bg-slate-900 dark:bg-slate-800 px-2.5 py-1 rounded-lg">
+                    <span id="timerHours" class="bg-brand-600 px-1 rounded">20</span>:
+                    <span id="timerMins" class="bg-brand-600 px-1 rounded">45</span>:
+                    <span id="timerSecs" class="bg-brand-600 px-1 rounded">00</span>
                 </div>
-                <button onclick="addToCart()" class="w-full mt-3 bg-gradient-to-r from-purple-600 to-cyan-600 text-white text-[11px] py-2.5 rounded-xl font-bold shadow-lg shadow-purple-500/20 active:scale-95 transition">
-                    Add to Cart
-                </button>
             </div>
+            <button onclick="filterCategory('All')" class="text-xs font-semibold text-brand-600 hover:text-brand-700 dark:text-brand-400 flex items-center gap-1">
+                Shop More <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            </button>
+        </section>
 
-            <!-- Product 2 -->
-            <div class="glass-card p-3 rounded-2xl glow-effect transition-all duration-300 flex flex-col justify-between">
-                <div>
-                    <div class="relative overflow-hidden rounded-xl mb-3">
-                        <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=500" alt="Classic Winter Hoodie" class="h-40 w-full object-cover rounded-xl hover:scale-110 transition duration-500">
-                        <span class="absolute top-2 left-2 bg-slate-950/80 backdrop-blur-md text-purple-400 text-[9px] font-bold px-2 py-0.5 rounded-md border border-purple-500/30">Limited</span>
-                    </div>
-                    <h4 class="text-xs font-bold text-slate-200 line-clamp-1">Neon Winter Hoodie</h4>
-                    <p class="text-purple-400 font-extrabold text-sm mt-1">$45.00</p>
-                </div>
-                <button onclick="addToCart()" class="w-full mt-3 bg-gradient-to-r from-purple-600 to-cyan-600 text-white text-[11px] py-2.5 rounded-xl font-bold shadow-lg shadow-purple-500/20 active:scale-95 transition">
-                    Add to Cart
-                </button>
+        <!-- PRODUCT GRID (DARAZ STYLE CARD LAYOUT) -->
+        <section>
+            <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
+                <!-- Products will be dynamically populated here via JS -->
             </div>
-
-            <!-- Product 3 -->
-            <div class="glass-card p-3 rounded-2xl glow-effect transition-all duration-300 flex flex-col justify-between">
-                <div>
-                    <div class="relative overflow-hidden rounded-xl mb-3">
-                        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500" alt="Stylish Denim Jacket" class="h-40 w-full object-cover rounded-xl hover:scale-110 transition duration-500">
-                        <span class="absolute top-2 left-2 bg-slate-950/80 backdrop-blur-md text-pink-400 text-[9px] font-bold px-2 py-0.5 rounded-md border border-pink-500/30">20% OFF</span>
-                    </div>
-                    <h4 class="text-xs font-bold text-slate-200 line-clamp-1">Cyber Denim Jacket</h4>
-                    <p class="text-purple-400 font-extrabold text-sm mt-1">$48.00 <span class="text-[10px] text-slate-500 line-through">$60</span></p>
-                </div>
-                <button onclick="addToCart()" class="w-full mt-3 bg-gradient-to-r from-purple-600 to-cyan-600 text-white text-[11px] py-2.5 rounded-xl font-bold shadow-lg shadow-purple-500/20 active:scale-95 transition">
-                    Add to Cart
-                </button>
-            </div>
-
-            <!-- Product 4 -->
-            <div class="glass-card p-3 rounded-2xl glow-effect transition-all duration-300 flex flex-col justify-between">
-                <div>
-                    <div class="relative overflow-hidden rounded-xl mb-3">
-                        <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500" alt="Graphic Tee" class="h-40 w-full object-cover rounded-xl hover:scale-110 transition duration-500">
-                        <span class="absolute top-2 left-2 bg-slate-950/80 backdrop-blur-md text-cyan-400 text-[9px] font-bold px-2 py-0.5 rounded-md border border-cyan-500/30">Hot Release</span>
-                    </div>
-                    <h4 class="text-xs font-bold text-slate-200 line-clamp-1">Graphic Street Tee</h4>
-                    <p class="text-purple-400 font-extrabold text-sm mt-1">$21.00 <span class="text-[10px] text-slate-500 line-through">$30</span></p>
-                </div>
-                <button onclick="addToCart()" class="w-full mt-3 bg-gradient-to-r from-purple-600 to-cyan-600 text-white text-[11px] py-2.5 rounded-xl font-bold shadow-lg shadow-purple-500/20 active:scale-95 transition">
-                    Add to Cart
-                </button>
-            </div>
-        </div>
-    </section>
-
-<!-- Glassmorphic Checkout Modal -->
-    <div id="checkoutModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md hidden items-center justify-center p-4 z-50">
-        <div class="glass-card w-full max-w-sm rounded-3xl p-6 shadow-2xl relative border border-purple-500/30">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white font-bold text-xl">&times;</button>
             
-            <h3 class="text-xl font-black text-white tracking-wide mb-1">Instant Checkout</h3>
-            <p class="text-xs text-slate-400 mb-5">Confirm your order directly via WhatsApp & Email.</p>
+            <!-- Empty State -->
+            <div id="emptyState" class="hidden py-16 text-center space-y-3">
+                <i class="fa-solid fa-box-open text-5xl text-slate-300 dark:text-slate-700"></i>
+                <p class="text-slate-500 dark:text-slate-400 font-medium">No products found matching your search!</p>
+                <button onclick="resetFilters()" class="px-4 py-2 text-xs font-semibold text-brand-600 border border-brand-600 rounded-lg hover:bg-brand-50 dark:hover:bg-slate-800 transition">Reset All Filters</button>
+            </div>
+        </section>
 
-            <form onsubmit="handleCheckout(event)" class="space-y-4">
-                <div>
-                    <label class="block text-[10px] font-bold text-purple-300 uppercase tracking-widest mb-1">Full Name</label>
-                    <input type="text" id="custName" required placeholder="John Doe" class="w-full bg-slate-900/80 border border-slate-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-purple-500 transition">
+    </main>
+
+    <!-- FIXED DARAZ-STYLE BOTTOM NAVIGATION BAR (Mobile & Desktop Accessible) -->
+    <nav class="fixed bottom-0 left-0 right-0 z-40 glass-nav shadow-2xl transition-all">
+        <div class="max-w-md mx-auto px-4 py-2 flex items-center justify-around">
+            
+            <!-- Home Item -->
+            <button onclick="filterCategory('All'); window.scrollTo({top: 0, behavior: 'smooth'});" class="flex flex-col items-center gap-0.5 text-brand-600 dark:text-brand-400 transition group">
+                <i class="fa-solid fa-house text-lg group-hover:scale-110 transition-transform"></i>
+                <span class="text-[11px] font-semibold">Home</span>
+            </button>
+
+            <!-- Messages / WhatsApp Support Item -->
+            <a href="https://wa.me/8801886759590?text=Hello!%20I%20have%20an%20inquiry%20regarding%20Style%20Nest." target="_blank" class="flex flex-col items-center gap-0.5 text-slate-500 dark:text-slate-400 hover:text-green-500 transition group relative">
+                <div class="relative">
+                    <i class="fa-brands fa-whatsapp text-lg group-hover:scale-110 transition-transform"></i>
+                    <span class="absolute -top-1 -right-2 bg-green-500 text-white text-[9px] font-bold px-1 rounded-full animate-pulse-slow">14</span>
                 </div>
-                <div>
-                    <label class="block text-[10px] font-bold text-purple-300 uppercase tracking-widest mb-1">Phone Number</label>
-                    <input type="tel" id="custPhone" required placeholder="017xxxxxxxx" class="w-full bg-slate-900/80 border border-slate-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-purple-500 transition">
+                <span class="text-[11px] font-medium">Messages</span>
+            </a>
+
+            <!-- Quick Action Floating Thumb -->
+            <div class="relative -top-3">
+                <button onclick="openAdminModal()" title="Vendor Admin Panel" class="w-12 h-12 rounded-full bg-gradient-to-tr from-brand-600 to-amber-500 text-white flex items-center justify-center shadow-lg shadow-brand-500/40 hover:scale-105 active:scale-95 transition transform border-2 border-white dark:border-slate-900">
+                    <i class="fa-solid fa-plus text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Cart Drawer Trigger Item -->
+            <button onclick="toggleCartModal()" class="flex flex-col items-center gap-0.5 text-slate-500 dark:text-slate-400 hover:text-brand-600 transition group relative">
+                <div class="relative">
+                    <i class="fa-solid fa-cart-shopping text-lg group-hover:scale-110 transition-transform"></i>
+                    <span id="mobileCartBadge" class="absolute -top-1.5 -right-2.5 bg-brand-600 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
                 </div>
-                <div>
-                    <label class="block text-[10px] font-bold text-purple-300 uppercase tracking-widest mb-1">Delivery Address</label>
-                    <textarea id="custAddress" required rows="2" placeholder="House, Road, Area, City..." class="w-full bg-slate-900/80 border border-slate-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-purple-500 transition"></textarea>
+                <span class="text-[11px] font-medium">Cart</span>
+            </button>
+
+            <!-- Admin / Account Item -->
+            <button onclick="openAdminModal()" class="flex flex-col items-center gap-0.5 text-slate-500 dark:text-slate-400 hover:text-brand-600 transition group">
+                <i class="fa-solid fa-user-gear text-lg group-hover:scale-110 transition-transform"></i>
+                <span class="text-[11px] font-medium">Account</span>
+            </button>
+
+        </div>
+    </nav>
+
+    <!-- SHOPPING CART DRAWER MODAL -->
+    <div id="cartModal" class="fixed inset-0 z-50 hidden transition-opacity duration-300">
+        <!-- Backdrop -->
+        <div onclick="toggleCartModal()" class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm"></div>
+
+        <!-- Drawer Body -->
+        <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white dark:bg-slate-900 shadow-2xl flex flex-col justify-between transform transition-transform duration-300">
+            <!-- Cart Header -->
+            <div class="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-bag-shopping text-brand-600 text-xl"></i>
+                    <h3 class="font-display font-bold text-lg">Your Shopping Bag</h3>
+                </div>
+                <button onclick="toggleCartModal()" class="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Cart Items List -->
+            <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-4 space-y-3 divide-y divide-slate-100 dark:divide-slate-800/60">
+                <!-- Dynamically populated -->
+            </div>
+
+            <!-- Cart Footer Summary & Checkout Options -->
+            <div class="p-4 border-t border-slate-200 dark:border-slate-800 space-y-3 bg-slate-50 dark:bg-slate-900/50">
+                
+                <!-- Promo Code Box -->
+                <div class="flex gap-2">
+                    <input type="text" id="couponInput" placeholder="Promo Code (e.g. EID50)" class="flex-1 text-xs px-3 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 uppercase focus:outline-none focus:ring-1 focus:ring-brand-500">
+                    <button onclick="applyCoupon()" class="px-3 py-2 bg-slate-800 dark:bg-slate-700 text-white text-xs font-bold rounded-lg hover:bg-slate-900 transition">Apply</button>
+                </div>
+                <p id="couponMsg" class="text-[11px] hidden font-semibold"></p>
+
+                <!-- Cost Summary -->
+                <div class="space-y-1 text-xs text-slate-600 dark:text-slate-300">
+                    <div class="flex justify-between">
+                        <span>Subtotal:</span>
+                        <span id="cartSubtotal" class="font-semibold text-slate-900 dark:text-white">৳0</span>
+                    </div>
+                    <div class="flex justify-between text-green-600 dark:text-green-400 hidden" id="discountRow">
+                        <span>Discount:</span>
+                        <span id="cartDiscount" class="font-semibold">-৳0</span>
+                    </div>
+                    <div class="flex justify-between text-sm font-bold text-slate-900 dark:text-white pt-1 border-t border-slate-200 dark:border-slate-800">
+                        <span>Total Payable:</span>
+                        <span id="cartTotal" class="text-brand-600 dark:text-brand-400">৳0</span>
+                    </div>
                 </div>
 
-                <button type="submit" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold py-3.5 rounded-xl hover:shadow-lg hover:shadow-emerald-500/20 transition active:scale-95">
-                    Order via WhatsApp & Email
+                <!-- Checkout Button -->
+                <button onclick="openCheckoutModal()" id="checkoutBtn" disabled class="w-full py-3 bg-brand-600 hover:bg-brand-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-sm rounded-xl shadow-lg shadow-brand-600/30 transition active:scale-98 flex items-center justify-center gap-2">
+                    <span>Proceed to Order</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHECKOUT MODAL (CUSTOMER DETAILS + ORDER SUBMISSION) -->
+    <div id="checkoutModal" class="fixed inset-0 z-50 hidden transition-opacity duration-300">
+        <div onclick="closeCheckoutModal()" class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm"></div>
+
+        <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[92%] max-w-md bg-white dark:bg-slate-900 rounded-2xl shadow-2xl p-6 space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
+                <h3 class="font-display font-bold text-lg flex items-center gap-2">
+                    <i class="fa-solid fa-truck-fast text-brand-600"></i> Customer Shipping Details
+                </h3>
+                <button onclick="closeCheckoutModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <form id="checkoutForm" onsubmit="handlePlaceOrder(event)" class="space-y-3">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Full Name</label>
+                    <input type="text" id="custName" required placeholder="MD Hossain khan" class="w-full text-xs px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Phone Number</label>
+                    <input type="tel" id="custPhone" required placeholder="01886759590" class="w-full text-xs px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Delivery Address</label>
+                    <textarea id="custAddress" required rows="2" placeholder="1207 Ring Rd, Mohammadpur, Dhaka" class="w-full text-xs px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
+                </div>
+
+                <!-- Order Summary Preview -->
+                <div class="p-3 bg-slate-100 dark:bg-slate-800/60 rounded-xl space-y-1 text-xs">
+                    <div class="flex justify-between">
+                        <span class="text-slate-500">Total Items:</span>
+                        <span id="checkoutItemCount" class="font-bold">0</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="font-bold">Grand Total:</span>
+                        <span id="checkoutGrandTotal" class="font-extrabold text-brand-600 dark:text-brand-400">৳0</span>
+                    </div>
+                </div>
+
+                <button type="submit" id="submitOrderBtn" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl shadow-lg shadow-emerald-600/30 transition flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span>Confirm Order via WhatsApp</span>
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- JavaScript Logic -->
+    <!-- VENDOR / ADMIN PRODUCT ADD MODAL -->
+    <div id="adminModal" class="fixed inset-0 z-50 hidden transition-opacity duration-300">
+        <div onclick="closeAdminModal()" class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm"></div>
+
+        <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[92%] max-w-lg bg-white dark:bg-slate-900 rounded-2xl shadow-2xl p-6 space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-store text-amber-500 text-xl"></i>
+                    <h3 class="font-display font-bold text-lg">Vendor Product Admin Panel</h3>
+                </div>
+                <button onclick="closeAdminModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <form id="addProductForm" onsubmit="handleAddProduct(event)" class="space-y-3">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Product Title</label>
+                    <input type="text" id="prodTitle" required placeholder="Oversized Streetwear Hoodie" class="w-full text-xs px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Price (৳)</label>
+                        <input type="number" id="prodPrice" required placeholder="1250" class="w-full text-xs px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Discount %</label>
+                        <input type="number" id="prodDiscount" placeholder="30" class="w-full text-xs px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Category</label>
+                        <select id="prodCategory" class="w-full text-xs px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                            <option value="Drop Shoulder">Drop Shoulder</option>
+                            <option value="Hoodies">Hoodies</option>
+                            <option value="Oversized">Oversized Tees</option>
+                            <option value="Accessories">Accessories</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Image URL</label>
+                        <input type="url" id="prodImg" placeholder="https://..." class="w-full text-xs px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full py-3 bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold text-sm rounded-xl shadow-lg shadow-amber-500/30 transition">
+                    + Publish Product to Store
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- NOTIFICATION TOAST -->
+    <div id="toast" class="fixed top-5 right-5 z-50 transform translate-y-[-150%] opacity-0 transition-all duration-300 max-w-xs bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 border border-slate-700 dark:border-slate-200">
+        <i id="toastIcon" class="fa-solid fa-circle-check text-green-400 dark:text-green-600"></i>
+        <span id="toastMsg" class="text-xs font-semibold">Action completed!</span>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        let cartItemCount = 0;
+        /* Initialize EmailJS Service with Given Credentials */
+        (function(){
+            // EmailJS Public Key initialization if needed, using Service & Template configured below
+            emailjs.init("YOUR_PUBLIC_KEY"); // Optional fallback
+        })();
 
-        function addToCart() {
-            cartItemCount++;
-            document.getElementById("cartCountBadge").innerText = cartItemCount;
-            openModal();
+        // INITIAL DEFAULT PRODUCTS
+        const initialProducts = [
+            {
+                id: 1,
+                name: "Cyberpunk Drop Shoulder Tee",
+                category: "Drop Shoulder",
+                price: 599,
+                discount: 40,
+                image: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 2,
+                name: "Minimalist Oversized Hoodie",
+                category: "Hoodies",
+                price: 1250,
+                discount: 30,
+                image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 3,
+                name: "Tokyo Neon Graphic T-Shirt",
+                category: "Oversized",
+                price: 499,
+                discount: 50,
+                image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 4,
+                name: "Tactical Crossbody Sling Bag",
+                category: "Accessories",
+                price: 350,
+                discount: 20,
+                image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 5,
+                name: "Acid Wash Vintage Crewneck",
+                category: "Drop Shoulder",
+                price: 799,
+                discount: 35,
+                image: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 6,
+                name: "Heavyweight Fleece Pullover",
+                category: "Hoodies",
+                price: 1450,
+                discount: 25,
+                image: "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=600&q=80"
+            }
+        ];
+
+        // STATE MANAGEMENT
+        let products = JSON.parse(localStorage.getItem('sn_products')) || initialProducts;
+        let cart = JSON.parse(localStorage.getItem('sn_cart')) || [];
+        let activeCategory = 'All';
+        let searchQuery = '';
+        let appliedDiscountPercent = 0;
+
+        // ON PAGE LOAD
+        window.onload = function() {
+            renderCategories();
+            renderProducts();
+            updateCartUI();
+            startCountdown();
+        };
+
+        // DARK MODE TOGGLE
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
         }
 
-        function openModal() {
-            document.getElementById("checkoutModal").classList.remove("hidden");
-            document.getElementById("checkoutModal").classList.add("flex");
+        // COUNTDOWN TIMER
+        function startCountdown() {
+            let totalSeconds = 74700; // 20 hours, 45 mins
+            setInterval(() => {
+                if (totalSeconds <= 0) return;
+                totalSeconds--;
+                const h = Math.floor(totalSeconds / 3600);
+                const m = Math.floor((totalSeconds % 3600) / 60);
+                const s = totalSeconds % 60;
+                
+                document.getElementById('timerHours').innerText = String(h).padStart(2, '0');
+                document.getElementById('timerMins').innerText = String(m).padStart(2, '0');
+                document.getElementById('timerSecs').innerText = String(s).padStart(2, '0');
+            }, 1000);
         }
 
-        function closeModal() {
-            document.getElementById("checkoutModal").classList.add("hidden");
-            document.getElementById("checkoutModal").classList.remove("flex");
+        // RENDER CATEGORY CHIPS
+        function renderCategories() {
+            const categories = ['All', 'Drop Shoulder', 'Hoodies', 'Oversized', 'Accessories'];
+            const container = document.getElementById('categoryContainer');
+            
+            container.innerHTML = categories.map(cat => `
+                <button onclick="filterCategory('${cat}')" 
+                    class="px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all duration-200 ${
+                        activeCategory === cat 
+                        ? 'bg-brand-600 text-white shadow-md shadow-brand-600/30' 
+                        : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'
+                    }">
+                    ${cat}
+                </button>
+            `).join('');
         }
 
-        // Combined WhatsApp & Email Automation Logic
-        function handleCheckout(event) {
-            event.preventDefault();
+        // FILTER CATEGORY
+        function filterCategory(cat) {
+            activeCategory = cat;
+            renderCategories();
+            renderProducts();
+        }
 
-            const ownerPhoneNumber = "8801886759590"; // Replace with client's WhatsApp number
+        // SEARCH FUNCTIONALITY
+        function handleSearch() {
+            const val = document.getElementById('searchInput').value.trim().toLowerCase();
+            searchQuery = val;
+            document.getElementById('clearSearchBtn').classList.toggle('hidden', val === '');
+            renderProducts();
+        }
 
-            const name = document.getElementById("custName").value;
-            const phone = document.getElementById("custPhone").value;
-            const address = document.getElementById("custAddress").value;
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            searchQuery = '';
+            document.getElementById('clearSearchBtn').classList.add('hidden');
+            renderProducts();
+        }
 
-            // 1. Send Email via EmailJS
-            const templateParams = {
-    to_name: name,
-    to_email: "your-email@gmail.com", // এখানে আপনার নিজের জিমেইল বসিয়ে দিতে পারেন, যাতে অর্ডার আসলে আপনার জিমেইলে নোটিফিকেশন আসে
-    cust_phone: phone,
-    cust_address: address,
-    cart_count: cartItemCount
-};
+        function resetFilters() {
+            activeCategory = 'All';
+            clearSearch();
+            renderCategories();
+        }
 
-            emailjs.send('service_ce4fpfe', 'template_py8f1yp', templateParams)
-                .then(function(response) {
-                    console.log('SUCCESS!', response.status, response.text);
-                }, function(error) {
-                    console.log('FAILED...', error);
+        // RENDER PRODUCT CARDS (DARAZ STYLE UI)
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            const emptyState = document.getElementById('emptyState');
+
+            const filtered = products.filter(p => {
+                const matchesCat = activeCategory === 'All' || p.category === activeCategory;
+                const matchesSearch = p.name.toLowerCase().includes(searchQuery);
+                return matchesCat && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            grid.innerHTML = filtered.map(p => {
+                const discountedPrice = Math.round(p.price - (p.price * (p.discount / 100)));
+                return `
+                    <div class="group bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+                        <!-- Image & Badge Container -->
+                        <div class="relative aspect-square overflow-hidden bg-slate-100 dark:bg-slate-800">
+                            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500" onerror="this.src='https://placehold.co/400x400/1e293b/fff?text=Style+Nest'">
+                            
+                            <!-- Discount Tag Badge (Daraz Style) -->
+                            ${p.discount ? `
+                                <span class="absolute top-2 left-2 bg-brand-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-md shadow-md">
+                                    -${p.discount}%
+                                </span>
+                            ` : ''}
+                        </div>
+
+                        <!-- Card Content Body -->
+                        <div class="p-3 flex-1 flex flex-col justify-between space-y-2">
+                            <div>
+                                <span class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wide">${p.category}</span>
+                                <h3 class="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100 line-clamp-2 leading-snug group-hover:text-brand-600 transition-colors">
+                                    ${p.name}
+                                </h3>
+                            </div>
+
+                            <!-- Pricing & Cart Button Aligned at Bottom -->
+                            <div class="pt-2 border-t border-slate-100 dark:border-slate-800/60 space-y-2">
+                                <div class="flex items-baseline gap-1.5">
+                                    <span class="text-sm sm:text-base font-extrabold text-brand-600 dark:text-brand-400">৳${discountedPrice}</span>
+                                    ${p.discount ? `<span class="text-[11px] text-slate-400 line-through">৳${p.price}</span>` : ''}
+                                </div>
+
+                                <button onclick="addToCart(${p.id})" class="w-full py-2 bg-slate-100 dark:bg-slate-800 hover:bg-brand-600 hover:text-white dark:hover:bg-brand-600 text-slate-800 dark:text-slate-200 font-bold text-xs rounded-xl transition-all duration-200 flex items-center justify-center gap-1.5 active:scale-95 shadow-sm">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                    <span>Add to Cart</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // ADD TO CART
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const existingItem = cart.find(item => item.id === productId);
+            if (existingItem) {
+                existingItem.qty += 1;
+            } else {
+                const finalPrice = Math.round(product.price - (product.price * (product.discount / 100)));
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: finalPrice,
+                    image: product.image,
+                    qty: 1
                 });
+            }
 
-            // 2. Open WhatsApp Message
-            const message = `Hello! I would like to place an order.%0A%0A` +
-                            `*Customer Details:*%0A` +
-                            `- Name: ${encodeURIComponent(name)}%0A` +
-                            `- Phone: ${encodeURIComponent(phone)}%0A` +
-                            `- Address: ${encodeURIComponent(address)}%0A%0A` +
-                            `*Total Items in Cart:* ${cartItemCount}`;
-
-            const whatsappURL = `https://wa.me/${ownerPhoneNumber}?text=${message}`;
-            window.open(whatsappURL, '_blank');
-
-            closeModal();
-            alert("Order placed successfully! Confirmation email & WhatsApp triggered.");
+            saveCart();
+            updateCartUI();
+            showToast(`Added "${product.name.slice(0, 15)}..." to cart!`);
         }
-        function setBrandName(customName) {
-            const brandTitle = document.getElementById("brandName");
-            if (brandTitle) {
-                brandTitle.innerText = customName;
+
+        // UPDATE CART UI & BADGES
+        function updateCartUI() {
+            const container = document.getElementById('cartItemsContainer');
+            const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+
+            // Badges
+            document.getElementById('mobileCartBadge').innerText = totalCount;
+            document.getElementById('mobileCartBadge').classList.toggle('hidden', totalCount === 0);
+            document.getElementById('desktopCartBadge').innerText = totalCount;
+            document.getElementById('desktopCartBadge').classList.toggle('hidden', totalCount === 0);
+
+            // Disable/Enable Checkout Button
+            document.getElementById('checkoutBtn').disabled = cart.length === 0;
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="py-12 text-center space-y-2">
+                        <i class="fa-solid fa-cart-flatbed text-4xl text-slate-300 dark:text-slate-700"></i>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Your shopping bag is empty</p>
+                    </div>
+                `;
+                calculateTotals(0);
+                return;
+            }
+
+            // Render Cart Drawer Items
+            container.innerHTML = cart.map(item => `
+                <div class="flex items-center justify-between gap-3 py-2">
+                    <img src="${item.image}" alt="${item.name}" class="w-12 h-12 rounded-lg object-cover bg-slate-100">
+                    <div class="flex-1 min-w-0">
+                        <h4 class="text-xs font-semibold text-slate-800 dark:text-slate-100 truncate">${item.name}</h4>
+                        <span class="text-xs font-bold text-brand-600 dark:text-brand-400">৳${item.price}</span>
+                    </div>
+
+                    <!-- Quantity Adjuster -->
+                    <div class="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-lg">
+                        <button onclick="changeQty(${item.id}, -1)" class="text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 text-xs px-1">-</button>
+                        <span class="text-xs font-bold w-4 text-center">${item.qty}</span>
+                        <button onclick="changeQty(${item.id}, 1)" class="text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 text-xs px-1">+</button>
+                    </div>
+
+                    <!-- Delete Button -->
+                    <button onclick="removeFromCart(${item.id})" class="text-slate-400 hover:text-red-500 p-1">
+                        <i class="fa-solid fa-trash-can text-xs"></i>
+                    </button>
+                </div>
+            `).join('');
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            calculateTotals(subtotal);
+        }
+
+        // QTY & REMOVE LOGIC
+        function changeQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) {
+                cart = cart.filter(i => i.id !== id);
+            }
+            saveCart();
+            updateCartUI();
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(i => i.id !== id);
+            saveCart();
+            updateCartUI();
+        }
+
+        function saveCart() {
+            localStorage.setItem('sn_cart', JSON.stringify(cart));
+        }
+
+        // CALCULATE TOTALS WITH PROMO
+        function calculateTotals(subtotal) {
+            const discountAmount = Math.round(subtotal * (appliedDiscountPercent / 100));
+            const grandTotal = subtotal - discountAmount;
+
+            document.getElementById('cartSubtotal').innerText = `৳${subtotal}`;
+            document.getElementById('cartTotal').innerText = `৳${grandTotal}`;
+            
+            if (appliedDiscountPercent > 0) {
+                document.getElementById('discountRow').classList.remove('hidden');
+                document.getElementById('cartDiscount').innerText = `-৳${discountAmount} (${appliedDiscountPercent}%)`;
+            } else {
+                document.getElementById('discountRow').classList.add('hidden');
             }
         }
 
-        setBrandName("Style Nest");
+        // PROMO CODE SYSTEM
+        function applyCoupon() {
+            const code = document.getElementById('couponInput').value.trim().toUpperCase();
+            const msg = document.getElementById('couponMsg');
+
+            if (code === 'EID50') {
+                appliedDiscountPercent = 50;
+                msg.innerText = "50% Promo Discount Applied!";
+                msg.className = "text-[11px] font-semibold text-green-600 block";
+            } else if (code === 'WELCOME10') {
+                appliedDiscountPercent = 10;
+                msg.innerText = "10% Welcome Discount Applied!";
+                msg.className = "text-[11px] font-semibold text-green-600 block";
+            } else {
+                appliedDiscountPercent = 0;
+                msg.innerText = "Invalid Promo Code";
+                msg.className = "text-[11px] font-semibold text-red-500 block";
+            }
+            updateCartUI();
+        }
+
+        function applyBannerPromo() {
+            toggleCartModal();
+            document.getElementById('couponInput').value = 'EID50';
+            applyCoupon();
+        }
+
+        // MODAL TOGGLES
+        function toggleCartModal() {
+            document.getElementById('cartModal').classList.toggle('hidden');
+        }
+
+        function openCheckoutModal() {
+            if (cart.length === 0) return;
+            toggleCartModal();
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const grandTotal = subtotal - Math.round(subtotal * (appliedDiscountPercent / 100));
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+
+            document.getElementById('checkoutItemCount').innerText = totalItems;
+            document.getElementById('checkoutGrandTotal').innerText = `৳${grandTotal}`;
+            document.getElementById('checkoutModal').classList.remove('hidden');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkoutModal').classList.add('hidden');
+        }
+
+        function openAdminModal() {
+            document.getElementById('adminModal').classList.remove('hidden');
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminModal').classList.add('hidden');
+        }
+
+        // VENDOR ADD PRODUCT
+        function handleAddProduct(e) {
+            e.preventDefault();
+            const title = document.getElementById('prodTitle').value.trim();
+            const price = parseFloat(document.getElementById('prodPrice').value);
+            const discount = parseFloat(document.getElementById('prodDiscount').value) || 0;
+            const category = document.getElementById('prodCategory').value;
+            const img = document.getElementById('prodImg').value.trim() || 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80';
+
+            const newProd = {
+                id: Date.now(),
+                name: title,
+                category: category,
+                price: price,
+                discount: discount,
+                image: img
+            };
+
+            products.unshift(newProd);
+            localStorage.setItem('sn_products', JSON.stringify(products));
+            
+            closeAdminModal();
+            document.getElementById('addProductForm').reset();
+            renderProducts();
+            showToast("New Product Published Successfully!");
+        }
+
+        // PLACE ORDER (DUAL: EMAILJS + WHATSAPP REDIRECT)
+        function handlePlaceOrder(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const address = document.getElementById('custAddress').value.trim();
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const grandTotal = subtotal - Math.round(subtotal * (appliedDiscountPercent / 100));
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+
+            // 1. Send EmailJS Notification (Service: service_ce4fpfe, Template: template_py8f1yp)
+            const templateParams = {
+                to_name: "Style Nest Admin",
+                cust_name: name,
+                cust_phone: phone,
+                cust_address: address,
+                cart_count: totalItems,
+                grand_total: `৳${grandTotal}`,
+                order_details: cart.map(i => `${i.name} (x${i.qty}) - ৳${i.price * i.qty}`).join(', ')
+            };
+
+            emailjs.send('service_ce4fpfe', 'template_py8f1yp', templateParams)
+                .then(function(response) {
+                    console.log('EmailJS Success!', response.status, response.text);
+                }, function(error) {
+                    console.log('EmailJS Failed...', error);
+                });
+
+            // 2. Format WhatsApp Message Link
+            const orderListText = cart.map(i => `• ${i.name} (x${i.qty})`).join('\n');
+            const waMessage = `Hello! I would like to place an order.\n\n*Customer Details:*\n• Name: ${name}\n• Phone: ${phone}\n• Address: ${address}\n\n*Order Summary:*\n${orderListText}\n\n*Total Payable:* ৳${grandTotal}`;
+
+            const encodedMsg = encodeURIComponent(waMessage);
+            const waUrl = `https://wa.me/8801886759590?text=${encodedMsg}`;
+
+            // Reset Cart & Close Modal
+            cart = [];
+            saveCart();
+            updateCartUI();
+            closeCheckoutModal();
+
+            showToast("Redirecting to WhatsApp to complete order...");
+
+            // Redirect to WhatsApp
+            setTimeout(() => {
+                window.open(waUrl, '_blank');
+            }, 800);
+        }
+
+        // SHOW TOAST NOTIFICATION
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = message;
+            
+            toast.classList.remove('translate-y-[-150%]', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-[-150%]', 'opacity-0');
+            }, 3000);
+        }
     </script>
 </body>
 </html>
-
-        
+```
