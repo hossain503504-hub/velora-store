@@ -1,48 +1,62 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
-    <!-- ১. মেটা ডেটা (SEO ও মোবাইল ফ্রেন্ডলি করার জন্য) -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Velora Store - Premium Jewelry</title>
+    <title>Style Nest - Trendy Clothing</title>
     
-    <!-- ২. Tailwind CSS (সহজে ডিজাইন করার জন্য CDN) -->
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans">
 
-    <!-- ৩. নেভিগেশন বার (Header Section) -->
+    <!-- Header / Navigation Bar -->
     <header class="w-full bg-white shadow-sm p-4 sticky top-0 z-50">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-indigo-600">Velora</h1>
-            <nav class="hidden md:flex space-x-6">
-                <a href="#hero" class="hover:text-indigo-600">হোম</a>
-                <a href="#products" class="hover:text-indigo-600">প্রোডাক্টস</a>
-                <a href="#about" class="hover:text-indigo-600">আমাদের সম্পর্কে</a>
+            <!-- Dynamic Brand Name with Unique ID -->
+            <h1 id="brandName" class="text-2xl font-bold text-indigo-600">Style Nest</h1>
+            
+            <nav class="hidden md:flex space-x-6 font-medium">
+                <a href="#hero" class="hover:text-indigo-600 transition">Home</a>
+                <a href="#products" class="hover:text-indigo-600 transition">Products</a>
+                <a href="#about" class="hover:text-indigo-600 transition">About Us</a>
             </nav>
-            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-indigo-700">
-                অর্ডার করুন
+            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-indigo-700 transition">
+                Order Now
             </button>
         </div>
     </header>
 
-    <!-- ৪. হিরো সেকশন (Hero Section - মূল আকর্ষণ) -->
+    <!-- Hero Section -->
     <section id="hero" class="max-w-6xl mx-auto px-4 py-12 text-center md:text-left flex flex-col md:flex-row items-center justify-between">
         <div class="md:w-1/2 mb-8 md:mb-0">
             <h2 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight text-slate-800">
-                স্মার্ট স্টাইলে খুঁজুন আপনার নিখুঁত সৌন্দর্য
+                Upgrade Your Style With Premium Outfits
             </h2>
             <p class="text-slate-600 text-lg mb-6">
-                প্রিমিয়াম কোয়ালিটির জুয়েলারি কালেকশন সরাসরি আপনার দরজায়। আধুনিক ডিজাইন এবং সেরা ফিনিশিং।
+                Discover top-quality fashion items delivered straight to your door. Modern design, comfort, and affordable pricing.
             </p>
-            <a href="#products" class="inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold shadow-md hover:bg-indigo-700">
-                কালেকশন দেখুন &rarr;
+            <a href="#products" class="inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold shadow-md hover:bg-indigo-700 transition">
+                Shop Collection &rarr;
             </a>
         </div>
         <div class="md:w-1/2 flex justify-center">
-            <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500" alt="Jewelry Product" class="rounded-2xl shadow-lg w-full max-w-sm">
+            <img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=500" alt="Clothing Collection" class="rounded-2xl shadow-lg w-full max-w-sm">
         </div>
     </section>
 
+    <!-- JavaScript to Handle Dynamic Brand Name -->
+    <script>
+        // Function to dynamically update brand name (e.g., matching a client's Facebook Page)
+        function setBrandName(customName) {
+            const brandTitle = document.getElementById("brandName");
+            if (brandTitle) {
+                brandTitle.innerText = customName;
+            }
+        }
+
+        // Example: Client can change this single line to match their Facebook page name
+        setBrandName("Style Nest");
+    </script>
 </body>
 </html>
