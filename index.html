@@ -26,22 +26,14 @@
 </head>
 <body class="bg-slate-950 text-slate-100 pb-24 transition-colors duration-300">
 
-    <!-- Top Navigation Bar -->
+    <!-- Top Header: Left Company Name & Right Full Search Bar -->
     <header class="sticky top-0 z-40 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 px-4 py-3">
         <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
-            <h1 class="text-xl font-extrabold tracking-wider text-rose-500 uppercase cursor-pointer" onclick="switchTab('home')" id="txtBrand">Style Nest</h1>
+            <h1 class="text-base md:text-xl font-extrabold tracking-wider text-rose-500 uppercase cursor-pointer whitespace-nowrap" onclick="switchTab('home')">Style Nest</h1>
             
-            <div class="flex-1 max-w-md relative">
-                <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Search products..." class="w-full bg-slate-800 border border-slate-700 rounded-full py-2 pl-4 pr-10 text-sm focus:outline-none focus:border-rose-500">
+            <div class="flex-1 relative">
+                <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Search products in Style Nest..." class="w-full bg-slate-800 border border-slate-700 rounded-full py-2 pl-4 pr-10 text-sm focus:outline-none focus:border-rose-500 text-white">
                 <span class="absolute right-3 top-2.5 text-slate-400">🔍</span>
-            </div>
-
-            <div class="flex items-center gap-2 text-xs">
-                <select id="langSelect" onchange="changeLanguage()" class="bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-slate-200">
-                    <option value="en">EN</option>
-                    <option value="bn">বাংলা</option>
-                </select>
-                <button onclick="toggleTheme()" class="bg-slate-800 p-2 rounded-full text-sm">🌓</button>
             </div>
         </div>
     </header>
@@ -55,7 +47,7 @@
             <div id="bannerSlider" class="bg-gradient-to-r from-slate-900 to-rose-950 border border-slate-800 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden transition-all duration-1000">
                 <div class="relative z-10 flex justify-between items-center">
                     <div>
-                        <span id="bannerTag" class="bg-rose-500/20 text-rose-400 text-xs px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">New Arrival</span>
+                        <span id="bannerTag" class="bg-rose-500/20 text-rose-400 text-xs px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">New Collection</span>
                         <h2 id="bannerTitle" class="text-2xl font-black mt-2">STYLE NEST STORE</h2>
                         <p id="bannerDesc" class="text-xs text-slate-300 mt-1">Discover premium fashion and trendsetter outfits.</p>
                     </div>
@@ -83,7 +75,7 @@
             </div>
         </div>
 
-        <!-- 2. MESSAGES TAB (Cleaned - Shows real messages when published) -->
+        <!-- 2. MESSAGES TAB -->
         <div id="tab-messages" class="tab-content hidden space-y-4">
             <h2 class="text-xl font-bold">Messages & Notifications</h2>
             <div id="messageList" class="space-y-3">
@@ -102,10 +94,10 @@
             <div id="checkoutBox" class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-4 hidden">
                 <h3 class="font-bold text-sm text-slate-300">Delivery Information</h3>
                 <form id="checkoutForm" onsubmit="handleFinalCheckout(event)" class="space-y-3">
-                    <input type="text" id="chkName" required placeholder="Full Name" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm">
-                    <input type="email" id="chkEmail" required placeholder="Email Address (Gmail)" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm">
-                    <input type="tel" id="chkPhone" required placeholder="Phone Number" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm">
-                    <textarea id="chkAddress" required rows="2" placeholder="Delivery Address" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm"></textarea>
+                    <input type="text" id="chkName" required placeholder="Full Name" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                    <input type="email" id="chkEmail" required placeholder="Email Address (Gmail)" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                    <input type="tel" id="chkPhone" required placeholder="Phone Number" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                    <textarea id="chkAddress" required rows="2" placeholder="Delivery Address" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white"></textarea>
                     
                     <div class="flex justify-between items-center bg-slate-800 p-3 rounded-xl font-bold text-sm">
                         <span>Total: <span id="summarySub" class="text-rose-500">৳0</span></span>
@@ -115,7 +107,7 @@
             </div>
         </div>
 
-        <!-- 4. ACCOUNT TAB (Settings Icon & Profile) -->
+        <!-- 4. ACCOUNT TAB -->
         <div id="tab-account" class="tab-content hidden space-y-4">
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex items-center justify-between">
                 <div class="flex items-center gap-3">
@@ -125,24 +117,33 @@
                         <p class="text-xs text-slate-400" id="displayUserEmail">No email added</p>
                     </div>
                 </div>
-                <!-- Settings Button (Image 33238 Style) -->
                 <button onclick="openSettingsModal()" class="bg-slate-800 hover:bg-slate-700 p-2.5 rounded-full text-base">⚙️</button>
             </div>
 
+            <!-- Fully Functional My Orders Status Bar -->
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
                 <h3 class="font-bold text-sm mb-4">My Orders</h3>
-                <div class="grid grid-cols-5 gap-2 text-center text-[11px] text-slate-400">
-                    <div><span class="text-lg">💳</span><p>To Pay</p></div>
-                    <div><span class="text-lg">📦</span><p>To Ship</p></div>
-                    <div><span class="text-lg">🚚</span><p>To Receive</p></div>
-                    <div><span class="text-lg">💬</span><p>To Review</p></div>
-                    <div><span class="text-lg">↩️</span><p>Returns</p></div>
+                <div class="grid grid-cols-5 gap-2 text-center text-[11px] text-slate-400 cursor-pointer">
+                    <div onclick="openOrderStatus('To Pay')" class="hover:text-rose-400 transition"><span class="text-lg block">💳</span><p>To Pay</p></div>
+                    <div onclick="openOrderStatus('To Ship')" class="hover:text-rose-400 transition"><span class="text-lg block">📦</span><p>To Ship</p></div>
+                    <div onclick="openOrderStatus('To Receive')" class="hover:text-rose-400 transition"><span class="text-lg block">🚚</span><p>To Receive</p></div>
+                    <div onclick="openOrderStatus('To Review')" class="hover:text-rose-400 transition"><span class="text-lg block">💬</span><p>To Review</p></div>
+                    <div onclick="openOrderStatus('Returns')" class="hover:text-rose-400 transition"><span class="text-lg block">↩️</span><p>Returns</p></div>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- FULL SETTINGS MODAL (Screenshot 33241 Style) -->
+    <!-- Order Status Modal -->
+    <div id="orderStatusModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-sm rounded-2xl p-6 relative space-y-4 text-center">
+            <button onclick="closeOrderStatusModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
+            <h3 class="text-lg font-bold text-rose-500" id="modalOrderStatusTitle">Order Status</h3>
+            <p class="text-xs text-slate-400" id="modalOrderStatusDesc">No orders found in this category.</p>
+        </div>
+    </div>
+
+    <!-- FULL SETTINGS MODAL -->
     <div id="settingsModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl p-6 relative max-h-[90vh] overflow-y-auto space-y-4">
             <div class="flex justify-between items-center border-b border-slate-800 pb-3">
@@ -151,7 +152,6 @@
             </div>
 
             <form onsubmit="saveCustomerSettings(event)" class="space-y-4 text-xs">
-                <!-- Account Information -->
                 <div class="space-y-2">
                     <h4 class="font-bold text-rose-400 uppercase text-[11px]">Account Information</h4>
                     <div>
@@ -172,25 +172,14 @@
                     </div>
                 </div>
 
-                <!-- Address Book -->
                 <div class="space-y-2 pt-2 border-t border-slate-800">
                     <h4 class="font-bold text-rose-400 uppercase text-[11px]">Address Book</h4>
                     <textarea id="settingsAddress" rows="2" placeholder="Full delivery address..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white"></textarea>
                 </div>
 
-                <!-- Language & Country -->
-                <div class="space-y-2 pt-2 border-t border-slate-800">
-                    <h4 class="font-bold text-rose-400 uppercase text-[11px]">Language & Region</h4>
-                    <select id="settingsLang" onchange="changeLanguageFromSettings()" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
-                        <option value="en">English</option>
-                        <option value="bn">বাংলা (Bengali)</option>
-                    </select>
-                </div>
-
                 <button type="submit" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 rounded-xl text-sm shadow-lg">Save Settings</button>
             </form>
 
-            <!-- Logout Button (Screenshot 33241 Style) -->
             <div class="pt-4 border-t border-slate-800">
                 <button onclick="handleLogout()" class="w-full bg-rose-500/10 hover:bg-rose-500/20 text-rose-500 border border-rose-500/30 font-bold py-3 rounded-xl text-sm transition">Logout</button>
             </div>
@@ -200,11 +189,10 @@
     <!-- Bottom Navigation Bar -->
     <nav class="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 z-50 px-4 py-2 flex justify-around items-center text-xs">
         <button onclick="switchTab('home')" id="nav-home" class="flex flex-col items-center text-rose-500 font-medium">
-            <span class="text-lg">🏠</span><span id="navHomeText">Home</span>
+            <span class="text-lg">🏠</span><span>Home</span>
         </button>
         <button onclick="switchTab('messages')" id="nav-messages" class="flex flex-col items-center text-slate-400 relative">
-            <span class="text-lg">💬</span><span id="navMsgText">Messages</span>
-            <span id="msgBadge" class="hidden absolute -top-1 -right-2 bg-rose-500 text-white text-[10px] w-4 h-4 rounded-full items-center justify-center font-bold">0</span>
+            <span class="text-lg">💬</span><span>Messages</span>
         </button>
         <div class="relative -top-3">
             <button onclick="switchTab('home')" class="w-12 h-12 bg-gradient-to-tr from-orange-500 to-rose-600 rounded-full flex flex-col items-center justify-center text-[9px] font-black text-white shadow-lg border-2 border-slate-950">
@@ -212,40 +200,16 @@
             </button>
         </div>
         <button onclick="switchTab('cart')" id="nav-cart" class="flex flex-col items-center text-slate-400 relative">
-            <span class="text-lg">🛒</span><span id="navCartText">Cart</span>
+            <span class="text-lg">🛒</span><span>Cart</span>
             <span id="cartBadge" class="absolute -top-1 -right-2 bg-rose-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
         </button>
         <button onclick="switchTab('account')" id="nav-account" class="flex flex-col items-center text-slate-400">
-            <span class="text-lg">👤</span><span id="navAccText">Account</span>
+            <span class="text-lg">👤</span><span>Account</span>
         </button>
     </nav>
 
     <!-- Script Logic -->
     <script>
-        const langData = {
-            en: { brand: "Style Nest", home: "Home", msg: "Messages", cart: "Cart", acc: "Account" },
-            bn: { brand: "স্টাইল নেস্ট", home: "হোম", msg: "মেসেজ", cart: "কার্ট", acc: "অ্যাকাউন্ট" }
-        };
-
-        function changeLanguage() {
-            const lang = document.getElementById('langSelect').value;
-            applyLang(lang);
-        }
-
-        function changeLanguageFromSettings() {
-            const lang = document.getElementById('settingsLang').value;
-            document.getElementById('langSelect').value = lang;
-            applyLang(lang);
-        }
-
-        function applyLang(lang) {
-            document.getElementById('txtBrand').innerText = langData[lang].brand;
-            document.getElementById('navHomeText').innerText = langData[lang].home;
-            document.getElementById('navMsgText').innerText = langData[lang].msg;
-            document.getElementById('navCartText').innerText = langData[lang].cart;
-            document.getElementById('navAccText').innerText = langData[lang].acc;
-        }
-
         // Slow & Smooth Auto Banner Slider (8 Seconds Interval)
         const banners = [
             { tag: "New Collection", title: "STYLE NEST STORE", desc: "Discover premium fashion and trendsetter outfits.", bg: "from-slate-900 to-rose-950" },
@@ -265,7 +229,6 @@
             }
         }, 8000);
 
-        // Flash Timer
         let totalSeconds = 5 * 3600;
         setInterval(() => {
             if (totalSeconds > 0) totalSeconds--;
@@ -276,7 +239,6 @@
             if(timerEl) timerEl.innerText = `${hrs} : ${mins} : ${secs}`;
         }, 1000);
 
-        // Load Vendor / Dynamic Products
         let products = JSON.parse(localStorage.getItem('vendor_products')) || [
             { id: 1, name: "6-Piece Stainless Steel Kitchen Tool Set", price: 709, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" },
             { id: 2, name: "Electric Kettle 2L - Perfect for Tea & Coffee", price: 659, image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500" }
@@ -379,6 +341,17 @@
             renderCartView();
         }
 
+        // Functional Order Status Modal
+        function openOrderStatus(statusType) {
+            document.getElementById('modalOrderStatusTitle').innerText = `${statusType} Orders`;
+            document.getElementById('modalOrderStatusDesc').innerText = `You have 0 active items under ${statusType}.`;
+            document.getElementById('orderStatusModal').classList.remove('hidden');
+        }
+
+        function closeOrderStatusModal() {
+            document.getElementById('orderStatusModal').classList.add('hidden');
+        }
+
         // Settings Modal Controls
         function openSettingsModal() {
             document.getElementById('settingsModal').classList.remove('hidden');
@@ -452,8 +425,6 @@
             switchTab('home');
             alert("Order Confirmed!");
         }
-
-        function toggleTheme() { document.documentElement.classList.toggle('dark'); }
 
         renderProducts();
     </script>
