@@ -206,7 +206,7 @@
         function handleCheckout(event) {
             event.preventDefault();
 
-            const ownerPhoneNumber = "8801700000000"; // Replace with client's WhatsApp number
+            const ownerPhoneNumber = "8801886759590"; // Replace with client's WhatsApp number
 
             const name = document.getElementById("custName").value;
             const phone = document.getElementById("custPhone").value;
@@ -220,7 +220,7 @@
                 cart_count: cartItemCount
             };
 
-            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+            emailjs.send('service_ce4fpfe', 'YOUR_TEMPLATE_ID', templateParams)
                 .then(function(response) {
                     console.log('SUCCESS!', response.status, response.text);
                 }, function(error) {
@@ -241,7 +241,6 @@
             closeModal();
             alert("Order placed successfully! Confirmation email & WhatsApp triggered.");
         }
-
         function setBrandName(customName) {
             const brandTitle = document.getElementById("brandName");
             if (brandTitle) {
@@ -253,6 +252,5 @@
     </script>
 </body>
 </html>
-    </script>
-</body>
-</html>
+
+        
