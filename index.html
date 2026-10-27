@@ -1,206 +1,174 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Style Nest - Flash Sale & Trendy Fashion Online</title>
-    <meta name="description" content="Shop trendy outfits, flash sale items, and premium clothing with direct WhatsApp ordering.">
+    <title>Style Nest - Ultra Futuristic Fashion Store</title>
+    <meta name="description" content="Experience high-end luxury fashion with our ultra-modern glassmorphic online store.">
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        neonPurple: '#a855f7',
+                        neonCyan: '#06b6d4',
+                        glassBg: 'rgba(15, 23, 42, 0.75)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glow-effect:hover {
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.4);
+        }
+    </style>
 </head>
-<body class="bg-slate-100 text-slate-900 font-sans pb-16">
+<body class="bg-slate-950 text-slate-100 font-sans pb-20 selection:bg-purple-500 selection:text-white">
 
-    <!-- Top Search & Brand Bar (Daraz Style) -->
-    <header class="w-full bg-rose-600 p-3 sticky top-0 z-50 shadow-md">
-        <div class="max-w-md mx-auto flex items-center justify-between gap-2">
-            <h1 id="brandName" class="text-white font-black text-xl tracking-wider">Style Nest</h1>
-            <!-- Search Bar -->
-            <div class="flex-1 bg-white rounded-full flex items-center px-3 py-1.5 shadow-inner">
-                <input type="text" placeholder="Search in Style Nest..." class="w-full text-xs outline-none bg-transparent text-slate-700">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-rose-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-            </div>
+    <!-- Glassmorphic Header -->
+    <header class="w-full glass-card sticky top-0 z-50 p-4 border-b border-slate-800">
+        <div class="max-w-md mx-auto flex justify-between items-center">
+            <h1 id="brandName" class="text-2xl font-black tracking-widest bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent uppercase">
+                Style Nest
+            </h1>
+            
+            <button onclick="openModal()" class="relative bg-gradient-to-r from-purple-600 to-cyan-600 text-white px-4 py-2 rounded-xl text-xs font-bold shadow-lg shadow-purple-500/20 active:scale-95 transition">
+                🛒 Cart (<span id="cartCountBadge">0</span>)
+            </button>
         </div>
     </header>
 
-    <!-- Quick Perks Bar -->
-    <div class="bg-white border-b border-slate-200 py-2 px-3 text-[11px] font-semibold text-slate-600 flex justify-around text-center shadow-sm">
-        <span>🛡️ Safe Payment</span>
-        <span>🚚 Fast Delivery</span>
-        <span>🔄 Free Return</span>
-    </div>
-
-    <!-- Voucher / Category Icons Row -->
-    <section class="max-w-md mx-auto px-3 my-3">
-        <div class="grid grid-cols-4 gap-2 text-center">
-            <div class="bg-white p-2 rounded-xl shadow-sm">
-                <div class="text-rose-600 font-bold text-base">🔥</div>
-                <span class="text-[10px] font-bold text-slate-700">Hot Deals</span>
-            </div>
-            <div class="bg-white p-2 rounded-xl shadow-sm">
-                <div class="text-amber-500 font-bold text-base">🏷️</div>
-                <span class="text-[10px] font-bold text-slate-700">Vouchers</span>
-            </div>
-            <div class="bg-white p-2 rounded-xl shadow-sm">
-                <div class="text-indigo-600 font-bold text-base">⚡</div>
-                <span class="text-[10px] font-bold text-slate-700">Free Shipping</span>
-            </div>
-            <div class="bg-white p-2 rounded-xl shadow-sm">
-                <div class="text-purple-600 font-bold text-base">⭐</div>
-                <span class="text-[10px] font-bold text-slate-700">Top Ranking</span>
+    <!-- Ultra Neon Announcement Bar -->
+    <section class="max-w-md mx-auto px-3 mt-4">
+        <div class="relative overflow-hidden rounded-2xl p-0.5 bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 shadow-2xl">
+            <div class="bg-slate-900 rounded-[14px] p-4 text-center">
+                <span class="bg-purple-500/20 text-purple-300 text-[10px] font-bold px-3 py-1 rounded-full border border-purple-500/30 uppercase tracking-widest">
+                    ⚡ Cyber Edition 2026
+                </span>
+                <h2 class="text-xl font-extrabold mt-2 text-white tracking-wide">
+                    Future of Streetwear
+                </h2>
+                <p class="text-xs text-slate-400 mt-1">Get 50% Instant Discount | Code: <span class="text-cyan-400 font-mono font-bold">CYBER50</span></p>
             </div>
         </div>
     </section>
 
-    <!-- Gorgeous Mega Sale Banner -->
-    <section class="max-w-md mx-auto px-3 my-3">
-        <div class="bg-gradient-to-r from-amber-400 via-rose-500 to-purple-600 rounded-2xl p-4 text-white shadow-lg relative overflow-hidden">
-            <span class="bg-black/30 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider">Payday Sale</span>
-            <h2 class="text-lg font-black mt-2">Up to 80% OFF + Free Delivery</h2>
-            <p class="text-[11px] text-slate-100 mt-1">Limited time offer. Use code: <span class="bg-white text-slate-900 px-1.5 py-0.5 rounded font-bold">STYLENEST80</span></p>
+    <!-- Category Pills -->
+    <section class="max-w-md mx-auto px-3 my-5">
+        <div class="flex gap-2 overflow-x-auto no-scrollbar py-1">
+            <span class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-xs font-bold px-4 py-2 rounded-xl whitespace-nowrap shadow-md">🔥 All Releases</span>
+            <span class="glass-card text-slate-300 text-xs font-medium px-4 py-2 rounded-xl whitespace-nowrap hover:text-white transition">Hoodies</span>
+            <span class="glass-card text-slate-300 text-xs font-medium px-4 py-2 rounded-xl whitespace-nowrap hover:text-white transition">Jackets</span>
+            <span class="glass-card text-slate-300 text-xs font-medium px-4 py-2 rounded-xl whitespace-nowrap hover:text-white transition">T-Shirts</span>
         </div>
     </section>
 
-    <!-- Flash Sale Section with Countdown Timer Style -->
+    <!-- Futuristic Product Grid (2 per row) -->
     <section id="products" class="max-w-md mx-auto px-3 my-4">
-        <div class="bg-white rounded-2xl p-3 shadow-sm border border-slate-100">
-            <div class="flex items-center justify-between mb-3">
-                <div class="flex items-center gap-2">
-                    <h3 class="font-black text-rose-600 text-sm flex items-center gap-1">⚡ Flash Sale</h3>
-                    <div class="flex gap-1 text-[10px] font-bold text-white">
-                        <span class="bg-rose-600 px-1.5 py-0.5 rounded">20</span>:
-                        <span class="bg-rose-600 px-1.5 py-0.5 rounded">45</span>:
-                        <span class="bg-rose-600 px-1.5 py-0.5 rounded">08</span>
-                    </div>
-                </div>
-                <span class="text-xs font-bold text-rose-600">Shop More &gt;</span>
-            </div>
-            
-            <!-- Products Grid (2 items per row like Daraz mobile app) -->
-            <div class="grid grid-cols-2 gap-2">
-                <!-- Product 1 -->
-                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100 flex flex-col justify-between">
-                    <div>
-                        <div class="relative mb-2">
-                            <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500" alt="Casual T-Shirt" class="h-36 w-full object-cover rounded-lg">
-                            <span class="absolute bottom-1 left-1 bg-rose-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">-76%</span>
-                        </div>
-                        <h4 class="text-xs font-semibold text-slate-800 line-clamp-1">Casual Cotton T-Shirt</h4>
-                        <p class="text-rose-600 font-bold text-sm mt-1">$25.00</p>
-                    </div>
-                    <button onclick="addToCart()" class="w-full mt-2 bg-slate-900 text-white text-[11px] py-2 rounded-lg font-bold hover:bg-rose-600 transition shadow">
-                        Add to Cart
-                    </button>
-                </div>
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="font-extrabold text-base tracking-wider text-slate-200 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> Exclusive Collection
+            </h3>
+            <span class="text-xs text-purple-400 font-bold hover:underline cursor-pointer">Explore &rarr;</span>
+        </div>
 
-                <!-- Product 2 -->
-                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100 flex flex-col justify-between">
-                    <div>
-                        <div class="relative mb-2">
-                            <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=500" alt="Classic Hoodie" class="h-36 w-full object-cover rounded-lg">
-                            <span class="absolute bottom-1 left-1 bg-rose-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">-54%</span>
-                        </div>
-                        <h4 class="text-xs font-semibold text-slate-800 line-clamp-1">Classic Winter Hoodie</h4>
-                        <p class="text-rose-600 font-bold text-sm mt-1">$45.00</p>
+        <div class="grid grid-cols-2 gap-3">
+            <!-- Product 1 -->
+            <div class="glass-card p-3 rounded-2xl glow-effect transition-all duration-300 flex flex-col justify-between">
+                <div>
+                    <div class="relative overflow-hidden rounded-xl mb-3">
+                        <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500" alt="Casual Cotton T-Shirt" class="h-40 w-full object-cover rounded-xl hover:scale-110 transition duration-500">
+                        <span class="absolute top-2 left-2 bg-slate-950/80 backdrop-blur-md text-cyan-400 text-[9px] font-bold px-2 py-0.5 rounded-md border border-cyan-500/30">Top Seller</span>
                     </div>
-                    <button onclick="addToCart()" class="w-full mt-2 bg-slate-900 text-white text-[11px] py-2 rounded-lg font-bold hover:bg-rose-600 transition shadow">
-                        Add to Cart
-                    </button>
+                    <h4 class="text-xs font-bold text-slate-200 line-clamp-1">Casual Cyber Tee</h4>
+                    <p class="text-purple-400 font-extrabold text-sm mt-1">$25.00</p>
                 </div>
+                <button onclick="addToCart()" class="w-full mt-3 bg-gradient-to-r from-purple-600 to-cyan-600 text-white text-[11px] py-2.5 rounded-xl font-bold shadow-lg shadow-purple-500/20 active:scale-95 transition">
+                    Add to Cart
+                </button>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="glass-card p-3 rounded-2xl glow-effect transition-all duration-300 flex flex-col justify-between">
+                <div>
+                    <div class="relative overflow-hidden rounded-xl mb-3">
+                        <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=500" alt="Classic Winter Hoodie" class="h-40 w-full object-cover rounded-xl hover:scale-110 transition duration-500">
+                        <span class="absolute top-2 left-2 bg-slate-950/80 backdrop-blur-md text-purple-400 text-[9px] font-bold px-2 py-0.5 rounded-md border border-purple-500/30">Limited</span>
+                    </div>
+                    <h4 class="text-xs font-bold text-slate-200 line-clamp-1">Neon Winter Hoodie</h4>
+                    <p class="text-purple-400 font-extrabold text-sm mt-1">$45.00</p>
+                </div>
+                <button onclick="addToCart()" class="w-full mt-3 bg-gradient-to-r from-purple-600 to-cyan-600 text-white text-[11px] py-2.5 rounded-xl font-bold shadow-lg shadow-purple-500/20 active:scale-95 transition">
+                    Add to Cart
+                </button>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="glass-card p-3 rounded-2xl glow-effect transition-all duration-300 flex flex-col justify-between">
+                <div>
+                    <div class="relative overflow-hidden rounded-xl mb-3">
+                        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500" alt="Stylish Denim Jacket" class="h-40 w-full object-cover rounded-xl hover:scale-110 transition duration-500">
+                        <span class="absolute top-2 left-2 bg-slate-950/80 backdrop-blur-md text-pink-400 text-[9px] font-bold px-2 py-0.5 rounded-md border border-pink-500/30">20% OFF</span>
+                    </div>
+                    <h4 class="text-xs font-bold text-slate-200 line-clamp-1">Cyber Denim Jacket</h4>
+                    <p class="text-purple-400 font-extrabold text-sm mt-1">$48.00 <span class="text-[10px] text-slate-500 line-through">$60</span></p>
+                </div>
+                <button onclick="addToCart()" class="w-full mt-3 bg-gradient-to-r from-purple-600 to-cyan-600 text-white text-[11px] py-2.5 rounded-xl font-bold shadow-lg shadow-purple-500/20 active:scale-95 transition">
+                    Add to Cart
+                </button>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="glass-card p-3 rounded-2xl glow-effect transition-all duration-300 flex flex-col justify-between">
+                <div>
+                    <div class="relative overflow-hidden rounded-xl mb-3">
+                        <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500" alt="Graphic Tee" class="h-40 w-full object-cover rounded-xl hover:scale-110 transition duration-500">
+                        <span class="absolute top-2 left-2 bg-slate-950/80 backdrop-blur-md text-cyan-400 text-[9px] font-bold px-2 py-0.5 rounded-md border border-cyan-500/30">Hot Release</span>
+                    </div>
+                    <h4 class="text-xs font-bold text-slate-200 line-clamp-1">Graphic Street Tee</h4>
+                    <p class="text-purple-400 font-extrabold text-sm mt-1">$21.00 <span class="text-[10px] text-slate-500 line-through">$30</span></p>
+                </div>
+                <button onclick="addToCart()" class="w-full mt-3 bg-gradient-to-r from-purple-600 to-cyan-600 text-white text-[11px] py-2.5 rounded-xl font-bold shadow-lg shadow-purple-500/20 active:scale-95 transition">
+                    Add to Cart
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- Daily Shera Deals Section -->
-    <section class="max-w-md mx-auto px-3 my-4">
-        <div class="bg-white rounded-2xl p-3 shadow-sm border border-slate-100">
-            <div class="flex items-center justify-between mb-3">
-                <h3 class="font-black text-slate-900 text-sm">🛍️ Daily Shera Deals</h3>
-                <span class="text-xs font-bold text-rose-600">Shop More &gt;</span>
-            </div>
+    <!-- Glassmorphic Checkout Modal -->
+    <div id="checkoutModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md hidden items-center justify-center p-4 z-50">
+        <div class="glass-card w-full max-w-sm rounded-3xl p-6 shadow-2xl relative border border-purple-500/30">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white font-bold text-xl">&times;</button>
             
-            <div class="grid grid-cols-2 gap-2">
-                <!-- Deal Product 1 -->
-                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100 flex flex-col justify-between">
-                    <div>
-                        <div class="relative mb-2">
-                            <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500" alt="Denim Jacket" class="h-36 w-full object-cover rounded-lg">
-                            <span class="absolute bottom-1 left-1 bg-amber-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">20% OFF</span>
-                        </div>
-                        <h4 class="text-xs font-semibold text-slate-800 line-clamp-1">Stylish Denim Jacket</h4>
-                        <p class="text-rose-600 font-bold text-sm mt-1">$48.00 <span class="text-[10px] text-slate-400 line-through">$60</span></p>
-                    </div>
-                    <button onclick="addToCart()" class="w-full mt-2 bg-slate-900 text-white text-[11px] py-2 rounded-lg font-bold hover:bg-rose-600 transition shadow">
-                        Add to Cart
-                    </button>
-                </div>
+            <h3 class="text-xl font-black text-white tracking-wide mb-1">Instant Checkout</h3>
+            <p class="text-xs text-slate-400 mb-5">Confirm your order directly via WhatsApp.</p>
 
-                <!-- Deal Product 2 -->
-                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100 flex flex-col justify-between">
-                    <div>
-                        <div class="relative mb-2">
-                            <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500" alt="Graphic Tee" class="h-36 w-full object-cover rounded-lg">
-                            <span class="absolute bottom-1 left-1 bg-amber-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">30% OFF</span>
-                        </div>
-                        <h4 class="text-xs font-semibold text-slate-800 line-clamp-1">Graphic Tee Shirt</h4>
-                        <p class="text-rose-600 font-bold text-sm mt-1">$21.00 <span class="text-[10px] text-slate-400 line-through">$30</span></p>
-                    </div>
-                    <button onclick="addToCart()" class="w-full mt-2 bg-slate-900 text-white text-[11px] py-2 rounded-lg font-bold hover:bg-rose-600 transition shadow">
-                        Add to Cart
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Bottom Navigation Bar (Daraz Mobile App Style) -->
-    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 py-2 px-4 flex justify-around items-center z-50 shadow-lg">
-        <a href="#hero" class="flex flex-col items-center text-rose-600">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-            <span class="text-[10px] font-bold mt-0.5">Home</span>
-        </a>
-        <button onclick="openModal()" class="flex flex-col items-center text-slate-500 relative">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-            <span class="text-[10px] font-bold mt-0.5">Cart</span>
-            <span id="cartCountBadge" class="absolute -top-1 -right-2 bg-rose-600 text-white text-[9px] px-1 rounded-full font-bold">0</span>
-        </button>
-        <a href="#products" class="flex flex-col items-center text-slate-500">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-            <span class="text-[10px] font-bold mt-0.5">Shop</span>
-        </a>
-        <button onclick="openModal()" class="flex flex-col items-center text-slate-500">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-            <span class="text-[10px] font-bold mt-0.5">Account</span>
-        </button>
-    </nav>
-
-    <!-- Order / Checkout Modal Popup -->
-    <div id="checkoutModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
-        <div class="bg-white w-full max-w-sm rounded-3xl p-6 shadow-2xl relative">
-            <!-- Close Button -->
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 font-bold text-xl">&times;</button>
-            
-            <h3 class="text-xl font-black text-slate-900 mb-1">Complete Order</h3>
-            <p class="text-xs text-slate-500 mb-4">Enter your details to confirm order via WhatsApp.</p>
-
-            <form onsubmit="handleCheckout(event)" class="space-y-3">
+            <form onsubmit="handleCheckout(event)" class="space-y-4">
                 <div>
-                    <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Full Name</label>
-                    <input type="text" id="custName" required placeholder="John Doe" class="w-full border border-slate-200 rounded-xl p-2.5 text-sm focus:outline-rose-600 bg-slate-50">
+                    <label class="block text-[10px] font-bold text-purple-300 uppercase tracking-widest mb-1">Full Name</label>
+                    <input type="text" id="custName" required placeholder="John Doe" class="w-full bg-slate-900/80 border border-slate-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-purple-500 transition">
                 </div>
                 <div>
-                    <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Phone Number</label>
-                    <input type="tel" id="custPhone" required placeholder="017xxxxxxxx" class="w-full border border-slate-200 rounded-xl p-2.5 text-sm focus:outline-rose-600 bg-slate-50">
+                    <label class="block text-[10px] font-bold text-purple-300 uppercase tracking-widest mb-1">Phone Number</label>
+                    <input type="tel" id="custPhone" required placeholder="017xxxxxxxx" class="w-full bg-slate-900/80 border border-slate-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-purple-500 transition">
                 </div>
                 <div>
-                    <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Delivery Address</label>
-                    <textarea id="custAddress" required rows="2" placeholder="House, Road, City..." class="w-full border border-slate-200 rounded-xl p-2.5 text-sm focus:outline-rose-600 bg-slate-50"></textarea>
+                    <label class="block text-[10px] font-bold text-purple-300 uppercase tracking-widest mb-1">Delivery Address</label>
+                    <textarea id="custAddress" required rows="2" placeholder="House, Road, Area, City..." class="w-full bg-slate-900/80 border border-slate-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-purple-500 transition"></textarea>
                 </div>
 
-                <button type="submit" class="w-full bg-emerald-600 text-white font-bold py-3 rounded-xl hover:bg-emerald-700 transition mt-2 shadow-md shadow-emerald-200">
-                    Confirm Order on WhatsApp
+                <button type="submit" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold py-3.5 rounded-xl hover:shadow-lg hover:shadow-emerald-500/20 transition active:scale-95">
+                    Order via WhatsApp
                 </button>
             </form>
         </div>
@@ -226,7 +194,6 @@
             document.getElementById("checkoutModal").classList.remove("flex");
         }
 
-        // WhatsApp Direct Order Logic
         function handleCheckout(event) {
             event.preventDefault();
 
