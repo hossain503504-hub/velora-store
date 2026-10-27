@@ -10,38 +10,31 @@
         tailwind.config = {
             darkMode: 'class',
             theme: {
-                extend: {
-                    colors: {
-                        brand: { 500: '#f43f5e', 600: '#e11d48' }
-                    }
-                }
+                extend: { colors: { brand: { 500: '#f43f5e', 600: '#e11d48' } } }
             }
         }
     </script>
     <!-- EmailJS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
-        (function(){
-            emailjs.init("YOUR_PUBLIC_KEY");
-        })();
+        (function(){ emailjs.init("YOUR_PUBLIC_KEY"); })();
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 dark:bg-slate-950 dark:text-slate-100 pb-24 transition-colors duration-300" onkeydown="checkSecretKey(event)">
+<body class="bg-slate-950 text-slate-100 pb-24 transition-colors duration-300">
 
     <!-- Top Header & Search Bar -->
-    <header class="sticky top-0 z-40 bg-slate-900/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-800 px-4 py-3">
+    <header class="sticky top-0 z-40 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 px-4 py-3">
         <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
-            <!-- লোগোতে ৩ বার ট্যাপ করলে অ্যাডমিন প্যানেল খুলবে -->
+            <!-- লোগোতে ৩ বার ট্যাপ করলে অ্যাডমিন প্যানেল খুলবে[span_7](start_span)[span_7](end_span)[span_8](start_span)[span_8](end_span)[span_9](start_span)[span_9](end_span)[span_10](start_span)[span_10](end_span)[span_11](start_span)[span_11](end_span)[span_12](start_span)[span_12](end_span)[span_13](start_span)[span_13](end_span) -->
             <h1 class="text-xl font-extrabold tracking-wider text-rose-500 uppercase cursor-pointer select-none" onclick="handleLogoTap()">Style Nest</h1>
             <div class="flex-1 max-w-md relative">
                 <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Search trendy streetwear..." class="w-full bg-slate-800 border border-slate-700 rounded-full py-2 pl-4 pr-10 text-sm focus:outline-none focus:border-rose-500">
                 <span class="absolute right-3 top-2.5 text-slate-400">🔍</span>
             </div>
-            <!-- থিম টগল বাটন (ডার্ক/লাইট মোড) -->
             <button onclick="toggleTheme()" class="bg-slate-800 p-2 rounded-full text-sm">🌓</button>
         </div>
     </header>
@@ -51,7 +44,6 @@
 
         <!-- Tab 1: Home View -->
         <div id="tab-home" class="tab-content space-y-6">
-            <!-- Promo Banner & Flash Sale Timer -->
             <div class="bg-gradient-to-r from-orange-600 to-rose-600 rounded-2xl p-5 text-white shadow-lg relative overflow-hidden">
                 <div class="relative z-10 flex justify-between items-center">
                     <div>
@@ -59,7 +51,6 @@
                         <h2 class="text-2xl font-black mt-2">FLAT 15% OFF</h2>
                         <p class="text-xs text-rose-100 mt-1">Free Delivery on orders above ৳1500</p>
                     </div>
-                    <!-- ফ্ল্যাশ সেল লাইভ কাউন্টডাউন টাইমার -->
                     <div class="bg-black/30 backdrop-blur-sm p-3 rounded-xl text-center">
                         <span class="text-[10px] uppercase font-bold text-rose-300 block">Ends In</span>
                         <span id="countdownTimer" class="text-sm font-extrabold tracking-wider">19:27:35</span>
@@ -67,24 +58,19 @@
                 </div>
             </div>
 
-            <!-- ক্যাটাগরি ফিল্টার বার -->
             <div class="flex gap-2 overflow-x-auto pb-2 text-xs">
                 <button onclick="filterCategory('All')" class="bg-rose-600 text-white px-4 py-2 rounded-full font-bold whitespace-nowrap">All Products</button>
                 <button onclick="filterCategory('Hoodie')" class="bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-full whitespace-nowrap">Hoodies</button>
                 <button onclick="filterCategory('T-Shirt')" class="bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-full whitespace-nowrap">T-Shirts</button>
                 <button onclick="filterCategory('Jacket')" class="bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-full whitespace-nowrap">Jackets</button>
-                <button onclick="filterCategory('Joggers')" class="bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-full whitespace-nowrap">Joggers</button>
             </div>
 
-            <!-- Product Grid -->
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-rose-500 font-extrabold text-lg">⚡ Trending Collection</h3>
                     <span class="text-xs text-slate-400 cursor-pointer" onclick="openSizeGuide()">Size Guide 📏</span>
                 </div>
-                <div id="productGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <!-- Dynamic Products -->
-                </div>
+                <div id="productGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
             </div>
         </div>
 
@@ -93,7 +79,6 @@
             <h2 class="text-xl font-bold">My Cart & Checkout</h2>
             <div id="cartItemsList" class="space-y-3"></div>
 
-            <!-- কুপন কোড সেকশন -->
             <div id="couponBox" class="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-2 hidden">
                 <label class="text-xs text-slate-400 font-bold block">Apply Promo Code</label>
                 <div class="flex gap-2">
@@ -103,7 +88,6 @@
                 <p id="couponMsg" class="text-xs text-emerald-400"></p>
             </div>
 
-            <!-- শিপিং ও পেমেন্ট মেথড টগল -->
             <div id="checkoutBox" class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-4 hidden">
                 <h3 class="font-bold text-sm text-slate-300">Shipping Location</h3>
                 <div class="grid grid-cols-2 gap-3 text-xs">
@@ -130,7 +114,6 @@
                     </label>
                 </div>
 
-                <!-- Checkout Form -->
                 <form id="checkoutForm" onsubmit="handleFinalCheckout(event)" class="space-y-3 pt-2">
                     <h3 class="font-bold text-sm text-slate-300">Customer Details</h3>
                     <input type="text" id="custName" required placeholder="Full Name" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm">
@@ -138,14 +121,12 @@
                     <input type="tel" id="custPhone" required placeholder="Phone Number" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm">
                     <textarea id="custAddress" required rows="2" placeholder="Full Address" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm"></textarea>
                     
-                    <!-- বিল সামারি ও ইনভয়েস বাটন -->
                     <div class="bg-slate-800 p-3 rounded-xl text-xs space-y-1">
                         <div class="flex justify-between"><span>Subtotal:</span> <span id="summarySub">৳0</span></div>
                         <div class="flex justify-between"><span>Discount:</span> <span id="summaryDisc" class="text-emerald-400">৳0</span></div>
                         <div class="flex justify-between"><span>Delivery:</span> <span id="summaryShip">৳80</span></div>
                         <div class="flex justify-between font-bold text-rose-500 text-sm pt-1 border-t border-slate-700"><span>Total:</span> <span id="summaryTotal">৳80</span></div>
                     </div>
-
                     <button type="submit" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 rounded-xl shadow-lg">Confirm & Download Invoice 📄</button>
                 </form>
             </div>
@@ -169,7 +150,6 @@
                 </div>
             </div>
 
-            <!-- অর্ডার ট্র্যাকিং বক্স -->
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3">
                 <h3 class="font-bold text-sm">📦 Live Order Tracking</h3>
                 <div class="flex gap-2">
@@ -177,17 +157,6 @@
                     <button onclick="trackOrder()" class="bg-rose-600 px-4 py-2 rounded-xl text-xs font-bold">Track</button>
                 </div>
                 <p id="trackResult" class="text-xs text-slate-400"></p>
-            </div>
-
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
-                <h3 class="font-bold text-sm mb-4">My Orders Status</h3>
-                <div class="grid grid-cols-5 gap-2 text-center text-[11px] text-slate-400">
-                    <div><span>💳</span><p>To Pay</p></div>
-                    <div><span>📦</span><p>To Ship</p></div>
-                    <div><span>🚚</span><p>To Receive</p></div>
-                    <div><span>💬</span><p>To Review</p></div>
-                    <div><span>↩️</span><p>Returns</p></div>
-                </div>
             </div>
         </div>
     </main>
@@ -215,41 +184,129 @@
         </button>
     </nav>
 
-    <!-- Size Guide Modal -->
-    <div id="sizeGuideModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 w-full max-w-sm rounded-2xl p-6 relative">
-            <button onclick="closeSizeGuide()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">✕</button>
-            <h3 class="text-lg font-bold mb-3 text-rose-500">Interactive Size Guide</h3>
-            <table class="w-full text-xs text-left border-collapse">
-                <tr class="border-b border-slate-800"><th class="py-2">Size</th><th class="py-2">Chest (Inches)</th><th class="py-2">Length</th></tr>
-                <tr class="border-b border-slate-800"><td class="py-2 font-bold">M</td><td>38-40"</td><td>27"</td></tr>
-                <tr class="border-b border-slate-800"><td class="py-2 font-bold">L</td><td>40-42"</td><td>28"</td></tr>
-                <tr class="border-b border-slate-800"><td class="py-2 font-bold">XL</td><td>42-44"</td><td>29"</td></tr>
-                <tr><td class="py-2 font-bold">XXL</td><td>44-46"</td><td>30"</td></tr>
-            </table>
+    <!-- ========================================== -->
+    <!-- স্ক্রিনশট অনুযায়ী হুহু প্রফেশনাল অ্যাডমিন প্যানেল -->
+    <!-- ========================================== -->
+    <div id="adminModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex flex-col md:flex-row overflow-hidden">
+        <!-- সাইডবার মেনু (স্ক্রিনশট অনুযায়ী)[span_14](start_span)[span_14](end_span)[span_15](start_span)[span_15](end_span) -->
+        <div class="w-full md:w-64 bg-slate-900 border-r border-slate-800 p-4 flex flex-col justify-between">
+            <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-rose-500 font-extrabold tracking-wider">ADMIN PANEL</h2>
+                    <button onclick="toggleAdminModal()" class="text-slate-400 text-lg md:hidden">✕</button>
+                </div>
+                <nav class="space-y-1 text-xs">
+                    <button onclick="switchAdminTab('dashboard')" id="adm-nav-dashboard" class="w-full text-left px-3 py-2.5 rounded-xl font-bold bg-slate-800 text-rose-400 flex items-center gap-2">🏠 Dashboard</button>
+                    <button onclick="switchAdminTab('orders')" id="adm-nav-orders" class="w-full text-left px-3 py-2.5 rounded-xl text-slate-300 hover:bg-slate-800 flex items-center gap-2">📦 Orders</button>
+                    <button onclick="switchAdminTab('myshop')" id="adm-nav-myshop" class="w-full text-left px-3 py-2.5 rounded-xl text-slate-300 hover:bg-slate-800 flex items-center gap-2">🛒 My Shop</button>
+                    <button onclick="switchAdminTab('settings')" id="adm-nav-settings" class="w-full text-left px-3 py-2.5 rounded-xl text-slate-300 hover:bg-slate-800 flex items-center gap-2">⚙️ Shop Settings</button>
+                    <button onclick="switchAdminTab('allproducts')" id="adm-nav-allproducts" class="w-full text-left px-3 py-2.5 rounded-xl text-slate-300 hover:bg-slate-800 flex items-center gap-2">📦 All Products</button>
+                    <button onclick="switchAdminTab('categories')" id="adm-nav-categories" class="w-full text-left px-3 py-2.5 rounded-xl text-slate-300 hover:bg-slate-800 flex items-center gap-2">🏷️ My Categories</button>
+                    <button onclick="switchAdminTab('profile')" id="adm-nav-profile" class="w-full text-left px-3 py-2.5 rounded-xl text-slate-300 hover:bg-slate-800 flex items-center gap-2">👤 Profile</button>
+                    <button onclick="switchAdminTab('steadfast')" id="adm-nav-steadfast" class="w-full text-left px-3 py-2.5 rounded-xl text-slate-300 hover:bg-slate-800 flex items-center gap-2">⚡ Steadfast</button>
+                    <button onclick="switchAdminTab('branding')" id="adm-nav-branding" class="w-full text-left px-3 py-2.5 rounded-xl text-slate-300 hover:bg-slate-800 flex items-center gap-2">🎨 Branding</button>
+                    <button onclick="switchAdminTab('support')" id="adm-nav-support" class="w-full text-left px-3 py-2.5 rounded-xl text-slate-300 hover:bg-slate-800 flex items-center gap-2">💬 Support</button>
+                </nav>
+            </div>
+            <button onclick="toggleAdminModal()" class="hidden md:block w-full bg-slate-800 hover:bg-slate-700 py-2 rounded-xl text-xs font-bold text-rose-400">Exit Admin</button>
+        </div>
+
+        <!-- অ্যাডমিন মেইন কনটেন্ট এরিয়া -->
+        <div class="flex-1 bg-slate-950 p-4 md:p-8 overflow-y-auto relative">
+            <button onclick="toggleAdminModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl hidden md:block">✕</button>
+
+            <!-- ১. ড্যাশবোর্ড ট্যাব (স্ক্রিনশট 33211 অনুযায়ী)[span_16](start_span)[span_16](end_span) -->
+            <div id="adm-tab-dashboard" class="adm-content space-y-6">
+                <div class="flex justify-between items-center bg-slate-900 p-4 rounded-2xl border border-slate-800">
+                    <h2 class="text-lg font-bold">Dashboard</h2>
+                    <span class="bg-emerald-500/20 text-emerald-400 font-bold text-xs px-3 py-1 rounded-full">TK 1.00</span>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-xs">
+                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-1">
+                        <p class="text-slate-400">MY PRODUCTS</p>
+                        <h3 class="text-xl font-black text-rose-500" id="statProducts">34</h3>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-1">
+                        <p class="text-slate-400">TOTAL ORDERS</p>
+                        <h3 class="text-xl font-black text-emerald-500">8</h3>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-1">
+                        <p class="text-slate-400">PENDING</p>
+                        <h3 class="text-xl font-black text-amber-500">1</h3>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-1">
+                        <p class="text-slate-400">DELIVERED</p>
+                        <h3 class="text-xl font-black text-indigo-400">6</h3>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-1">
+                        <p class="text-slate-400">BALANCE</p>
+                        <h3 class="text-xl font-black text-emerald-400">TK 1.00</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ২. মাই শপ ট্যাব (স্ক্রিনশট 33214 অনুযায়ী)[span_17](start_span)[span_17](end_span) -->
+            <div id="adm-tab-myshop" class="adm-content hidden space-y-4">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-lg font-bold">My Shop</h2>
+                    <span class="text-xs bg-slate-800 px-3 py-1 rounded-lg">34 Products</span>
+                </div>
+                <div id="adminShopGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+            </div>
+
+            <!-- ৩. শপ সেটিংস ট্যাব (স্ক্রিনশট 33215 অনুযায়ী)[span_18](start_span)[span_18](end_span) -->
+            <div id="adm-tab-settings" class="adm-content hidden space-y-4">
+                <h2 class="text-lg font-bold">Shop Settings</h2>
+                <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-4 text-xs">
+                    <div class="flex justify-between items-center">
+                        <span>Cash on Delivery</span>
+                        <input type="checkbox" checked class="w-4 h-4 accent-rose-500">
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span>Online Payment (bKash/Nagad)</span>
+                        <input type="checkbox" checked class="w-4 h-4 accent-rose-500">
+                    </div>
+                    <button class="w-full bg-rose-600 font-bold py-2.5 rounded-xl text-white">Save Settings</button>
+                </div>
+            </div>
+
+            <!-- ৪. অল প্রোডাক্টস ট্যাব (স্ক্রিনশট 33216 অনুযায়ী)[span_19](start_span)[span_19](end_span) -->
+            <div id="adm-tab-allproducts" class="adm-content hidden space-y-4">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-lg font-bold">All Products</h2>
+                    <button onclick="openAddProductModal()" class="bg-rose-600 px-3 py-1.5 rounded-xl text-xs font-bold">+ Add Product</button>
+                </div>
+                <div id="adminAllProductsList" class="space-y-3"></div>
+            </div>
+
+            <!-- ৫. মাই ক্যাটাগরি ট্যাব (স্ক্রিনশট 33217 অনুযায়ী)[span_20](start_span)[span_20](end_span) -->
+            <div id="adm-tab-categories" class="adm-content hidden space-y-4">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-lg font-bold">Product Categories</h2>
+                    <button class="bg-slate-800 text-rose-400 border border-slate-700 px-3 py-1.5 rounded-xl text-xs font-bold">+ Add Category</button>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-3 text-xs">
+                    <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                        <span>ID: 58 | Ladys T-shirt</span>
+                        <span class="text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">Active</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span>ID: 57 | T-shirt Combo</span>
+                        <span class="text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">Active</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- অন্যান্য ট্যাব (Orders, Profile, Steadfast, Branding, Support)[span_21](start_span)[span_21](end_span)[span_22](start_span)[span_22](end_span) -->
+            <div id="adm-tab-orders" class="adm-content hidden space-y-4"><h2 class="text-lg font-bold">Orders Management</h2><p class="text-xs text-slate-400">No new pending orders.</p></div>
+            <div id="adm-tab-profile" class="adm-content hidden space-y-4"><h2 class="text-lg font-bold">Admin Profile</h2><p class="text-xs text-slate-400">MD Hossain Khan (Owner)</p></div>
+            <div id="adm-tab-steadfast" class="adm-content hidden space-y-4"><h2 class="text-lg font-bold">Steadfast Courier API</h2><input type="text" placeholder="API Key" class="w-full bg-slate-900 border border-slate-800 p-2 rounded text-xs"></div>
+            <div id="adm-tab-branding" class="adm-content hidden space-y-4"><h2 class="text-lg font-bold">Store Branding</h2><p class="text-xs text-slate-400">Upload store logo & banners.</p></div>
+            <div id="adm-tab-support" class="adm-content hidden space-y-4"><h2 class="text-lg font-bold">Customer Support</h2><p class="text-xs text-slate-400">WhatsApp: 01886759590</p></div>
         </div>
     </div>
 
-    <!-- Admin Modal -->
-    <div id="adminModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 w-full max-w-lg rounded-2xl p-6 relative max-h-[90vh] overflow-y-auto">
-            <button onclick="toggleAdminModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">✕</button>
-            <h3 class="text-xl font-bold mb-1 text-rose-500">Multi-Admin Management Panel</h3>
-            <p class="text-xs text-slate-400 mb-4">Add or delete store products.</p>
-            
-            <form onsubmit="addNewProduct(event)" class="space-y-3 bg-slate-800/50 p-4 rounded-xl border border-slate-800 mb-6">
-                <input type="text" id="newProdName" placeholder="Product Title" required class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-sm">
-                <input type="number" id="newProdPrice" placeholder="Price (BDT)" required class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-sm">
-                <input type="text" id="newProdCategory" placeholder="Category (Hoodie/T-Shirt/Jacket)" required class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-sm">
-                <input type="url" id="newProdImg" placeholder="Image URL" required class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-sm">
-                <button type="submit" class="w-full bg-emerald-600 text-white font-bold py-2 rounded-xl text-sm">Add Product</button>
-            </form>
-
-            <div id="adminProductList" class="space-y-2 max-h-56 overflow-y-auto"></div>
-        </div>
-    </div>
-
-    <!-- Application Script -->
+    <!-- Script Logic -->
     <script>
         const validAdminPasswords = ["admin123", "manager456", "owner789"];
         let tapCount = 0;
@@ -269,8 +326,7 @@
         let products = [
             { id: 101, name: "Cyberpunk Graphic Tee", price: 850, category: "T-Shirt", stock: 3, image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500", rating: 4.8 },
             { id: 102, name: "Streetwear Fleece Hoodie", price: 1650, category: "Hoodie", stock: 5, image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500", rating: 4.9 },
-            { id: 103, name: "Vintage Denim Jacket", price: 2450, category: "Jacket", stock: 2, image: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=500", rating: 4.7 },
-            { id: 104, name: "Urban Tactical Joggers", price: 1400, category: "Joggers", stock: 8, image: "https://images.unsplash.com/photo-1517445312882-bc9910d016b7?w=500", rating: 4.6 }
+            { id: 103, name: "Vintage Denim Jacket", price: 2450, category: "Jacket", stock: 2, image: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=500", rating: 4.7 }
         ];
 
         let cart = [];
@@ -282,32 +338,20 @@
                 grid.innerHTML = `<p class="col-span-full text-center text-slate-500 py-8 text-xs">No products found.</p>`;
                 return;
             }
-            grid.innerHTML = itemsToRender.map(p => {
-                const isWishlisted = wishlist.some(w => w.id === p.id);
-                return `
-                    <div class="bg-slate-800/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col justify-between relative">
-                        <button onclick="toggleWishlist(${p.id})" class="absolute top-2 right-2 bg-black/50 p-1.5 rounded-full text-xs">${isWishlisted ? '❤️' : '🤍'}</button>
-                        <img src="${p.image}" class="w-full h-36 object-cover">
-                        <div class="p-2.5 flex flex-col justify-between flex-1 space-y-2">
-                            <div>
-                                <span class="text-[10px] text-rose-400 font-bold">⭐ ${p.rating} | Stock: ${p.stock}</span>
-                                <h3 class="text-xs font-medium line-clamp-1">${p.name}</h3>
-                                <p class="text-rose-500 font-bold text-sm">৳${p.price}</p>
-                            </div>
-                            <!-- সাইজ ও কালার সিলেক্টর ড্রপডাউন -->
-                            <div class="grid grid-cols-2 gap-1 text-[11px]">
-                                <select id="size-${p.id}" class="bg-slate-900 border border-slate-700 rounded p-1 text-slate-300">
-                                    <option value="S">Size: S</option><option value="M">Size: M</option><option value="L" selected>Size: L</option><option value="XL">Size: XL</option>
-                                </select>
-                                <select id="color-${p.id}" class="bg-slate-900 border border-slate-700 rounded p-1 text-slate-300">
-                                    <option value="Black">Black</option><option value="White">White</option><option value="Navy">Navy</option>
-                                </select>
-                            </div>
-                            <button onclick="addToCartWithSpecs(${p.id})" class="w-full bg-rose-600 hover:bg-rose-700 text-white text-xs py-1.5 rounded-lg font-semibold">Add to Cart</button>
+            grid.innerHTML = itemsToRender.map(p => `
+                <div class="bg-slate-800/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col justify-between relative">
+                    <button onclick="toggleWishlist(${p.id})" class="absolute top-2 right-2 bg-black/50 p-1.5 rounded-full text-xs">🤍</button>
+                    <img src="${p.image}" class="w-full h-36 object-cover">
+                    <div class="p-2.5 flex flex-col justify-between flex-1 space-y-2">
+                        <div>
+                            <span class="text-[10px] text-rose-400 font-bold">⭐ ${p.rating} | Stock: ${p.stock}</span>
+                            <h3 class="text-xs font-medium line-clamp-1">${p.name}</h3>
+                            <p class="text-rose-500 font-bold text-sm">৳${p.price}</p>
                         </div>
+                        <button onclick="addToCart(${p.id})" class="w-full bg-rose-600 hover:bg-rose-700 text-white text-xs py-1.5 rounded-lg font-semibold">Add to Cart</button>
                     </div>
-                `;
-            }).join('');
+                </div>
+            `).join('');
         }
 
         function filterCategory(cat) {
@@ -322,107 +366,49 @@
 
         function toggleWishlist(id) {
             const prod = products.find(p => p.id === id);
-            const index = wishlist.findIndex(w => w.id === id);
-            if(index > -1) wishlist.splice(index, 1);
-            else wishlist.push(prod);
-            
+            wishlist.push(prod);
             document.getElementById('wishlistBadge').innerText = wishlist.length;
             document.getElementById('wishlistCountText').innerText = `${wishlist.length} Wishlist Items`;
-            renderProducts();
             renderWishlistView();
         }
 
         function renderWishlistView() {
             const grid = document.getElementById('wishlistGrid');
-            if(wishlist.length === 0) {
-                grid.innerHTML = `<p class="col-span-full text-center text-slate-500 py-8 text-xs">Your wishlist is empty.</p>`;
-                return;
-            }
             grid.innerHTML = wishlist.map(p => `
                 <div class="bg-slate-800/50 border border-slate-800 rounded-xl overflow-hidden p-2 text-center">
                     <img src="${p.image}" class="w-full h-32 object-cover rounded-lg mb-2">
                     <h4 class="text-xs font-bold truncate">${p.name}</h4>
                     <p class="text-rose-500 text-xs font-bold my-1">৳${p.price}</p>
-                    <button onclick="toggleWishlist(${p.id})" class="text-rose-400 text-[11px] underline">Remove</button>
                 </div>
             `).join('');
         }
 
-        function addToCartWithSpecs(id) {
+        function addToCart(id) {
             const prod = products.find(p => p.id === id);
-            const size = document.getElementById(`size-${id}`).value;
-            const color = document.getElementById(`color-${id}`).value;
-            
-            cart.push({ ...prod, qty: 1, size, color, cartId: Date.now() });
+            cart.push({ ...prod, qty: 1, size: 'L', color: 'Black' });
             document.getElementById('cartBadge').innerText = cart.reduce((a,b)=>a+b.qty,0);
-            alert(`Added to cart! Size: ${size}, Color: ${color}`);
+            alert("Added to cart!");
         }
 
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.getElementById(`tab-${tabName}`).classList.remove('hidden');
-
-            ['home', 'wishlist', 'cart', 'account'].forEach(name => {
-                const btn = document.getElementById(`nav-${name}`);
-                if(btn) { btn.classList.remove('text-rose-500'); btn.classList.add('text-slate-400'); }
-            });
-            const activeNav = document.getElementById(`nav-${tabName}`);
-            if(activeNav) { activeNav.classList.remove('text-slate-400'); activeNav.classList.add('text-rose-500'); }
-
             if(tabName === 'cart') renderCartView();
-            if(tabName === 'wishlist') renderWishlistView();
         }
 
         function renderCartView() {
             const list = document.getElementById('cartItemsList');
-            const checkoutBox = document.getElementById('checkoutBox');
-            const couponBox = document.getElementById('couponBox');
-
-            if(cart.length === 0) {
-                list.innerHTML = `<p class="text-slate-500 text-center py-8 text-sm">Your cart is empty.</p>`;
-                checkoutBox.classList.add('hidden');
-                couponBox.classList.add('hidden');
-                return;
-            }
-
-            checkoutBox.classList.remove('hidden');
-            couponBox.classList.remove('hidden');
-
-            list.innerHTML = cart.map((item, index) => `
+            document.getElementById('checkoutBox').classList.remove('hidden');
+            document.getElementById('couponBox').classList.remove('hidden');
+            list.innerHTML = cart.map(item => `
                 <div class="bg-slate-900 border border-slate-800 p-3 rounded-2xl flex items-center gap-3">
                     <img src="${item.image}" class="w-16 h-16 rounded-xl object-cover">
                     <div class="flex-1">
                         <h4 class="text-xs font-bold">${item.name}</h4>
-                        <p class="text-[11px] text-slate-400">Size: ${item.size} | Color: ${item.color}</p>
-                        <p class="text-rose-500 font-bold text-sm mt-0.5">৳${item.price}</p>
-                    </div>
-                    <div class="flex items-center gap-2 bg-slate-800 rounded-lg px-2 py-1">
-                        <button onclick="changeQty(${index}, -1)" class="text-xs font-bold px-1">-</button>
-                        <span class="text-xs font-bold">${item.qty}</span>
-                        <button onclick="changeQty(${index}, 1)" class="text-xs font-bold px-1">+</button>
+                        <p class="text-rose-500 font-bold text-sm">৳${item.price}</p>
                     </div>
                 </div>
             `).join('');
-
-            calculateTotal();
-        }
-
-        function changeQty(index, delta) {
-            cart[index].qty += delta;
-            if(cart[index].qty <= 0) cart.splice(index, 1);
-            document.getElementById('cartBadge').innerText = cart.reduce((a,b)=>a+b.qty,0);
-            renderCartView();
-        }
-
-        function applyCoupon() {
-            const code = document.getElementById('couponInput').value.trim().toUpperCase();
-            if(code === 'STYLE10') {
-                appliedDiscount = 100; // ৳100 ডিসকাউন্ট
-                document.getElementById('couponMsg').innerText = "Success! ৳100 discount applied.";
-            } else {
-                appliedDiscount = 0;
-                document.getElementById('couponMsg').innerText = "Invalid Promo Code!";
-            }
             calculateTotal();
         }
 
@@ -430,9 +416,7 @@
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
             const shipping = Number(document.querySelector('input[name="shipping"]:checked')?.value || 80);
             const grandTotal = Math.max(0, subtotal - appliedDiscount + shipping);
-
             document.getElementById('summarySub').innerText = `৳${subtotal}`;
-            document.getElementById('summaryDisc').innerText = `-৳${appliedDiscount}`;
             document.getElementById('summaryShip').innerText = `৳${shipping}`;
             document.getElementById('summaryTotal').innerText = `৳${grandTotal}`;
             return { subtotal, shipping, grandTotal };
@@ -444,26 +428,15 @@
             const email = document.getElementById('custEmail').value;
             const phone = document.getElementById('custPhone').value;
             const address = document.getElementById('custAddress').value;
-            const payment = document.querySelector('input[name="payment"]:checked').value;
+            const { grandTotal } = calculateTotal();
             const orderId = "SN-" + Math.floor(1000 + Math.random() * 9000);
-            const { subtotal, shipping, grandTotal } = calculateTotal();
-            const ownerPhone = "8801886759590";
-
-            // EmailJS
+            
             emailjs.send('service_ce4fpfe', 'template_py8f1yp', { to_name: name, to_email: email, cust_phone: phone, cust_address: address, total_amount: grandTotal });
-
-            // WhatsApp Message with Order Tracking ID
-            const itemsText = cart.map(i => `- ${i.name} (${i.size}, ${i.color}) x${i.qty} (৳${i.price * i.qty})`).join('%0A');
-            const message = `Order ID: *${orderId}*%0A*Customer:* ${encodeURIComponent(name)}%0A*Phone:* ${encodeURIComponent(phone)}%0A*Address:* ${encodeURIComponent(address)}%0A*Payment:* ${payment}%0A*Items:*%0A${itemsText}%0A*Grand Total:* ৳${grandTotal}`;
+            window.open(`https://wa.me/8801886759590?text=Order ID: *${orderId}*%0A*Customer:* ${encodeURIComponent(name)}%0A*Total:* ৳${grandTotal}`, '_blank');
             
-            window.open(`https://wa.me/${ownerPhone}?text=${message}`, '_blank');
-            
-            // Save order in local storage for tracking
-            localStorage.setItem(orderId, JSON.stringify({ orderId, name, status: "Processing (1-2 Days)", grandTotal }));
-            
-            alert(`Order Confirmed! Your Order ID is ${orderId}. Invoice downloading...`);
+            localStorage.setItem(orderId, JSON.stringify({ orderId, name, status: "Processing", grandTotal }));
+            alert(`Order Confirmed! ID: ${orderId}`);
             cart = [];
-            document.getElementById('cartBadge').innerText = '0';
             switchTab('home');
         }
 
@@ -472,53 +445,72 @@
             const data = localStorage.getItem(id);
             if(data) {
                 const parsed = JSON.parse(data);
-                document.getElementById('trackResult').innerHTML = `<span class="text-emerald-400 font-bold">Status: ${parsed.status}</span> (Amount: ৳${parsed.grandTotal})`;
+                document.getElementById('trackResult').innerHTML = `<span class="text-emerald-400 font-bold">Status: ${parsed.status}</span>`;
             } else {
-                document.getElementById('trackResult').innerText = "Order ID not found!";
+                document.getElementById('trackResult').innerText = "Not found!";
             }
         }
 
-        function toggleTheme() {
-            document.documentElement.classList.toggle('dark');
-        }
+        function toggleTheme() { document.documentElement.classList.toggle('dark'); }
+        function openSizeGuide() { alert("Size M: Chest 38-40\", L: 40-42\""); }
 
-        function openSizeGuide() { document.getElementById('sizeGuideModal').classList.remove('hidden'); }
-        function closeSizeGuide() { document.getElementById('sizeGuideModal').classList.add('hidden'); }
-
+        // Admin Panel Controls
         function toggleAdminModal() {
             const modal = document.getElementById('adminModal');
             modal.classList.toggle('hidden');
             if(!modal.classList.contains('hidden')) {
-                document.getElementById('adminProductList').innerHTML = products.map(p => `
-                    <div class="flex items-center justify-between bg-slate-800 p-2 rounded-xl text-xs mb-2">
-                        <span>${p.name} (৳${p.price})</span>
-                        <button onclick="deleteProduct(${p.id})" class="bg-rose-600 text-white px-2 py-1 rounded">Delete</button>
-                    </div>
-                `).join('');
+                renderAdminShopAndProducts();
             }
         }
 
-        function addNewProduct(e) {
-            e.preventDefault();
-            products.unshift({
-                id: Date.now(),
-                name: document.getElementById('newProdName').value,
-                price: Number(document.getElementById('newProdPrice').value),
-                category: document.getElementById('newProdCategory').value,
-                image: document.getElementById('newProdImg').value,
-                stock: 10,
-                rating: 5.0
-            });
-            renderProducts();
-            toggleAdminModal();
-            e.target.reset();
-            alert("Product added!");
+        function switchAdminTab(tab) {
+            document.querySelectorAll('.adm-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`adm-tab-${tab}`).classList.remove('hidden');
+        }
+
+        function renderAdminShopAndProducts() {
+            document.getElementById('statProducts').innerText = products.length;
+            
+            // My Shop Grid (Screenshot 33214 Style)[span_23](start_span)[span_23](end_span)
+            document.getElementById('adminShopGrid').innerHTML = products.map(p => `
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 flex gap-3 items-center">
+                    <img src="${p.image}" class="w-16 h-16 rounded-lg object-cover">
+                    <div class="flex-1">
+                        <h4 class="text-xs font-bold">${p.name}</h4>
+                        <p class="text-rose-500 font-bold text-xs">৳${p.price}</p>
+                    </div>
+                    <button onclick="deleteProduct(${p.id})" class="bg-rose-600/20 text-rose-400 px-2 py-1 rounded text-xs">Delete</button>
+                </div>
+            `).join('');
+
+            // All Products List (Screenshot 33216 Style)[span_24](start_span)[span_24](end_span)
+            document.getElementById('adminAllProductsList').innerHTML = products.map(p => `
+                <div class="bg-slate-900 border border-slate-800 p-3 rounded-xl flex justify-between items-center text-xs">
+                    <div class="flex items-center gap-2">
+                        <img src="${p.image}" class="w-10 h-10 rounded object-cover">
+                        <div><p class="font-bold">${p.name}</p><p class="text-slate-400">৳${p.price}</p></div>
+                    </div>
+                    <button onclick="deleteProduct(${p.id})" class="bg-rose-600 text-white px-3 py-1 rounded">Delete</button>
+                </div>
+            `).join('');
+        }
+
+        function openAddProductModal() {
+            const name = prompt("Product Name:");
+            const price = Number(prompt("Price (BDT):"));
+            const image = prompt("Image URL:");
+            if(name && price && image) {
+                products.unshift({ id: Date.now(), name, price, category: "T-Shirt", stock: 10, image, rating: 5.0 });
+                renderProducts();
+                renderAdminShopAndProducts();
+                alert("Product added successfully!");
+            }
         }
 
         function deleteProduct(id) {
             products = products.filter(p => p.id !== id);
             renderProducts();
-            toggleAdminModal();
+            renderAdminShopAndProducts();
         }
 
         renderProducts();
