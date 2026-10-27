@@ -3,169 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Style Nest - Trendy Clothing</title>
+    <title>Style Nest - Flash Sale & Trendy Fashion Online</title>
+    <meta name="description" content="Shop trendy outfits, flash sale items, and premium clothing with direct WhatsApp ordering.">
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-50 text-slate-900 font-sans">
+<body class="bg-slate-100 text-slate-900 font-sans pb-16">
 
-    <!-- Header / Navigation Bar -->
-    <header class="w-full bg-white shadow-sm p-4 sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <!-- Dynamic Brand Name with Unique ID -->
-            <h1 id="brandName" class="text-2xl font-bold text-indigo-600">Style Nest</h1>
-            
-            <nav class="hidden md:flex space-x-6 font-medium">
-                <a href="#hero" class="hover:text-indigo-600 transition">Home</a>
-                <a href="#products" class="hover:text-indigo-600 transition">Products</a>
-                <a href="#about" class="hover:text-indigo-600 transition">About Us</a>
-            </nav>
-
-            <!-- Cart Button with Counter -->
-            <div class="flex items-center space-x-3">
-                <button onclick="openModal()" class="bg-indigo-600 text-white px-3.5 py-2 rounded-lg font-medium hover:bg-indigo-700 transition text-sm flex items-center gap-1.5 shadow-sm">
-                    🛒 Cart (<span id="cartCount">0</span>)
-                </button>
+    <!-- Top Search & Brand Bar (Daraz Style) -->
+    <header class="w-full bg-rose-600 p-3 sticky top-0 z-50 shadow-md">
+        <div class="max-w-md mx-auto flex items-center justify-between gap-2">
+            <h1 id="brandName" class="text-white font-black text-xl tracking-wider">Style Nest</h1>
+            <!-- Search Bar -->
+            <div class="flex-1 bg-white rounded-full flex items-center px-3 py-1.5 shadow-inner">
+                <input type="text" placeholder="Search in Style Nest..." class="w-full text-xs outline-none bg-transparent text-slate-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-rose-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="hero" class="max-w-6xl mx-auto px-4 py-8 text-center md:text-left flex flex-col md:flex-row items-center justify-between">
-        <div class="md:w-1/2 mb-6 md:mb-0">
-            <h2 class="text-3xl md:text-5xl font-extrabold mb-4 leading-tight text-slate-800">
-                Upgrade Your Style With Premium Outfits
-            </h2>
-            <p class="text-slate-600 text-base md:text-lg mb-6">
-                Discover top-quality fashion items delivered straight to your door. Modern design, comfort, and affordable pricing.
-            </p>
-            <a href="#products" class="inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold shadow-md hover:bg-indigo-700 transition">
-                Shop Collection &rarr;
-            </a>
-        </div>
-        <div class="md:w-1/2 flex justify-center">
-            <img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=500" alt="Clothing Collection" class="rounded-2xl shadow-lg w-full max-w-sm">
-        </div>
-    </section>
+    <!-- Quick Perks Bar -->
+    <div class="bg-white border-b border-slate-200 py-2 px-3 text-[11px] font-semibold text-slate-600 flex justify-around text-center shadow-sm">
+        <span>🛡️ Safe Payment</span>
+        <span>🚚 Fast Delivery</span>
+        <span>🔄 Free Return</span>
+    </div>
 
-    <!-- 1. Mega Sale Banner -->
-    <section class="max-w-6xl mx-auto px-4 mt-4">
-        <div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl p-4 text-white text-center shadow-lg">
-            <span class="bg-yellow-400 text-slate-900 text-xs font-bold px-2.5 py-1 rounded-full uppercase">Mega Sale</span>
-            <h2 class="text-xl md:text-2xl font-extrabold mt-2">Get Up to 50% OFF On All Items!</h2>
-            <p class="text-xs md:text-sm text-indigo-100 mt-1">Limited time offer. Use code: <span class="font-bold underline">STYLENEST50</span></p>
-        </div>
-    </section>
-
-    <!-- 2. High Selling Products -->
-    <section id="products" class="max-w-6xl mx-auto px-4 py-6">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg md:text-xl font-bold text-slate-800 flex items-center gap-2">
-                🔥 High Selling Products
-            </h3>
-        </div>
-        
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
-            <!-- Product 1 -->
-            <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100">
-                <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500" alt="Casual T-Shirt" class="rounded-lg h-40 md:h-52 w-full object-cover mb-2">
-                <span class="text-[10px] bg-red-100 text-red-600 px-2 py-0.5 rounded font-bold">Top Selling</span>
-                <h4 class="font-semibold text-sm text-slate-800 line-clamp-1 mt-1">Casual Cotton T-Shirt</h4>
-                <p class="text-indigo-600 font-bold text-sm mt-1">$25.00</p>
-                <button onclick="addToCart()" class="w-full mt-2 bg-slate-900 text-white text-xs py-2 rounded-lg font-medium hover:bg-indigo-600 transition">Add to Cart</button>
+    <!-- Voucher / Category Icons Row -->
+    <section class="max-w-md mx-auto px-3 my-3">
+        <div class="grid grid-cols-4 gap-2 text-center">
+            <div class="bg-white p-2 rounded-xl shadow-sm">
+                <div class="text-rose-600 font-bold text-base">🔥</div>
+                <span class="text-[10px] font-bold text-slate-700">Hot Deals</span>
             </div>
-
-            <!-- Product 2 -->
-            <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100">
-                <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=500" alt="Classic Hoodie" class="rounded-lg h-40 md:h-52 w-full object-cover mb-2">
-                <span class="text-[10px] bg-red-100 text-red-600 px-2 py-0.5 rounded font-bold">Best Seller</span>
-                <h4 class="font-semibold text-sm text-slate-800 line-clamp-1 mt-1">Classic Winter Hoodie</h4>
-                <p class="text-indigo-600 font-bold text-sm mt-1">$45.00</p>
-                <button onclick="addToCart()" class="w-full mt-2 bg-slate-900 text-white text-xs py-2 rounded-lg font-medium hover:bg-indigo-600 transition">Add to Cart</button>
+            <div class="bg-white p-2 rounded-xl shadow-sm">
+                <div class="text-amber-500 font-bold text-base">🏷️</div>
+                <span class="text-[10px] font-bold text-slate-700">Vouchers</span>
+            </div>
+            <div class="bg-white p-2 rounded-xl shadow-sm">
+                <div class="text-indigo-600 font-bold text-base">⚡</div>
+                <span class="text-[10px] font-bold text-slate-700">Free Shipping</span>
+            </div>
+            <div class="bg-white p-2 rounded-xl shadow-sm">
+                <div class="text-purple-600 font-bold text-base">⭐</div>
+                <span class="text-[10px] font-bold text-slate-700">Top Ranking</span>
             </div>
         </div>
     </section>
 
-    <!-- 3. Special Discount Products -->
-    <section class="max-w-6xl mx-auto px-4 py-4">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg md:text-xl font-bold text-slate-800 flex items-center gap-2">
-                🏷️ Special Discount Products
-            </h3>
+    <!-- Gorgeous Mega Sale Banner -->
+    <section class="max-w-md mx-auto px-3 my-3">
+        <div class="bg-gradient-to-r from-amber-400 via-rose-500 to-purple-600 rounded-2xl p-4 text-white shadow-lg relative overflow-hidden">
+            <span class="bg-black/30 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider">Payday Sale</span>
+            <h2 class="text-lg font-black mt-2">Up to 80% OFF + Free Delivery</h2>
+            <p class="text-[11px] text-slate-100 mt-1">Limited time offer. Use code: <span class="bg-white text-slate-900 px-1.5 py-0.5 rounded font-bold">STYLENEST80</span></p>
         </div>
-        
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
-            <!-- Discount Product 1 -->
-            <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100">
-                <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500" alt="Denim Jacket" class="rounded-lg h-40 md:h-52 w-full object-cover mb-2">
-                <span class="text-[10px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded font-bold">20% OFF</span>
-                <h4 class="font-semibold text-sm text-slate-800 line-clamp-1 mt-1">Stylish Denim Jacket</h4>
-                <p class="text-indigo-600 font-bold text-sm mt-1">$48.00 <span class="text-xs text-slate-400 line-through font-normal">$60.00</span></p>
-                <button onclick="addToCart()" class="w-full mt-2 bg-slate-900 text-white text-xs py-2 rounded-lg font-medium hover:bg-indigo-600 transition">Add to Cart</button>
-            </div>
+    </section>
 
-            <!-- Discount Product 2 -->
-            <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100">
-                <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500" alt="Graphic Tee" class="rounded-lg h-40 md:h-52 w-full object-cover mb-2">
-                <span class="text-[10px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded font-bold">30% OFF</span>
-                <h4 class="font-semibold text-sm text-slate-800 line-clamp-1 mt-1">Drop-Shoulder Graphic Tee</h4>
-                <p class="text-indigo-600 font-bold text-sm mt-1">$21.00 <span class="text-xs text-slate-400 line-through font-normal">$30.00</span></p>
-                <button onclick="addToCart()" class="w-full mt-2 bg-slate-900 text-white text-xs py-2 rounded-lg font-medium hover:bg-indigo-600 transition">Add to Cart</button>
+    <!-- Flash Sale Section with Countdown Timer Style -->
+    <section id="products" class="max-w-md mx-auto px-3 my-4">
+        <div class="bg-white rounded-2xl p-3 shadow-sm border border-slate-100">
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-2">
+                    <h3 class="font-black text-rose-600 text-sm flex items-center gap-1">⚡ Flash Sale</h3>
+                    <div class="flex gap-1 text-[10px] font-bold text-white">
+                        <span class="bg-rose-600 px-1.5 py-0.5 rounded">20</span>:
+                        <span class="bg-rose-600 px-1.5 py-0.5 rounded">45</span>:
+                        <span class="bg-rose-600 px-1.5 py-0.5 rounded">08</span>
+                    </div>
+                </div>
+                <span class="text-xs font-bold text-rose-600">Shop More &gt;</span>
+            </div>
+            
+            <!-- Products Grid (2 items per row like Daraz mobile app) -->
+            <div class="grid grid-cols-2 gap-2">
+                <!-- Product 1 -->
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100 flex flex-col justify-between">
+                    <div>
+                        <div class="relative mb-2">
+                            <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500" alt="Casual T-Shirt" class="h-36 w-full object-cover rounded-lg">
+                            <span class="absolute bottom-1 left-1 bg-rose-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">-76%</span>
+                        </div>
+                        <h4 class="text-xs font-semibold text-slate-800 line-clamp-1">Casual Cotton T-Shirt</h4>
+                        <p class="text-rose-600 font-bold text-sm mt-1">$25.00</p>
+                    </div>
+                    <button onclick="addToCart()" class="w-full mt-2 bg-slate-900 text-white text-[11px] py-2 rounded-lg font-bold hover:bg-rose-600 transition shadow">
+                        Add to Cart
+                    </button>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100 flex flex-col justify-between">
+                    <div>
+                        <div class="relative mb-2">
+                            <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=500" alt="Classic Hoodie" class="h-36 w-full object-cover rounded-lg">
+                            <span class="absolute bottom-1 left-1 bg-rose-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">-54%</span>
+                        </div>
+                        <h4 class="text-xs font-semibold text-slate-800 line-clamp-1">Classic Winter Hoodie</h4>
+                        <p class="text-rose-600 font-bold text-sm mt-1">$45.00</p>
+                    </div>
+                    <button onclick="addToCart()" class="w-full mt-2 bg-slate-900 text-white text-[11px] py-2 rounded-lg font-bold hover:bg-rose-600 transition shadow">
+                        Add to Cart
+                    </button>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- 4. All Collection -->
-    <section class="max-w-6xl mx-auto px-4 py-6 mb-12">
-        <h3 class="text-lg md:text-xl font-bold text-slate-800 mb-4">
-            🛍️ All Collection
-        </h3>
-        
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
-            <!-- Regular Product 1 -->
-            <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100">
-                <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500" alt="Formal Shirt" class="rounded-lg h-40 md:h-52 w-full object-cover mb-2">
-                <h4 class="font-semibold text-sm text-slate-800 line-clamp-1 mt-1">Classic Formal Shirt</h4>
-                <p class="text-indigo-600 font-bold text-sm mt-1">$35.00</p>
-                <button onclick="addToCart()" class="w-full mt-2 bg-slate-900 text-white text-xs py-2 rounded-lg font-medium hover:bg-indigo-600 transition">Add to Cart</button>
+    <!-- Daily Shera Deals Section -->
+    <section class="max-w-md mx-auto px-3 my-4">
+        <div class="bg-white rounded-2xl p-3 shadow-sm border border-slate-100">
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="font-black text-slate-900 text-sm">🛍️ Daily Shera Deals</h3>
+                <span class="text-xs font-bold text-rose-600">Shop More &gt;</span>
             </div>
+            
+            <div class="grid grid-cols-2 gap-2">
+                <!-- Deal Product 1 -->
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100 flex flex-col justify-between">
+                    <div>
+                        <div class="relative mb-2">
+                            <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500" alt="Denim Jacket" class="h-36 w-full object-cover rounded-lg">
+                            <span class="absolute bottom-1 left-1 bg-amber-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">20% OFF</span>
+                        </div>
+                        <h4 class="text-xs font-semibold text-slate-800 line-clamp-1">Stylish Denim Jacket</h4>
+                        <p class="text-rose-600 font-bold text-sm mt-1">$48.00 <span class="text-[10px] text-slate-400 line-through">$60</span></p>
+                    </div>
+                    <button onclick="addToCart()" class="w-full mt-2 bg-slate-900 text-white text-[11px] py-2 rounded-lg font-bold hover:bg-rose-600 transition shadow">
+                        Add to Cart
+                    </button>
+                </div>
 
-            <!-- Regular Product 2 -->
-            <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100">
-                <img src="https://images.unsplash.com/photo-1542272604-780c96856553?w=500" alt="Casual Jeans" class="rounded-lg h-40 md:h-52 w-full object-cover mb-2">
-                <h4 class="font-semibold text-sm text-slate-800 line-clamp-1 mt-1">Slim Fit Jeans</h4>
-                <p class="text-indigo-600 font-bold text-sm mt-1">$40.00</p>
-                <button onclick="addToCart()" class="w-full mt-2 bg-slate-900 text-white text-xs py-2 rounded-lg font-medium hover:bg-indigo-600 transition">Add to Cart</button>
+                <!-- Deal Product 2 -->
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100 flex flex-col justify-between">
+                    <div>
+                        <div class="relative mb-2">
+                            <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500" alt="Graphic Tee" class="h-36 w-full object-cover rounded-lg">
+                            <span class="absolute bottom-1 left-1 bg-amber-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">30% OFF</span>
+                        </div>
+                        <h4 class="text-xs font-semibold text-slate-800 line-clamp-1">Graphic Tee Shirt</h4>
+                        <p class="text-rose-600 font-bold text-sm mt-1">$21.00 <span class="text-[10px] text-slate-400 line-through">$30</span></p>
+                    </div>
+                    <button onclick="addToCart()" class="w-full mt-2 bg-slate-900 text-white text-[11px] py-2 rounded-lg font-bold hover:bg-rose-600 transition shadow">
+                        Add to Cart
+                    </button>
+                </div>
             </div>
         </div>
     </section>
+
+    <!-- Bottom Navigation Bar (Daraz Mobile App Style) -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 py-2 px-4 flex justify-around items-center z-50 shadow-lg">
+        <a href="#hero" class="flex flex-col items-center text-rose-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            <span class="text-[10px] font-bold mt-0.5">Home</span>
+        </a>
+        <button onclick="openModal()" class="flex flex-col items-center text-slate-500 relative">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+            <span class="text-[10px] font-bold mt-0.5">Cart</span>
+            <span id="cartCountBadge" class="absolute -top-1 -right-2 bg-rose-600 text-white text-[9px] px-1 rounded-full font-bold">0</span>
+        </button>
+        <a href="#products" class="flex flex-col items-center text-slate-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+            <span class="text-[10px] font-bold mt-0.5">Shop</span>
+        </a>
+        <button onclick="openModal()" class="flex flex-col items-center text-slate-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+            <span class="text-[10px] font-bold mt-0.5">Account</span>
+        </button>
+    </nav>
 
     <!-- Order / Checkout Modal Popup -->
-    <div id="checkoutModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
-        <div class="bg-white w-full max-w-md rounded-2xl p-6 shadow-2xl relative">
+    <div id="checkoutModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+        <div class="bg-white w-full max-w-sm rounded-3xl p-6 shadow-2xl relative">
             <!-- Close Button -->
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 font-bold text-xl">&times;</button>
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 font-bold text-xl">&times;</button>
             
-            <h3 class="text-xl font-bold text-slate-800 mb-1">Complete Your Order</h3>
-            <p class="text-xs text-slate-500 mb-4">Please enter your shipping details to place the order.</p>
+            <h3 class="text-xl font-black text-slate-900 mb-1">Complete Order</h3>
+            <p class="text-xs text-slate-500 mb-4">Enter your details to confirm order via WhatsApp.</p>
 
             <form onsubmit="handleCheckout(event)" class="space-y-3">
                 <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1">Full Name</label>
-                    <input type="text" id="custName" required placeholder="John Doe" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm focus:outline-indigo-600">
+                    <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Full Name</label>
+                    <input type="text" id="custName" required placeholder="John Doe" class="w-full border border-slate-200 rounded-xl p-2.5 text-sm focus:outline-rose-600 bg-slate-50">
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1">Phone Number</label>
-                    <input type="tel" id="custPhone" required placeholder="017xxxxxxxx" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm focus:outline-indigo-600">
+                    <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Phone Number</label>
+                    <input type="tel" id="custPhone" required placeholder="017xxxxxxxx" class="w-full border border-slate-200 rounded-xl p-2.5 text-sm focus:outline-rose-600 bg-slate-50">
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1">Delivery Address</label>
-                    <textarea id="custAddress" required rows="2" placeholder="House, Road, City..." class="w-full border border-slate-200 rounded-lg p-2.5 text-sm focus:outline-indigo-600"></textarea>
+                    <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Delivery Address</label>
+                    <textarea id="custAddress" required rows="2" placeholder="House, Road, City..." class="w-full border border-slate-200 rounded-xl p-2.5 text-sm focus:outline-rose-600 bg-slate-50"></textarea>
                 </div>
 
-                <button type="submit" class="w-full bg-indigo-600 text-white font-semibold py-3 rounded-lg hover:bg-indigo-700 transition mt-2">
-                    Confirm Order
+                <button type="submit" class="w-full bg-emerald-600 text-white font-bold py-3 rounded-xl hover:bg-emerald-700 transition mt-2 shadow-md shadow-emerald-200">
+                    Confirm Order on WhatsApp
                 </button>
             </form>
         </div>
@@ -173,59 +208,55 @@
 
     <!-- JavaScript Logic -->
     <script>
-    let cartItemCount = 0;
+        let cartItemCount = 0;
 
-    function addToCart() {
-        cartItemCount++;
-        document.getElementById("cartCount").innerText = cartItemCount;
-        openModal();
-    }
-
-    function openModal() {
-        document.getElementById("checkoutModal").classList.remove("hidden");
-        document.getElementById("checkoutModal").classList.add("flex");
-    }
-
-    function closeModal() {
-        document.getElementById("checkoutModal").classList.add("hidden");
-        document.getElementById("checkoutModal").classList.remove("flex");
-    }
-
-    // WhatsApp Direct Order Logic
-    function handleCheckout(event) {
-        event.preventDefault();
-
-        // Target WhatsApp Number (Client's Number)
-        const ownerPhoneNumber = "8801700000000"; // Change this to client's WhatsApp number
-
-        // Form Inputs
-        const name = document.getElementById("custName").value;
-        const phone = document.getElementById("custPhone").value;
-        const address = document.getElementById("custAddress").value;
-
-        // Custom WhatsApp Message Format
-        const message = `Hello! I would like to place an order.%0A%0A` +
-                        `*Customer Details:*%0A` +
-                        `- Name: ${encodeURIComponent(name)}%0A` +
-                        `- Phone: ${encodeURIComponent(phone)}%0A` +
-                        `- Address: ${encodeURIComponent(address)}%0A%0A` +
-                        `*Total Items in Cart:* ${cartItemCount}`;
-
-        // Redirect to WhatsApp
-        const whatsappURL = `https://wa.me/${ownerPhoneNumber}?text=${message}`;
-        window.open(whatsappURL, '_blank');
-
-        closeModal();
-    }
-
-    function setBrandName(customName) {
-        const brandTitle = document.getElementById("brandName");
-        if (brandTitle) {
-            brandTitle.innerText = customName;
+        function addToCart() {
+            cartItemCount++;
+            document.getElementById("cartCountBadge").innerText = cartItemCount;
+            openModal();
         }
-    }
 
-    setBrandName("Style Nest");
+        function openModal() {
+            document.getElementById("checkoutModal").classList.remove("hidden");
+            document.getElementById("checkoutModal").classList.add("flex");
+        }
+
+        function closeModal() {
+            document.getElementById("checkoutModal").classList.add("hidden");
+            document.getElementById("checkoutModal").classList.remove("flex");
+        }
+
+        // WhatsApp Direct Order Logic
+        function handleCheckout(event) {
+            event.preventDefault();
+
+            const ownerPhoneNumber = "8801700000000"; // Replace with client's WhatsApp number
+
+            const name = document.getElementById("custName").value;
+            const phone = document.getElementById("custPhone").value;
+            const address = document.getElementById("custAddress").value;
+
+            const message = `Hello! I would like to place an order.%0A%0A` +
+                            `*Customer Details:*%0A` +
+                            `- Name: ${encodeURIComponent(name)}%0A` +
+                            `- Phone: ${encodeURIComponent(phone)}%0A` +
+                            `- Address: ${encodeURIComponent(address)}%0A%0A` +
+                            `*Total Items in Cart:* ${cartItemCount}`;
+
+            const whatsappURL = `https://wa.me/${ownerPhoneNumber}?text=${message}`;
+            window.open(whatsappURL, '_blank');
+
+            closeModal();
+        }
+
+        function setBrandName(customName) {
+            const brandTitle = document.getElementById("brandName");
+            if (brandTitle) {
+                brandTitle.innerText = customName;
+            }
+        }
+
+        setBrandName("Style Nest");
     </script>
 </body>
 </html>
