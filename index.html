@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Style Nest - Global E-Commerce Store</title>
+    <title>Style Nest - Shopping Store</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -26,17 +26,16 @@
 </head>
 <body class="bg-slate-950 text-slate-100 pb-24 transition-colors duration-300">
 
-    <!-- Top Utility & Search Bar -->
+    <!-- Top Navigation Bar -->
     <header class="sticky top-0 z-40 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 px-4 py-3">
         <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
             <h1 class="text-xl font-extrabold tracking-wider text-rose-500 uppercase cursor-pointer" onclick="switchTab('home')" id="txtBrand">Style Nest</h1>
             
             <div class="flex-1 max-w-md relative">
-                <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Search in Style Nest..." class="w-full bg-slate-800 border border-slate-700 rounded-full py-2 pl-4 pr-10 text-sm focus:outline-none focus:border-rose-500">
+                <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Search products..." class="w-full bg-slate-800 border border-slate-700 rounded-full py-2 pl-4 pr-10 text-sm focus:outline-none focus:border-rose-500">
                 <span class="absolute right-3 top-2.5 text-slate-400">🔍</span>
             </div>
 
-            <!-- Language & Theme & Currency -->
             <div class="flex items-center gap-2 text-xs">
                 <select id="langSelect" onchange="changeLanguage()" class="bg-slate-800 border border-slate-700 rounded-lg px-2 py-1 text-slate-200">
                     <option value="en">EN</option>
@@ -52,17 +51,17 @@
 
         <!-- 1. HOME TAB -->
         <div id="tab-home" class="tab-content space-y-6">
-            <!-- Auto Changing Banner Slider -->
-            <div id="bannerSlider" class="bg-gradient-to-r from-orange-600 to-rose-600 rounded-2xl p-5 text-white shadow-lg relative overflow-hidden transition-all duration-500">
+            <!-- Smooth & Slow Auto Banner Slider (8 Seconds Interval) -->
+            <div id="bannerSlider" class="bg-gradient-to-r from-slate-900 to-rose-950 border border-slate-800 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden transition-all duration-1000">
                 <div class="relative z-10 flex justify-between items-center">
                     <div>
-                        <span id="bannerTag" class="bg-white/20 text-xs px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">Payday Sale</span>
-                        <h2 id="bannerTitle" class="text-2xl font-black mt-2">MEGA DEALS</h2>
-                        <p id="bannerDesc" class="text-xs text-rose-100 mt-1">Up to 60% OFF · Free Shipping over ৳1500</p>
+                        <span id="bannerTag" class="bg-rose-500/20 text-rose-400 text-xs px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">New Arrival</span>
+                        <h2 id="bannerTitle" class="text-2xl font-black mt-2">STYLE NEST STORE</h2>
+                        <p id="bannerDesc" class="text-xs text-slate-300 mt-1">Discover premium fashion and trendsetter outfits.</p>
                     </div>
-                    <div class="bg-black/30 backdrop-blur-sm p-3 rounded-xl text-center">
-                        <span class="text-[10px] uppercase font-bold text-rose-300 block">Flash Ends</span>
-                        <span id="flashTimer" class="text-sm font-extrabold tracking-wider">05 : 00 : 00</span>
+                    <div class="bg-slate-900/80 border border-slate-700 p-3 rounded-xl text-center">
+                        <span class="text-[10px] uppercase font-bold text-slate-400 block">Flash Offer</span>
+                        <span id="flashTimer" class="text-sm font-extrabold text-rose-500 tracking-wider">05 : 00 : 00</span>
                     </div>
                 </div>
             </div>
@@ -71,73 +70,52 @@
             <div class="grid grid-cols-3 gap-2 text-center text-xs bg-slate-900 border border-slate-800 p-3 rounded-2xl">
                 <div class="font-bold text-slate-300">🛡️ Safe Payment</div>
                 <div class="font-bold text-slate-300">⚡ Fast Delivery</div>
-                <div class="font-bold text-slate-300">🔄 Free Return</div>
+                <div class="font-bold text-slate-300">🔄 Easy Return</div>
             </div>
 
-            <!-- Flash Sale Section -->
+            <!-- Products Section -->
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
                 <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center gap-2">
-                        <span class="text-rose-500 font-extrabold text-lg">⚡ Flash Sale</span>
-                    </div>
-                    <span class="text-xs text-slate-400">Shop More ></span>
+                    <h3 class="text-rose-500 font-extrabold text-base">⚡ Trending Collection</h3>
+                    <span class="text-xs text-slate-400">All Products</span>
                 </div>
                 <div id="productGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
             </div>
         </div>
 
-        <!-- 2. MESSAGES TAB (Auto Discount & Product Alerts) -->
+        <!-- 2. MESSAGES TAB (Cleaned - Shows real messages when published) -->
         <div id="tab-messages" class="tab-content hidden space-y-4">
             <h2 class="text-xl font-bold">Messages & Notifications</h2>
-            <div class="flex gap-2 overflow-x-auto pb-2 text-xs">
-                <span class="bg-rose-600 text-white px-3 py-1.5 rounded-full font-bold">All Alerts</span>
-                <span class="bg-slate-800 px-3 py-1.5 rounded-full text-slate-400">Discounts</span>
-                <span class="bg-slate-800 px-3 py-1.5 rounded-full text-slate-400">New Arrivals</span>
-            </div>
             <div id="messageList" class="space-y-3">
-                <!-- Auto messages injected via JS -->
+                <div class="bg-slate-900 border border-slate-800 p-8 rounded-2xl text-center text-xs text-slate-500">
+                    <span class="text-2xl block mb-2">📥</span>
+                    <p>No new messages or promotional alerts right now.</p>
+                </div>
             </div>
         </div>
 
         <!-- 3. CART TAB -->
         <div id="tab-cart" class="tab-content hidden space-y-4">
-            <h2 class="text-xl font-bold">My Cart</h2>
-            
-            <div class="bg-slate-900 border border-slate-800 p-3 rounded-xl flex items-center justify-between text-xs">
-                <span class="font-bold text-amber-400">⚡ EXPRESS · 1-3 Days Delivery</span>
-                <span class="text-slate-400">Buy 3 for free shipping</span>
-            </div>
-
+            <h2 class="text-xl font-bold">My Shopping Cart</h2>
             <div id="cartItemsList" class="space-y-3"></div>
 
             <div id="checkoutBox" class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-4 hidden">
-                <h3 class="font-bold text-sm text-slate-300">Shipping Location</h3>
-                <div class="grid grid-cols-2 gap-3 text-xs">
-                    <label class="flex items-center gap-2 bg-slate-800 p-3 rounded-xl cursor-pointer border border-slate-700">
-                        <input type="radio" name="shipping" value="80" checked onchange="calculateTotal()" class="accent-rose-500">
-                        <div><p class="font-bold">Inside Dhaka</p><p class="text-slate-400">৳80</p></div>
-                    </label>
-                    <label class="flex items-center gap-2 bg-slate-800 p-3 rounded-xl cursor-pointer border border-slate-700">
-                        <input type="radio" name="shipping" value="150" onchange="calculateTotal()" class="accent-rose-500">
-                        <div><p class="font-bold">Outside Dhaka</p><p class="text-slate-400">৳150</p></div>
-                    </label>
-                </div>
-
-                <form id="checkoutForm" onsubmit="handleFinalCheckout(event)" class="space-y-3 pt-2">
+                <h3 class="font-bold text-sm text-slate-300">Delivery Information</h3>
+                <form id="checkoutForm" onsubmit="handleFinalCheckout(event)" class="space-y-3">
                     <input type="text" id="chkName" required placeholder="Full Name" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm">
-                    <input type="email" id="chkEmail" required placeholder="Email Address" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm">
+                    <input type="email" id="chkEmail" required placeholder="Email Address (Gmail)" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm">
                     <input type="tel" id="chkPhone" required placeholder="Phone Number" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm">
-                    <textarea id="chkAddress" required rows="2" placeholder="Full Delivery Address" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm"></textarea>
+                    <textarea id="chkAddress" required rows="2" placeholder="Delivery Address" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm"></textarea>
                     
                     <div class="flex justify-between items-center bg-slate-800 p-3 rounded-xl font-bold text-sm">
-                        <span>Subtotal: <span id="summarySub" class="text-rose-500">৳0</span></span>
-                        <button type="submit" class="bg-rose-600 hover:bg-rose-700 text-white px-6 py-2 rounded-lg text-xs shadow-lg">Check Out</button>
+                        <span>Total: <span id="summarySub" class="text-rose-500">৳0</span></span>
+                        <button type="submit" class="bg-rose-600 hover:bg-rose-700 text-white px-6 py-2 rounded-lg text-xs shadow-lg">Confirm Order</button>
                     </div>
                 </form>
             </div>
         </div>
 
-        <!-- 4. ACCOUNT TAB (Settings Icon & Customer Profile Settings) -->
+        <!-- 4. ACCOUNT TAB (Settings Icon & Profile) -->
         <div id="tab-account" class="tab-content hidden space-y-4">
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex items-center justify-between">
                 <div class="flex items-center gap-3">
@@ -147,7 +125,7 @@
                         <p class="text-xs text-slate-400" id="displayUserEmail">No email added</p>
                     </div>
                 </div>
-                <!-- Settings Button replacing star -->
+                <!-- Settings Button (Image 33238 Style) -->
                 <button onclick="openSettingsModal()" class="bg-slate-800 hover:bg-slate-700 p-2.5 rounded-full text-base">⚙️</button>
             </div>
 
@@ -161,40 +139,61 @@
                     <div><span class="text-lg">↩️</span><p>Returns</p></div>
                 </div>
             </div>
-
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 grid grid-cols-4 gap-4 text-center text-xs">
-                <div><span class="text-xl">🎁</span><p>Store Candy</p></div>
-                <div><span class="text-xl">🛍️</span><p>Combo Deals</p></div>
-                <div><span class="text-xl">📍</span><p>Pickup Points</p></div>
-                <div><span class="text-xl">🤝</span><p>Affiliates</p></div>
-            </div>
         </div>
     </main>
 
-    <!-- Customer Settings Modal -->
-    <div id="settingsModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl p-6 relative space-y-4">
-            <button onclick="closeSettingsModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">✕</button>
-            <h3 class="text-lg font-bold text-rose-500">Customer Settings & Profile</h3>
-            <form onsubmit="saveCustomerSettings(event)" class="space-y-3 text-xs">
-                <div>
-                    <label class="text-slate-400 block mb-1">Full Name</label>
-                    <input type="text" id="settingsName" required class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+    <!-- FULL SETTINGS MODAL (Screenshot 33241 Style) -->
+    <div id="settingsModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl p-6 relative max-h-[90vh] overflow-y-auto space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                <h3 class="text-base font-bold text-white">Settings</h3>
+                <button onclick="closeSettingsModal()" class="text-slate-400 hover:text-white text-lg">✕</button>
+            </div>
+
+            <form onsubmit="saveCustomerSettings(event)" class="space-y-4 text-xs">
+                <!-- Account Information -->
+                <div class="space-y-2">
+                    <h4 class="font-bold text-rose-400 uppercase text-[11px]">Account Information</h4>
+                    <div>
+                        <label class="text-slate-400 block mb-1">Full Name</label>
+                        <input type="text" id="settingsName" placeholder="Enter name" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                    </div>
+                    <div>
+                        <label class="text-slate-400 block mb-1">Email Address (Gmail)</label>
+                        <input type="email" id="settingsEmail" placeholder="Enter email" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                    </div>
+                    <div>
+                        <label class="text-slate-400 block mb-1">Phone Number</label>
+                        <input type="tel" id="settingsPhone" placeholder="Enter phone" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                    </div>
+                    <div>
+                        <label class="text-slate-400 block mb-1">Password</label>
+                        <input type="password" id="settingsPass" placeholder="••••••••" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                    </div>
                 </div>
-                <div>
-                    <label class="text-slate-400 block mb-1">Email Address (Gmail)</label>
-                    <input type="email" id="settingsEmail" required class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+
+                <!-- Address Book -->
+                <div class="space-y-2 pt-2 border-t border-slate-800">
+                    <h4 class="font-bold text-rose-400 uppercase text-[11px]">Address Book</h4>
+                    <textarea id="settingsAddress" rows="2" placeholder="Full delivery address..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white"></textarea>
                 </div>
-                <div>
-                    <label class="text-slate-400 block mb-1">Phone Number</label>
-                    <input type="tel" id="settingsPhone" required class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+
+                <!-- Language & Country -->
+                <div class="space-y-2 pt-2 border-t border-slate-800">
+                    <h4 class="font-bold text-rose-400 uppercase text-[11px]">Language & Region</h4>
+                    <select id="settingsLang" onchange="changeLanguageFromSettings()" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                        <option value="en">English</option>
+                        <option value="bn">বাংলা (Bengali)</option>
+                    </select>
                 </div>
-                <div>
-                    <label class="text-slate-400 block mb-1">Delivery Address</label>
-                    <textarea id="settingsAddress" required rows="2" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white"></textarea>
-                </div>
+
                 <button type="submit" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 rounded-xl text-sm shadow-lg">Save Settings</button>
             </form>
+
+            <!-- Logout Button (Screenshot 33241 Style) -->
+            <div class="pt-4 border-t border-slate-800">
+                <button onclick="handleLogout()" class="w-full bg-rose-500/10 hover:bg-rose-500/20 text-rose-500 border border-rose-500/30 font-bold py-3 rounded-xl text-sm transition">Logout</button>
+            </div>
         </div>
     </div>
 
@@ -205,11 +204,11 @@
         </button>
         <button onclick="switchTab('messages')" id="nav-messages" class="flex flex-col items-center text-slate-400 relative">
             <span class="text-lg">💬</span><span id="navMsgText">Messages</span>
-            <span id="msgBadge" class="absolute -top-1 -right-2 bg-rose-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">2</span>
+            <span id="msgBadge" class="hidden absolute -top-1 -right-2 bg-rose-500 text-white text-[10px] w-4 h-4 rounded-full items-center justify-center font-bold">0</span>
         </button>
         <div class="relative -top-3">
             <button onclick="switchTab('home')" class="w-12 h-12 bg-gradient-to-tr from-orange-500 to-rose-600 rounded-full flex flex-col items-center justify-center text-[9px] font-black text-white shadow-lg border-2 border-slate-950">
-                <span>UP TO</span><span>60% OFF</span>
+                <span>NEW</span><span>COLLECTION</span>
             </button>
         </div>
         <button onclick="switchTab('cart')" id="nav-cart" class="flex flex-col items-center text-slate-400 relative">
@@ -223,7 +222,6 @@
 
     <!-- Script Logic -->
     <script>
-        // Multi-language translations
         const langData = {
             en: { brand: "Style Nest", home: "Home", msg: "Messages", cart: "Cart", acc: "Account" },
             bn: { brand: "স্টাইল নেস্ট", home: "হোম", msg: "মেসেজ", cart: "কার্ট", acc: "অ্যাকাউন্ট" }
@@ -231,6 +229,16 @@
 
         function changeLanguage() {
             const lang = document.getElementById('langSelect').value;
+            applyLang(lang);
+        }
+
+        function changeLanguageFromSettings() {
+            const lang = document.getElementById('settingsLang').value;
+            document.getElementById('langSelect').value = lang;
+            applyLang(lang);
+        }
+
+        function applyLang(lang) {
             document.getElementById('txtBrand').innerText = langData[lang].brand;
             document.getElementById('navHomeText').innerText = langData[lang].home;
             document.getElementById('navMsgText').innerText = langData[lang].msg;
@@ -238,11 +246,10 @@
             document.getElementById('navAccText').innerText = langData[lang].acc;
         }
 
-        // Auto Banner Rotation System
+        // Slow & Smooth Auto Banner Slider (8 Seconds Interval)
         const banners = [
-            { tag: "Payday Sale", title: "MEGA DEALS", desc: "Up to 60% OFF · Free Shipping over ৳1500", bg: "from-orange-600 to-rose-600" },
-            { tag: "Flash Discount", title: "SUMMER FASHION", desc: "New Trendy Collections Just Arrived!", bg: "from-purple-600 to-pink-600" },
-            { tag: "Special Offer", title: "FREE GIFT VOUCHER", desc: "Get free delivery on your first order!", bg: "from-emerald-600 to-teal-600" }
+            { tag: "New Collection", title: "STYLE NEST STORE", desc: "Discover premium fashion and trendsetter outfits.", bg: "from-slate-900 to-rose-950" },
+            { tag: "Limited Stock", title: "TRENDY STREETWEAR", desc: "Exclusive hoodies and drop-shoulder t-shirts.", bg: "from-slate-900 to-purple-950" }
         ];
         let currentBannerIndex = 0;
 
@@ -250,14 +257,16 @@
             currentBannerIndex = (currentBannerIndex + 1) % banners.length;
             const b = banners[currentBannerIndex];
             const slider = document.getElementById('bannerSlider');
-            slider.className = `rounded-2xl p-5 text-white shadow-lg relative overflow-hidden transition-all duration-500 bg-gradient-to-r ${b.bg}`;
-            document.getElementById('bannerTag').innerText = b.tag;
-            document.getElementById('bannerTitle').innerText = b.title;
-            document.getElementById('bannerDesc').innerText = b.desc;
-        }, 4000);
+            if(slider) {
+                slider.className = `border border-slate-800 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden transition-all duration-1000 bg-gradient-to-r ${b.bg}`;
+                document.getElementById('bannerTag').innerText = b.tag;
+                document.getElementById('bannerTitle').innerText = b.title;
+                document.getElementById('bannerDesc').innerText = b.desc;
+            }
+        }, 8000);
 
-        // Fixed Working Flash Sale Timer
-        let totalSeconds = 5 * 3600 + 22 * 60;
+        // Flash Timer
+        let totalSeconds = 5 * 3600;
         setInterval(() => {
             if (totalSeconds > 0) totalSeconds--;
             let hrs = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
@@ -267,51 +276,24 @@
             if(timerEl) timerEl.innerText = `${hrs} : ${mins} : ${secs}`;
         }, 1000);
 
-        // Auto Messages & Discount Alerts
-        const autoMessages = [
-            { title: "🔥 Flash Discount Alert!", desc: "Get extra ৳100 off on all Kitchen Tool sets today.", time: "Just now" },
-            { title: "📦 New Arrival Discovered", desc: "Trendy Summer Cotton T-Shirts are now live in stock.", time: "2 hrs ago" },
-            { title: "🎁 Weekly Voucher Unlocked", desc: "Use code STYLE10 during checkout for special rebate.", time: "1 day ago" }
-        ];
-
-        function renderMessages() {
-            const list = document.getElementById('messageList');
-            if(list) {
-                list.innerHTML = autoMessages.map(m => `
-                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl flex items-center gap-3">
-                        <div class="w-10 h-10 bg-rose-500/20 text-rose-500 rounded-full flex items-center justify-center font-bold">📢</div>
-                        <div class="flex-1">
-                            <h4 class="text-xs font-bold">${m.title}</h4>
-                            <p class="text-[11px] text-slate-400">${m.desc}</p>
-                        </div>
-                        <span class="text-[10px] text-slate-500">${m.time}</span>
-                    </div>
-                `).join('');
-            }
-        }
-
-        let products = [
-            { id: 1, name: "6-Piece Stainless Steel Kitchen Tool Set", price: 709, oldPrice: 858, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" },
-            { id: 2, name: "Electric Kettle 2L - Perfect for Tea & Coffee", price: 659, oldPrice: 1350, image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500" },
-            { id: 3, name: "10 Piece Hanger Hook For Bathroom", price: 69, oldPrice: 199, image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=500" },
-            { id: 4, name: "Trendy Sunflower Summer Cotton T-Shirt", price: 399, oldPrice: 699, image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500" }
+        // Load Vendor / Dynamic Products
+        let products = JSON.parse(localStorage.getItem('vendor_products')) || [
+            { id: 1, name: "6-Piece Stainless Steel Kitchen Tool Set", price: 709, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" },
+            { id: 2, name: "Electric Kettle 2L - Perfect for Tea & Coffee", price: 659, image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500" }
         ];
 
         let cart = [];
 
-        function renderProducts(itemsToRender = products) {
+        function renderProducts() {
             const grid = document.getElementById('productGrid');
             if(grid) {
-                grid.innerHTML = itemsToRender.map(p => `
+                grid.innerHTML = products.map(p => `
                     <div class="bg-slate-800/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col justify-between">
                         <img src="${p.image}" class="w-full h-36 object-cover">
                         <div class="p-2.5 flex flex-col justify-between flex-1 space-y-2">
                             <div>
                                 <h3 class="text-xs font-medium line-clamp-2">${p.name}</h3>
-                                <div class="flex items-center gap-2 mt-1">
-                                    <span class="text-rose-500 font-bold text-sm">৳${p.price}</span>
-                                    <span class="text-slate-500 text-[10px] line-through">৳${p.oldPrice}</span>
-                                </div>
+                                <p class="text-rose-500 font-bold text-sm mt-1">৳${p.price}</p>
                             </div>
                             <button onclick="addToCart(${p.id})" class="w-full bg-rose-600 hover:bg-rose-700 text-white text-xs py-1.5 rounded-lg font-semibold">Add to Cart</button>
                         </div>
@@ -322,7 +304,20 @@
 
         function filterProducts() {
             const query = document.getElementById('searchInput').value.toLowerCase();
-            renderProducts(products.filter(p => p.name.toLowerCase().includes(query)));
+            const filtered = products.filter(p => p.name.toLowerCase().includes(query));
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = filtered.map(p => `
+                <div class="bg-slate-800/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col justify-between">
+                    <img src="${p.image}" class="w-full h-36 object-cover">
+                    <div class="p-2.5 flex flex-col justify-between flex-1 space-y-2">
+                        <div>
+                            <h3 class="text-xs font-medium line-clamp-2">${p.name}</h3>
+                            <p class="text-rose-500 font-bold text-sm mt-1">৳${p.price}</p>
+                        </div>
+                        <button onclick="addToCart(${p.id})" class="w-full bg-rose-600 hover:bg-rose-700 text-white text-xs py-1.5 rounded-lg font-semibold">Add to Cart</button>
+                    </div>
+                </div>
+            `).join('');
         }
 
         function addToCart(id) {
@@ -330,7 +325,7 @@
             const existing = cart.find(c => c.id === id);
             if(existing) { existing.qty += 1; } else { cart.push({ ...prod, qty: 1 }); }
             document.getElementById('cartBadge').innerText = cart.reduce((a,b)=>a+b.qty,0);
-            alert("Product added to cart!");
+            alert("Added to cart!");
         }
 
         function switchTab(tabName) {
@@ -345,7 +340,6 @@
             if(activeNav) { activeNav.classList.remove('text-slate-400'); activeNav.classList.add('text-rose-500'); }
 
             if(tabName === 'cart') renderCartView();
-            if(tabName === 'messages') renderMessages();
         }
 
         function renderCartView() {
@@ -374,7 +368,8 @@
                 </div>
             `).join('');
 
-            calculateTotal();
+            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            document.getElementById('summarySub').innerText = '৳' + total;
         }
 
         function changeQty(index, delta) {
@@ -384,13 +379,7 @@
             renderCartView();
         }
 
-        function calculateTotal() {
-            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            document.getElementById('summarySub').innerText = '৳' + subtotal;
-            return subtotal;
-        }
-
-        // Customer Settings Modal Controls
+        // Settings Modal Controls
         function openSettingsModal() {
             document.getElementById('settingsModal').classList.remove('hidden');
             document.getElementById('settingsName').value = localStorage.getItem('cust_name') || '';
@@ -415,19 +404,24 @@
             localStorage.setItem('cust_phone', phone);
             localStorage.setItem('cust_address', address);
 
-            document.getElementById('displayUserName').innerText = name;
-            document.getElementById('displayUserEmail').innerText = email;
-
-            // Auto fill checkout form if exists
-            if(document.getElementById('chkName')) {
-                document.getElementById('chkName').value = name;
-                document.getElementById('chkEmail').value = email;
-                document.getElementById('chkPhone').value = phone;
-                document.getElementById('chkAddress').value = address;
-            }
+            document.getElementById('displayUserName').innerText = name || 'Guest Customer';
+            document.getElementById('displayUserEmail').innerText = email || 'No email added';
 
             closeSettingsModal();
-            alert("Profile settings saved successfully!");
+            alert("Settings saved successfully!");
+        }
+
+        function handleLogout() {
+            if(confirm("Are you sure you want to logout?")) {
+                localStorage.removeItem('cust_name');
+                localStorage.removeItem('cust_email');
+                localStorage.removeItem('cust_phone');
+                localStorage.removeItem('cust_address');
+                document.getElementById('displayUserName').innerText = 'Guest Customer';
+                document.getElementById('displayUserEmail').innerText = 'No email added';
+                closeSettingsModal();
+                alert("Logged out successfully!");
+            }
         }
 
         window.addEventListener('DOMContentLoaded', () => {
@@ -445,25 +439,23 @@
             const email = document.getElementById('chkEmail').value;
             const phone = document.getElementById('chkPhone').value;
             const address = document.getElementById('chkAddress').value;
-            const subtotal = calculateTotal();
-            const ownerPhone = "8801886759590";
+            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
 
-            emailjs.send('service_ce4fpfe', 'template_py8f1yp', { to_name: name, to_email: email, cust_phone: phone, cust_address: address, total_amount: subtotal });
+            emailjs.send('service_ce4fpfe', 'template_py8f1yp', { to_name: name, to_email: email, cust_phone: phone, cust_address: address, total_amount: total });
 
             const itemsText = cart.map(i => `- ${i.name} x${i.qty} (৳${i.price * i.qty})`).join('%0A');
-            const message = `Order Confirmation%0A*Name:* ${encodeURIComponent(name)}%0A*Phone:* ${encodeURIComponent(phone)}%0A*Address:* ${encodeURIComponent(address)}%0A*Items:*%0A${itemsText}%0A*Total:* ৳${subtotal}`;
+            const message = `Order Confirmation%0A*Name:* ${encodeURIComponent(name)}%0A*Phone:* ${encodeURIComponent(phone)}%0A*Address:* ${encodeURIComponent(address)}%0A*Items:*%0A${itemsText}%0A*Total:* ৳${total}`;
             
-            window.open(`https://wa.me/${ownerPhone}?text=${message}`, '_blank');
+            window.open(`https://wa.me/8801886759590?text=${message}`, '_blank');
             cart = [];
             document.getElementById('cartBadge').innerText = '0';
             switchTab('home');
-            alert("Order Placed Successfully!");
+            alert("Order Confirmed!");
         }
 
         function toggleTheme() { document.documentElement.classList.toggle('dark'); }
 
         renderProducts();
-        renderMessages();
     </script>
 </body>
 </html>
