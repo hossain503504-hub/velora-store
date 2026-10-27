@@ -214,11 +214,12 @@
 
             // 1. Send Email via EmailJS
             const templateParams = {
-                to_name: name,
-                cust_phone: phone,
-                cust_address: address,
-                cart_count: cartItemCount
-            };
+    to_name: name,
+    to_email: "your-email@gmail.com", // এখানে আপনার নিজের জিমেইল বসিয়ে দিতে পারেন, যাতে অর্ডার আসলে আপনার জিমেইলে নোটিফিকেশন আসে
+    cust_phone: phone,
+    cust_address: address,
+    cart_count: cartItemCount
+};
 
             emailjs.send('service_ce4fpfe', 'template_py8f1yp', templateParams)
                 .then(function(response) {
