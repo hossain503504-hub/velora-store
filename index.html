@@ -35,6 +35,12 @@
                 <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Search products in VELORA..." class="w-full bg-slate-800 border border-slate-700 rounded-full py-2 pl-4 pr-10 text-sm focus:outline-none focus:border-rose-500 text-white">
                 <span class="absolute right-3 top-2.5 text-slate-400">🔍</span>
             </div>
+
+            <!-- Language Switcher -->
+            <select id="langSwitcher" onchange="switchLanguage(this.value)" class="bg-slate-800 border border-slate-700 text-white text-xs rounded-xl px-2 py-1.5 focus:outline-none">
+                <option value="en">English</option>
+                <option value="bn">বাংলা</option>
+            </select>
         </div>
     </header>
 
@@ -51,16 +57,16 @@
                         <p id="bannerDesc" class="text-xs text-slate-300 mt-1">Discover premium fashion and luxury lifestyle items.</p>
                     </div>
                     <div class="bg-slate-900/80 border border-slate-700 p-3 rounded-xl text-center">
-                        <span class="text-[10px] uppercase font-bold text-slate-400 block">Flash Offer</span>
+                        <span class="text-[10px] uppercase font-bold text-slate-400 block" data-i18n="flash_offer">Flash Offer</span>
                         <span id="flashTimer" class="text-sm font-extrabold text-rose-500 tracking-wider">05 : 00 : 00</span>
                     </div>
                 </div>
             </div>
 
             <div class="grid grid-cols-3 gap-2 text-center text-xs bg-slate-900 border border-slate-800 p-3 rounded-2xl">
-                <div class="font-bold text-slate-300">🛡️ Safe Payment</div>
-                <div class="font-bold text-slate-300">⚡ Fast Delivery</div>
-                <div class="font-bold text-slate-300">🔄 Easy Return</div>
+                <div class="font-bold text-slate-300" data-i18n="safe_pay">🛡️ Safe Payment</div>
+                <div class="font-bold text-slate-300" data-i18n="fast_delivery">⚡ Fast Delivery</div>
+                <div class="font-bold text-slate-300" data-i18n="easy_return">🔄 Easy Return</div>
             </div>
 
             <!-- Category Filter Tabs -->
@@ -74,8 +80,8 @@
 
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-rose-500 font-extrabold text-base">⚡ All Products</h3>
-                    <span class="text-xs text-slate-400">Trending</span>
+                    <h3 class="text-rose-500 font-extrabold text-base" data-i18n="all_products">⚡ All Products</h3>
+                    <span class="text-xs text-slate-400" data-i18n="trending">Trending</span>
                 </div>
                 <div id="productGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
             </div>
@@ -98,7 +104,6 @@
             <div id="cartItemsList" class="space-y-3"></div>
 
             <div id="checkoutBox" class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-4 hidden">
-                <!-- Coupon Code Section -->
                 <div class="flex gap-2">
                     <input type="text" id="couponInput" placeholder="Enter Coupon (e.g. VELORA10)" class="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
                     <button type="button" onclick="applyCoupon()" class="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-xl text-xs font-bold">Apply</button>
@@ -137,14 +142,14 @@
                 <button onclick="openSettingsModal()" class="bg-slate-800 hover:bg-slate-700 p-2.5 rounded-full text-base">⚙️</button>
             </div>
 
-            <!-- Order Tracking Section -->
+            <!-- Visual Order Tracking Timeline Section -->
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3">
-                <h3 class="font-bold text-sm">Track Your Order</h3>
+                <h3 class="font-bold text-sm">Visual Order Tracking</h3>
                 <div class="flex gap-2">
                     <input type="text" id="trackIdInput" placeholder="Enter Order ID (e.g. VELORA-1234)" class="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-                    <button onclick="trackOrder()" class="bg-rose-600 text-white px-4 py-2 rounded-xl text-xs font-bold">Track</button>
+                    <button onclick="trackOrderVisual()" class="bg-rose-600 text-white px-4 py-2 rounded-xl text-xs font-bold">Track</button>
                 </div>
-                <div id="trackResult" class="text-xs text-slate-400 hidden bg-slate-800 p-3 rounded-xl"></div>
+                <div id="trackResultVisual" class="hidden space-y-3 pt-2"></div>
             </div>
 
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
@@ -160,7 +165,12 @@
         </div>
     </main>
 
-    <!-- Product Details Modal -->
+    <!-- Floating WhatsApp Live Chat Widget -->
+    <a href="https://wa.me/8801886759596?text=Hello%20Velora,%20I%20need%20support!" target="_blank" class="fixed bottom-20 right-4 z-40 bg-emerald-600 hover:bg-emerald-700 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-xl text-2xl transition transform hover:scale-110">
+        💬
+    </a>
+
+    <!-- Product Details Modal with Gallery & Review Form -->
     <div id="productModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 w-full max-w-lg rounded-2xl p-6 relative space-y-4 max-h-[90vh] overflow-y-auto">
             <button onclick="closeProductModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
@@ -275,10 +285,10 @@
     <!-- Bottom Navigation Bar -->
     <nav class="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 z-50 px-4 py-2 flex justify-around items-center text-xs">
         <button onclick="switchTab('home')" id="nav-home" class="flex flex-col items-center text-rose-500 font-medium">
-            <span class="text-lg">🏠</span><span>Home</span>
+            <span class="text-lg">🏠</span><span data-i18n="nav_home">Home</span>
         </button>
         <button onclick="switchTab('messages')" id="nav-messages" class="flex flex-col items-center text-slate-400 relative">
-            <span class="text-lg">💬</span><span>Messages</span>
+            <span class="text-lg">💬</span><span data-i18n="nav_messages">Messages</span>
         </button>
         <div class="relative -top-3">
             <button onclick="switchTab('home')" class="w-12 h-12 bg-gradient-to-tr from-orange-500 to-rose-600 rounded-full flex flex-col items-center justify-center text-[9px] font-black text-white shadow-lg border-2 border-slate-950">
@@ -286,54 +296,34 @@
             </button>
         </div>
         <button onclick="switchTab('cart')" id="nav-cart" class="flex flex-col items-center text-slate-400 relative">
-            <span class="text-lg">🛒</span><span>Cart</span>
+            <span class="text-lg">🛒</span><span data-i18n="nav_cart">Cart</span>
             <span id="cartBadge" class="absolute -top-1 -right-2 bg-rose-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
         </button>
         <button onclick="switchTab('account')" id="nav-account" class="flex flex-col items-center text-slate-400">
-            <span class="text-lg">👤</span><span>Account</span>
+            <span class="text-lg">👤</span><span data-i18n="nav_account">Account</span>
         </button>
     </nav>
 
     <!-- Script Logic -->
     <script>
-        const banners = [
-            { tag: "FEATURED", title: "VELORA STORE", desc: "Discover premium fashion and luxury lifestyle items.", bg: "from-slate-900 to-rose-950" },
-            { tag: "EXCLUSIVE", title: "TRENDY COLLECTION", desc: "Exclusive hoodies and drop-shoulder t-shirts.", bg: "from-slate-900 to-purple-950" }
-        ];
-        let currentBannerIndex = 0;
+        const translations = {
+            en: { flash_offer: "Flash Offer", safe_pay: "🛡️ Safe Payment", fast_delivery: "⚡ Fast Delivery", easy_return: "🔄 Easy Return", all_products: "⚡ All Products", trending: "Trending", nav_home: "Home", nav_messages: "Messages", nav_cart: "Cart", nav_account: "Account" },
+            bn: { flash_offer: "ফ্ল্যাশ অফার", safe_pay: "🛡️ নিরাপদ পেমেন্ট", fast_delivery: "⚡ দ্রুত ডেলিভারি", easy_return: "🔄 সহজ রিটার্ন", all_products: "⚡ সকল প্রডাক্ট", trending: "ট্রেন্ডিং", nav_home: "হোম", nav_messages: "মেসেজ", nav_cart: "কার্ট", nav_account: "অ্যাকাউন্ট" }
+        };
 
-        setInterval(() => {
-            currentBannerIndex = (currentBannerIndex + 1) % banners.length;
-            const b = banners[currentBannerIndex];
-            const slider = document.getElementById('bannerSlider');
-            if(slider) {
-                slider.className = `border border-slate-800 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden transition-all duration-1000 bg-gradient-to-r ${b.bg}`;
-                document.getElementById('bannerTag').innerText = b.tag;
-                document.getElementById('bannerTitle').innerText = b.title;
-                document.getElementById('bannerDesc').innerText = b.desc;
-            }
-        }, 8000);
+        function switchLanguage(lang) {
+            localStorage.setItem('velora_lang', lang);
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if(translations[lang][key]) el.innerText = translations[lang][key];
+            });
+        }
 
-        let totalSeconds = 5 * 3600;
-        setInterval(() => {
-            if (totalSeconds > 0) totalSeconds--;
-            let hrs = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
-            let mins = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
-            let secs = String(totalSeconds % 60).padStart(2, '0');
-            const timerEl = document.getElementById('flashTimer');
-            if(timerEl) timerEl.innerText = `${hrs} : ${mins} : ${secs}`;
-        }, 1000);
-
-        // Products with Categories & Wishlist status
         const products = [
-            { id: 1, name: "6-Piece Stainless Steel Kitchen Tool Set", price: 709, category: "Kitchen", image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500", desc: "High quality stainless steel kitchen tool set for everyday cooking.", rating: 4.8 },
-            { id: 2, name: "Electric Kettle 2L - Perfect for Tea & Coffee", price: 659, category: "Kitchen", image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500", desc: "Fast boiling 2L electric kettle with auto shut-off safety feature.", rating: 4.6 },
-            { id: 3, name: "Wireless Bluetooth Earbuds Pro", price: 1299, category: "Electronics", image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500", desc: "Immersive sound with active noise cancellation and long battery life.", rating: 4.9 },
-            { id: 4, name: "Smart Fitness Tracker Watch", price: 1850, category: "Electronics", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500", desc: "Track your health, heart rate, steps, and sports activities easily.", rating: 4.7 },
-            { id: 5, name: "Minimalist Leather Wallet for Men", price: 450, category: "Accessories", image: "https://images.unsplash.com/photo-1627123424574-724758594e93?w=500", desc: "Genuine leather slim wallet with RFID blocking protection.", rating: 4.5 },
-            { id: 6, name: "Casual Over-Sized Hoodie", price: 1490, category: "Fashion", image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500", desc: "Super comfortable fleece cotton oversized hoodie for winter.", rating: 4.8 },
-            { id: 7, name: "Classic Drop-Shoulder Graphic Tee", price: 650, category: "Fashion", image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500", desc: "Trendy drop-shoulder premium cotton t-shirt with custom print.", rating: 4.6 },
-            { id: 8, name: "Anti-Glare UV Protection Sunglasses", price: 890, category: "Accessories", image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500", desc: "Stylish UV400 polarized sunglasses for men and women.", rating: 4.4 }
+            { id: 1, name: "6-Piece Stainless Steel Kitchen Tool Set", price: 709, category: "Kitchen", images: ["https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500", "https://images.unsplash.com/photo-1583777926162-d27806b72a9b?w=500"], desc: "High quality stainless steel kitchen tool set for everyday cooking.", rating: 4.8 },
+            { id: 2, name: "Electric Kettle 2L - Perfect for Tea & Coffee", price: 659, category: "Kitchen", images: ["https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500", "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500"], desc: "Fast boiling 2L electric kettle with auto shut-off safety feature.", rating: 4.6 },
+            { id: 3, name: "Wireless Bluetooth Earbuds Pro", price: 1299, category: "Electronics", images: ["https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500", "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500"], desc: "Immersive sound with active noise cancellation and long battery life.", rating: 4.9 },
+            { id: 4, name: "Smart Fitness Tracker Watch", price: 1850, category: "Electronics", images: ["https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500", "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500"], desc: "Track your health, heart rate, steps, and sports activities easily.", rating: 4.7 }
         ];
 
         let cart = [];
@@ -349,7 +339,7 @@
                     return `
                         <div class="bg-slate-800/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col justify-between relative">
                             <button onclick="toggleWishlist(${p.id})" class="absolute top-2 right-2 bg-slate-900/80 p-1.5 rounded-full text-sm ${isWishlisted ? 'text-rose-500' : 'text-slate-400'}">❤️</button>
-                            <img src="${p.image}" class="w-full h-36 object-cover cursor-pointer" onclick="openProductModal(${p.id})">
+                            <img src="${p.images[0]}" class="w-full h-36 object-cover cursor-pointer" onclick="openProductModal(${p.id})">
                             <div class="p-2.5 flex flex-col justify-between flex-1 space-y-2">
                                 <div>
                                     <h3 class="text-xs font-medium line-clamp-2 cursor-pointer" onclick="openProductModal(${p.id})">${p.name}</h3>
@@ -397,12 +387,17 @@
             const p = products.find(item => item.id === id);
             if(!p) return;
             document.getElementById('modalProductContent').innerHTML = `
-                <img src="${p.image}" class="w-full h-56 rounded-xl object-cover mb-4">
-                <span class="bg-rose-500/20 text-rose-400 text-xs px-2.5 py-1 rounded-full font-bold uppercase">${p.category}</span>
-                <h3 class="text-lg font-bold mt-2 text-white">${p.name}</h3>
-                <p class="text-amber-400 text-xs mt-1">Rating: ⭐ ${p.rating} / 5.0</p>
-                <p class="text-rose-500 font-black text-lg mt-1">৳${p.price}</p>
-                <p class="text-xs text-slate-300 mt-2">${p.desc}</p>
+                <div class="space-y-3">
+                    <img id="mainModalImg" src="${p.images[0]}" class="w-full h-56 rounded-xl object-cover">
+                    <div class="flex gap-2">
+                        ${p.images.map(img => `<img src="${img}" onclick="document.getElementById('mainModalImg').src='${img}'" class="w-14 h-14 rounded-lg object-cover cursor-pointer border border-slate-700 hover:border-rose-500">`).join('')}
+                    </div>
+                </div>
+                <span class="bg-rose-500/20 text-rose-400 text-xs px-2.5 py-1 rounded-full font-bold uppercase inline-block mt-2">${p.category}</span>
+                <h3 class="text-lg font-bold text-white">${p.name}</h3>
+                <p class="text-amber-400 text-xs">Rating: ⭐ ${p.rating} / 5.0</p>
+                <p class="text-rose-500 font-black text-lg">৳${p.price}</p>
+                <p class="text-xs text-slate-300">${p.desc}</p>
                 <button onclick="addToCart(${p.id}); closeProductModal();" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 rounded-xl text-sm mt-4">Add to Cart</button>
             `;
             document.getElementById('productModal').classList.remove('hidden');
@@ -455,7 +450,7 @@
             if(cart.length === 0) {
                 let otherProductsHTML = products.slice(0, 4).map(p => `
                     <div class="bg-slate-800/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col justify-between">
-                        <img src="${p.image}" class="w-full h-32 object-cover">
+                        <img src="${p.images[0]}" class="w-full h-32 object-cover">
                         <div class="p-2.5 flex flex-col justify-between flex-1 space-y-1">
                             <h4 class="text-xs font-medium line-clamp-1">${p.name}</h4>
                             <p class="text-rose-500 font-bold text-xs">৳${p.price}</p>
@@ -477,7 +472,7 @@
             checkoutBox.classList.remove('hidden');
             list.innerHTML = cart.map((item, index) => `
                 <div class="bg-slate-900 border border-slate-800 p-3 rounded-2xl flex items-center gap-3">
-                    <img src="${item.image}" class="w-16 h-16 rounded-xl object-cover">
+                    <img src="${item.images[0]}" class="w-16 h-16 rounded-xl object-cover">
                     <div class="flex-1">
                         <h4 class="text-xs font-bold">${item.name}</h4>
                         <p class="text-rose-500 font-bold text-sm mt-0.5">৳${item.price}</p>
@@ -494,7 +489,7 @@
             const discountAmt = (subtotal * discountPercent) / 100;
             const shipping = Number(document.querySelector('input[name="shipping"]:checked')?.value || 80);
             const grandTotal = (subtotal - discountAmt) + shipping;
-            document.getElementById('summarySub').innerText = '৳' + grandTotal + ` (Subtotal: ৳${subtotal}${discountPercent > 0 ? ' - Disc: ৳'+discountAmt : ''} + Delivery: ৳${shipping})`;
+            document.getElementById('summarySub').innerText = '৳' + grandTotal;
         }
 
         function changeQty(index, delta) {
@@ -553,7 +548,7 @@
                 total_amount: grandTotal
             });
 
-            localStorage.setItem(orderId, JSON.stringify({ orderId, name, status: "Processing (To Ship)", grandTotal }));
+            localStorage.setItem(orderId, JSON.stringify({ orderId, name, step: 2, grandTotal }));
 
             cart = [];
             document.getElementById('cartBadge').innerText = '0';
@@ -568,16 +563,25 @@
             switchTab('home');
         }
 
-        function trackOrder() {
+        function trackOrderVisual() {
             const id = document.getElementById('trackIdInput').value.trim();
-            const resBox = document.getElementById('trackResult');
+            const resBox = document.getElementById('trackResultVisual');
             resBox.classList.remove('hidden');
             const data = localStorage.getItem(id);
             if(data) {
                 const order = JSON.parse(data);
-                resBox.innerHTML = `Order ID: <b>${order.orderId}</b><br>Status: <span class="text-rose-400 font-bold">${order.status}</span><br>Total: ৳${order.grandTotal}`;
+                const step = order.step || 2;
+                resBox.innerHTML = `
+                    <p class="text-rose-400 font-bold mb-2">Order ID: ${order.orderId}</p>
+                    <div class="flex justify-between text-center text-[10px]">
+                        <div class="${step >= 1 ? 'text-emerald-400 font-bold' : 'text-slate-500'}">📦 Placed</div>
+                        <div class="${step >= 2 ? 'text-emerald-400 font-bold' : 'text-slate-500'}">⚙️ Processing</div>
+                        <div class="${step >= 3 ? 'text-emerald-400 font-bold' : 'text-slate-500'}">🚚 Shipped</div>
+                        <div class="${step >= 4 ? 'text-emerald-400 font-bold' : 'text-slate-500'}">✅ Delivered</div>
+                    </div>
+                `;
             } else {
-                resBox.innerHTML = "No order found with this Tracking ID.";
+                resBox.innerHTML = "<p class='text-rose-400'>No order found with this Tracking ID.</p>";
             }
         }
 
@@ -586,6 +590,9 @@
                 document.getElementById('displayUserName').innerText = localStorage.getItem('cust_name');
                 document.getElementById('displayUserEmail').innerText = localStorage.getItem('cust_email') || 'No email added';
             }
+            const savedLang = localStorage.getItem('velora_lang') || 'en';
+            document.getElementById('langSwitcher').value = savedLang;
+            switchLanguage(savedLang);
         }
 
         function openOrderStatus(statusType) {
