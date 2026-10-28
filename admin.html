@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VELORA SHOP VENDOR - Multi-Vendor Pro Dashboard</title>
+    <title>VELORA SHOP VENDOR - Complete Pro Dashboard</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -26,13 +26,13 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-[#070b19] text-slate-100 pb-24 transition-colors duration-300">
+<body class="bg-[#070b19] text-slate-100 pb-28 transition-colors duration-300">
 
     <!-- Top Vendor Header -->
     <header class="sticky top-0 z-40 bg-[#0b132b]/95 backdrop-blur-md border-b border-slate-800 px-4 py-3 flex items-center justify-between">
         <h1 class="text-base font-black tracking-widest text-rose-500 uppercase">VELORA SHOP VENDOR</h1>
         <div class="flex items-center gap-3">
-            <span class="text-xs bg-emerald-500/20 text-emerald-400 font-bold px-2.5 py-1 rounded-full border border-emerald-500/30 flex items-center gap-1">✓ Verified Multi-Vendor</span>
+            <span class="text-xs bg-emerald-500/20 text-emerald-400 font-bold px-2.5 py-1 rounded-full border border-emerald-500/30 flex items-center gap-1">✓ Pro Verified Multi-Vendor</span>
             <button onclick="toggleVendorSidebar()" class="text-slate-300 hover:text-white text-xl">☰</button>
         </div>
     </header>
@@ -41,11 +41,14 @@
     <div id="vendorSidebar" class="fixed inset-y-0 right-0 z-50 w-72 bg-[#0b132b] border-l border-slate-800 p-5 transform translate-x-full transition-transform duration-300 shadow-2xl flex flex-col justify-between overflow-y-auto">
         <div class="space-y-4">
             <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                <h3 class="font-bold text-sm text-rose-500 uppercase">Multi-Vendor Menu</h3>
+                <h3 class="font-bold text-sm text-rose-500 uppercase">Vendor Quick Menu</h3>
                 <button onclick="toggleVendorSidebar()" class="text-slate-400 hover:text-white text-lg">✕</button>
             </div>
             <div class="space-y-2 text-xs font-bold text-slate-300">
                 <div onclick="switchVendorTab('dashboard')" class="p-2.5 bg-rose-600 text-white rounded-xl cursor-pointer shadow">📌 Dashboard & Analytics</div>
+                <div onclick="switchVendorTab('membership')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">👑 Membership & Commissions</div>
+                <div onclick="switchVendorTab('bulkimport')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">📊 Bulk CSV Product Import</div>
+                <div onclick="switchVendorTab('shippingzone')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">🚚 Custom Shipping Zones</div>
                 <div onclick="switchVendorTab('multivendor')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">🌐 Multi-Vendor Marketplace</div>
                 <div onclick="switchVendorTab('gateway')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">💳 Multi-Currency & Gateway</div>
                 <div onclick="switchVendorTab('invoice')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">📄 Invoice & Packing Slip</div>
@@ -64,15 +67,15 @@
         <button onclick="handleVendorLogout()" class="w-full bg-rose-500/10 hover:bg-rose-500/20 text-rose-500 border border-rose-500/30 font-bold py-2.5 rounded-xl text-xs transition mt-4">Logout Token</button>
     </div>
 
-    <!-- Main Vendor Container -->
+    <!-- Main Scrollable Home / Dashboard Container -->
     <main class="max-w-7xl mx-auto px-4 py-4 space-y-4">
 
         <!-- Dynamic Promo Banner Slider -->
         <div id="vendorBannerSlider" class="bg-gradient-to-r from-indigo-700 via-purple-700 to-rose-700 border border-slate-700 rounded-2xl p-5 text-white shadow-xl relative overflow-hidden transition-all duration-700">
             <div class="relative z-10 space-y-1">
-                <span id="vBannerTag" class="bg-black/30 text-amber-300 text-[10px] px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">MULTI-VENDOR ECOSYSTEM</span>
-                <h2 id="vBannerTitle" class="text-lg font-black tracking-wide">Global Marketplace & Invoicing Live</h2>
-                <p id="vBannerDesc" class="text-xs text-slate-100">Manage multiple vendors, currency settings, automated slips, and admin notices seamlessly.</p>
+                <span id="vBannerTag" class="bg-black/30 text-amber-300 text-[10px] px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">PRO ECOSYSTEM</span>
+                <h2 id="vBannerTitle" class="text-lg font-black tracking-wide">All Features Available on Scroll</h2>
+                <p id="vBannerDesc" class="text-xs text-slate-100">Membership plans, bulk CSV upload, visual sales charts, low stock alerts, and shipping zones are live.</p>
             </div>
         </div>
 
@@ -88,30 +91,111 @@
             <button onclick="switchVendorTab('profile')" class="bg-[#1c2541] hover:bg-slate-700 p-2.5 rounded-full text-base border border-slate-700">⚙️</button>
         </div>
 
-        <!-- Quick Stats & Feature Grid -->
+        <!-- Low Stock Warning Notification Bar (Scrollable on Home) -->
+        <div id="lowStockWarningBox" class="bg-rose-500/15 border border-rose-500/40 p-3 rounded-2xl text-xs text-rose-300 flex items-center justify-between shadow">
+            <div class="flex items-center gap-2">
+                <span class="text-lg">⚠️</span>
+                <div>
+                    <p class="font-bold">Low Stock Auto-Refill Warning</p>
+                    <p class="text-[10px] text-slate-300">Electric Kettle 2L has less than 5 units remaining in stock!</p>
+                </div>
+            </div>
+            <button onclick="switchVendorTab('products')" class="bg-rose-600 text-white px-3 py-1.5 rounded-xl font-bold text-[10px]">Refill</button>
+        </div>
+
+        <!-- Quick Stats & Feature Grid (All brought to Home Scroll) -->
         <div class="grid grid-cols-2 gap-3 text-xs">
             <div onclick="switchVendorTab('wallet')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
                 <span class="text-amber-400 font-bold text-xs block">AVAILABLE BALANCE</span>
                 <p class="text-xl font-black text-white mt-1">৳12,450</p>
             </div>
+            <div onclick="switchVendorTab('membership')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
+                <span class="text-rose-400 font-bold text-xs block">MEMBERSHIP</span>
+                <p class="text-xl font-black text-emerald-400 mt-1">Gold Plan 👑</p>
+            </div>
+            <div onclick="switchVendorTab('bulkimport')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
+                <span class="text-blue-400 font-bold text-xs block">BULK IMPORT</span>
+                <p class="text-xl font-black text-white mt-1">CSV Ready 📊</p>
+            </div>
+            <div onclick="switchVendorTab('shippingzone')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
+                <span class="text-amber-300 font-bold text-xs block">SHIPPING ZONES</span>
+                <p class="text-xl font-black text-rose-500 mt-1">Configured 🚚</p>
+            </div>
             <div onclick="switchVendorTab('multivendor')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
-                <span class="text-rose-400 font-bold text-xs block">MARKETPLACE</span>
-                <p class="text-xl font-black text-emerald-400 mt-1">Active 🌐</p>
+                <span class="text-purple-400 font-bold text-xs block">MARKETPLACE</span>
+                <p class="text-xl font-black text-white mt-1">Active 🌐</p>
             </div>
             <div onclick="switchVendorTab('gateway')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
-                <span class="text-blue-400 font-bold text-xs block">GATEWAY SETTINGS</span>
-                <p class="text-xl font-black text-white mt-1">BDT / USD 💳</p>
+                <span class="text-emerald-400 font-bold text-xs block">PAYMENT GATEWAY</span>
+                <p class="text-xl font-black text-white mt-1">bKash/COD 💳</p>
+            </div>
+            <div onclick="switchVendorTab('invoice')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
+                <span class="text-teal-400 font-bold text-xs block">INVOICE SLIP</span>
+                <p class="text-xl font-black text-white mt-1">PDF Print 📄</p>
             </div>
             <div onclick="switchVendorTab('notice')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
-                <span class="text-amber-300 font-bold text-xs block">ADMIN NOTICE</span>
-                <p class="text-xl font-black text-rose-500 mt-1">1 New 📢</p>
+                <span class="text-rose-400 font-bold text-xs block">ADMIN NOTICE</span>
+                <p class="text-xl font-black text-amber-400 mt-1">1 Update 📢</p>
             </div>
+            <div onclick="switchVendorTab('storefront')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
+                <span class="text-indigo-400 font-bold text-xs block">STOREFRONT</span>
+                <p class="text-xl font-black text-emerald-400 mt-1">Live 🏪</p>
+            </div>
+            <div onclick="switchVendorTab('chatbot')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
+                <span class="text-sky-400 font-bold text-xs block">AI CHATBOT</span>
+                <p class="text-xl font-black text-white mt-1">Active 🤖</p>
+            </div>
+            <div onclick="switchVendorTab('flashsale')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
+                <span class="text-orange-400 font-bold text-xs block">FLASH SALE</span>
+                <p class="text-xl font-black text-rose-500 mt-1">Running ⚡</p>
+            </div>
+            <div onclick="switchVendorTab('reviews')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
+                <span class="text-amber-400 font-bold text-xs block">PHOTO REVIEWS</span>
+                <p class="text-xl font-black text-white mt-1">⭐ 5.0</p>
+            </div>
+            <div onclick="switchVendorTab('profile')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
+                <span class="text-emerald-400 font-bold text-xs block">ID STATUS</span>
+                <p class="text-xl font-black text-white mt-1">Verified ✓</p>
+            </div>
+            <div onclick="switchVendorTab('helpline')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
+                <span class="text-rose-400 font-bold text-xs block">HELPLINE CHAT</span>
+                <p class="text-xl font-black text-emerald-400 mt-1">Active 🎧</p>
+            </div>
+            <div onclick="switchVendorTab('products')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
+                <span class="text-slate-400 font-bold text-xs block">INVENTORY</span>
+                <p class="text-xl font-black text-white mt-1">4 Active 📦</p>
+            </div>
+            <div onclick="switchVendorTab('dashboard')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
+                <span class="text-purple-400 font-bold text-xs block">ANALYTICS</span>
+                <p class="text-xl font-black text-emerald-400 mt-1">Sales Graph 📈</p>
+            </div>
+
             <div onclick="switchVendorTab('addproduct')" class="bg-gradient-to-r from-rose-600 to-amber-600 text-white p-4 rounded-2xl cursor-pointer shadow-lg col-span-2 text-center font-bold text-sm">
                 ➕ Add Advanced Product (SEO & Video)
             </div>
         </div>
 
-        <!-- Recent Store Overview & Notice -->
+        <!-- Visual Sales Chart & Traffic Analytics Section on Scroll -->
+        <div class="bg-[#0b132b] border border-slate-800 rounded-2xl p-4 space-y-3 shadow-xl">
+            <div class="flex justify-between items-center">
+                <h3 class="font-bold text-sm text-white">Visual Sales & Traffic Graph (Last 7 Days)</h3>
+                <span class="text-xs text-emerald-400 font-bold">+28% Growth</span>
+            </div>
+            <div class="bg-[#1c2541] border border-slate-700 p-4 rounded-xl space-y-3">
+                <div class="flex justify-between items-end h-32 gap-2 pt-4">
+                    <div class="w-1/7 bg-rose-500/80 rounded-t-lg h-[40%] flex items-center justify-center text-[10px] font-bold text-white">Sat</div>
+                    <div class="w-1/7 bg-rose-500/80 rounded-t-lg h-[65%] flex items-center justify-center text-[10px] font-bold text-white">Sun</div>
+                    <div class="w-1/7 bg-rose-500/80 rounded-t-lg h-[50%] flex items-center justify-center text-[10px] font-bold text-white">Mon</div>
+                    <div class="w-1/7 bg-rose-500/80 rounded-t-lg h-[80%] flex items-center justify-center text-[10px] font-bold text-white">Tue</div>
+                    <div class="w-1/7 bg-rose-500/80 rounded-t-lg h-[60%] flex items-center justify-center text-[10px] font-bold text-white">Wed</div>
+                    <div class="w-1/7 bg-rose-500/80 rounded-t-lg h-[90%] flex items-center justify-center text-[10px] font-bold text-white">Thu</div>
+                    <div class="w-1/7 bg-emerald-500 rounded-t-lg h-[100%] flex items-center justify-center text-[10px] font-bold text-black">Fri</div>
+                </div>
+                <p class="text-[11px] text-slate-300 text-center">Live tracking analytics updated automatically from store orders.</p>
+            </div>
+        </div>
+
+        <!-- Recent Admin Notice & Marketplace Info on Scroll -->
         <div class="bg-[#0b132b] border border-slate-800 rounded-2xl p-4 space-y-3 shadow-xl">
             <div class="flex justify-between items-center">
                 <h3 class="font-bold text-sm text-white">Marketplace & Admin Notices</h3>
@@ -139,8 +223,8 @@
     <!-- Script Engine -->
     <script>
         const vendorBanners = [
-            { tag: "MULTI-VENDOR ECOSYSTEM", title: "Global Marketplace & Invoicing Live", desc: "Manage multiple vendors, currency settings, automated slips, and admin notices seamlessly.", bg: "from-indigo-700 via-purple-700 to-rose-700" },
-            { tag: "ADMIN BROADCAST", title: "Multi-Currency & Payment Gateway Active", desc: "Configure local bKash/Nagad and international USD settlements instantly.", bg: "from-emerald-700 via-teal-800 to-blue-900" }
+            { tag: "PRO ECOSYSTEM", title: "All Features Available on Scroll", desc: "Membership plans, bulk CSV upload, visual sales charts, low stock alerts, and shipping zones are live.", bg: "from-indigo-700 via-purple-700 to-rose-700" },
+            { tag: "MEMBERSHIP PLAN", title: "Gold Plan Active with 2% Commission", desc: "Enjoy priority search listing and instant wallet withdrawals across Bangladesh.", bg: "from-emerald-700 via-teal-800 to-blue-900" }
         ];
         let currentVBIndex = 0;
         setInterval(() => {
@@ -167,8 +251,37 @@
             const body = document.getElementById('vModalBody');
 
             if(tab === 'dashboard') {
-                title.innerText = "Dashboard & Analytics";
-                body.innerHTML = `<div class="bg-[#1c2541] p-3 rounded-xl space-y-2"><p class="font-bold text-white">Status: Verified Multi-Vendor Store</p><p class="text-emerald-400">Total Revenue: ৳14,500</p></div>`;
+                title.innerText = "Dashboard & Analytics & Visual Graph";
+                body.innerHTML = `<div class="bg-[#1c2541] p-3 rounded-xl space-y-2"><p class="font-bold text-white">Status: Verified Multi-Vendor Store</p><p class="text-emerald-400">Total Revenue: ৳14,500</p><p class="text-amber-400">Traffic Growth: +28% this week</p></div>`;
+            } else if(tab === 'membership') {
+                title.innerText = "Vendor Subscription & Commission Plans";
+                body.innerHTML = `
+                    <div class="bg-[#1c2541] p-3 rounded-xl space-y-3">
+                        <p class="font-bold text-amber-400">Current Plan: Gold Vendor Membership 👑</p>
+                        <p class="text-slate-300 text-xs">Platform Commission: <strong>2% per sale</strong> (Lowest tier fee)</p>
+                        <p class="text-slate-300 text-xs">Perks: Priority product display in home feed, instant bKash payout.</p>
+                        <button onclick="alert('You are already on the best Gold Plan!'); closeVendorModal();" class="w-full bg-amber-500 text-black font-bold py-2.5 rounded-xl">Plan Active</button>
+                    </div>`;
+            } else if(tab === 'bulkimport') {
+                title.innerText = "Bulk CSV / Excel Product Import";
+                body.innerHTML = `
+                    <div class="bg-[#1c2541] p-3 rounded-xl space-y-3">
+                        <p class="font-bold text-blue-400">Upload CSV / Excel File:</p>
+                        <input type="file" accept=".csv, .xlsx" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2 text-white text-xs">
+                        <p class="text-[10px] text-slate-400">You can upload up to 500 products at once using our official Velora CSV template.</p>
+                        <button onclick="alert('Bulk products imported successfully!'); closeVendorModal();" class="w-full bg-rose-600 text-white font-bold py-2.5 rounded-xl">Import Products</button>
+                    </div>`;
+            } else if(tab === 'shippingzone') {
+                title.innerText = "Custom Shipping Zones & Rates";
+                body.innerHTML = `
+                    <div class="bg-[#1c2541] p-3 rounded-xl space-y-3">
+                        <p class="font-bold text-amber-400">Configure Delivery Rates:</p>
+                        <label class="text-slate-400 block">Inside Dhaka Charge (BDT)</label>
+                        <input type="number" value="80" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
+                        <label class="text-slate-400 block">Outside Dhaka Charge (BDT)</label>
+                        <input type="number" value="130" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
+                        <button onclick="alert('Shipping zones updated!'); closeVendorModal();" class="w-full bg-rose-600 text-white font-bold py-2.5 rounded-xl">Save Rates</button>
+                    </div>`;
             } else if(tab === 'multivendor') {
                 title.innerText = "Multi-Vendor Marketplace Directory";
                 body.innerHTML = `
