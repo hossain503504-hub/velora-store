@@ -156,14 +156,17 @@
             </div>
         </div>
 
-        <!-- 10. Add Product Tab (Image Upload at Top & Custom Category Added) -->
+        <!-- 10. Add Product Tab (Direct Photo Upload & Optional URL) -->
         <div id="tab-addproduct" class="admin-tab hidden space-y-4 max-w-2xl mx-auto">
             <h2 class="text-base font-bold text-rose-500">Add New Product</h2>
             <form onsubmit="handleAddNewProduct(event)" class="bg-[#111827] border border-slate-800 p-5 rounded-2xl space-y-4 text-xs">
-                <!-- Product Image at Top -->
                 <div>
-                    <label class="text-slate-400 block mb-1 font-bold">Product Image (URL or Upload) *</label>
-                    <input type="url" id="prodImage" required placeholder="https://images.unsplash.com/..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                    <label class="text-slate-400 block mb-1 font-bold">Product Photo (Select from Device) *</label>
+                    <input type="file" id="prodFile" accept="image/*" required class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-slate-300 text-xs">
+                </div>
+                <div>
+                    <label class="text-slate-400 block mb-1 font-bold">Product Image URL (Optional)</label>
+                    <input type="url" id="prodImage" placeholder="https://images.unsplash.com/..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
                 </div>
                 <div>
                     <label class="text-slate-400 block mb-1 font-bold">Product Name *</label>
@@ -205,7 +208,7 @@
 
     </main>
 
-    <!-- Order Details View Modal (Matching Image 33272 Style with Update & PDF Download) -->
+    <!-- Order Details View Modal -->
     <div id="orderDetailsModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 w-full max-w-lg rounded-2xl p-6 relative max-h-[90vh] overflow-y-auto space-y-4 text-xs">
             <button onclick="closeOrderDetailsModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
@@ -378,9 +381,9 @@
             container.innerHTML = ordersArr.map(o => `
                 <div class="bg-[#111827] border border-slate-800 p-4 rounded-xl flex items-center justify-between gap-3">
                     <div class="flex-1 space-y-1">
-                        <p class="text-rose-400 font-bold text-xs">${o.orderId} - <span class="text-white">${o.name}</span></p>
+                        <p class="text-rose-400 font-bold text-xs">Order ID: ${o.orderId} - <span class="text-white">${o.name}</span></p>
                         <p class="text-slate-300 text-xs">Product: ${o.items ? o.items.map(i=>i.name).join(', ') : 'Order Items'}</p>
-                        <p class="text-slate-400 text-[11px]">Total: ৳${o.grandTotal} | Status: <span class="text-amber-400 font-bold">${o.status}</span></p>
+                        <p class="text-slate-400 text-[11px]">Total Bill: <span class="text-rose-400 font-bold">৳${o.grandTotal}</span> | Status: <span class="text-amber-400 font-bold">${o.status}</span></p>
                     </div>
                     <div class="flex items-center gap-2">
                         <button onclick="openOrderDetails('${o.orderId}')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg font-bold text-xs">View</button>
@@ -397,10 +400,10 @@
             if(!data) return;
 
             document.getElementById('modalOrderIdTitle').innerText = `Order #${data.orderId}`;
-            document.getElementById('detCustName').innerText = data.name;
+            document.getElementById('detCustName').innerText = data.name || 'N/A';
             document.getElementById('detCustPhone').innerText = data.phone || 'N/A';
             document.getElementById('detCustAddress').innerText = data.address || 'N/A';
-            document.getElementById('detGrandTotal').innerText = '৳' + data.grandTotal;
+            document.getElementById('detGrandTotal').innerText = '৳' + (data.grandTotal || 0);
             document.getElementById('detStatusSelect').value = data.status || 'Pending';
 
             const prodList = document.getElementById('detProductsList');
@@ -448,7 +451,6 @@
                 localStorage.setItem(activeSelectedOrderId, JSON.stringify(data));
                 closeOrderDetailsModal();
                 renderAdminData();
-                alert("Order status updated successfully!");
             }
         }
 
@@ -458,7 +460,14 @@
 
         function handleAddNewProduct(e) {
             e.preventDefault();
-            const image = document.getElementById('prodImage').value;
+            const fileInput = document.getElementById('prodFile');
+            const urlInput = document.getElementById('prodImage').value;
+            
+            let imageUrl = urlInput;
+            if(fileInput.files && fileInput.files[0]) {
+                imageUrl = URL.createObjectURL(fileInput.files[0]);
+            }
+
             const name = document.getElementById('prodName').value;
             const category = document.getElementById('prodCategory').value;
             const desc = document.getElementById('prodDesc').value;
@@ -468,9 +477,8 @@
             const qty = Number(document.getElementById('prodQty').value);
             const price = Number(document.getElementById('prodPrice').value);
 
-            products.unshift({ id: Date.now(), image, name, category, desc, spec, hashtag, size, qty, price });
+            products.unshift({ id: Date.now(), image: imageUrl, name, category, desc, spec, hashtag, size, qty, price });
             localStorage.setItem('vendor_products', JSON.stringify(products));
-            alert("Product published successfully!");
             e.target.reset();
             switchAdminTab('products');
         }
@@ -515,7 +523,6 @@
             localStorage.setItem('admin_bkash', document.getElementById('bkashNum').value);
             localStorage.setItem('admin_nagad', document.getElementById('nagadNum').value);
             closeAdminSettings();
-            alert("Settings saved successfully!");
         }
 
         renderAdminData();
