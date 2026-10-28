@@ -172,7 +172,7 @@
         </div>
     </div>
 
-    <!-- Custom In-App Success Modal (Replaces browser alert popup) -->
+    <!-- Custom In-App Success Modal -->
     <div id="orderSuccessModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 w-full max-w-sm rounded-2xl p-6 relative space-y-4 text-center">
             <div class="w-16 h-16 bg-emerald-500/20 text-emerald-500 rounded-full flex items-center justify-center text-3xl font-bold mx-auto">✓</div>
@@ -290,9 +290,113 @@
             if(timerEl) timerEl.innerText = `${hrs} : ${mins} : ${secs}`;
         }, 1000);
 
+        // 100+ Dummy Products
         let products = JSON.parse(localStorage.getItem('vendor_products')) || [
             { id: 1, name: "6-Piece Stainless Steel Kitchen Tool Set", price: 709, isPaid: true, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" },
-            { id: 2, name: "Electric Kettle 2L - Perfect for Tea & Coffee", price: 659, isPaid: false, image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500" }
+            { id: 2, name: "Electric Kettle 2L - Perfect for Tea & Coffee", price: 659, isPaid: false, image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500" },
+            { id: 3, name: "Wireless Bluetooth Earbuds Pro", price: 1299, isPaid: true, image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500" },
+            { id: 4, name: "Smart Fitness Tracker Watch", price: 1850, isPaid: true, image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500" },
+            { id: 5, name: "Minimalist Leather Wallet for Men", price: 450, isPaid: false, image: "https://images.unsplash.com/photo-1627123424574-724758594e93?w=500" },
+            { id: 6, name: "Casual Over-Sized Hoodie", price: 1490, isPaid: true, image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500" },
+            { id: 7, name: "Classic Drop-Shoulder Graphic Tee", price: 650, isPaid: false, image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500" },
+            { id: 8, name: "Anti-Glare UV Protection Sunglasses", price: 890, isPaid: true, image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500" },
+            { id: 9, name: "RGB Gaming Mechanical Keyboard", price: 2450, isPaid: true, image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500" },
+            { id: 10, name: "Ergonomic Wireless Optical Mouse", price: 750, isPaid: false, image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500" },
+            { id: 11, name: "Portable Mini USB Desk Fan", price: 520, isPaid: false, image: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=500" },
+            { id: 12, name: "Stainless Steel Insulated Water Bottle 1L", price: 680, isPaid: true, image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=500" },
+            { id: 13, name: "Non-Stick Frying Pan 28cm", price: 1150, isPaid: false, image: "https://images.unsplash.com/photo-1583777926162-d27806b72a9b?w=500" },
+            { id: 14, name: "LED Desk Lamp with Touch Control", price: 950, isPaid: true, image: "https://images.unsplash.com/photo-1534349762230-e0cadf32f57a?w=500" },
+            { id: 15, name: "Waterproof Travel Backpack 35L", price: 1750, isPaid: true, image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500" },
+            { id: 16, name: "Magnetic Phone Car Mount Holder", price: 350, isPaid: false, image: "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=500" },
+            { id: 17, name: "Fast Charging Type-C Cable 2M", price: 250, isPaid: false, image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=500" },
+            { id: 18, name: "10000mAh Power Bank Slim Design", price: 1200, isPaid: true, image: "https://images.unsplash.com/photo-1609592424155-27f12e53376a?w=500" },
+            { id: 19, name: "Silicone Phone Case with Magsafe", price: 420, isPaid: false, image: "https://images.unsplash.com/photo-1601593346740-925622e0325b?w=500" },
+            { id: 20, name: "Bluetooth Soundbar Speaker for TV & PC", price: 2950, isPaid: true, image: "https://images.unsplash.com/photo-1545454675-3531b543be5d?w=500" },
+            { id: 21, name: "Adjustable Laptop Stand Aluminum", price: 1350, isPaid: true, image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500" },
+            { id: 22, name: "Smart Digital Kitchen Food Scale", price: 580, isPaid: false, image: "https://images.unsplash.com/photo-1589782182703-2aaa69037b5b?w=500" },
+            { id: 23, name: "Automatic Sensor Soap Dispenser", price: 890, isPaid: false, image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=500" },
+            { id: 24, name: "Rechargeable Lint Remover for Clothes", price: 650, isPaid: false, image: "https://images.unsplash.com/photo-1582738404164-2c5ab9fb03ba?w=500" },
+            { id: 25, name: "Multifunctional Vegetable Chopper", price: 790, isPaid: true, image: "https://images.unsplash.com/photo-1594807046591-0963d3345672?w=500" },
+            { id: 26, name: "Ceramic Coffee Mug with Spoon", price: 350, isPaid: false, image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=500" },
+            { id: 27, name: "Insulated Lunch Box 3-Tier", price: 990, isPaid: false, image: "https://images.unsplash.com/photo-1577803645773-f96470509666?w=500" },
+            { id: 28, name: "Memory Foam Neck Travel Pillow", price: 720, isPaid: true, image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=500" },
+            { id: 29, name: "Portable Lint Shaver Fabric Care", price: 550, isPaid: false, image: "https://images.unsplash.com/photo-1582738404164-2c5ab9fb03ba?w=500" },
+            { id: 30, name: "USB Rechargeable Handheld Vacuum Cleaner", price: 1650, isPaid: true, image: "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=500" },
+            { id: 31, name: "LED Strip Lights 5M with Remote", price: 600, isPaid: false, image: "https://images.unsplash.com/photo-1550985616-11411d33b6c6?w=500" },
+            { id: 32, name: "Mini Smart Projector HD 1080P", price: 6500, isPaid: true, image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500" },
+            { id: 33, name: "Wireless Charging Pad 15W", price: 780, isPaid: false, image: "https://images.unsplash.com/photo-1622445275576-7243c7d33d82?w=500" },
+            { id: 34, name: "Smart Wi-Fi Bulb Color Changing", price: 690, isPaid: false, image: "https://images.unsplash.com/photo-1550581190-9c1c48021d6c?w=500" },
+            { id: 35, name: "Professional Hair Dryer 2000W", price: 1450, isPaid: true, image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500" },
+            { id: 36, name: "Electric Hair Straightening Brush", price: 1250, isPaid: false, image: "https://images.unsplash.com/photo-1560869713-7d0a29430803?w=500" },
+            { id: 37, name: "Men's Grooming Trimmer Cordless", price: 1100, isPaid: true, image: "https://images.unsplash.com/photo-1621607548881-229202575f64?w=500" },
+            { id: 38, name: "Facial Cleansing Brush Electric", price: 850, isPaid: false, image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=500" },
+            { id: 39, name: "Essential Oil Aroma Diffuser 300ml", price: 1300, isPaid: true, image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=500" },
+            { id: 40, name: "Digital Body Weight Bathroom Scale", price: 950, isPaid: false, image: "https://images.unsplash.com/photo-1512290900672-1c255013b52f?w=500" },
+            { id: 41, name: "Yoga Mat Non-Slip 6mm", price: 890, isPaid: true, image: "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=500" },
+            { id: 42, name: "Resistance Bands Set of 5", price: 550, isPaid: false, image: "https://images.unsplash.com/photo-1598289431512-b97b09177c6e?w=500" },
+            { id: 43, name: "Adjustable Hand Grip Strengthener", price: 320, isPaid: false, image: "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=500" },
+            { id: 44, name: "Skipping Jump Rope Digital Counter", price: 450, isPaid: false, image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=500" },
+            { id: 45, name: "Sports Armband Phone Holder", price: 380, isPaid: false, image: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=500" },
+            { id: 46, name: "Running Waist Pack Fanny Bag", price: 490, isPaid: false, image: "https://images.unsplash.com/photo-1544816155-12df9643f363?w=500" },
+            { id: 47, name: "Cycling Gloves Anti-Slip Full Finger", price: 550, isPaid: false, image: "https://images.unsplash.com/photo-1517649763962-0c623266cf20?w=500" },
+            { id: 48, name: "Waterproof Bicycle Phone Mount", price: 620, isPaid: false, image: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=500" },
+            { id: 49, name: "Rechargeable LED Bicycle Headlight", price: 750, isPaid: true, image: "https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?w=500" },
+            { id: 50, name: "Car Vacuum Cleaner High Power 12V", price: 1250, isPaid: true, image: "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=500" },
+            { id: 51, name: "Car Steering Wheel Cover Leather", price: 650, isPaid: false, image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500" },
+            { id: 52, name: "Car Dashboard Sticky Anti-Slip Mat", price: 250, isPaid: false, image: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=500" },
+            { id: 53, name: "Mini Car Trash Can with Lid", price: 300, isPaid: false, image: "https://images.unsplash.com/photo-1563720223185-11003d516935?w=500" },
+            { id: 54, name: "Car Tissue Holder Sun Visor Pouch", price: 350, isPaid: false, image: "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?w=500" },
+            { id: 55, name: "Portable Car Air Purifier Ionizer", price: 1450, isPaid: true, image: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=500" },
+            { id: 56, name: "Multifunctional Car Seat Organizer", price: 790, isPaid: false, image: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=500" },
+            { id: 57, name: "Car Window Sun Shade 4-Pack", price: 590, isPaid: false, image: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=500" },
+            { id: 58, name: "Heavy Duty Jump Starter Cables", price: 950, isPaid: false, image: "https://images.unsplash.com/photo-1486006920555-c77dce18193b?w=500" },
+            { id: 59, name: "Digital Tire Pressure Gauge", price: 680, isPaid: false, image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=500" },
+            { id: 60, name: "Magnetic Wireless Power Bank 5000mAh", price: 1850, isPaid: true, image: "https://images.unsplash.com/photo-1609592424155-27f12e53376a?w=500" },
+            { id: 61, name: "Type-C Hub Multiport Adapter 7-in-1", price: 1950, isPaid: true, image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=500" },
+            { id: 62, name: "Vertical Ergonomic Optical Mouse", price: 1100, isPaid: false, image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500" },
+            { id: 63, name: "Extended Gaming Mouse Pad XL", price: 550, isPaid: false, image: "https://images.unsplash.com/photo-1616440347437-b1c73416efc2?w=500" },
+            { id: 64, name: "Webcam 1080P HD with Privacy Cover", price: 1650, isPaid: true, image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500" },
+            { id: 65, name: "Condenser Microphone for Streaming & Podcasting", price: 2450, isPaid: true, image: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=500" },
+            { id: 66, name: "Ring Light 10 inch with Tripod Stand", price: 1200, isPaid: true, image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500" },
+            { id: 67, name: "Mini Tripod Stand for Phone & Camera", price: 350, isPaid: false, image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500" },
+            { id: 68, name: "Flexible Phone Overhead Mount Stand", price: 590, isPaid: false, image: "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=500" },
+            { id: 69, name: "Selfie Stick Bluetooth with Tripod", price: 750, isPaid: false, image: "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=500" },
+            { id: 70, name: "Smart LED Ceiling Light with Remote", price: 3200, isPaid: true, image: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=500" },
+            { id: 71, name: "Motion Sensor Night Light LED", price: 380, isPaid: false, image: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=500" },
+            { id: 72, name: "Solar Outdoor Garden Lights 4-Pack", price: 1250, isPaid: true, image: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=500" },
+            { id: 73, name: "Flameless LED Tea Lights 12-Pack", price: 490, isPaid: false, image: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=500" },
+            { id: 74, name: "Decorative Fairy String Lights 10M", price: 350, isPaid: false, image: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=500" },
+            { id: 75, name: "Electric Insect Killer Lamp UV", price: 790, isPaid: false, image: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=500" },
+            { id: 76, name: "Ultrasonic Humidifier 2.5L", price: 1450, isPaid: true, image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=500" },
+            { id: 77, name: "Mini Air Cooler Desktop AC Fan", price: 1850, isPaid: true, image: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=500" },
+            { id: 78, name: "Electric Blanket Heated Throw", price: 2900, isPaid: true, image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=500" },
+            { id: 79, name: "Memory Foam Seat Cushion Pillow", price: 950, isPaid: false, image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=500" },
+            { id: 80, name: "Orthopedic Knee Pillow for Sleeping", price: 780, isPaid: false, image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=500" },
+            { id: 81, name: "Electric Coffee Grinder Stainless Steel", price: 1350, isPaid: true, image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=500" },
+            { id: 82, name: "Manual Coffee Maker French Press", price: 890, isPaid: false, image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=500" },
+            { id: 83, name: "Handheld Milk Frother for Coffee", price: 320, isPaid: false, image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=500" },
+            { id: 84, name: "Thermal Insulated Coffee Tumbler", price: 650, isPaid: false, image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=500" },
+            { id: 85, name: "Glass Tea Infuser Teapot 800ml", price: 990, isPaid: false, image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=500" },
+            { id: 86, name: "Silicone Ice Cube Tray with Lid", price: 250, isPaid: false, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" },
+            { id: 87, name: "Collapsible Dish Drying Rack", price: 850, isPaid: false, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" },
+            { id: 88, name: "Over-the-Sink Colander Strainer", price: 450, isPaid: false, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" },
+            { id: 89, name: "Magnetic Knife Holder Strip", price: 550, isPaid: false, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" },
+            { id: 90, name: "Digital Kitchen Meat Thermometer", price: 480, isPaid: false, image: "https://images.unsplash.com/photo-1589782182703-2aaa69037b5b?w=500" },
+            { id: 91, name: "Stainless Steel Garlic Press Mincer", price: 290, isPaid: false, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" },
+            { id: 92, name: "Rotary Cheese Grater Kitchen Tool", price: 790, isPaid: false, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" },
+            { id: 93, name: "Reusable Silicone Food Storage Bags", price: 600, isPaid: false, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" },
+            { id: 94, name: "Pantry Storage Containers Set of 6", price: 1450, isPaid: true, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" },
+            { id: 95, name: "Under-Sink Sliding Storage Drawer", price: 1100, isPaid: false, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" },
+            { id: 96, name: "Wardrobe Clothes Organizer Boxes", price: 890, isPaid: false, image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500" },
+            { id: 97, name: "Hanging Shoe Organizer for Closet", price: 590, isPaid: false, image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500" },
+            { id: 98, name: "Vacuum Storage Bags for Clothes 6-Pack", price: 950, isPaid: true, image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500" },
+            { id: 99, name: "Portable Lint Roller Pet Hair Remover", price: 320, isPaid: false, image: "https://images.unsplash.com/photo-1582738404164-2c5ab9fb03ba?w=500" },
+            { id: 100, name: "Sticky Notes Colorful Memo Pad Set", price: 220, isPaid: false, image: "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=500" },
+            { id: 101, name: "Desktop Bookshelf Organizer Rack", price: 1250, isPaid: true, image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500" },
+            { id: 102, name: "Magnetic Whiteboard for Fridge", price: 650, isPaid: false, image: "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=500" },
+            { id: 103, name: "Cable Management Box Cord Organizer", price: 490, isPaid: false, image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=500" },
+            { id: 104, name: "Reusable Cable Ties Velcro 50-Pack", price: 280, isPaid: false, image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=500" },
+            { id: 105, name: "Universal Travel Adapter Plug", price: 450, isPaid: false, image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=500" }
         ];
 
         products.sort((a, b) => (b.isPaid === true) - (a.isPaid === true));
@@ -361,7 +465,7 @@
             const checkoutBox = document.getElementById('checkoutBox');
 
             if(cart.length === 0) {
-                let otherProductsHTML = products.map(p => `
+                let otherProductsHTML = products.slice(0, 4).map(p => `
                     <div class="bg-slate-800/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col justify-between">
                         <img src="${p.image}" class="w-full h-32 object-cover">
                         <div class="p-2.5 flex flex-col justify-between flex-1 space-y-1">
@@ -467,7 +571,7 @@
             document.getElementById('cartBadge').innerText = '0';
             closePaymentModal();
             
-            // Show custom in-app success modal instead of alert popup
+            // Show custom in-app success modal
             document.getElementById('successTrackId').innerText = orderId;
             document.getElementById('orderSuccessModal').classList.remove('hidden');
         }
