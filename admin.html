@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VELORA SHOP VENDOR - Pro Verified Dashboard</title>
+    <title>VELORA SHOP VENDOR - Multi-Vendor Pro Dashboard</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -32,7 +32,7 @@
     <header class="sticky top-0 z-40 bg-[#0b132b]/95 backdrop-blur-md border-b border-slate-800 px-4 py-3 flex items-center justify-between">
         <h1 class="text-base font-black tracking-widest text-rose-500 uppercase">VELORA SHOP VENDOR</h1>
         <div class="flex items-center gap-3">
-            <span class="text-xs bg-emerald-500/20 text-emerald-400 font-bold px-2.5 py-1 rounded-full border border-emerald-500/30 flex items-center gap-1">✓ Verified Vendor</span>
+            <span class="text-xs bg-emerald-500/20 text-emerald-400 font-bold px-2.5 py-1 rounded-full border border-emerald-500/30 flex items-center gap-1">✓ Verified Multi-Vendor</span>
             <button onclick="toggleVendorSidebar()" class="text-slate-300 hover:text-white text-xl">☰</button>
         </div>
     </header>
@@ -41,11 +41,15 @@
     <div id="vendorSidebar" class="fixed inset-y-0 right-0 z-50 w-72 bg-[#0b132b] border-l border-slate-800 p-5 transform translate-x-full transition-transform duration-300 shadow-2xl flex flex-col justify-between overflow-y-auto">
         <div class="space-y-4">
             <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                <h3 class="font-bold text-sm text-rose-500 uppercase">Verified Vendor Menu</h3>
+                <h3 class="font-bold text-sm text-rose-500 uppercase">Multi-Vendor Menu</h3>
                 <button onclick="toggleVendorSidebar()" class="text-slate-400 hover:text-white text-lg">✕</button>
             </div>
             <div class="space-y-2 text-xs font-bold text-slate-300">
                 <div onclick="switchVendorTab('dashboard')" class="p-2.5 bg-rose-600 text-white rounded-xl cursor-pointer shadow">📌 Dashboard & Analytics</div>
+                <div onclick="switchVendorTab('multivendor')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">🌐 Multi-Vendor Marketplace</div>
+                <div onclick="switchVendorTab('gateway')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">💳 Multi-Currency & Gateway</div>
+                <div onclick="switchVendorTab('invoice')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">📄 Invoice & Packing Slip</div>
+                <div onclick="switchVendorTab('notice')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">📢 Admin Notice Board</div>
                 <div onclick="switchVendorTab('storefront')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">🏪 My Storefront Page</div>
                 <div onclick="switchVendorTab('chatbot')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">🤖 AI Chatbot & Auto-Reply</div>
                 <div onclick="switchVendorTab('flashsale')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">⚡ Flash Sale Management</div>
@@ -66,9 +70,9 @@
         <!-- Dynamic Promo Banner Slider -->
         <div id="vendorBannerSlider" class="bg-gradient-to-r from-indigo-700 via-purple-700 to-rose-700 border border-slate-700 rounded-2xl p-5 text-white shadow-xl relative overflow-hidden transition-all duration-700">
             <div class="relative z-10 space-y-1">
-                <span id="vBannerTag" class="bg-black/30 text-amber-300 text-[10px] px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">PRO VENDOR ECOSYSTEM</span>
-                <h2 id="vBannerTitle" class="text-lg font-black tracking-wide">AI Chatbot, Storefront & Flash Sales Live</h2>
-                <p id="vBannerDesc" class="text-xs text-slate-100">Manage automated replies, customer photo reviews, and dedicated multi-vendor storefronts.</p>
+                <span id="vBannerTag" class="bg-black/30 text-amber-300 text-[10px] px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">MULTI-VENDOR ECOSYSTEM</span>
+                <h2 id="vBannerTitle" class="text-lg font-black tracking-wide">Global Marketplace & Invoicing Live</h2>
+                <p id="vBannerDesc" class="text-xs text-slate-100">Manage multiple vendors, currency settings, automated slips, and admin notices seamlessly.</p>
             </div>
         </div>
 
@@ -90,35 +94,35 @@
                 <span class="text-amber-400 font-bold text-xs block">AVAILABLE BALANCE</span>
                 <p class="text-xl font-black text-white mt-1">৳12,450</p>
             </div>
-            <div onclick="switchVendorTab('storefront')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
-                <span class="text-rose-400 font-bold text-xs block">STOREFRONT</span>
-                <p class="text-xl font-black text-emerald-400 mt-1">Live 🏪</p>
+            <div onclick="switchVendorTab('multivendor')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
+                <span class="text-rose-400 font-bold text-xs block">MARKETPLACE</span>
+                <p class="text-xl font-black text-emerald-400 mt-1">Active 🌐</p>
             </div>
-            <div onclick="switchVendorTab('chatbot')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
-                <span class="text-blue-400 font-bold text-xs block">AI CHATBOT</span>
-                <p class="text-xl font-black text-white mt-1">Active 🤖</p>
+            <div onclick="switchVendorTab('gateway')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
+                <span class="text-blue-400 font-bold text-xs block">GATEWAY SETTINGS</span>
+                <p class="text-xl font-black text-white mt-1">BDT / USD 💳</p>
             </div>
-            <div onclick="switchVendorTab('flashsale')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
-                <span class="text-amber-300 font-bold text-xs block">FLASH SALE</span>
-                <p class="text-xl font-black text-rose-500 mt-1">Running ⚡</p>
+            <div onclick="switchVendorTab('notice')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
+                <span class="text-amber-300 font-bold text-xs block">ADMIN NOTICE</span>
+                <p class="text-xl font-black text-rose-500 mt-1">1 New 📢</p>
             </div>
             <div onclick="switchVendorTab('addproduct')" class="bg-gradient-to-r from-rose-600 to-amber-600 text-white p-4 rounded-2xl cursor-pointer shadow-lg col-span-2 text-center font-bold text-sm">
                 ➕ Add Advanced Product (SEO & Video)
             </div>
         </div>
 
-        <!-- Recent Store Overview & Reviews -->
+        <!-- Recent Store Overview & Notice -->
         <div class="bg-[#0b132b] border border-slate-800 rounded-2xl p-4 space-y-3 shadow-xl">
             <div class="flex justify-between items-center">
-                <h3 class="font-bold text-sm text-white">Customer Photo Reviews & Store Status</h3>
-                <span class="text-xs text-rose-500 cursor-pointer" onclick="switchVendorTab('reviews')">View Reviews</span>
+                <h3 class="font-bold text-sm text-white">Marketplace & Admin Notices</h3>
+                <span class="text-xs text-rose-500 cursor-pointer" onclick="switchVendorTab('notice')">View Notice</span>
             </div>
             <div class="bg-[#1c2541] border border-slate-700 p-3 rounded-xl text-xs space-y-2">
                 <div class="flex justify-between font-bold">
-                    <span class="text-rose-400">Store Verification Badge:</span>
-                    <span class="text-emerald-400">Active on Home Page</span>
+                    <span class="text-rose-400">System Announcement:</span>
+                    <span class="text-amber-400">Urgent Update</span>
                 </div>
-                <p class="text-slate-300">Latest Customer Review: ⭐ 5.0 - "Amazing quality product with fast delivery!"</p>
+                <p class="text-slate-300">"All multi-vendor stores must ensure automated invoice slips are attached with every Pathao/Steadfast parcel."</p>
             </div>
         </div>
     </main>
@@ -135,8 +139,8 @@
     <!-- Script Engine -->
     <script>
         const vendorBanners = [
-            { tag: "PRO VENDOR ECOSYSTEM", title: "AI Chatbot, Storefront & Flash Sales Live", desc: "Manage automated replies, customer photo reviews, and dedicated multi-vendor storefronts.", bg: "from-indigo-700 via-purple-700 to-rose-700" },
-            { tag: "CUSTOMER ENGAGEMENT", title: "Photo Reviews & Live Chat Support", desc: "Build buyer trust with verified photo testimonials and instant AI support.", bg: "from-emerald-700 via-teal-800 to-blue-900" }
+            { tag: "MULTI-VENDOR ECOSYSTEM", title: "Global Marketplace & Invoicing Live", desc: "Manage multiple vendors, currency settings, automated slips, and admin notices seamlessly.", bg: "from-indigo-700 via-purple-700 to-rose-700" },
+            { tag: "ADMIN BROADCAST", title: "Multi-Currency & Payment Gateway Active", desc: "Configure local bKash/Nagad and international USD settlements instantly.", bg: "from-emerald-700 via-teal-800 to-blue-900" }
         ];
         let currentVBIndex = 0;
         setInterval(() => {
@@ -164,7 +168,59 @@
 
             if(tab === 'dashboard') {
                 title.innerText = "Dashboard & Analytics";
-                body.innerHTML = `<div class="bg-[#1c2541] p-3 rounded-xl space-y-2"><p class="font-bold text-white">Status: Verified Store</p><p class="text-emerald-400">Total Revenue: ৳14,500</p></div>`;
+                body.innerHTML = `<div class="bg-[#1c2541] p-3 rounded-xl space-y-2"><p class="font-bold text-white">Status: Verified Multi-Vendor Store</p><p class="text-emerald-400">Total Revenue: ৳14,500</p></div>`;
+            } else if(tab === 'multivendor') {
+                title.innerText = "Multi-Vendor Marketplace Directory";
+                body.innerHTML = `
+                    <div class="bg-[#1c2541] p-3 rounded-xl space-y-2">
+                        <p class="font-bold text-amber-400">Registered Marketplace Partners:</p>
+                        <div class="bg-[#0b132b] p-2 rounded-lg flex justify-between items-center">
+                            <span>1. Velora Shop (Current)</span>
+                            <span class="text-emerald-400 text-[10px]">Active</span>
+                        </div>
+                        <div class="bg-[#0b132b] p-2 rounded-lg flex justify-between items-center">
+                            <span>2. Dhaka Fashion Hub</span>
+                            <span class="text-emerald-400 text-[10px]">Active</span>
+                        </div>
+                        <div class="bg-[#0b132b] p-2 rounded-lg flex justify-between items-center">
+                            <span>3. Apex Gadgets BD</span>
+                            <span class="text-emerald-400 text-[10px]">Active</span>
+                        </div>
+                    </div>`;
+            } else if(tab === 'gateway') {
+                title.innerText = "Multi-Currency & Payment Gateways";
+                body.innerHTML = `
+                    <div class="bg-[#1c2541] p-3 rounded-xl space-y-3">
+                        <p class="font-bold text-blue-400">Active Currencies:</p>
+                        <label class="flex items-center gap-2"><input type="checkbox" checked class="accent-rose-500"> Bangladeshi Taka (BDT ৳)</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" checked class="accent-rose-500"> US Dollar (USD $)</label>
+                        <p class="font-bold text-amber-400 pt-2">Accepted Gateways:</p>
+                        <label class="flex items-center gap-2"><input type="checkbox" checked class="accent-rose-500"> bKash Merchant / Personal</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" checked class="accent-rose-500"> Nagad Gateway</label>
+                        <label class="flex items-center gap-2"><input type="checkbox" checked class="accent-rose-500"> Cash on Delivery (COD)</label>
+                        <button onclick="alert('Gateway settings updated!'); closeVendorModal();" class="w-full bg-rose-600 text-white font-bold py-2.5 rounded-xl mt-2">Save Settings</button>
+                    </div>`;
+            } else if(tab === 'invoice') {
+                title.innerText = "Automated Invoice & Packing Slip";
+                body.innerHTML = `
+                    <div class="bg-[#1c2541] p-3 rounded-xl space-y-3">
+                        <p class="font-bold text-emerald-400">Order #SN-2518 Ready for Print</p>
+                        <div class="bg-[#0b132b] p-3 rounded-lg text-slate-300 space-y-1 text-xs">
+                            <p><strong>Store:</strong> VELORA SHOP</p>
+                            <p><strong>Customer:</strong> MD Hossain khan</p>
+                            <p><strong>Items:</strong> Product Item (Qty: 1)</p>
+                            <p><strong>Total:</strong> ৳1398</p>
+                        </div>
+                        <button onclick="alert('PDF Invoice generated and downloaded successfully!'); closeVendorModal();" class="w-full bg-emerald-600 text-white font-bold py-2.5 rounded-xl">Download PDF Invoice</button>
+                    </div>`;
+            } else if(tab === 'notice') {
+                title.innerText = "Admin Notice Board";
+                body.innerHTML = `
+                    <div class="bg-[#1c2541] p-3 rounded-xl space-y-2">
+                        <p class="font-bold text-amber-400">📢 Announcement from Velora Admin:</p>
+                        <p class="text-slate-300 text-xs">"All multi-vendor stores must ensure automated invoice slips are attached with every Pathao/Steadfast parcel. Failure to do so may result in temporary store suspension."</p>
+                        <p class="text-[10px] text-slate-500">Published: October 2026</p>
+                    </div>`;
             } else if(tab === 'storefront') {
                 title.innerText = "My Dedicated Storefront Page";
                 body.innerHTML = `
