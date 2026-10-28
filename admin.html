@@ -46,7 +46,11 @@
             </div>
             <div class="space-y-2 text-xs font-bold text-slate-300">
                 <div onclick="switchVendorTab('dashboard')" class="p-2.5 bg-rose-600 text-white rounded-xl cursor-pointer shadow">📌 Dashboard & Analytics</div>
-                <div onclick="switchVendorTab('profile')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">🛡️ Vendor Profile & Verification</div>
+                <div onclick="switchVendorTab('storefront')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">🏪 My Storefront Page</div>
+                <div onclick="switchVendorTab('chatbot')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">🤖 AI Chatbot & Auto-Reply</div>
+                <div onclick="switchVendorTab('flashsale')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">⚡ Flash Sale Management</div>
+                <div onclick="switchVendorTab('reviews')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">⭐ Photo Reviews & Ratings</div>
+                <div onclick="switchVendorTab('profile')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">🛡️ Vendor Verification & Details</div>
                 <div onclick="switchVendorTab('helpline')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">🎧 Vendor Helpline & Live Chat</div>
                 <div onclick="switchVendorTab('wallet')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">💰 Wallet & Payouts</div>
                 <div onclick="switchVendorTab('products')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">📦 Inventory & Stock</div>
@@ -62,9 +66,9 @@
         <!-- Dynamic Promo Banner Slider -->
         <div id="vendorBannerSlider" class="bg-gradient-to-r from-indigo-700 via-purple-700 to-rose-700 border border-slate-700 rounded-2xl p-5 text-white shadow-xl relative overflow-hidden transition-all duration-700">
             <div class="relative z-10 space-y-1">
-                <span id="vBannerTag" class="bg-black/30 text-amber-300 text-[10px] px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">VERIFIED PARTNER</span>
-                <h2 id="vBannerTitle" class="text-lg font-black tracking-wide">SEO Optimized & Direct Helpline Live</h2>
-                <p id="vBannerDesc" class="text-xs text-slate-100">Upload products with custom sizes, SEO hashtags, videos, and connect with buyers instantly.</p>
+                <span id="vBannerTag" class="bg-black/30 text-amber-300 text-[10px] px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">PRO VENDOR ECOSYSTEM</span>
+                <h2 id="vBannerTitle" class="text-lg font-black tracking-wide">AI Chatbot, Storefront & Flash Sales Live</h2>
+                <p id="vBannerDesc" class="text-xs text-slate-100">Manage automated replies, customer photo reviews, and dedicated multi-vendor storefronts.</p>
             </div>
         </div>
 
@@ -73,7 +77,7 @@
             <div class="flex items-center gap-3">
                 <div class="w-12 h-12 bg-rose-600 rounded-xl flex items-center justify-center text-white font-black text-lg shadow">V</div>
                 <div>
-                    <h2 class="font-bold text-sm text-white flex items-center gap-1.5"><span id="shopNameDisplay">VELORA SHOP</span> <span class="text-xs text-emerald-400">✓</span></h2>
+                    <h2 class="font-bold text-sm text-white flex items-center gap-1.5"><span id="shopNameDisplay">VELORA SHOP</span> <span class="text-xs text-emerald-400">✓ Verified</span></h2>
                     <p class="text-[11px] text-slate-400" id="shopEmailDisplay">rona503504@gmail.com</p>
                 </div>
             </div>
@@ -86,35 +90,35 @@
                 <span class="text-amber-400 font-bold text-xs block">AVAILABLE BALANCE</span>
                 <p class="text-xl font-black text-white mt-1">৳12,450</p>
             </div>
-            <div onclick="switchVendorTab('products')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
-                <span class="text-slate-400 font-bold text-xs block">INVENTORY ITEMS</span>
-                <p class="text-xl font-black text-white mt-1" id="statProductsCount">4</p>
+            <div onclick="switchVendorTab('storefront')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
+                <span class="text-rose-400 font-bold text-xs block">STOREFRONT</span>
+                <p class="text-xl font-black text-emerald-400 mt-1">Live 🏪</p>
             </div>
-            <div onclick="switchVendorTab('helpline')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
-                <span class="text-rose-400 font-bold text-xs block">HELPLINE CHAT</span>
-                <p class="text-xl font-black text-emerald-400 mt-1">Active 🎧</p>
+            <div onclick="switchVendorTab('chatbot')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
+                <span class="text-blue-400 font-bold text-xs block">AI CHATBOT</span>
+                <p class="text-xl font-black text-white mt-1">Active 🤖</p>
             </div>
-            <div onclick="switchVendorTab('profile')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
-                <span class="text-amber-300 font-bold text-xs block">ID STATUS</span>
-                <p class="text-xl font-black text-white mt-1">Verified ✓</p>
+            <div onclick="switchVendorTab('flashsale')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
+                <span class="text-amber-300 font-bold text-xs block">FLASH SALE</span>
+                <p class="text-xl font-black text-rose-500 mt-1">Running ⚡</p>
             </div>
             <div onclick="switchVendorTab('addproduct')" class="bg-gradient-to-r from-rose-600 to-amber-600 text-white p-4 rounded-2xl cursor-pointer shadow-lg col-span-2 text-center font-bold text-sm">
                 ➕ Add Advanced Product (SEO & Video)
             </div>
         </div>
 
-        <!-- Recent Orders & Helpline Status -->
+        <!-- Recent Store Overview & Reviews -->
         <div class="bg-[#0b132b] border border-slate-800 rounded-2xl p-4 space-y-3 shadow-xl">
             <div class="flex justify-between items-center">
-                <h3 class="font-bold text-sm text-white">Store Overview & Customer Inquiries</h3>
-                <span class="text-xs text-rose-500 cursor-pointer" onclick="switchVendorTab('helpline')">Helpline Support</span>
+                <h3 class="font-bold text-sm text-white">Customer Photo Reviews & Store Status</h3>
+                <span class="text-xs text-rose-500 cursor-pointer" onclick="switchVendorTab('reviews')">View Reviews</span>
             </div>
             <div class="bg-[#1c2541] border border-slate-700 p-3 rounded-xl text-xs space-y-2">
                 <div class="flex justify-between font-bold">
-                    <span class="text-rose-400">Store Verification:</span>
-                    <span class="text-emerald-400">Approved & Displayed on Home</span>
+                    <span class="text-rose-400">Store Verification Badge:</span>
+                    <span class="text-emerald-400">Active on Home Page</span>
                 </div>
-                <p class="text-slate-300">Helpline WhatsApp / Direct Line: <span class="text-amber-400 font-bold">+8801886759596</span></p>
+                <p class="text-slate-300">Latest Customer Review: ⭐ 5.0 - "Amazing quality product with fast delivery!"</p>
             </div>
         </div>
     </main>
@@ -131,8 +135,8 @@
     <!-- Script Engine -->
     <script>
         const vendorBanners = [
-            { tag: "VERIFIED PARTNER", title: "SEO Optimized & Direct Helpline Live", desc: "Upload products with custom sizes, SEO hashtags, videos, and connect with buyers instantly.", bg: "from-indigo-700 via-purple-700 to-rose-700" },
-            { tag: "HOME DISPLAY", title: "Showcase Your Verified Store Badge", desc: "Your name, phone and Gmail verification will appear on the homepage to boost customer trust.", bg: "from-emerald-700 via-teal-800 to-blue-900" }
+            { tag: "PRO VENDOR ECOSYSTEM", title: "AI Chatbot, Storefront & Flash Sales Live", desc: "Manage automated replies, customer photo reviews, and dedicated multi-vendor storefronts.", bg: "from-indigo-700 via-purple-700 to-rose-700" },
+            { tag: "CUSTOMER ENGAGEMENT", title: "Photo Reviews & Live Chat Support", desc: "Build buyer trust with verified photo testimonials and instant AI support.", bg: "from-emerald-700 via-teal-800 to-blue-900" }
         ];
         let currentVBIndex = 0;
         setInterval(() => {
@@ -161,6 +165,48 @@
             if(tab === 'dashboard') {
                 title.innerText = "Dashboard & Analytics";
                 body.innerHTML = `<div class="bg-[#1c2541] p-3 rounded-xl space-y-2"><p class="font-bold text-white">Status: Verified Store</p><p class="text-emerald-400">Total Revenue: ৳14,500</p></div>`;
+            } else if(tab === 'storefront') {
+                title.innerText = "My Dedicated Storefront Page";
+                body.innerHTML = `
+                    <div class="bg-[#1c2541] p-3 rounded-xl space-y-3">
+                        <p class="font-bold text-amber-400">Storefront URL:</p>
+                        <input type="text" readonly value="https://velora.com/store/velora-shop" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white text-center">
+                        <p class="text-slate-300">All your verified products are displayed here exclusively for your customers.</p>
+                        <button onclick="alert('Storefront link copied to clipboard!'); closeVendorModal();" class="w-full bg-rose-600 text-white font-bold py-2.5 rounded-xl">Copy Store Link</button>
+                    </div>`;
+            } else if(tab === 'chatbot') {
+                title.innerText = "AI Chatbot & Auto-Reply Management";
+                body.innerHTML = `
+                    <div class="bg-[#1c2541] p-3 rounded-xl space-y-3">
+                        <p class="font-bold text-blue-400">Configure Automated Replies:</p>
+                        <label class="text-slate-400 block">Trigger: "Delivery time?"</label>
+                        <input type="text" value="Inside Dhaka 24-48 hours, Outside Dhaka 2-3 days." class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
+                        <label class="text-slate-400 block">Trigger: "bKash number?"</label>
+                        <input type="text" value="Our official merchant bKash: 01886759596" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
+                        <button onclick="alert('AI Chatbot settings saved!'); closeVendorModal();" class="w-full bg-emerald-600 text-white font-bold py-2.5 rounded-xl">Save Chatbot Rules</button>
+                    </div>`;
+            } else if(tab === 'flashsale') {
+                title.innerText = "Flash Sale & Countdown Management";
+                body.innerHTML = `
+                    <div class="bg-[#1c2541] p-3 rounded-xl space-y-3">
+                        <p class="font-bold text-amber-400">Active Flash Sale Campaign:</p>
+                        <input type="text" value="Weekend Special Mega Discount" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
+                        <div class="flex gap-2">
+                            <input type="text" value="Discount: 30% OFF" class="w-1/2 bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
+                            <input type="text" value="Timer: 05:00:00" class="w-1/2 bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
+                        </div>
+                        <button onclick="alert('Flash Sale updated successfully!'); closeVendorModal();" class="w-full bg-rose-600 text-white font-bold py-2.5 rounded-xl">Update Flash Sale</button>
+                    </div>`;
+            } else if(tab === 'reviews') {
+                title.innerText = "Customer Photo Reviews & Ratings";
+                body.innerHTML = `
+                    <div class="bg-[#1c2541] p-3 rounded-xl space-y-3">
+                        <div class="bg-[#0b132b] p-3 rounded-lg space-y-1">
+                            <div class="flex justify-between font-bold"><span class="text-white">Rahim Ahmed</span><span class="text-amber-400">⭐ 5.0</span></div>
+                            <p class="text-slate-300 text-[11px]">"Product quality is extremely premium. Loved the packaging!"</p>
+                            <span class="text-[10px] text-emerald-400">✓ Verified Buyer Photo Attached</span>
+                        </div>
+                    </div>`;
             } else if(tab === 'profile') {
                 title.innerText = "Vendor Verification & Details";
                 body.innerHTML = `
