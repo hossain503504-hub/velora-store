@@ -26,20 +26,17 @@
 </head>
 <body class="bg-slate-950 text-slate-100 pb-24 transition-colors duration-300">
 
-    <!-- Top Header -->
+    <!-- Top Header with Search & Camera/Scan Icon -->
     <header class="sticky top-0 z-40 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 px-4 py-3">
-        <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
-            <h1 class="text-base md:text-xl font-black tracking-widest text-rose-500 uppercase cursor-pointer whitespace-nowrap" onclick="switchTab('home')">VELORA</h1>
-            
-            <div class="flex-1 relative">
-                <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Search products in VELORA..." class="w-full bg-slate-800 border border-slate-700 rounded-full py-2 pl-4 pr-10 text-sm focus:outline-none focus:border-rose-500 text-white">
-                <span class="absolute right-3 top-2.5 text-slate-400">🔍</span>
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-2">
+            <div class="flex-1 relative flex items-center">
+                <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Search in VELORA..." class="w-full bg-slate-800 border border-slate-700 rounded-full py-2 pl-4 pr-16 text-sm focus:outline-none focus:border-rose-500 text-white">
+                <button onclick="alert('Image/Visual Search feature activated!')" class="absolute right-9 text-slate-400 hover:text-rose-500 text-base">📷</button>
+                <span class="absolute right-3 text-slate-400">🔍</span>
             </div>
-
-            <!-- Language Switcher -->
-            <select id="langSwitcher" onchange="switchLanguage(this.value)" class="bg-slate-800 border border-slate-700 text-white text-xs rounded-xl px-2 py-1.5 focus:outline-none">
-                <option value="en">English</option>
-                <option value="bn">বাংলা</option>
+            <select id="langSwitcher" onchange="switchLanguage(this.value)" class="bg-slate-800 border border-slate-700 text-white text-xs rounded-xl px-2 py-2 focus:outline-none">
+                <option value="en">EN</option>
+                <option value="bn">বাং</option>
             </select>
         </div>
     </header>
@@ -48,25 +45,45 @@
     <main class="max-w-7xl mx-auto px-4 py-4">
 
         <!-- 1. HOME TAB -->
-        <div id="tab-home" class="tab-content space-y-6">
-            <div id="bannerSlider" class="bg-gradient-to-r from-slate-900 to-rose-950 border border-slate-800 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden transition-all duration-1000">
+        <div id="tab-home" class="tab-content space-y-4">
+            <!-- Campaign Banner Slider -->
+            <div id="bannerSlider" class="bg-gradient-to-r from-orange-600 to-rose-700 border border-slate-800 rounded-2xl p-5 text-white shadow-lg relative overflow-hidden transition-all duration-1000">
                 <div class="relative z-10 flex justify-between items-center">
                     <div>
-                        <span id="bannerTag" class="bg-rose-500/20 text-rose-400 text-xs px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">FEATURED</span>
-                        <h2 id="bannerTitle" class="text-2xl font-black mt-2">VELORA STORE</h2>
-                        <p id="bannerDesc" class="text-xs text-slate-300 mt-1">Discover premium fashion and luxury lifestyle items.</p>
+                        <span id="bannerTag" class="bg-black/30 text-white text-[10px] px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">BIG SALE</span>
+                        <h2 id="bannerTitle" class="text-xl font-black mt-1">MEGA CAMPAIGN</h2>
+                        <p id="bannerDesc" class="text-[11px] text-slate-100 mt-0.5">Up to 80% OFF + Free Delivery Vouchers.</p>
                     </div>
-                    <div class="bg-slate-900/80 border border-slate-700 p-3 rounded-xl text-center">
-                        <span class="text-[10px] uppercase font-bold text-slate-400 block" data-i18n="flash_offer">Flash Offer</span>
-                        <span id="flashTimer" class="text-sm font-extrabold text-rose-500 tracking-wider">05 : 00 : 00</span>
+                    <div class="bg-black/40 border border-white/20 p-2.5 rounded-xl text-center">
+                        <span class="text-[9px] uppercase font-bold text-slate-200 block">Flash Offer</span>
+                        <span id="flashTimer" class="text-xs font-extrabold text-amber-300 tracking-wider">04 : 59 : 29</span>
                     </div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-3 gap-2 text-center text-xs bg-slate-900 border border-slate-800 p-3 rounded-2xl">
-                <div class="font-bold text-slate-300" data-i18n="safe_pay">🛡️ Safe Payment</div>
-                <div class="font-bold text-slate-300" data-i18n="fast_delivery">⚡ Fast Delivery</div>
-                <div class="font-bold text-slate-300" data-i18n="easy_return">🔄 Easy Return</div>
+            <!-- Trust Badges -->
+            <div class="grid grid-cols-3 gap-2 text-center text-xs bg-slate-900 border border-slate-800 p-2.5 rounded-2xl">
+                <div class="font-bold text-slate-300 text-[11px]" data-i18n="safe_pay">🛡️ Safe Payment</div>
+                <div class="font-bold text-slate-300 text-[11px]" data-i18n="fast_delivery">⚡ Fast Delivery</div>
+                <div class="font-bold text-slate-300 text-[11px]" data-i18n="easy_return">🔄 Free Return</div>
+            </div>
+
+            <!-- Quick Shortcuts Bar (Daraz Style Icons) -->
+            <div class="grid grid-cols-5 gap-2 text-center text-[10px] bg-slate-900 border border-slate-800 p-3 rounded-2xl font-bold text-slate-300">
+                <div onclick="alert('Coins & Rewards')" class="cursor-pointer hover:text-rose-500"><span class="text-xl block">🪙</span>Coins</div>
+                <div onclick="alert('Free Shipping Vouchers')" class="cursor-pointer hover:text-rose-500"><span class="text-xl block">🎟️</span>Vouchers</div>
+                <div onclick="alert('Choice Trending Items')" class="cursor-pointer hover:text-rose-500"><span class="text-xl block">⭐</span>Choice</div>
+                <div onclick="alert('Flash Sale Zone')" class="cursor-pointer hover:text-rose-500"><span class="text-xl block">⚡</span>Flash Sale</div>
+                <div onclick="alert('Top Ranking Products')" class="cursor-pointer hover:text-rose-500"><span class="text-xl block">🔥</span>Ranking</div>
+            </div>
+
+            <!-- Claim Vouchers Section -->
+            <div class="bg-gradient-to-r from-slate-900 to-rose-950 border border-slate-800 rounded-2xl p-3 flex justify-between items-center">
+                <div>
+                    <h4 class="font-bold text-xs text-white">Claim Vouchers to Save More!</h4>
+                    <p class="text-[10px] text-rose-400">9% OFF Max & Free Shipping</p>
+                </div>
+                <button onclick="alert('All Vouchers Collected Successfully!')" class="bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold px-3 py-1.5 rounded-xl shadow">Collect All</button>
             </div>
 
             <!-- Category Filter Tabs -->
@@ -78,10 +95,11 @@
                 <button onclick="filterCategory('Accessories')" id="cat-Accessories" class="cat-btn px-4 py-2 bg-slate-900 border border-slate-800 text-slate-300 font-bold rounded-xl whitespace-nowrap transition">Accessories</button>
             </div>
 
+            <!-- Product Grid -->
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-rose-500 font-extrabold text-base" data-i18n="all_products">⚡ All Products</h3>
-                    <span class="text-xs text-slate-400" data-i18n="trending">Trending</span>
+                    <h3 class="text-rose-500 font-extrabold text-base" data-i18n="all_products">⚡ Daily Shera Deals</h3>
+                    <span class="text-xs text-slate-400" data-i18n="trending">Shop Now | Free Gift</span>
                 </div>
                 <div id="productGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
             </div>
@@ -129,20 +147,20 @@
             </div>
         </div>
 
-        <!-- 4. ACCOUNT TAB -->
+        <!-- 4. ACCOUNT TAB (Daraz Style Pro Profile) -->
         <div id="tab-account" class="tab-content hidden space-y-4">
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex items-center justify-between">
                 <div class="flex items-center gap-3">
                     <div class="w-14 h-14 bg-rose-500/20 text-rose-500 rounded-full flex items-center justify-center text-2xl font-bold">👤</div>
                     <div>
-                        <h2 class="font-bold text-lg" id="displayUserName">Guest Customer</h2>
-                        <p class="text-xs text-slate-400" id="displayUserEmail">No email added</p>
+                        <h2 class="font-bold text-lg" id="displayUserName">MD Hossain Khan</h2>
+                        <p class="text-xs text-slate-400" id="displayUserEmail">0 Wishlist · 0 Vouchers</p>
                     </div>
                 </div>
                 <button onclick="openSettingsModal()" class="bg-slate-800 hover:bg-slate-700 p-2.5 rounded-full text-base">⚙️</button>
             </div>
 
-            <!-- New Account Options Grid -->
+            <!-- Account Options Grid -->
             <div class="grid grid-cols-2 gap-3 text-xs">
                 <div onclick="openWishlistModal()" class="bg-slate-900 border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition flex items-center gap-3">
                     <span class="text-2xl">❤️</span>
@@ -150,11 +168,11 @@
                 </div>
                 <div onclick="openAddressModal()" class="bg-slate-900 border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition flex items-center gap-3">
                     <span class="text-2xl">📍</span>
-                    <div><h4 class="font-bold text-white">Addresses</h4><p class="text-[10px] text-slate-400">Saved delivery locations</p></div>
+                    <div><h4 class="font-bold text-white">Addresses</h4><p class="text-[10px] text-slate-400">Saved locations</p></div>
                 </div>
                 <div onclick="openVouchersModal()" class="bg-slate-900 border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition flex items-center gap-3">
                     <span class="text-2xl">🎟️</span>
-                    <div><h4 class="font-bold text-white">Vouchers</h4><p class="text-[10px] text-slate-400">Coupons & Discounts</p></div>
+                    <div><h4 class="font-bold text-white">Vouchers</h4><p class="text-[10px] text-slate-400">Coupons wallet</p></div>
                 </div>
                 <div onclick="openReferralModal()" class="bg-slate-900 border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition flex items-center gap-3">
                     <span class="text-2xl">🎁</span>
@@ -162,7 +180,7 @@
                 </div>
             </div>
 
-            <!-- Visual Order Tracking Timeline Section -->
+            <!-- Visual Order Tracking -->
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3">
                 <h3 class="font-bold text-sm">Visual Order Tracking</h3>
                 <div class="flex gap-2">
@@ -172,8 +190,12 @@
                 <div id="trackResultVisual" class="hidden space-y-3 pt-2"></div>
             </div>
 
+            <!-- My Orders Status Bar -->
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
-                <h3 class="font-bold text-sm mb-4">My Orders</h3>
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="font-bold text-sm">My Orders</h3>
+                    <span class="text-xs text-rose-500 cursor-pointer" onclick="openOrderStatus('All')">View All Orders ></span>
+                </div>
                 <div class="grid grid-cols-5 gap-2 text-center text-[11px] text-slate-400 cursor-pointer">
                     <div onclick="openOrderStatus('To Pay')" class="hover:text-rose-400 transition"><span class="text-lg block">💳</span><p>To Pay</p></div>
                     <div onclick="openOrderStatus('To Ship')" class="hover:text-rose-400 transition"><span class="text-lg block">📦</span><p>To Ship</p></div>
@@ -198,7 +220,7 @@
         </div>
     </div>
 
-    <!-- Extra Account Modals (Wishlist, Address, Vouchers, Referral) -->
+    <!-- Extra Account Modals -->
     <div id="extraModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl p-6 relative space-y-4 max-h-[90vh] overflow-y-auto">
             <button onclick="closeExtraModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
@@ -291,10 +313,6 @@
                         <label class="text-slate-400 block mb-1">Phone Number</label>
                         <input type="tel" id="settingsPhone" placeholder="Enter phone" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
                     </div>
-                    <div>
-                        <label class="text-slate-400 block mb-1">Password</label>
-                        <input type="password" id="settingsPass" placeholder="••••••••" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
-                    </div>
                 </div>
 
                 <div class="space-y-2 pt-2 border-t border-slate-800">
@@ -336,8 +354,8 @@
     <!-- Script Logic -->
     <script>
         const translations = {
-            en: { flash_offer: "Flash Offer", safe_pay: "🛡️ Safe Payment", fast_delivery: "⚡ Fast Delivery", easy_return: "🔄 Easy Return", all_products: "⚡ All Products", trending: "Trending", nav_home: "Home", nav_messages: "Messages", nav_cart: "Cart", nav_account: "Account" },
-            bn: { flash_offer: "ফ্ল্যাশ অফার", safe_pay: "🛡️ নিরাপদ পেমেন্ট", fast_delivery: "⚡ দ্রুত ডেলিভারি", easy_return: "🔄 সহজ রিটার্ন", all_products: "⚡ সকল প্রডাক্ট", trending: "ট্রেন্ডিং", nav_home: "হোম", nav_messages: "মেসেজ", nav_cart: "কার্ট", nav_account: "অ্যাকাউন্ট" }
+            en: { flash_offer: "Flash Offer", safe_pay: "🛡️ Safe Payment", fast_delivery: "⚡ Fast Delivery", easy_return: "🔄 Free Return", all_products: "⚡ Daily Shera Deals", trending: "Shop Now", nav_home: "Home", nav_messages: "Messages", nav_cart: "Cart", nav_account: "Account" },
+            bn: { flash_offer: "ফ্ল্যাশ অফার", safe_pay: "🛡️ নিরাপদ পেমেন্ট", fast_delivery: "⚡ দ্রুত ডেলিভারি", easy_return: "🔄 ফ্রি রিটার্ন", all_products: "⚡ সেরা ডিলসমূহ", trending: "শপ নাও", nav_home: "হোম", nav_messages: "মেসেজ", nav_cart: "কার্ট", nav_account: "অ্যাকাউন্ট" }
         };
 
         function switchLanguage(lang) {
@@ -652,7 +670,6 @@
         function loadCustomerData() {
             if(localStorage.getItem('cust_name')) {
                 document.getElementById('displayUserName').innerText = localStorage.getItem('cust_name');
-                document.getElementById('displayUserEmail').innerText = localStorage.getItem('cust_email') || 'No email added';
             }
             const savedLang = localStorage.getItem('velora_lang') || 'en';
             document.getElementById('langSwitcher').value = savedLang;
