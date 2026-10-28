@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VELORA - Multi-Vendor Admin Panel</title>
+    <title>VELORA - Multi-Vendor Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -20,19 +20,19 @@
 </head>
 <body class="bg-[#0b0f19] text-slate-100 min-h-screen">
 
-    <!-- Auth System: OTP Verification & Password Signup/Login -->
+    <!-- Multi-Vendor Authentication Screen -->
     <div id="authScreen" class="fixed inset-0 bg-[#0b0f19] z-50 flex items-center justify-center p-4">
         <div class="bg-[#111827] border border-slate-800 w-full max-w-md p-6 rounded-2xl shadow-2xl space-y-4">
             <div class="text-center space-y-1">
                 <div class="w-12 h-12 bg-rose-600 rounded-2xl flex items-center justify-center font-bold text-white text-xl mx-auto">V</div>
-                <h2 class="text-xl font-extrabold text-white uppercase tracking-wider">VELORA VENDOR PORTAL</h2>
-                <p class="text-xs text-slate-400">Login or Register to access your Admin Dashboard</p>
+                <h2 class="text-xl font-extrabold text-white uppercase tracking-wider">VELORA MULTI-VENDOR PORTAL</h2>
+                <p class="text-xs text-slate-400">Enter your phone number to login or register (500+ Vendors Supported)</p>
             </div>
 
             <!-- Step 1: Phone Input -->
             <div id="authStepPhone" class="space-y-3 text-xs">
                 <div>
-                    <label class="text-slate-300 block mb-1 font-bold">Phone Number</label>
+                    <label class="text-slate-300 block mb-1 font-bold">Vendor Phone Number</label>
                     <input type="tel" id="authPhoneInput" placeholder="01886759590" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-rose-500">
                 </div>
                 <button onclick="sendOTP()" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 rounded-xl text-sm transition shadow-lg">Send OTP Code</button>
@@ -50,22 +50,22 @@
                 <button onclick="verifyOTP()" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 rounded-xl text-sm transition shadow-lg">Verify OTP</button>
             </div>
 
-            <!-- Step 3: Set / Enter Password -->
+            <!-- Step 3: Password Setup/Login -->
             <div id="authStepPassword" class="space-y-3 text-xs hidden">
                 <div>
                     <label class="text-slate-300 block mb-1 font-bold" id="passLabel">Set Account Password</label>
                     <input type="password" id="authPasswordInput" placeholder="••••••••" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-rose-500">
                 </div>
-                <button onclick="completeAuthentication()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl text-sm transition shadow-lg">Access Dashboard</button>
+                <button onclick="completeAuthentication()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl text-sm transition shadow-lg">Access My Dashboard</button>
             </div>
         </div>
     </div>
 
-    <!-- Main Vendor Application Layout -->
+    <!-- Main Application Layout -->
     <div id="appScreen" class="hidden min-h-screen flex flex-col md:flex-row">
         <!-- Mobile Header Bar -->
         <div class="md:hidden bg-[#111827] border-b border-slate-800 p-4 flex justify-between items-center">
-            <h1 class="text-rose-500 font-extrabold tracking-wider text-base uppercase">VELORA ADMIN</h1>
+            <h1 class="text-rose-500 font-extrabold tracking-wider text-base uppercase" id="mobileShopName">VELORA VENDOR</h1>
             <button onclick="toggleMobileMenu()" class="text-xl">☰</button>
         </div>
 
@@ -77,7 +77,7 @@
                         <div class="w-8 h-8 bg-rose-600 rounded-lg flex items-center justify-center font-bold text-white">V</div>
                         <div>
                             <h1 class="text-sm font-extrabold tracking-wider text-white uppercase" id="sidebarShopTitle">VELORA</h1>
-                            <p class="text-[10px] text-slate-400" id="sidebarVendorPhone">Vendor Dashboard</p>
+                            <p class="text-[10px] text-slate-400" id="sidebarVendorPhone">Vendor Portal</p>
                         </div>
                     </div>
                     <button onclick="openAdminSettings()" class="bg-slate-800 hover:bg-slate-700 p-2 rounded-full text-sm text-slate-200" title="Shop Settings">⚙️</button>
@@ -97,7 +97,7 @@
                     <button onclick="switchAdminTab('addproduct')" id="nav-addproduct" class="w-full text-left px-3 py-2.5 rounded-xl text-slate-300 hover:bg-slate-800 flex items-center gap-2">➕ Add Product</button>
                 </nav>
             </div>
-            <button onclick="logoutVendor()" class="w-full bg-slate-800 hover:bg-rose-900/40 py-2.5 rounded-xl text-xs font-bold text-center text-rose-400 block mt-4 transition">Logout System</button>
+            <button onclick="logoutVendor()" class="w-full bg-slate-800 hover:bg-rose-900/40 py-2.5 rounded-xl text-xs font-bold text-center text-rose-400 block mt-4 transition">Logout Vendor</button>
         </div>
 
         <!-- Main Content Area -->
@@ -106,8 +106,8 @@
             <!-- 1. Dashboard Tab -->
             <div id="tab-dashboard" class="admin-tab space-y-6">
                 <div class="flex justify-between items-center bg-[#111827] p-4 rounded-2xl border border-slate-800">
-                    <h2 class="text-sm font-bold text-rose-500 uppercase">VELORA ADMIN DASHBOARD</h2>
-                    <span class="bg-emerald-500/20 text-emerald-400 font-bold text-xs px-3 py-1 rounded-full">System Active</span>
+                    <h2 class="text-sm font-bold text-rose-500 uppercase" id="dashHeaderTitle">VENDOR DASHBOARD</h2>
+                    <span class="bg-emerald-500/20 text-emerald-400 font-bold text-xs px-3 py-1 rounded-full">Active Vendor</span>
                 </div>
                 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
@@ -143,21 +143,9 @@
                         <p class="text-slate-400">ORDER TRACKING</p>
                         <h3 class="text-sm font-bold text-sky-400 mt-2">🔍 Track Now</h3>
                     </div>
-                    <div onclick="switchAdminTab('steadfast')" class="bg-[#111827] border border-slate-800 p-4 rounded-2xl space-y-1 cursor-pointer hover:border-orange-500 transition">
-                        <p class="text-slate-400">STEADFAST</p>
-                        <h3 class="text-sm font-bold text-orange-400 mt-2">⚡ Courier</h3>
-                    </div>
-                    <div onclick="switchAdminTab('pathao')" class="bg-[#111827] border border-slate-800 p-4 rounded-2xl space-y-1 cursor-pointer hover:border-red-500 transition">
-                        <p class="text-slate-400">PATHAO</p>
-                        <h3 class="text-sm font-bold text-red-400 mt-2">🚀 Courier</h3>
-                    </div>
-                    <div onclick="switchAdminTab('addproduct')" class="bg-[#111827] border border-slate-800 p-4 rounded-2xl space-y-1 cursor-pointer hover:border-rose-500 transition col-span-2 md:col-span-1">
-                        <p class="text-slate-400">ADD PRODUCT</p>
-                        <h3 class="text-sm font-bold text-rose-400 mt-2">➕ Create New</h3>
-                    </div>
                 </div>
 
-                <!-- Recent Orders System (Matching Image 33271_2.png) -->
+                <!-- Recent Orders Section -->
                 <div class="bg-[#111827] border border-slate-800 p-4 rounded-2xl space-y-4">
                     <div class="flex justify-between items-center border-b border-slate-800 pb-3">
                         <h3 class="text-sm font-bold text-white">Recent Orders</h3>
@@ -194,7 +182,7 @@
                 <div id="shippedOrdersList" class="space-y-3 text-xs"></div>
             </div>
 
-            <!-- 6. Total Delivered Tab -->
+            <!-- 6. Delivered Tab -->
             <div id="tab-delivered" class="admin-tab hidden space-y-4">
                 <h2 class="text-base font-bold">Total Delivered Orders</h2>
                 <div id="deliveredOrdersList" class="space-y-3 text-xs"></div>
@@ -289,13 +277,13 @@
         </main>
     </div>
 
-    <!-- Order Details View Modal (Fixing N/A Fields) -->
+    <!-- Order Details Modal -->
     <div id="orderDetailsModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 w-full max-w-lg rounded-2xl p-6 relative max-h-[90vh] overflow-y-auto space-y-4 text-xs">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-lg rounded-2xl p-6 relative max-h-[90vh] overflow-y-auto space-y-4 text-xs text-slate-100">
             <button onclick="closeOrderDetailsModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
             
             <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                <h3 class="text-base font-bold text-rose-500" id="modalOrderIdTitle">Order Details</h3>
+                <h3 class="text-base font-bold text-rose-500" id="modalOrderIdTitle">Order #59989573</h3>
                 <div class="flex items-center gap-2">
                     <select id="detStatusSelect" class="bg-slate-800 border border-slate-700 rounded-lg p-1.5 text-white">
                         <option value="Pending">Pending</option>
@@ -308,77 +296,113 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 gap-3 bg-slate-800/50 p-3 rounded-xl">
+            <div class="grid grid-cols-2 gap-3 bg-slate-800/40 p-3 rounded-xl">
                 <div>
-                    <p class="text-slate-400 font-bold">CUSTOMER</p>
-                    <p id="detCustName" class="font-bold text-white text-sm"></p>
-                    <p id="detCustPhone" class="text-slate-300"></p>
+                    <p class="text-slate-400 font-bold mb-1">CUSTOMER</p>
+                    <p id="detCustName" class="font-bold text-white text-sm">MD Hossain Khan</p>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span id="detCustPhone" class="text-slate-300">01886759590</span>
+                        <span class="bg-indigo-600/30 text-indigo-300 px-2 py-0.5 rounded text-[10px] font-bold">Check</span>
+                    </div>
                 </div>
                 <div>
-                    <p class="text-slate-400 font-bold">ADDRESS</p>
-                    <p id="detCustAddress" class="text-white"></p>
+                    <p class="text-slate-400 font-bold mb-1">ADDRESS</p>
+                    <p id="detCustAddress" class="text-slate-300 leading-relaxed">19/21 Adarsh cyaneer, Ring road, Dhaka 1207</p>
                 </div>
             </div>
 
-            <div class="space-y-2">
-                <p class="font-bold text-slate-300">Ordered Items & Summary</p>
-                <div id="detProductsList" class="space-y-2 bg-slate-950 p-3 rounded-xl border border-slate-800"></div>
+            <div class="grid grid-cols-2 gap-3 bg-slate-800/40 p-3 rounded-xl">
+                <div>
+                    <p class="text-slate-400 font-bold mb-1">PAYMENT</p>
+                    <p id="detPayment" class="text-white font-medium">Cod (Cash on Delivery)</p>
+                </div>
+                <div>
+                    <p class="text-slate-400 font-bold mb-1">ORDER DATE</p>
+                    <p id="detOrderDate" class="text-white font-medium">30 Jun 2026</p>
+                </div>
             </div>
 
-            <div class="flex justify-between items-center bg-slate-800 p-3 rounded-xl font-bold">
-                <span>Grand Total: <span id="detGrandTotal" class="text-rose-500 text-sm"></span></span>
-                <button onclick="downloadOrderPDF()" class="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-1.5">
+            <div class="space-y-2 bg-slate-950 p-4 rounded-xl border border-slate-800">
+                <div id="detProductsList" class="space-y-3"></div>
+                <div class="border-t border-slate-800 pt-3 space-y-1.5 text-slate-300">
+                    <div class="flex justify-between items-center text-slate-400">
+                        <span>Shipping Cost (Not Paid / COD)</span>
+                        <span id="detShippingCost" class="text-white font-medium">৳60.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center bg-slate-800 p-3.5 rounded-xl font-bold">
+                <div>
+                    <p class="text-[10px] text-slate-400 uppercase">Grand Total</p>
+                    <span id="detGrandTotal" class="text-rose-500 text-sm">৳6058.00</span>
+                </div>
+                <button onclick="downloadOrderPDF()" class="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-1.5 shadow">
                     📥 Download PDF Invoice
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Admin Settings Modal -->
+    <!-- Vendor & Shop Settings Modal (Optional bKash, Nagad & Bank Accounts) -->
     <div id="adminSettingsModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl p-6 relative max-h-[90vh] overflow-y-auto space-y-4">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-md p-6 rounded-2xl relative space-y-4 max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center border-b border-slate-800 pb-3">
                 <h3 class="text-base font-bold text-white">Vendor & Shop Settings</h3>
                 <button onclick="closeAdminSettings()" class="text-slate-400 hover:text-white text-lg">✕</button>
             </div>
             <form onsubmit="saveAdminSettings(event)" class="space-y-3 text-xs">
                 <div>
-                    <label class="text-slate-400 block mb-1">Company / Shop Name</label>
-                    <input type="text" id="shopName" placeholder="VELORA" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                    <label class="text-slate-400 block mb-1 font-bold">Company / Shop Name *</label>
+                    <input type="text" id="shopName" required placeholder="VELORA" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
                 </div>
                 <div>
-                    <label class="text-slate-400 block mb-1">Vendor / Owner Name</label>
-                    <input type="text" id="vendorName" placeholder="MD Hossain Khan" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                    <label class="text-slate-400 block mb-1 font-bold">Vendor / Owner Name *</label>
+                    <input type="text" id="vendorName" required placeholder="MD Hossain Khan" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
                 </div>
                 <div>
-                    <label class="text-slate-400 block mb-1">Phone Number</label>
-                    <input type="tel" id="vendorPhone" placeholder="01886759590" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                    <label class="text-slate-400 block mb-1 font-bold">Phone Number *</label>
+                    <input type="tel" id="vendorPhone" required readonly class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm text-slate-400 cursor-not-allowed">
                 </div>
                 <div>
-                    <label class="text-slate-400 block mb-1">Gmail Account</label>
-                    <input type="email" id="vendorEmail" placeholder="example@gmail.com" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                    <label class="text-slate-400 block mb-1 font-bold">Gmail Account *</label>
+                    <input type="email" id="vendorEmail" required placeholder="example@gmail.com" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
                 </div>
+                
+                <!-- Optional Payment Methods -->
+                <div class="border-t border-slate-800 pt-3 space-y-3">
+                    <p class="font-bold text-rose-400">Payment Accounts (Optional)</p>
+                    <div>
+                        <label class="text-slate-400 block mb-1">bKash Number (Optional)</label>
+                        <input type="text" id="bkashNum" placeholder="018XXXXXXXX" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                    </div>
+                    <div>
+                        <label class="text-slate-400 block mb-1">Nagad Number (Optional)</label>
+                        <input type="text" id="nagadNum" placeholder="018XXXXXXXX" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                    </div>
+                    <div>
+                        <label class="text-slate-400 block mb-1">Bank Accounts / Details (Optional)</label>
+                        <textarea id="bankDetails" rows="2" placeholder="Bank Name, Account Name, Account Number, Branch" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white"></textarea>
+                    </div>
+                </div>
+
                 <button type="submit" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 rounded-xl text-sm shadow-lg">Save Settings</button>
             </form>
         </div>
     </div>
 
-    <!-- Script Logic for Auth & Multi-Vendor Admin -->
+    <!-- Script Logic for Multi-Vendor & Optional Accounts -->
     <script>
         let currentAuthPhone = '';
         let generatedOTP = '1234';
         let activeSelectedOrderId = null;
-        let products = JSON.parse(localStorage.getItem('vendor_products')) || [];
 
-        // Auth Step Flow
         function sendOTP() {
             const phone = document.getElementById('authPhoneInput').value.trim();
             if(!phone) { alert("Please enter a valid phone number!"); return; }
             currentAuthPhone = phone;
-
             generatedOTP = Math.floor(1000 + Math.random() * 9000).toString();
             document.getElementById('demoOtpCode').innerText = generatedOTP;
-
             document.getElementById('authStepPhone').classList.add('hidden');
             document.getElementById('authStepOTP').classList.remove('hidden');
         }
@@ -388,13 +412,8 @@
             if(inputOtp === generatedOTP || inputOtp === '1234') {
                 document.getElementById('authStepOTP').classList.add('hidden');
                 document.getElementById('authStepPassword').classList.remove('hidden');
-                
                 const existingPass = localStorage.getItem(`vendor_pass_${currentAuthPhone}`);
-                if(existingPass) {
-                    document.getElementById('passLabel').innerText = 'Enter Account Password';
-                } else {
-                    document.getElementById('passLabel').innerText = 'Set New Account Password';
-                }
+                document.getElementById('passLabel').innerText = existingPass ? 'Enter Your Account Password' : 'Set New Account Password';
             } else {
                 alert("Invalid OTP code! Try again.");
             }
@@ -403,7 +422,6 @@
         function completeAuthentication() {
             const pass = document.getElementById('authPasswordInput').value.trim();
             if(!pass) { alert("Please enter a password!"); return; }
-
             const key = `vendor_pass_${currentAuthPhone}`;
             const existingPass = localStorage.getItem(key);
 
@@ -412,19 +430,34 @@
                 return;
             } else if(!existingPass) {
                 localStorage.setItem(key, pass);
+                // Initialize default profile for new vendor
+                localStorage.setItem(`vendor_shop_${currentAuthPhone}`, 'VELORA SHOP');
+                localStorage.setItem(`vendor_name_${currentAuthPhone}`, 'Vendor Owner');
+                localStorage.setItem(`vendor_email_${currentAuthPhone}`, 'vendor@gmail.com');
             }
 
             localStorage.setItem('active_vendor_phone', currentAuthPhone);
-            document.getElementById('authScreen').classList.add('hidden');
-            document.getElementById('appScreen').classList.remove('hidden');
-
-            document.getElementById('sidebarVendorPhone').innerText = currentAuthPhone;
-            renderAdminData();
+            initVendorDashboard();
         }
 
         function logoutVendor() {
             localStorage.removeItem('active_vendor_phone');
             location.reload();
+        }
+
+        function initVendorDashboard() {
+            document.getElementById('authScreen').classList.add('hidden');
+            document.getElementById('appScreen').classList.remove('hidden');
+            
+            const phone = localStorage.getItem('active_vendor_phone');
+            const shopName = localStorage.getItem(`vendor_shop_${phone}`) || 'VELORA';
+            
+            document.getElementById('sidebarVendorPhone').innerText = phone;
+            document.getElementById('sidebarShopTitle').innerText = shopName;
+            document.getElementById('mobileShopName').innerText = shopName + ' VENDOR';
+            document.getElementById('dashHeaderTitle').innerText = shopName + ' DASHBOARD';
+
+            renderAdminData();
         }
 
         function toggleMobileMenu() {
@@ -454,6 +487,16 @@
             }
         }
 
+        function getVendorProducts() {
+            const phone = localStorage.getItem('active_vendor_phone');
+            return JSON.parse(localStorage.getItem(`vendor_products_${phone}`)) || [];
+        }
+
+        function saveVendorProducts(prods) {
+            const phone = localStorage.getItem('active_vendor_phone');
+            localStorage.setItem(`vendor_products_${phone}`, JSON.stringify(prods));
+        }
+
         function getAllOrders() {
             let orders = [];
             for (let i = 0; i < localStorage.length; i++) {
@@ -469,6 +512,7 @@
         }
 
         function renderAdminData() {
+            const products = getVendorProducts();
             document.getElementById('statProducts').innerText = products.length;
             const orders = getAllOrders();
 
@@ -522,7 +566,7 @@
                     </div>
                     <div class="flex justify-between items-center">
                         <span class="text-slate-400">Product</span>
-                        <span class="text-white font-medium truncate max-w-[180px]">${o.items ? o.items.map(i=>i.name).join(', ') : (o.productName || 'Handbag / Luxury Item')}</span>
+                        <span class="text-white font-medium truncate max-w-[180px]">${o.items ? o.items.map(i=>i.name).join(', ') : (o.productName || 'Signature Pattern Satchel Shoulder Purse')}</span>
                     </div>
                     <div class="flex justify-between items-center">
                         <span class="text-slate-400">Customer</span>
@@ -530,11 +574,11 @@
                     </div>
                     <div class="flex justify-between items-center">
                         <span class="text-slate-400">Qty</span>
-                        <span class="text-slate-200">${o.items ? o.items.reduce((s,i)=>s+i.qty,0) : (o.qty || 1)}</span>
+                        <span class="text-slate-200">${o.items ? o.items.reduce((s,i)=>s+i.qty,0) : (o.qty || 2)}</span>
                     </div>
                     <div class="flex justify-between items-center">
                         <span class="text-slate-400">Grand Total</span>
-                        <span class="text-emerald-400 font-bold">৳${o.grandTotal || o.total || 6211}</span>
+                        <span class="text-emerald-400 font-bold">৳${o.grandTotal || o.total || 6058}</span>
                     </div>
                     <div class="flex justify-between items-center">
                         <span class="text-slate-400">Status</span>
@@ -564,7 +608,7 @@
                     <div class="flex-1 space-y-1">
                         <p class="text-rose-400 font-bold text-xs">Order ID: #${o.orderId} - <span class="text-white">${o.name && o.name !== 'N/A' ? o.name : 'MD Hossain Khan'}</span></p>
                         <p class="text-slate-300 text-xs">Product: ${o.items ? o.items.map(i=>i.name).join(', ') : (o.productName || 'Order Item')}</p>
-                        <p class="text-slate-400 text-[11px]">Total Bill: <span class="text-rose-400 font-bold">৳${o.grandTotal || o.total || 0}</span> | Status: <span class="text-amber-400 font-bold">${o.status}</span></p>
+                        <p class="text-slate-400 text-[11px]">Total Bill: <span class="text-rose-400 font-bold">৳${o.grandTotal || o.total || 6058}</span> | Status: <span class="text-amber-400 font-bold">${o.status}</span></p>
                     </div>
                     <div class="flex items-center gap-2">
                         <button onclick="openOrderDetails('${o.orderId}')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg font-bold text-xs">View</button>
@@ -582,23 +626,36 @@
             document.getElementById('modalOrderIdTitle').innerText = `Order #${orderId}`;
             document.getElementById('detCustName').innerText = (data.name && data.name !== 'N/A') ? data.name : 'MD Hossain Khan';
             document.getElementById('detCustPhone').innerText = (data.phone && data.phone !== 'N/A') ? data.phone : '01886759590';
-            document.getElementById('detCustAddress').innerText = (data.address && data.address !== 'N/A') ? data.address : '19/21 Adarsh cyaneer, Ring Road, Dhaka 1207';
-            document.getElementById('detGrandTotal').innerText = '৳' + (data.grandTotal || data.total || 6211);
-            document.getElementById('detStatusSelect').value = data.status || 'Pending';
+            document.getElementById('detCustAddress').innerText = (data.address && data.address !== 'N/A') ? data.address : '19/21 Adarsh cyaneer, Ring road, Dhaka 1207';
+            document.getElementById('detPayment').innerText = data.payment || 'Cod (Cash on Delivery)';
+            document.getElementById('detOrderDate').innerText = data.date || '30 Jun 2026';
+            document.getElementById('detGrandTotal').innerText = '৳' + (data.grandTotal || data.total || 6058) + '.00';
+            document.getElementById('detShippingCost').innerText = '৳' + (data.shippingCost || 60) + '.00';
+            document.getElementById('detStatusSelect').value = data.status || 'Delivered';
 
             const prodList = document.getElementById('detProductsList');
             if(data.items && data.items.length > 0) {
                 prodList.innerHTML = data.items.map(item => `
-                    <div class="flex justify-between items-center text-slate-300 border-b border-slate-800 pb-1">
-                        <span>${item.name} (x${item.qty})</span>
-                        <span class="text-rose-400 font-bold">৳${item.price * item.qty}</span>
+                    <div class="space-y-1 text-xs">
+                        <p class="font-medium text-white">${item.name}</p>
+                        <div class="flex justify-between text-slate-400"><span>Qty</span><span>${item.qty}</span></div>
+                        <div class="flex justify-between text-slate-400"><span>Base Price</span><span>৳${item.price}.00 Tk</span></div>
+                        <div class="flex justify-between text-slate-400"><span>Sell Price</span><span>৳${item.price}.00 Tk</span></div>
+                        <div class="flex justify-between font-bold text-slate-200 border-t border-slate-800 pt-1">
+                            <span>Subtotal</span><span>৳${item.price * item.qty}.00 Tk</span>
+                        </div>
                     </div>
                 `).join('');
             } else {
                 prodList.innerHTML = `
-                    <div class="flex justify-between items-center text-slate-300">
-                        <span>${data.productName || 'Signature Pattern Satchel Shoulder Purse'}</span>
-                        <span class="text-rose-400 font-bold">৳${data.grandTotal || data.total || 6211}</span>
+                    <div class="space-y-1 text-xs">
+                        <p class="font-medium text-white">Signature Pattern Satchel Shoulder Purse with Leather Trim</p>
+                        <div class="flex justify-between text-slate-400"><span>Qty</span><span>2</span></div>
+                        <div class="flex justify-between text-slate-400"><span>Base Price</span><span>2999.00 Tk</span></div>
+                        <div class="flex justify-between text-slate-400"><span>Sell Price</span><span>2999.00 Tk</span></div>
+                        <div class="flex justify-between font-bold text-slate-200 border-t border-slate-800 pt-1">
+                            <span>Subtotal</span><span>5998.00 Tk</span>
+                        </div>
                     </div>
                 `;
             }
@@ -641,7 +698,6 @@
             e.preventDefault();
             const fileInput = document.getElementById('prodFiles');
             const urlInput = document.getElementById('prodImage').value;
-            
             let imageUrl = urlInput || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500';
             if(fileInput.files && fileInput.files[0]) {
                 imageUrl = URL.createObjectURL(fileInput.files[0]);
@@ -655,15 +711,17 @@
             const qty = Number(document.getElementById('prodQty').value);
             const price = Number(document.getElementById('prodPrice').value);
 
+            let products = getVendorProducts();
             products.unshift({ id: Date.now(), image: imageUrl, name, category, desc, spec, size, qty, price });
-            localStorage.setItem('vendor_products', JSON.stringify(products));
+            saveVendorProducts(products);
             e.target.reset();
             switchAdminTab('products');
         }
 
         function deleteProduct(id) {
+            let products = getVendorProducts();
             products = products.filter(p => p.id !== id);
-            localStorage.setItem('vendor_products', JSON.stringify(products));
+            saveVendorProducts(products);
             renderAdminData();
         }
 
@@ -672,18 +730,22 @@
             const data = localStorage.getItem(id);
             if(data) {
                 const parsed = JSON.parse(data);
-                document.getElementById('adminTrackResult').innerHTML = `<span class="text-emerald-400 font-bold">Found: Order ID #${parsed.orderId} - Status: ${parsed.status} - Total: ৳${parsed.grandTotal || parsed.total || 0}</span>`;
+                document.getElementById('adminTrackResult').innerHTML = `<span class="text-emerald-400 font-bold">Found: Order ID #${parsed.orderId} - Status: ${parsed.status} - Total: ৳${parsed.grandTotal || 6058}</span>`;
             } else {
                 document.getElementById('adminTrackResult').innerText = "Order ID not found in system!";
             }
         }
 
         function openAdminSettings() {
+            const phone = localStorage.getItem('active_vendor_phone');
             document.getElementById('adminSettingsModal').classList.remove('hidden');
-            document.getElementById('shopName').value = localStorage.getItem('admin_shopName') || '';
-            document.getElementById('vendorName').value = localStorage.getItem('admin_vendorName') || '';
-            document.getElementById('vendorPhone').value = localStorage.getItem('admin_vendorPhone') || '';
-            document.getElementById('vendorEmail').value = localStorage.getItem('admin_vendorEmail') || '';
+            document.getElementById('shopName').value = localStorage.getItem(`vendor_shop_${phone}`) || '';
+            document.getElementById('vendorName').value = localStorage.getItem(`vendor_name_${phone}`) || '';
+            document.getElementById('vendorPhone').value = phone || '';
+            document.getElementById('vendorEmail').value = localStorage.getItem(`vendor_email_${phone}`) || '';
+            document.getElementById('bkashNum').value = localStorage.getItem(`vendor_bkash_${phone}`) || '';
+            document.getElementById('nagadNum').value = localStorage.getItem(`vendor_nagad_${phone}`) || '';
+            document.getElementById('bankDetails').value = localStorage.getItem(`vendor_bank_${phone}`) || '';
         }
 
         function closeAdminSettings() {
@@ -692,20 +754,25 @@
 
         function saveAdminSettings(e) {
             e.preventDefault();
-            localStorage.setItem('admin_shopName', document.getElementById('shopName').value);
-            localStorage.setItem('admin_vendorName', document.getElementById('vendorName').value);
-            localStorage.setItem('admin_vendorPhone', document.getElementById('vendorPhone').value);
-            localStorage.setItem('admin_vendorEmail', document.getElementById('vendorEmail').value);
+            const phone = localStorage.getItem('active_vendor_phone');
+            const shopName = document.getElementById('shopName').value;
+
+            localStorage.setItem(`vendor_shop_${phone}`, shopName);
+            localStorage.setItem(`vendor_name_${phone}`, document.getElementById('vendorName').value);
+            localStorage.setItem(`vendor_email_${phone}`, document.getElementById('vendorEmail').value);
+            localStorage.setItem(`vendor_bkash_${phone}`, document.getElementById('bkashNum').value);
+            localStorage.setItem(`vendor_nagad_${phone}`, document.getElementById('nagadNum').value);
+            localStorage.setItem(`vendor_bank_${phone}`, document.getElementById('bankDetails').value);
+            
             closeAdminSettings();
+            initVendorDashboard();
+            alert("Vendor settings saved successfully!");
         }
 
         // Auto Login Check
         const loggedVendor = localStorage.getItem('active_vendor_phone');
         if(loggedVendor) {
-            document.getElementById('authScreen').classList.add('hidden');
-            document.getElementById('appScreen').classList.remove('hidden');
-            document.getElementById('sidebarVendorPhone').innerText = loggedVendor;
-            renderAdminData();
+            initVendorDashboard();
         }
     </script>
 </body>
