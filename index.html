@@ -53,8 +53,8 @@
 
         <!-- 1. HOME TAB -->
         <div id="tab-home" class="tab-content space-y-4">
-            <!-- Campaign Banner Slider -->
-            <div id="bannerSlider" class="bg-gradient-to-r from-orange-600 to-rose-700 border border-slate-800 rounded-2xl p-5 text-white shadow-lg relative overflow-hidden transition-all duration-1000">
+            <!-- 7-8 Visual Templates Campaign Banner Slider (4s Interval) -->
+            <div id="bannerSlider" class="bg-gradient-to-r from-orange-600 to-rose-700 border border-slate-800 rounded-2xl p-5 text-white shadow-lg relative overflow-hidden transition-all duration-700">
                 <div class="relative z-10 flex justify-between items-center">
                     <div>
                         <span id="bannerTag" class="bg-black/30 text-white text-[10px] px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">BIG SALE</span>
@@ -113,11 +113,13 @@
             </div>
         </div>
 
-        <!-- 1.5 VELORA EXCLUSIVE TAB (CENTER CIRCLE TAB) -->
+        <!-- 1.5 VELORA EXCLUSIVE TAB (CENTER CIRCLE TAB WITH 10-15 TEMPLATES) -->
         <div id="tab-velora" class="tab-content hidden space-y-4">
-            <div class="bg-gradient-to-r from-rose-900 to-amber-900 border border-rose-500/30 rounded-2xl p-5 text-white shadow-xl text-center">
-                <h2 class="text-2xl font-black uppercase tracking-widest text-amber-400">VELORA COLLECTION</h2>
-                <p class="text-xs text-slate-200 mt-1">Exclusive & Premium Handpicked Items</p>
+            <!-- 10-15 Visual Templates Banner Slider (4s Interval) -->
+            <div id="veloraBannerSlider" class="bg-gradient-to-r from-rose-900 to-amber-900 border border-rose-500/30 rounded-2xl p-5 text-white shadow-xl text-center transition-all duration-700">
+                <span id="vBannerTag" class="bg-amber-500/20 text-amber-300 text-[10px] px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">EXCLUSIVE ITEM</span>
+                <h2 id="vBannerTitle" class="text-xl font-black uppercase tracking-widest text-amber-400 mt-2">VELORA COLLECTION</h2>
+                <p id="vBannerDesc" class="text-xs text-slate-200 mt-1">Exclusive & Premium Handpicked Items</p>
             </div>
 
             <!-- Scrollable Categories Bar -->
@@ -147,7 +149,7 @@
             </div>
         </div>
 
-        <!-- 3. CART TAB (STYLISH DARK BLUE THEME WITH RECOMMENDED PRODUCTS) -->
+        <!-- 3. CART TAB -->
         <div id="tab-cart" class="tab-content hidden space-y-6">
             <h2 class="text-xl font-bold text-slate-100">My Shopping Cart</h2>
             <div id="cartItemsList" class="space-y-3"></div>
@@ -177,16 +179,14 @@
                 </div>
             </div>
 
-            <!-- Recommended Products Section on Cart Scroll -->
             <div class="bg-[#0b132b] border border-slate-800 rounded-2xl p-4 space-y-3">
                 <h3 class="font-bold text-sm text-rose-400">Recommended Products for You</h3>
                 <div id="cartRecommendedGrid" class="grid grid-cols-2 md:grid-cols-4 gap-3"></div>
             </div>
         </div>
 
-        <!-- 4. ACCOUNT TAB (WITH FACEBOOK STYLE PHOTO UPLOAD & MORE PRODUCTS) -->
+        <!-- 4. ACCOUNT TAB -->
         <div id="tab-account" class="tab-content hidden space-y-4">
-            <!-- Facebook-Style Profile Section with Real Image Upload -->
             <div class="bg-[#0b132b] border border-slate-800 rounded-2xl p-4 flex items-center justify-between">
                 <div class="flex items-center gap-3">
                     <div class="relative group cursor-pointer" onclick="document.getElementById('avatarUploadInput').click()">
@@ -202,7 +202,6 @@
                 <button onclick="openSettingsModal()" class="bg-[#1c2541] hover:bg-slate-700 p-2.5 rounded-full text-base">⚙️</button>
             </div>
 
-            <!-- Account Options Grid -->
             <div class="grid grid-cols-2 gap-3 text-xs">
                 <div onclick="openWishlistModal()" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition flex items-center gap-3">
                     <span class="text-2xl">❤️</span>
@@ -222,7 +221,6 @@
                 </div>
             </div>
 
-            <!-- My Orders Status Grid -->
             <div class="bg-[#0b132b] border border-slate-800 rounded-2xl p-4">
                 <div class="flex justify-between items-center mb-3">
                     <h3 class="font-bold text-sm">My Orders</h3>
@@ -237,7 +235,6 @@
                 </div>
             </div>
 
-            <!-- Recently Viewed Products -->
             <div class="bg-[#0b132b] border border-slate-800 rounded-2xl p-4 space-y-3">
                 <h3 class="font-bold text-sm">Recently Viewed</h3>
                 <div id="recentlyViewedContainer" class="flex gap-2 overflow-x-auto pb-1 text-xs no-scrollbar">
@@ -245,7 +242,6 @@
                 </div>
             </div>
 
-            <!-- Account Services Row -->
             <div class="grid grid-cols-4 gap-2 text-center text-[10px] bg-[#0b132b] border border-slate-800 p-3 rounded-2xl font-bold text-slate-300">
                 <div onclick="openHelpCenter()" class="cursor-pointer hover:text-rose-500"><span class="text-xl block">❓</span>Help Center</div>
                 <div onclick="openMyReviewsModal()" class="cursor-pointer hover:text-rose-500"><span class="text-xl block">⭐</span>My Reviews</div>
@@ -253,7 +249,6 @@
                 <div onclick="window.open('https://wa.me/8801886759596')" class="cursor-pointer hover:text-rose-500"><span class="text-xl block">🎧</span>Support</div>
             </div>
 
-            <!-- Visual Order Tracking Timeline -->
             <div class="bg-[#0b132b] border border-slate-800 rounded-2xl p-4 space-y-3">
                 <h3 class="font-bold text-sm">Real Visual Order Tracking</h3>
                 <div class="flex gap-2">
@@ -263,7 +258,6 @@
                 <div id="trackResultVisual" class="hidden space-y-3 pt-2"></div>
             </div>
 
-            <!-- More Products on Account Scroll -->
             <div class="bg-[#0b132b] border border-slate-800 rounded-2xl p-4 space-y-3">
                 <h3 class="font-bold text-sm text-amber-400">More Recommended Items</h3>
                 <div id="accountMoreProductsGrid" class="grid grid-cols-2 md:grid-cols-4 gap-3"></div>
@@ -421,6 +415,61 @@
             });
         }
 
+        // 7-8 Visual Templates for Home Mega Campaign Banner
+        const homeBanners = [
+            { tag: "BIG SALE", title: "MEGA CAMPAIGN", desc: "Up to 80% OFF + Free Delivery Vouchers.", bg: "from-orange-600 to-rose-700" },
+            { tag: "FLASH DEAL", title: "ELECTRONICS BUST", desc: "Save up to ৳2000 on Smart Gadgets today.", bg: "from-blue-700 to-indigo-900" },
+            { tag: "FASHION HUB", title: "WINTER OVERSIZED HOODIES", desc: "Premium fleece fabric starting at ৳1290.", bg: "from-purple-800 to-pink-700" },
+            { tag: "KITCHEN FEST", title: "MODERN COOKWARE SETS", desc: "Upgrade your kitchen with stainless steel tools.", bg: "from-emerald-700 to-teal-900" },
+            { tag: "SUPER SAVER", title: "WEEKEND CLEARANCE", desc: "Extra 15% off with bKash payment gateway.", bg: "from-rose-800 to-orange-800" },
+            { tag: "EXCLUSIVE", title: "VELORA CHOICE DEALS", desc: "Buy 1 Get 1 Free on selected accessories.", bg: "from-amber-600 to-yellow-800" },
+            { tag: "LIMITED TIME", title: "MID-NIGHT MADNESS", desc: "Lightning fast delivery inside Dhaka within 24 hours.", bg: "from-violet-700 to-fuchsia-900" },
+            { tag: "TRENDING", title: "TOP RATED PRODUCTS", desc: "Loved by over 10,000+ active customers across Bangladesh.", bg: "from-cyan-700 to-blue-900" }
+        ];
+        let currentHomeBanner = 0;
+        setInterval(() => {
+            currentHomeBanner = (currentHomeBanner + 1) % homeBanners.length;
+            const b = homeBanners[currentHomeBanner];
+            const slider = document.getElementById('bannerSlider');
+            if(slider) {
+                slider.className = `border border-slate-800 rounded-2xl p-5 text-white shadow-lg relative overflow-hidden transition-all duration-700 bg-gradient-to-r ${b.bg}`;
+                document.getElementById('bannerTag').innerText = b.tag;
+                document.getElementById('bannerTitle').innerText = b.title;
+                document.getElementById('bannerDesc').innerText = b.desc;
+            }
+        }, 4000);
+
+        // 10-15 Visual Templates for Velora Collection Banner
+        const veloraBanners = [
+            { tag: "EXCLUSIVE ITEM", title: "VELORA COLLECTION", desc: "Exclusive & Premium Handpicked Items", bg: "from-rose-900 to-amber-900" },
+            { tag: "ROYAL JEWELRY", title: "DIAMOND & GOLD SETS", desc: "Handcrafted 22k luxury sets for special occasions", bg: "from-amber-700 to-yellow-900" },
+            { tag: "SMART GADGETS", title: "PRO WIRELESS EARBUDS", desc: "Active noise cancellation with 40h battery backup", bg: "from-blue-900 to-slate-900" },
+            { tag: "DESIGNER WEAR", title: "ETHNIC SILK SAREE", desc: "Pure zari embroidery party wear collection", bg: "from-purple-900 to-rose-950" },
+            { tag: "PREMIUM FOOTWEAR", title: "GENUINE LEATHER LOAFERS", desc: "Classic comfort fit for formal and casual styling", bg: "from-emerald-900 to-teal-950" },
+            { tag: "LUXURY WATCHES", title: "CHRONOGRAPH TIMEPIECES", desc: "Water-resistant stainless steel elegant wristwatches", bg: "from-indigo-900 to-blue-950" },
+            { tag: "SIGNATURE STYLE", title: "VELORA LIMITED EDITION", desc: "Only 100 pieces available worldwide", bg: "from-orange-900 to-red-950" },
+            { tag: "HIGH END", title: "PREMIUM SUNGLASSES", desc: "UV400 anti-glare polarized fashion eyewear", bg: "from-cyan-900 to-blue-950" },
+            { tag: "COUTURE", title: "VELORA SILK BLAZERS", desc: "Tailored fit formal wear for modern gentlemen", bg: "from-stone-800 to-neutral-900" },
+            { tag: "ACCESSORIES", title: "RFID BLOCKING WALLETS", desc: "Genuine slim leather cardholders with coin pocket", bg: "from-amber-800 to-stone-900" },
+            { tag: "SPECIAL DROP", title: "AUTUMN VINTAGE HOODIES", desc: "Super soft fleece lining with custom embroidery", bg: "from-fuchsia-900 to-purple-950" },
+            { tag: "ELITE SERIES", title: "TITANIUM SMART WATCH", desc: "Advanced health tracking with AMOLED display", bg: "from-slate-800 to-zinc-900" },
+            { tag: "SIGNATURE", title: "VELORA PERFUME EXCLUSIVE", desc: "Long-lasting French fragrance notes for daily wear", bg: "from-pink-900 to-rose-950" },
+            { tag: "ROYAL LIVING", title: "STAINLESS STEEL KITCHEN SET", desc: "Mirror finish durable cookware for modern homes", bg: "from-teal-900 to-cyan-950" },
+            { tag: "GRAND FINALE", title: "VELORA VIP MEMBERSHIP", desc: "Free shipping and exclusive cashbacks for life", bg: "from-red-900 to-rose-950" }
+        ];
+        let currentVeloraBanner = 0;
+        setInterval(() => {
+            currentVeloraBanner = (currentVeloraBanner + 1) % veloraBanners.length;
+            const vb = veloraBanners[currentVeloraBanner];
+            const vSlider = document.getElementById('veloraBannerSlider');
+            if(vSlider) {
+                vSlider.className = `border border-rose-500/30 rounded-2xl p-5 text-white shadow-xl text-center transition-all duration-700 bg-gradient-to-r ${vb.bg}`;
+                document.getElementById('vBannerTag').innerText = vb.tag;
+                document.getElementById('vBannerTitle').innerText = vb.title;
+                document.getElementById('vBannerDesc').innerText = vb.desc;
+            }
+        }, 4000);
+
         const products = [
             { id: 1, name: "6-Piece Stainless Steel Kitchen Tool Set", price: 709, category: "Kitchen", images: ["https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500", "https://images.unsplash.com/photo-1583777926162-d27806b72a9b?w=500"], desc: "High quality stainless steel kitchen tool set for everyday cooking.", rating: 4.8 },
             { id: 2, name: "Electric Kettle 2L - Perfect for Tea & Coffee", price: 659, category: "Kitchen", images: ["https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500", "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500"], desc: "Fast boiling 2L electric kettle with auto shut-off safety feature.", rating: 4.6 },
@@ -493,7 +542,6 @@
         function renderSecondaryGrids() {
             const allItems = [...products, ...veloraExclusiveProducts];
             
-            // Cart recommended grid
             const cartGrid = document.getElementById('cartRecommendedGrid');
             if(cartGrid) {
                 cartGrid.innerHTML = allItems.map(p => `
@@ -506,7 +554,6 @@
                 `).join('');
             }
 
-            // Account scroll more products grid
             const accGrid = document.getElementById('accountMoreProductsGrid');
             if(accGrid) {
                 accGrid.innerHTML = allItems.map(p => `
