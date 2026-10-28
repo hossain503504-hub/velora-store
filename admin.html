@@ -56,7 +56,7 @@
     </div>
 
     <!-- Main Content Area -->
-    <main class="flex-1 bg-[#0b0f19] p-4 md:p-8 overflow-y-auto">
+    <main class="flex-1 bg-[#0b0f19] p-4 md:p-8 overflow-y-auto space-y-6">
 
         <!-- 1. Dashboard Tab -->
         <div id="tab-dashboard" class="admin-tab space-y-6">
@@ -64,6 +64,7 @@
                 <h2 class="text-sm font-bold text-rose-500 uppercase">VELORA ADMIN DASHBOARD</h2>
                 <span class="bg-emerald-500/20 text-emerald-400 font-bold text-xs px-3 py-1 rounded-full">System Active</span>
             </div>
+            
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-xs">
                 <div onclick="switchAdminTab('products')" class="bg-[#111827] border border-slate-800 p-4 rounded-2xl space-y-1 cursor-pointer hover:border-rose-500 transition">
                     <p class="text-slate-400">MY PRODUCTS</p>
@@ -89,7 +90,6 @@
                     <p class="text-slate-400">ORDER TRACKING</p>
                     <h3 class="text-sm font-bold text-sky-400 mt-2">🔍 Track Now</h3>
                 </div>
-                <!-- Newly added dashboard boxes to fill empty spaces -->
                 <div onclick="switchAdminTab('steadfast')" class="bg-[#111827] border border-slate-800 p-4 rounded-2xl space-y-1 cursor-pointer hover:border-orange-500 transition">
                     <p class="text-slate-400">STEADFAST</p>
                     <h3 class="text-sm font-bold text-orange-400 mt-2">⚡ Courier</h3>
@@ -102,6 +102,15 @@
                     <p class="text-slate-400">ADD PRODUCT</p>
                     <h3 class="text-sm font-bold text-rose-400 mt-2">➕ Create New</h3>
                 </div>
+            </div>
+
+            <!-- Recent Orders Section Matching Image 33271_2.png -->
+            <div class="bg-[#111827] border border-slate-800 p-4 rounded-2xl space-y-4">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                    <h3 class="text-sm font-bold text-white">Recent Orders</h3>
+                    <button onclick="switchAdminTab('orders')" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1 rounded-lg text-xs font-bold">View all</button>
+                </div>
+                <div id="recentOrdersDashboardList" class="space-y-3 text-xs"></div>
             </div>
         </div>
 
@@ -169,14 +178,13 @@
             </div>
         </div>
 
-        <!-- 10. Add Product Tab (Up to 7 Photos Upload & Optional URL) -->
+        <!-- 10. Add Product Tab -->
         <div id="tab-addproduct" class="admin-tab hidden space-y-4 max-w-2xl mx-auto">
             <h2 class="text-base font-bold text-rose-500">Add New Product</h2>
             <form onsubmit="handleAddNewProduct(event)" class="bg-[#111827] border border-slate-800 p-5 rounded-2xl space-y-4 text-xs">
                 <div>
                     <label class="text-slate-400 block mb-1 font-bold">Product Photos (Select up to 7 images) *</label>
                     <input type="file" id="prodFiles" accept="image/*" multiple required class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-slate-300 text-xs">
-                    <p class="text-[10px] text-slate-500 mt-1">You can select a maximum of 7 images.</p>
                 </div>
                 <div>
                     <label class="text-slate-400 block mb-1 font-bold">Product Image URL (Optional)</label>
@@ -188,7 +196,7 @@
                 </div>
                 <div>
                     <label class="text-slate-400 block mb-1 font-bold">Product Category *</label>
-                    <input type="text" id="prodCategory" required placeholder="e.g. Fashion, Electronics, Kitchen" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                    <input type="text" id="prodCategory" required placeholder="e.g. Fashion, Electronics" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
                 </div>
                 <div>
                     <label class="text-slate-400 block mb-1 font-bold">Product Description *</label>
@@ -198,22 +206,18 @@
                     <label class="text-slate-400 block mb-1 font-bold">Product Specification *</label>
                     <textarea id="prodSpec" required rows="2" placeholder="Write product specs..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-sm text-white"></textarea>
                 </div>
-                <div>
-                    <label class="text-slate-400 block mb-1 font-bold">SEO Friendly Hashtag (Optional)</label>
-                    <input type="text" id="prodHashtag" placeholder="e.g. #velora #fashion" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
-                </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                     <div>
-                        <label class="text-slate-400 block mb-1 font-bold">Product Size (Optional)</label>
-                        <input type="text" id="prodSize" placeholder="e.g. M, L, XL" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                        <label class="text-slate-400 block mb-1 font-bold">Size (Optional)</label>
+                        <input type="text" id="prodSize" placeholder="M, L, XL" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
                     </div>
                     <div>
-                        <label class="text-slate-400 block mb-1 font-bold">Product Quantity *</label>
-                        <input type="number" id="prodQty" required placeholder="e.g. 20" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                        <label class="text-slate-400 block mb-1 font-bold">Quantity *</label>
+                        <input type="number" id="prodQty" required placeholder="20" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
                     </div>
                     <div>
-                        <label class="text-slate-400 block mb-1 font-bold">Product Price (BDT) *</label>
-                        <input type="number" id="prodPrice" required placeholder="e.g. 999" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                        <label class="text-slate-400 block mb-1 font-bold">Price (BDT) *</label>
+                        <input type="number" id="prodPrice" required placeholder="999" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
                     </div>
                 </div>
                 <button type="submit" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 rounded-xl text-sm shadow-lg">Save & Publish Product</button>
@@ -222,7 +226,7 @@
 
     </main>
 
-    <!-- Order Details View Modal -->
+    <!-- Order Details View Modal (Matching Image 33272_2.png) -->
     <div id="orderDetailsModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 w-full max-w-lg rounded-2xl p-6 relative max-h-[90vh] overflow-y-auto space-y-4 text-xs">
             <button onclick="closeOrderDetailsModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
@@ -277,11 +281,11 @@
             <form onsubmit="saveAdminSettings(event)" class="space-y-3 text-xs">
                 <div>
                     <label class="text-slate-400 block mb-1">Company / Shop Name</label>
-                    <input type="text" id="shopName" placeholder="e.g. VELORA" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                    <input type="text" id="shopName" placeholder="VELORA" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
                 </div>
                 <div>
                     <label class="text-slate-400 block mb-1">Vendor / Owner Name</label>
-                    <input type="text" id="vendorName" placeholder="e.g. MD Hossain Khan" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                    <input type="text" id="vendorName" placeholder="MD Hossain Khan" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
                 </div>
                 <div>
                     <label class="text-slate-400 block mb-1">Phone Number</label>
@@ -292,11 +296,11 @@
                     <input type="email" id="vendorEmail" placeholder="example@gmail.com" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
                 </div>
                 <div>
-                    <label class="text-slate-400 block mb-1">bKash Number (Optional)</label>
+                    <label class="text-slate-400 block mb-1">bKash (Optional)</label>
                     <input type="text" id="bkashNum" placeholder="018XXXXXXXX" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
                 </div>
                 <div>
-                    <label class="text-slate-400 block mb-1">Nagad Number (Optional)</label>
+                    <label class="text-slate-400 block mb-1">Nagad (Optional)</label>
                     <input type="text" id="nagadNum" placeholder="018XXXXXXXX" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
                 </div>
                 <button type="submit" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 rounded-xl text-sm shadow-lg">Save Settings</button>
@@ -360,6 +364,7 @@
             document.getElementById('statCancel').innerText = orders.filter(o => o.status === 'Canceled').length;
             document.getElementById('statPending').innerText = orders.filter(o => o.status === 'Pending' || o.status === 'Processing').length;
 
+            renderRecentOrdersDashboard(orders);
             renderOrdersList('totalOrdersList', orders);
             renderOrdersList('deliveredOrdersList', orders.filter(o => o.status === 'Delivered'));
             renderOrdersList('cancelOrdersList', orders.filter(o => o.status === 'Canceled'));
@@ -385,6 +390,51 @@
             }
         }
 
+        function renderRecentOrdersDashboard(ordersArr) {
+            const container = document.getElementById('recentOrdersDashboardList');
+            if(!container) return;
+            if(ordersArr.length === 0) {
+                container.innerHTML = `<p class="text-slate-500 text-xs">No recent orders found.</p>`;
+                return;
+            }
+            container.innerHTML = ordersArr.slice(0, 5).map(o => `
+                <div class="bg-slate-900 border border-slate-800 p-3 rounded-xl space-y-2">
+                    <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
+                        <span class="text-slate-400 font-bold">Order ID</span>
+                        <span class="text-rose-400 font-bold">#${o.orderId}</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-slate-400">Product</span>
+                        <span class="text-white font-medium truncate max-w-[180px]">${o.items ? o.items.map(i=>i.name).join(', ') : 'N/A'}</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-slate-400">Customer</span>
+                        <span class="text-slate-200">${o.name || 'N/A'}</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-slate-400">Qty</span>
+                        <span class="text-slate-200">${o.items ? o.items.reduce((s,i)=>s+i.qty,0) : 1}</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-slate-400">Grand Total</span>
+                        <span class="text-emerald-400 font-bold">৳${o.grandTotal}</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-slate-400">Status</span>
+                        <span class="bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded font-bold text-[10px]">${o.status}</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-slate-400">Date</span>
+                        <span class="text-slate-400 text-[10px]">${o.date || '30 Jun 2026'}</span>
+                    </div>
+                    <div class="flex justify-between items-center pt-1 border-t border-slate-800">
+                        <span class="text-slate-400 font-bold">Action</span>
+                        <button onclick="openOrderDetails('${o.orderId}')" class="bg-slate-800 hover:bg-slate-700 text-white px-3 py-1 rounded-lg font-bold text-xs">View</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
         function renderOrdersList(containerId, ordersArr) {
             const container = document.getElementById(containerId);
             if(!container) return;
@@ -395,7 +445,7 @@
             container.innerHTML = ordersArr.map(o => `
                 <div class="bg-[#111827] border border-slate-800 p-4 rounded-xl flex items-center justify-between gap-3">
                     <div class="flex-1 space-y-1">
-                        <p class="text-rose-400 font-bold text-xs">Order ID: ${o.orderId} - <span class="text-white">${o.name}</span></p>
+                        <p class="text-rose-400 font-bold text-xs">Order ID: #${o.orderId} - <span class="text-white">${o.name}</span></p>
                         <p class="text-slate-300 text-xs">Product: ${o.items ? o.items.map(i=>i.name).join(', ') : 'Order Items'}</p>
                         <p class="text-slate-400 text-[11px]">Total Bill: <span class="text-rose-400 font-bold">৳${o.grandTotal}</span> | Status: <span class="text-amber-400 font-bold">${o.status}</span></p>
                     </div>
@@ -486,12 +536,11 @@
             const category = document.getElementById('prodCategory').value;
             const desc = document.getElementById('prodDesc').value;
             const spec = document.getElementById('prodSpec').value;
-            const hashtag = document.getElementById('prodHashtag').value;
             const size = document.getElementById('prodSize').value;
             const qty = Number(document.getElementById('prodQty').value);
             const price = Number(document.getElementById('prodPrice').value);
 
-            products.unshift({ id: Date.now(), image: imageUrl, name, category, desc, spec, hashtag, size, qty, price });
+            products.unshift({ id: Date.now(), image: imageUrl, name, category, desc, spec, size, qty, price });
             localStorage.setItem('vendor_products', JSON.stringify(products));
             e.target.reset();
             switchAdminTab('products');
@@ -508,7 +557,7 @@
             const data = localStorage.getItem(id);
             if(data) {
                 const parsed = JSON.parse(data);
-                document.getElementById('adminTrackResult').innerHTML = `<span class="text-emerald-400 font-bold">Found: Order ID ${parsed.orderId} - Status: ${parsed.status} - Total: ৳${parsed.grandTotal}</span>`;
+                document.getElementById('adminTrackResult').innerHTML = `<span class="text-emerald-400 font-bold">Found: Order ID #${parsed.orderId} - Status: ${parsed.status} - Total: ৳${parsed.grandTotal}</span>`;
             } else {
                 document.getElementById('adminTrackResult').innerText = "Order ID not found in system!";
             }
