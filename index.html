@@ -148,20 +148,20 @@
             </div>
         </div>
 
-        <!-- 4. ACCOUNT TAB -->
+        <!-- 4. ACCOUNT TAB (FULL EXPANDED SYSTEM) -->
         <div id="tab-account" class="tab-content hidden space-y-4">
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex items-center justify-between">
                 <div class="flex items-center gap-3">
                     <div class="w-14 h-14 bg-rose-500/20 text-rose-500 rounded-full flex items-center justify-center text-2xl font-bold">👤</div>
                     <div>
                         <h2 class="font-bold text-lg" id="displayUserName">MD Hossain Khan</h2>
-                        <p class="text-xs text-slate-400" id="displayUserEmail">No address added</p>
+                        <p class="text-xs text-slate-400 line-clamp-1" id="displayUserEmail">No address saved</p>
                     </div>
                 </div>
                 <button onclick="openSettingsModal()" class="bg-slate-800 hover:bg-slate-700 p-2.5 rounded-full text-base">⚙️</button>
             </div>
 
-            <!-- Real Account Options Grid -->
+            <!-- Account Options Grid 1 -->
             <div class="grid grid-cols-2 gap-3 text-xs">
                 <div onclick="openWishlistModal()" class="bg-slate-900 border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition flex items-center gap-3">
                     <span class="text-2xl">❤️</span>
@@ -181,6 +181,37 @@
                 </div>
             </div>
 
+            <!-- My Orders Status Grid -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="font-bold text-sm">My Orders</h3>
+                    <span class="text-xs text-rose-500 cursor-pointer" onclick="openOrderStatus('All')">View All ></span>
+                </div>
+                <div class="grid grid-cols-5 gap-2 text-center text-[11px] text-slate-400 cursor-pointer">
+                    <div onclick="openOrderStatus('To Pay')" class="hover:text-rose-400 transition"><span class="text-lg block">💳</span><p>To Pay</p></div>
+                    <div onclick="openOrderStatus('To Ship')" class="hover:text-rose-400 transition"><span class="text-lg block">📦</span><p>To Ship</p></div>
+                    <div onclick="openOrderStatus('To Receive')" class="hover:text-rose-400 transition"><span class="text-lg block">🚚</span><p>To Receive</p></div>
+                    <div onclick="openOrderStatus('To Review')" class="hover:text-rose-400 transition"><span class="text-lg block">💬</span><p>To Review</p></div>
+                    <div onclick="openOrderStatus('Returns')" class="hover:text-rose-400 transition"><span class="text-lg block">↩️</span><p>Returns</p></div>
+                </div>
+            </div>
+
+            <!-- Recently Viewed Products -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3">
+                <h3 class="font-bold text-sm">Recently Viewed</h3>
+                <div id="recentlyViewedContainer" class="flex gap-2 overflow-x-auto pb-1 text-xs">
+                    <p class="text-slate-500 text-[11px]">No recently viewed products yet.</p>
+                </div>
+            </div>
+
+            <!-- Account Services Row 2 -->
+            <div class="grid grid-cols-4 gap-2 text-center text-[10px] bg-slate-900 border border-slate-800 p-3 rounded-2xl font-bold text-slate-300">
+                <div onclick="openHelpCenter()" class="cursor-pointer hover:text-rose-500"><span class="text-xl block">❓</span>Help Center</div>
+                <div onclick="openMyReviewsModal()" class="cursor-pointer hover:text-rose-500"><span class="text-xl block">⭐</span>My Reviews</div>
+                <div onclick="openPaymentOptionsModal()" class="cursor-pointer hover:text-rose-500"><span class="text-xl block">💳</span>Payments</div>
+                <div onclick="window.open('https://wa.me/8801886759596')" class="cursor-pointer hover:text-rose-500"><span class="text-xl block">🎧</span>Support</div>
+            </div>
+
             <!-- Visual Order Tracking Timeline -->
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3">
                 <h3 class="font-bold text-sm">Real Visual Order Tracking</h3>
@@ -198,7 +229,7 @@
         💬
     </a>
 
-    <!-- Product Details Modal with Reviews & Related Products -->
+    <!-- Product Details Modal -->
     <div id="productModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 w-full max-w-lg rounded-2xl p-6 relative space-y-4 max-h-[90vh] overflow-y-auto">
             <button onclick="closeProductModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
@@ -206,12 +237,21 @@
         </div>
     </div>
 
-    <!-- Modals (Wishlist, Address, Vouchers, Referral) -->
+    <!-- Multi-purpose Extra Modal -->
     <div id="extraModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl p-6 relative space-y-4 max-h-[90vh] overflow-y-auto">
             <button onclick="closeExtraModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
             <h3 id="extraModalTitle" class="text-base font-bold text-rose-500"></h3>
             <div id="extraModalBody" class="text-xs text-slate-300 space-y-2"></div>
+        </div>
+    </div>
+
+    <!-- Order Status Category Modal -->
+    <div id="orderStatusModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-sm rounded-2xl p-6 relative space-y-4 text-center">
+            <button onclick="closeOrderStatusModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
+            <h3 class="text-lg font-bold text-rose-500" id="modalOrderStatusTitle">Order Status</h3>
+            <p class="text-xs text-slate-400" id="modalOrderStatusDesc">No active orders found in this category.</p>
         </div>
     </div>
 
@@ -352,6 +392,7 @@
 
         let cart = JSON.parse(localStorage.getItem('velora_cart')) || [];
         let wishlist = JSON.parse(localStorage.getItem('velora_wishlist')) || [];
+        let recentlyViewed = JSON.parse(localStorage.getItem('velora_recent')) || [];
         let reviewsData = JSON.parse(localStorage.getItem('velora_reviews')) || {};
         let currentCategory = 'All';
         let discountPercent = 0;
@@ -445,6 +486,14 @@
             const p = products.find(item => item.id === id);
             if(!p) return;
 
+            // Save to recently viewed
+            if(!recentlyViewed.includes(id)) {
+                recentlyViewed.unshift(id);
+                if(recentlyViewed.length > 5) recentlyViewed.pop();
+                localStorage.setItem('velora_recent', JSON.stringify(recentlyViewed));
+                loadRecentlyViewed();
+            }
+
             const prodReviews = reviewsData[id] || [
                 { user: "Rahim", text: "Great quality product! Very satisfied.", rating: 5 }
             ];
@@ -496,10 +545,26 @@
             document.getElementById('productModal').classList.remove('hidden');
         }
 
+        function loadRecentlyViewed() {
+            const container = document.getElementById('recentlyViewedContainer');
+            if(recentlyViewed.length === 0) {
+                container.innerHTML = `<p class="text-slate-500 text-[11px]">No recently viewed products yet.</p>`;
+                return;
+            }
+            const viewedProds = products.filter(p => recentlyViewed.includes(p.id));
+            container.innerHTML = viewedProds.map(p => `
+                <div onclick="openProductModal(${p.id})" class="bg-slate-800 p-2 rounded-xl cursor-pointer min-w-[100px] text-center border border-slate-700">
+                    <img src="${p.images[0]}" class="w-full h-16 rounded-lg object-cover mb-1">
+                    <p class="text-[10px] font-bold text-white line-clamp-1">${p.name}</p>
+                    <p class="text-[10px] text-rose-500 font-bold">৳${p.price}</p>
+                </div>
+            `).join('');
+        }
+
         function submitReview(e, prodId) {
             e.preventDefault();
             const text = document.getElementById('revText').value;
-            const userName = localStorage.getItem('cust_name') || 'Guest Customer';
+            const userName = localStorage.getItem('cust_name') || 'MD Hossain Khan';
             
             if(!reviewsData[prodId]) reviewsData[prodId] = [];
             reviewsData[prodId].push({ user: userName, text: text, rating: 5 });
@@ -509,9 +574,7 @@
             openProductModal(prodId);
         }
 
-        function closeProductModal() {
-            document.getElementById('productModal').classList.add('hidden');
-        }
+        function closeProductModal() { document.getElementById('productModal').classList.add('hidden'); }
 
         function addToCart(id) {
             const prod = products.find(p => p.id === id);
@@ -604,9 +667,7 @@
             document.getElementById('paymentModal').classList.remove('hidden');
         }
 
-        function closePaymentModal() {
-            document.getElementById('paymentModal').classList.add('hidden');
-        }
+        function closePaymentModal() { document.getElementById('paymentModal').classList.add('hidden'); }
 
         function handleFinalConfirmOrder() {
             const name = document.getElementById('chkName').value;
@@ -675,6 +736,13 @@
             }
         }
 
+        function openOrderStatus(type) {
+            document.getElementById('modalOrderStatusTitle').innerText = `${type} Orders`;
+            document.getElementById('modalOrderStatusDesc').innerText = `You have 0 active items under ${type}.`;
+            document.getElementById('orderStatusModal').classList.remove('hidden');
+        }
+        function closeOrderStatusModal() { document.getElementById('orderStatusModal').classList.add('hidden'); }
+
         function openWishlistModal() {
             document.getElementById('extraModalTitle').innerText = "My Wishlist";
             const body = document.getElementById('extraModalBody');
@@ -706,13 +774,31 @@
             document.getElementById('extraModal').classList.remove('hidden');
         }
 
+        function openHelpCenter() {
+            document.getElementById('extraModalTitle').innerText = "Help Center";
+            document.getElementById('extraModalBody').innerHTML = `<div class="space-y-2"><p class="font-bold text-white">Frequently Asked Questions:</p><p>1. How to place an order?<br>Select product -> Add to Cart -> Confirm Order.</p><p>2. How long does delivery take?<br>Inside Dhaka: 24-48 hours. Outside Dhaka: 2-3 days.</p></div>`;
+            document.getElementById('extraModal').classList.remove('hidden');
+        }
+
+        function openMyReviewsModal() {
+            document.getElementById('extraModalTitle').innerText = "My Reviews";
+            document.getElementById('extraModalBody').innerHTML = `<div class="bg-slate-800 p-3 rounded-xl"><p class="font-bold text-white">Submitted Reviews:</p><p class="text-slate-400 mt-1">You have submitted 0 product reviews so far.</p></div>`;
+            document.getElementById('extraModal').classList.remove('hidden');
+        }
+
+        function openPaymentOptionsModal() {
+            document.getElementById('extraModalTitle').innerText = "Payment Options";
+            document.getElementById('extraModalBody').innerHTML = `<div class="bg-slate-800 p-3 rounded-xl space-y-2"><p class="font-bold text-white">Supported Payment Methods:</p><p class="text-emerald-400">✓ bKash Mobile Banking</p><p class="text-orange-400">✓ Nagad Mobile Banking</p><p class="text-rose-400">✓ Cash on Delivery (COD)</p></div>`;
+            document.getElementById('extraModal').classList.remove('hidden');
+        }
+
         function closeExtraModal() { document.getElementById('extraModal').classList.add('hidden'); }
 
         function loadCustomerData() {
             if(localStorage.getItem('cust_name')) {
                 document.getElementById('displayUserName').innerText = localStorage.getItem('cust_name');
-                document.getElementById('displayUserEmail').innerText = localStorage.getItem('cust_address') || 'No address saved';
             }
+            document.getElementById('displayUserEmail').innerText = localStorage.getItem('cust_address') || 'No address saved';
             document.getElementById('userCoinsCount').innerText = localStorage.getItem('velora_coins') || 0;
             document.getElementById('wishlistCountText').innerText = `${wishlist.length} Saved items`;
             
@@ -720,6 +806,7 @@
             document.getElementById('langSwitcher').value = savedLang;
             switchLanguage(savedLang);
             updateCartBadge();
+            loadRecentlyViewed();
         }
 
         function openSettingsModal() {
