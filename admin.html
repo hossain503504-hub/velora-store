@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VELORA SHOP VENDOR - Pro Dashboard</title>
+    <title>VELORA SHOP VENDOR - Pro Verified Dashboard</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -32,7 +32,7 @@
     <header class="sticky top-0 z-40 bg-[#0b132b]/95 backdrop-blur-md border-b border-slate-800 px-4 py-3 flex items-center justify-between">
         <h1 class="text-base font-black tracking-widest text-rose-500 uppercase">VELORA SHOP VENDOR</h1>
         <div class="flex items-center gap-3">
-            <span class="text-xs bg-emerald-500/20 text-emerald-400 font-bold px-2.5 py-1 rounded-full border border-emerald-500/30">Active Vendor</span>
+            <span class="text-xs bg-emerald-500/20 text-emerald-400 font-bold px-2.5 py-1 rounded-full border border-emerald-500/30 flex items-center gap-1">✓ Verified Vendor</span>
             <button onclick="toggleVendorSidebar()" class="text-slate-300 hover:text-white text-xl">☰</button>
         </div>
     </header>
@@ -41,18 +41,16 @@
     <div id="vendorSidebar" class="fixed inset-y-0 right-0 z-50 w-72 bg-[#0b132b] border-l border-slate-800 p-5 transform translate-x-full transition-transform duration-300 shadow-2xl flex flex-col justify-between overflow-y-auto">
         <div class="space-y-4">
             <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                <h3 class="font-bold text-sm text-rose-500 uppercase">Pro Vendor Menu</h3>
+                <h3 class="font-bold text-sm text-rose-500 uppercase">Verified Vendor Menu</h3>
                 <button onclick="toggleVendorSidebar()" class="text-slate-400 hover:text-white text-lg">✕</button>
             </div>
             <div class="space-y-2 text-xs font-bold text-slate-300">
                 <div onclick="switchVendorTab('dashboard')" class="p-2.5 bg-rose-600 text-white rounded-xl cursor-pointer shadow">📌 Dashboard & Analytics</div>
+                <div onclick="switchVendorTab('profile')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">🛡️ Vendor Profile & Verification</div>
+                <div onclick="switchVendorTab('helpline')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">🎧 Vendor Helpline & Live Chat</div>
                 <div onclick="switchVendorTab('wallet')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">💰 Wallet & Payouts</div>
                 <div onclick="switchVendorTab('products')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">📦 Inventory & Stock</div>
-                <div onclick="switchVendorTab('coupons')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">🎟️ Custom Coupons</div>
-                <div onclick="switchVendorTab('orders')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">🛒 Total Orders</div>
-                <div onclick="switchVendorTab('courier')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">🚀 1-Click Courier Booking</div>
-                <div onclick="switchVendorTab('profile')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">🎨 Shop Customization</div>
-                <div onclick="switchVendorTab('addproduct')" class="p-2.5 bg-amber-500 text-black rounded-xl cursor-pointer shadow">➕ Add New Product</div>
+                <div onclick="switchVendorTab('addproduct')" class="p-2.5 bg-amber-500 text-black rounded-xl cursor-pointer shadow">➕ Add Advanced Product</div>
             </div>
         </div>
         <button onclick="handleVendorLogout()" class="w-full bg-rose-500/10 hover:bg-rose-500/20 text-rose-500 border border-rose-500/30 font-bold py-2.5 rounded-xl text-xs transition mt-4">Logout Token</button>
@@ -64,9 +62,9 @@
         <!-- Dynamic Promo Banner Slider -->
         <div id="vendorBannerSlider" class="bg-gradient-to-r from-indigo-700 via-purple-700 to-rose-700 border border-slate-700 rounded-2xl p-5 text-white shadow-xl relative overflow-hidden transition-all duration-700">
             <div class="relative z-10 space-y-1">
-                <span id="vBannerTag" class="bg-black/30 text-amber-300 text-[10px] px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">PRO VENDOR</span>
-                <h2 id="vBannerTitle" class="text-lg font-black tracking-wide">Automated Payouts & Courier Live</h2>
-                <p id="vBannerDesc" class="text-xs text-slate-100">Manage your entire e-commerce store inventory and finance seamlessly.</p>
+                <span id="vBannerTag" class="bg-black/30 text-amber-300 text-[10px] px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">VERIFIED PARTNER</span>
+                <h2 id="vBannerTitle" class="text-lg font-black tracking-wide">SEO Optimized & Direct Helpline Live</h2>
+                <p id="vBannerDesc" class="text-xs text-slate-100">Upload products with custom sizes, SEO hashtags, videos, and connect with buyers instantly.</p>
             </div>
         </div>
 
@@ -75,8 +73,8 @@
             <div class="flex items-center gap-3">
                 <div class="w-12 h-12 bg-rose-600 rounded-xl flex items-center justify-center text-white font-black text-lg shadow">V</div>
                 <div>
-                    <h2 class="font-bold text-sm text-white" id="shopNameDisplay">VELORA SHOP</h2>
-                    <p class="text-[11px] text-slate-400">rona503504@gmail.com</p>
+                    <h2 class="font-bold text-sm text-white flex items-center gap-1.5"><span id="shopNameDisplay">VELORA SHOP</span> <span class="text-xs text-emerald-400">✓</span></h2>
+                    <p class="text-[11px] text-slate-400" id="shopEmailDisplay">rona503504@gmail.com</p>
                 </div>
             </div>
             <button onclick="switchVendorTab('profile')" class="bg-[#1c2541] hover:bg-slate-700 p-2.5 rounded-full text-base border border-slate-700">⚙️</button>
@@ -92,54 +90,38 @@
                 <span class="text-slate-400 font-bold text-xs block">INVENTORY ITEMS</span>
                 <p class="text-xl font-black text-white mt-1" id="statProductsCount">4</p>
             </div>
-            <div onclick="switchVendorTab('orders')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
-                <span class="text-slate-400 font-bold text-xs block">TOTAL ORDERS</span>
-                <p class="text-xl font-black text-emerald-400 mt-1">7</p>
+            <div onclick="switchVendorTab('helpline')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
+                <span class="text-rose-400 font-bold text-xs block">HELPLINE CHAT</span>
+                <p class="text-xl font-black text-emerald-400 mt-1">Active 🎧</p>
             </div>
-            <div onclick="switchVendorTab('courier')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
-                <span class="text-slate-400 font-bold text-xs block">COURIER API</span>
-                <p class="text-xl font-black text-rose-400 mt-1">Ready 🚀</p>
-            </div>
-            <div onclick="switchVendorTab('coupons')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
-                <span class="text-slate-400 font-bold text-xs block">ACTIVE COUPONS</span>
-                <p class="text-xl font-black text-amber-300 mt-1">2 Active</p>
-            </div>
-            <div onclick="switchVendorTab('dashboard')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
-                <span class="text-slate-400 font-bold text-xs block">STORE RATING</span>
-                <p class="text-xl font-black text-amber-400 mt-1">⭐ 4.9 / 5.0</p>
+            <div onclick="switchVendorTab('profile')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
+                <span class="text-amber-300 font-bold text-xs block">ID STATUS</span>
+                <p class="text-xl font-black text-white mt-1">Verified ✓</p>
             </div>
             <div onclick="switchVendorTab('addproduct')" class="bg-gradient-to-r from-rose-600 to-amber-600 text-white p-4 rounded-2xl cursor-pointer shadow-lg col-span-2 text-center font-bold text-sm">
-                ➕ Add New Product
+                ➕ Add Advanced Product (SEO & Video)
             </div>
         </div>
 
-        <!-- Recent Orders & Low Stock Warnings -->
+        <!-- Recent Orders & Helpline Status -->
         <div class="bg-[#0b132b] border border-slate-800 rounded-2xl p-4 space-y-3 shadow-xl">
             <div class="flex justify-between items-center">
-                <h3 class="font-bold text-sm text-white">Recent Orders & Stock Alerts</h3>
-                <span class="text-xs text-rose-500 cursor-pointer" onclick="switchVendorTab('orders')">View all</span>
+                <h3 class="font-bold text-sm text-white">Store Overview & Customer Inquiries</h3>
+                <span class="text-xs text-rose-500 cursor-pointer" onclick="switchVendorTab('helpline')">Helpline Support</span>
             </div>
-            <div id="lowStockWarningBox" class="bg-rose-500/10 border border-rose-500/30 p-2.5 rounded-xl text-[11px] text-rose-300 hidden">
-                ⚠️ Low Stock Alert: 2 items have less than 5 units remaining!
-            </div>
-            <div class="bg-[#1c2541] border border-slate-700 p-3 rounded-xl text-xs space-y-1">
+            <div class="bg-[#1c2541] border border-slate-700 p-3 rounded-xl text-xs space-y-2">
                 <div class="flex justify-between font-bold">
-                    <span class="text-rose-400">Order ID</span>
-                    <span class="text-white">#SN-2518</span>
+                    <span class="text-rose-400">Store Verification:</span>
+                    <span class="text-emerald-400">Approved & Displayed on Home</span>
                 </div>
-                <p class="text-slate-300">Product: Product Item[span_0](start_span)[span_0](end_span)</p>
-                <p class="text-slate-300">Customer: MD Hossain khan[span_1](start_span)[span_1](end_span)</p>
-                <div class="flex justify-between pt-1 border-t border-slate-700 font-bold">
-                    <span>Grand Total:</span>
-                    <span class="text-emerald-400">৳1398</span>
-                </div>
+                <p class="text-slate-300">Helpline WhatsApp / Direct Line: <span class="text-amber-400 font-bold">+8801886759596</span></p>
             </div>
         </div>
     </main>
 
     <!-- Vendor Action Modal -->
     <div id="vendorModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-[#0b132b] border border-slate-800 w-full max-w-md rounded-2xl p-6 relative space-y-4 max-h-[90vh] overflow-y-auto">
+        <div class="bg-[#0b132b] border border-slate-800 w-full max-w-lg rounded-2xl p-6 relative space-y-4 max-h-[90vh] overflow-y-auto">
             <button onclick="closeVendorModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
             <h3 id="vModalTitle" class="text-base font-bold text-rose-500"></h3>
             <div id="vModalBody" class="text-xs text-slate-300 space-y-2"></div>
@@ -148,12 +130,9 @@
 
     <!-- Script Engine -->
     <script>
-        // Banner Slider
         const vendorBanners = [
-            { tag: "PRO VENDOR", title: "Automated Payouts & Courier Live", desc: "Manage your entire e-commerce store inventory and finance seamlessly.", bg: "from-indigo-700 via-purple-700 to-rose-700" },
-            { tag: "FINANCE", title: "Instant bKash/Nagad Payouts", desc: "Withdraw your earnings instantly with zero withdrawal fee.", bg: "from-emerald-700 via-teal-800 to-blue-900" },
-            { tag: "MARKETING", title: "Create Custom Shop Coupons", desc: "Boost sales by offering custom percentage discounts to buyers.", bg: "from-amber-600 via-orange-700 to-rose-800" },
-            { tag: "LOGISTICS", title: "1-Click Steadfast & Pathao Booking", desc: "Dispatch parcels instantly and generate automated shipping labels.", bg: "from-purple-800 via-pink-700 to-rose-900" }
+            { tag: "VERIFIED PARTNER", title: "SEO Optimized & Direct Helpline Live", desc: "Upload products with custom sizes, SEO hashtags, videos, and connect with buyers instantly.", bg: "from-indigo-700 via-purple-700 to-rose-700" },
+            { tag: "HOME DISPLAY", title: "Showcase Your Verified Store Badge", desc: "Your name, phone and Gmail verification will appear on the homepage to boost customer trust.", bg: "from-emerald-700 via-teal-800 to-blue-900" }
         ];
         let currentVBIndex = 0;
         setInterval(() => {
@@ -180,89 +159,59 @@
             const body = document.getElementById('vModalBody');
 
             if(tab === 'dashboard') {
-                title.innerText = "Dashboard & Sales Analytics";
+                title.innerText = "Dashboard & Analytics";
+                body.innerHTML = `<div class="bg-[#1c2541] p-3 rounded-xl space-y-2"><p class="font-bold text-white">Status: Verified Store</p><p class="text-emerald-400">Total Revenue: ৳14,500</p></div>`;
+            } else if(tab === 'profile') {
+                title.innerText = "Vendor Verification & Details";
                 body.innerHTML = `
                     <div class="bg-[#1c2541] p-3 rounded-xl space-y-2">
-                        <p class="font-bold text-white">📊 Weekly Performance</p>
-                        <p class="text-emerald-400">Total Revenue: ৳14,500</p>
-                        <p class="text-slate-300">Completed Orders: 7</p>
-                        <p class="text-amber-400">Store Rating: ⭐ 4.9 / 5.0</p>
+                        <label class="text-slate-400 block">Vendor Full Name</label>
+                        <input type="text" id="vName" value="MD Hossain Khan" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
+                        <label class="text-slate-400 block">Phone Number</label>
+                        <input type="tel" id="vPhone" value="01886759596" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
+                        <label class="text-slate-400 block">Gmail Account</label>
+                        <input type="email" id="vEmail" value="rona503504@gmail.com" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
+                        <label class="text-slate-400 block">Shop/Store Name</label>
+                        <input type="text" id="vShop" value="VELORA SHOP" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
+                        <button onclick="document.getElementById('shopNameDisplay').innerText = document.getElementById('vShop').value; document.getElementById('shopEmailDisplay').innerText = document.getElementById('vEmail').value; alert('Vendor Verification Details Updated!'); closeVendorModal();" class="w-full bg-rose-600 text-white font-bold py-2.5 rounded-xl">Save & Verify Details</button>
+                    </div>`;
+            } else if(tab === 'helpline') {
+                title.innerText = "Vendor Helpline & Customer Chat";
+                body.innerHTML = `
+                    <div class="bg-[#1c2541] p-3 rounded-xl space-y-3">
+                        <p class="font-bold text-amber-400">Customer Direct Inquiries:</p>
+                        <div class="bg-[#0b132b] p-2.5 rounded-lg text-slate-300">
+                            <p class="text-rose-400 font-bold">Customer: Rahim</p>
+                            <p>Hi, is this product available in black color?</p>
+                        </div>
+                        <input type="text" placeholder="Type reply to customer..." class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
+                        <button onclick="alert('Reply sent via Helpline!')" class="w-full bg-emerald-600 text-white font-bold py-2 rounded-xl">Send Reply</button>
                     </div>`;
             } else if(tab === 'wallet') {
-                title.innerText = "Vendor Wallet & Payouts";
-                body.innerHTML = `
-                    <div class="bg-[#1c2541] p-3 rounded-xl space-y-3">
-                        <p class="font-bold text-amber-400">Available Balance: ৳12,450</p>
-                        <div class="space-y-1">
-                            <label class="text-slate-400 block">Withdraw Amount (BDT)</label>
-                            <input type="number" id="withdrawAmt" placeholder="Enter amount" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
-                        </div>
-                        <div class="space-y-1">
-                            <label class="text-slate-400 block">Payout Method</label>
-                            <select class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
-                                <option>bKash Personal</option>
-                                <option>Nagad Personal</option>
-                                <option>Bank Account</option>
-                            </select>
-                        </div>
-                        <button onclick="alert('Withdraw request submitted successfully!'); closeVendorModal();" class="w-full bg-rose-600 text-white font-bold py-2.5 rounded-xl">Request Payout</button>
-                    </div>`;
+                title.innerText = "Wallet & Payouts";
+                body.innerHTML = `<div class="bg-[#1c2541] p-3 rounded-xl"><p class="font-bold text-amber-400">Available Balance: ৳12,450</p></div>`;
             } else if(tab === 'products') {
-                title.innerText = "Inventory & Stock Management";
-                body.innerHTML = `
-                    <div class="bg-[#1c2541] p-3 rounded-xl space-y-2">
-                        <div class="flex justify-between items-center border-b border-slate-700 pb-2">
-                            <span>Stainless Steel Tool Set</span>
-                            <span class="text-emerald-400 font-bold">Stock: 15</span>
-                        </div>
-                        <div class="flex justify-between items-center border-b border-slate-700 pb-2">
-                            <span>Electric Kettle 2L</span>
-                            <span class="text-rose-400 font-bold">Stock: 3 (Low)</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span>Wireless Earbuds Pro</span>
-                            <span class="text-emerald-400 font-bold">Stock: 25</span>
-                        </div>
-                    </div>`;
-            } else if(tab === 'coupons') {
-                title.innerText = "Create & Manage Custom Coupons";
-                body.innerHTML = `
-                    <div class="bg-[#1c2541] p-3 rounded-xl space-y-2">
-                        <input type="text" id="couponCode" placeholder="Coupon Code (e.g. SHOP20)" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white uppercase">
-                        <input type="number" id="couponDisc" placeholder="Discount Percentage (%)" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
-                        <button onclick="alert('Custom Coupon Created Successfully!'); closeVendorModal();" class="w-full bg-rose-600 text-white font-bold py-2.5 rounded-xl">Publish Coupon</button>
-                    </div>`;
-            } else if(tab === 'orders') {
-                title.innerText = "Total Orders List";
-                body.innerHTML = `<div class="bg-[#1c2541] p-3 rounded-xl space-y-2"><p class="font-bold text-rose-400">Order #SN-2518</p><p>Product Item - ৳1398[span_2](start_span)[span_2](end_span)</p><p>Customer: MD Hossain khan[span_3](start_span)[span_3](end_span)</p><span class="text-emerald-400 block font-bold">Status: Confirmed</span></div>`;
-            } else if(tab === 'courier') {
-                title.innerText = "1-Click Courier Parcel Booking";
-                body.innerHTML = `
-                    <div class="bg-[#1c2541] p-3 rounded-xl space-y-3">
-                        <p class="font-bold text-white">Select Courier Provider:</p>
-                        <div class="grid grid-cols-2 gap-2">
-                            <button onclick="alert('Parcel booked successfully via Steadfast! Tracking ID: STF-9821')" class="bg-amber-600 text-black font-bold p-2.5 rounded-xl">Steadfast API</button>
-                            <button onclick="alert('Parcel booked successfully via Pathao! Tracking ID: PTH-4412')" class="bg-rose-600 text-white font-bold p-2.5 rounded-xl">Pathao API</button>
-                        </div>
-                    </div>`;
-            } else if(tab === 'profile') {
-                title.innerText = "Shop Profile & Customization";
-                body.innerHTML = `
-                    <div class="bg-[#1c2541] p-3 rounded-xl space-y-2">
-                        <label class="text-slate-400 block">Shop Brand Name</label>
-                        <input type="text" id="inputShopName" value="VELORA SHOP" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
-                        <label class="text-slate-400 block">Store Bio / Description</label>
-                        <textarea rows="2" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">Official Velora Partner Store</textarea>
-                        <button onclick="document.getElementById('shopNameDisplay').innerText = document.getElementById('inputShopName').value; alert('Shop Profile Updated!'); closeVendorModal();" class="w-full bg-rose-600 text-white font-bold py-2.5 rounded-xl">Save Profile</button>
-                    </div>`;
+                title.innerText = "Inventory & Stock";
+                body.innerHTML = `<div class="bg-[#1c2541] p-3 rounded-xl"><p class="text-emerald-400">All inventory items are active.</p></div>`;
             } else if(tab === 'addproduct') {
-                title.innerText = "Add New Product";
+                title.innerText = "Add Advanced Product (SEO & Video)";
                 body.innerHTML = `
-                    <div class="space-y-2">
+                    <div class="space-y-2.5 text-xs">
                         <input type="text" placeholder="Product Name" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
-                        <input type="number" placeholder="Price in BDT" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
-                        <input type="number" placeholder="Initial Stock Quantity" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
-                        <button onclick="alert('Product published successfully to inventory!'); closeVendorModal();" class="w-full bg-rose-600 text-white font-bold py-2.5 rounded-xl">Publish Product</button>
+                        <input type="text" placeholder="Product Category" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
+                        <input type="text" placeholder="Product Title" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
+                        <textarea rows="2" placeholder="Product Description" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white"></textarea>
+                        <input type="text" placeholder="Specification (e.g. Material: Cotton)" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
+                        <input type="text" placeholder="Google SEO Optimized Hashtags (e.g. #Velora #Fashion #Trend)" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
+                        <input type="text" placeholder="Product Size (e.g. M, L, XL, Free Size)" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
+                        <input type="number" placeholder="Product Price (BDT)" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
+                        
+                        <label class="text-slate-400 block pt-1">Upload Image from Gallery</label>
+                        <input type="file" accept="image/*" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2 text-white">
+
+                        <input type="url" placeholder="Optional: Product Video / Facebook Post URL Link" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
+
+                        <button onclick="alert('Advanced product published successfully with SEO & Gallery support!'); closeVendorModal();" class="w-full bg-rose-600 text-white font-bold py-3 rounded-xl shadow-lg mt-2">Publish Product</button>
                     </div>`;
             }
             modal.classList.remove('hidden');
@@ -276,11 +225,6 @@
             alert("Vendor Token Cleared. Logged out successfully.");
             location.reload();
         }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            // Show low stock warning automatically
-            document.getElementById('lowStockWarningBox').classList.remove('hidden');
-        });
     </script>
 </body>
 </html>
