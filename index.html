@@ -43,7 +43,6 @@
 
         <!-- 1. HOME TAB -->
         <div id="tab-home" class="tab-content space-y-6">
-            <!-- Smooth & Slow Auto Banner Slider (8 Seconds Interval) -->
             <div id="bannerSlider" class="bg-gradient-to-r from-slate-900 to-rose-950 border border-slate-800 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden transition-all duration-1000">
                 <div class="relative z-10 flex justify-between items-center">
                     <div>
@@ -58,14 +57,12 @@
                 </div>
             </div>
 
-            <!-- Value Propositions -->
             <div class="grid grid-cols-3 gap-2 text-center text-xs bg-slate-900 border border-slate-800 p-3 rounded-2xl">
                 <div class="font-bold text-slate-300">🛡️ Safe Payment</div>
                 <div class="font-bold text-slate-300">⚡ Fast Delivery</div>
                 <div class="font-bold text-slate-300">🔄 Easy Return</div>
             </div>
 
-            <!-- Products Section -->
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-rose-500 font-extrabold text-base">⚡ Trending Collection</h3>
@@ -92,18 +89,30 @@
             <div id="cartItemsList" class="space-y-3"></div>
 
             <div id="checkoutBox" class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-4 hidden">
-                <h3 class="font-bold text-sm text-slate-300">Delivery Information</h3>
-                <form id="checkoutForm" onsubmit="handleFinalCheckout(event)" class="space-y-3">
+                <h3 class="font-bold text-sm text-slate-300">Delivery Location</h3>
+                <div class="grid grid-cols-2 gap-3 text-xs">
+                    <label class="flex items-center gap-2 bg-slate-800 p-3 rounded-xl cursor-pointer border border-slate-700">
+                        <input type="radio" name="shipping" value="80" checked onchange="renderCartView()" class="accent-rose-500">
+                        <div><p class="font-bold">Inside Dhaka</p><p class="text-slate-400">৳80</p></div>
+                    </label>
+                    <label class="flex items-center gap-2 bg-slate-800 p-3 rounded-xl cursor-pointer border border-slate-700">
+                        <input type="radio" name="shipping" value="130" onchange="renderCartView()" class="accent-rose-500">
+                        <div><p class="font-bold">Outside Dhaka</p><p class="text-slate-400">৳130</p></div>
+                    </label>
+                </div>
+
+                <h3 class="font-bold text-sm text-slate-300 pt-2">Delivery Information</h3>
+                <div class="space-y-3">
                     <input type="text" id="chkName" required placeholder="Full Name" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
                     <input type="email" id="chkEmail" required placeholder="Email Address (Gmail)" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
                     <input type="tel" id="chkPhone" required placeholder="Phone Number" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
                     <textarea id="chkAddress" required rows="2" placeholder="Delivery Address" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white"></textarea>
-                    
-                    <div class="flex justify-between items-center bg-slate-800 p-3 rounded-xl font-bold text-sm">
-                        <span>Total: <span id="summarySub" class="text-rose-500">৳0</span></span>
-                        <button type="submit" class="bg-rose-600 hover:bg-rose-700 text-white px-6 py-2 rounded-lg text-xs shadow-lg">Confirm Order</button>
-                    </div>
-                </form>
+                </div>
+
+                <div class="flex justify-between items-center bg-slate-800 p-3 rounded-xl font-bold text-sm pt-2">
+                    <span>Total (Inc. Delivery): <span id="summarySub" class="text-rose-500">৳0</span></span>
+                    <button type="button" onclick="openPaymentModal()" class="bg-rose-600 hover:bg-rose-700 text-white px-6 py-2 rounded-lg text-xs shadow-lg">Proceed to Checkout</button>
+                </div>
             </div>
         </div>
 
@@ -120,7 +129,6 @@
                 <button onclick="openSettingsModal()" class="bg-slate-800 hover:bg-slate-700 p-2.5 rounded-full text-base">⚙️</button>
             </div>
 
-            <!-- Fully Functional My Orders Status Bar -->
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
                 <h3 class="font-bold text-sm mb-4">My Orders</h3>
                 <div class="grid grid-cols-5 gap-2 text-center text-[11px] text-slate-400 cursor-pointer">
@@ -133,6 +141,28 @@
             </div>
         </div>
     </main>
+
+    <!-- Payment Gateway Modal -->
+    <div id="paymentModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-sm rounded-2xl p-6 relative space-y-4">
+            <button onclick="closePaymentModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
+            <h3 class="text-base font-bold text-rose-500">Select Payment Method</h3>
+            
+            <div class="space-y-3 text-xs">
+                <label class="flex items-center gap-3 bg-slate-800 p-3 rounded-xl cursor-pointer border border-slate-700 font-bold">
+                    <input type="radio" name="paymentMethod" value="bKash" checked class="accent-rose-500"> 📱 bKash Online Payment
+                </label>
+                <label class="flex items-center gap-3 bg-slate-800 p-3 rounded-xl cursor-pointer border border-slate-700 font-bold">
+                    <input type="radio" name="paymentMethod" value="Card" class="accent-rose-500"> 💳 Credit / Debit Card
+                </label>
+                <label class="flex items-center gap-3 bg-slate-800 p-3 rounded-xl cursor-pointer border border-slate-700 font-bold">
+                    <input type="radio" name="paymentMethod" value="COD" class="accent-rose-500"> 💵 Cash on Delivery (COD)
+                </label>
+            </div>
+
+            <button onclick="handleFinalCheckout()" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 rounded-xl text-sm shadow-lg">Next & Confirm Order</button>
+        </div>
+    </div>
 
     <!-- Order Status Modal -->
     <div id="orderStatusModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
@@ -210,7 +240,6 @@
 
     <!-- Script Logic -->
     <script>
-        // Slow & Smooth Auto Banner Slider (8 Seconds Interval)
         const banners = [
             { tag: "New Collection", title: "STYLE NEST STORE", desc: "Discover premium fashion and trendsetter outfits.", bg: "from-slate-900 to-rose-950" },
             { tag: "Limited Stock", title: "TRENDY STREETWEAR", desc: "Exclusive hoodies and drop-shoulder t-shirts.", bg: "from-slate-900 to-purple-950" }
@@ -287,7 +316,7 @@
             const existing = cart.find(c => c.id === id);
             if(existing) { existing.qty += 1; } else { cart.push({ ...prod, qty: 1 }); }
             document.getElementById('cartBadge').innerText = cart.reduce((a,b)=>a+b.qty,0);
-            alert("Added to cart!");
+            // পপ-আপ অ্যালার্ট সম্পূর্ণ বন্ধ করা হয়েছে
         }
 
         function switchTab(tabName) {
@@ -330,8 +359,10 @@
                 </div>
             `).join('');
 
-            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            document.getElementById('summarySub').innerText = '৳' + total;
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const shipping = Number(document.querySelector('input[name="shipping"]:checked')?.value || 80);
+            const grandTotal = subtotal + shipping;
+            document.getElementById('summarySub').innerText = '৳' + grandTotal + ` (Subtotal: ৳${subtotal} + Delivery: ৳${shipping})`;
         }
 
         function changeQty(index, delta) {
@@ -341,7 +372,57 @@
             renderCartView();
         }
 
-        // Functional Order Status Modal
+        function openPaymentModal() {
+            const name = document.getElementById('chkName').value;
+            const email = document.getElementById('chkEmail').value;
+            const phone = document.getElementById('chkPhone').value;
+            const address = document.getElementById('chkAddress').value;
+
+            if(!name || !email || !phone || !address) {
+                alert("Please fill up all delivery information fields first!");
+                return;
+            }
+            document.getElementById('paymentModal').classList.remove('hidden');
+        }
+
+        function closePaymentModal() {
+            document.getElementById('paymentModal').classList.add('hidden');
+        }
+
+        function handleFinalCheckout() {
+            const name = document.getElementById('chkName').value;
+            const email = document.getElementById('chkEmail').value;
+            const phone = document.getElementById('chkPhone').value;
+            const address = document.getElementById('chkAddress').value;
+            const shipping = Number(document.querySelector('input[name="shipping"]:checked')?.value || 80);
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const grandTotal = subtotal + shipping;
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+            const ownerPhone = "8801886759590";
+
+            emailjs.send('service_ce4fpfe', 'template_py8f1yp', { to_name: name, to_email: email, cust_phone: phone, cust_address: address, total_amount: grandTotal });
+
+            const itemsText = cart.map(i => `- ${i.name} x${i.qty} (৳${i.price * i.qty})`).join('%0A');
+            const message = `Order Confirmation%0A*Name:* ${encodeURIComponent(name)}%0A*Phone:* ${encodeURIComponent(phone)}%0A*Address:* ${encodeURIComponent(address)}%0A*Payment Method:* ${paymentMethod}%0A*Items:*%0A${itemsText}%0A*Delivery Charge:* ৳${shipping}%0A*Grand Total:* ৳${grandTotal}`;
+            
+            window.open(`https://wa.me/${ownerPhone}?text=${message}`, '_blank');
+            cart = [];
+            document.getElementById('cartBadge').innerText = '0';
+            closePaymentModal();
+            switchTab('home');
+            alert("Order Confirmed Successfully!");
+        }
+
+        // Auto fill form from saved settings
+        function loadCustomerData() {
+            if(localStorage.getItem('cust_name')) {
+                document.getElementById('chkName').value = localStorage.getItem('cust_name') || '';
+                document.getElementById('chkEmail').value = localStorage.getItem('cust_email') || '';
+                document.getElementById('chkPhone').value = localStorage.getItem('cust_phone') || '';
+                document.getElementById('chkAddress').value = localStorage.getItem('cust_address') || '';
+            }
+        }
+
         function openOrderStatus(statusType) {
             document.getElementById('modalOrderStatusTitle').innerText = `${statusType} Orders`;
             document.getElementById('modalOrderStatusDesc').innerText = `You have 0 active items under ${statusType}.`;
@@ -352,7 +433,6 @@
             document.getElementById('orderStatusModal').classList.add('hidden');
         }
 
-        // Settings Modal Controls
         function openSettingsModal() {
             document.getElementById('settingsModal').classList.remove('hidden');
             document.getElementById('settingsName').value = localStorage.getItem('cust_name') || '';
@@ -380,6 +460,7 @@
             document.getElementById('displayUserName').innerText = name || 'Guest Customer';
             document.getElementById('displayUserEmail').innerText = email || 'No email added';
 
+            loadCustomerData();
             closeSettingsModal();
             alert("Settings saved successfully!");
         }
@@ -404,27 +485,8 @@
                 document.getElementById('displayUserName').innerText = savedName;
                 document.getElementById('displayUserEmail').innerText = savedEmail || '';
             }
+            loadCustomerData();
         });
-
-        function handleFinalCheckout(e) {
-            e.preventDefault();
-            const name = document.getElementById('chkName').value;
-            const email = document.getElementById('chkEmail').value;
-            const phone = document.getElementById('chkPhone').value;
-            const address = document.getElementById('chkAddress').value;
-            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-
-            emailjs.send('service_ce4fpfe', 'template_py8f1yp', { to_name: name, to_email: email, cust_phone: phone, cust_address: address, total_amount: total });
-
-            const itemsText = cart.map(i => `- ${i.name} x${i.qty} (৳${i.price * i.qty})`).join('%0A');
-            const message = `Order Confirmation%0A*Name:* ${encodeURIComponent(name)}%0A*Phone:* ${encodeURIComponent(phone)}%0A*Address:* ${encodeURIComponent(address)}%0A*Items:*%0A${itemsText}%0A*Total:* ৳${total}`;
-            
-            window.open(`https://wa.me/8801886759590?text=${message}`, '_blank');
-            cart = [];
-            document.getElementById('cartBadge').innerText = '0';
-            switchTab('home');
-            alert("Order Confirmed!");
-        }
 
         renderProducts();
     </script>
