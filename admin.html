@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VELORA SHOP VENDOR - Dashboard</title>
+    <title>VELORA SHOP VENDOR - Pro Dashboard</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -37,40 +37,36 @@
         </div>
     </header>
 
-    <!-- Sidebar Menu Drawer (Hidden by default, toggled via hamburger) -->
-    <div id="vendorSidebar" class="fixed inset-y-0 right-0 z-50 w-72 bg-[#0b132b] border-l border-slate-800 p-5 transform translate-x-full transition-transform duration-300 shadow-2xl flex flex-col justify-between">
+    <!-- Sidebar Menu Drawer -->
+    <div id="vendorSidebar" class="fixed inset-y-0 right-0 z-50 w-72 bg-[#0b132b] border-l border-slate-800 p-5 transform translate-x-full transition-transform duration-300 shadow-2xl flex flex-col justify-between overflow-y-auto">
         <div class="space-y-4">
             <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                <h3 class="font-bold text-sm text-rose-500 uppercase">Vendor Menu</h3>
+                <h3 class="font-bold text-sm text-rose-500 uppercase">Pro Vendor Menu</h3>
                 <button onclick="toggleVendorSidebar()" class="text-slate-400 hover:text-white text-lg">✕</button>
             </div>
             <div class="space-y-2 text-xs font-bold text-slate-300">
-                <div onclick="switchVendorTab('dashboard')" class="p-2.5 bg-rose-600 text-white rounded-xl cursor-pointer shadow">📌 Dashboard</div>
-                <div onclick="switchVendorTab('products')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">📦 My Products</div>
+                <div onclick="switchVendorTab('dashboard')" class="p-2.5 bg-rose-600 text-white rounded-xl cursor-pointer shadow">📌 Dashboard & Analytics</div>
+                <div onclick="switchVendorTab('wallet')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">💰 Wallet & Payouts</div>
+                <div onclick="switchVendorTab('products')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">📦 Inventory & Stock</div>
+                <div onclick="switchVendorTab('coupons')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">🎟️ Custom Coupons</div>
                 <div onclick="switchVendorTab('orders')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">🛒 Total Orders</div>
-                <div onclick="switchVendorTab('confirmed')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">✔️ Confirmed</div>
-                <div onclick="switchVendorTab('shipped')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">🚚 Shipped</div>
-                <div onclick="switchVendorTab('delivered')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">✅ Total Delivered</div>
-                <div onclick="switchVendorTab('canceled')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">❌ Canceled</div>
-                <div onclick="switchVendorTab('pending')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">⏳ Pending</div>
-                <div onclick="switchVendorTab('tracking')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">🔍 Order Tracking</div>
-                <div onclick="switchVendorTab('steadfast')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">⚡ Steadfast Courier</div>
-                <div onclick="switchVendorTab('pathao')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">🚀 Pathao Courier</div>
-                <div onclick="switchVendorTab('addproduct')" class="p-2.5 bg-amber-500 text-black rounded-xl cursor-pointer shadow">➕ Add Product</div>
+                <div onclick="switchVendorTab('courier')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">🚀 1-Click Courier Booking</div>
+                <div onclick="switchVendorTab('profile')" class="p-2.5 bg-[#1c2541] hover:bg-slate-800 rounded-xl cursor-pointer">🎨 Shop Customization</div>
+                <div onclick="switchVendorTab('addproduct')" class="p-2.5 bg-amber-500 text-black rounded-xl cursor-pointer shadow">➕ Add New Product</div>
             </div>
         </div>
-        <button onclick="handleVendorLogout()" class="w-full bg-rose-500/10 hover:bg-rose-500/20 text-rose-500 border border-rose-500/30 font-bold py-2.5 rounded-xl text-xs transition">Logout Token</button>
+        <button onclick="handleVendorLogout()" class="w-full bg-rose-500/10 hover:bg-rose-500/20 text-rose-500 border border-rose-500/30 font-bold py-2.5 rounded-xl text-xs transition mt-4">Logout Token</button>
     </div>
 
     <!-- Main Vendor Container -->
     <main class="max-w-7xl mx-auto px-4 py-4 space-y-4">
 
-        <!-- Dynamic Color-rich Vendor Promo Banner Slider (4s Interval) -->
+        <!-- Dynamic Promo Banner Slider -->
         <div id="vendorBannerSlider" class="bg-gradient-to-r from-indigo-700 via-purple-700 to-rose-700 border border-slate-700 rounded-2xl p-5 text-white shadow-xl relative overflow-hidden transition-all duration-700">
             <div class="relative z-10 space-y-1">
-                <span id="vBannerTag" class="bg-black/30 text-amber-300 text-[10px] px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">VENDOR INSIGHT</span>
-                <h2 id="vBannerTitle" class="text-lg font-black tracking-wide">Boost Your Sales by 50%</h2>
-                <p id="vBannerDesc" class="text-xs text-slate-100">Use Velora Express Delivery to get priority listing across Bangladesh.</p>
+                <span id="vBannerTag" class="bg-black/30 text-amber-300 text-[10px] px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">PRO VENDOR</span>
+                <h2 id="vBannerTitle" class="text-lg font-black tracking-wide">Automated Payouts & Courier Live</h2>
+                <p id="vBannerDesc" class="text-xs text-slate-100">Manage your entire e-commerce store inventory and finance seamlessly.</p>
             </div>
         </div>
 
@@ -79,78 +75,52 @@
             <div class="flex items-center gap-3">
                 <div class="w-12 h-12 bg-rose-600 rounded-xl flex items-center justify-center text-white font-black text-lg shadow">V</div>
                 <div>
-                    <h2 class="font-bold text-sm text-white">VELORA SHOP</h2>
+                    <h2 class="font-bold text-sm text-white" id="shopNameDisplay">VELORA SHOP</h2>
                     <p class="text-[11px] text-slate-400">rona503504@gmail.com</p>
                 </div>
             </div>
-            <button onclick="alert('Settings panel opened')" class="bg-[#1c2541] hover:bg-slate-700 p-2.5 rounded-full text-base border border-slate-700">⚙️</button>
+            <button onclick="switchVendorTab('profile')" class="bg-[#1c2541] hover:bg-slate-700 p-2.5 rounded-full text-base border border-slate-700">⚙️</button>
         </div>
 
-        <!-- Vendor Core Stats & Features Grid (Matching exact user request + extra colorful cards) -->
+        <!-- Quick Stats & Feature Grid -->
         <div class="grid grid-cols-2 gap-3 text-xs">
-            <div onclick="switchVendorTab('dashboard')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
-                <span class="text-rose-500 font-bold text-xs block uppercase">Dashboard</span>
-                <p class="text-[10px] text-slate-400 mt-1">Overview & Analytics</p>
+            <div onclick="switchVendorTab('wallet')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
+                <span class="text-amber-400 font-bold text-xs block">AVAILABLE BALANCE</span>
+                <p class="text-xl font-black text-white mt-1">৳12,450</p>
             </div>
             <div onclick="switchVendorTab('products')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
-                <span class="text-slate-400 font-bold text-xs block">MY PRODUCTS</span>
-                <p class="text-2xl font-black text-white mt-1" id="statProductsCount">0</p>
+                <span class="text-slate-400 font-bold text-xs block">INVENTORY ITEMS</span>
+                <p class="text-xl font-black text-white mt-1" id="statProductsCount">4</p>
             </div>
             <div onclick="switchVendorTab('orders')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
                 <span class="text-slate-400 font-bold text-xs block">TOTAL ORDERS</span>
-                <p class="text-2xl font-black text-emerald-400 mt-1">7</p>
+                <p class="text-xl font-black text-emerald-400 mt-1">7</p>
             </div>
-            <div onclick="switchVendorTab('confirmed')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
-                <span class="text-slate-400 font-bold text-xs block">CONFIRMED</span>
-                <p class="text-2xl font-black text-blue-400 mt-1">2</p>
+            <div onclick="switchVendorTab('courier')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
+                <span class="text-slate-400 font-bold text-xs block">COURIER API</span>
+                <p class="text-xl font-black text-rose-400 mt-1">Ready 🚀</p>
             </div>
-            <div onclick="switchVendorTab('shipped')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
-                <span class="text-slate-400 font-bold text-xs block">SHIPPED</span>
-                <p class="text-2xl font-black text-amber-400 mt-1">0</p>
+            <div onclick="switchVendorTab('coupons')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
+                <span class="text-slate-400 font-bold text-xs block">ACTIVE COUPONS</span>
+                <p class="text-xl font-black text-amber-300 mt-1">2 Active</p>
             </div>
-            <div onclick="switchVendorTab('delivered')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
-                <span class="text-slate-400 font-bold text-xs block">TOTAL DELIVERED</span>
-                <p class="text-2xl font-black text-emerald-500 mt-1">0</p>
+            <div onclick="switchVendorTab('dashboard')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
+                <span class="text-slate-400 font-bold text-xs block">STORE RATING</span>
+                <p class="text-xl font-black text-amber-400 mt-1">⭐ 4.9 / 5.0</p>
             </div>
-            <div onclick="switchVendorTab('canceled')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
-                <span class="text-slate-400 font-bold text-xs block">CANCELED</span>
-                <p class="text-2xl font-black text-rose-500 mt-1">4</p>
-            </div>
-            <div onclick="switchVendorTab('pending')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
-                <span class="text-slate-400 font-bold text-xs block">PENDING</span>
-                <p class="text-2xl font-black text-amber-300 mt-1">0</p>
-            </div>
-            <div onclick="switchVendorTab('tracking')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow flex items-center justify-between">
-                <div>
-                    <span class="text-slate-400 font-bold text-xs block">ORDER TRACKING</span>
-                    <p class="text-rose-400 font-bold mt-1">Track Now</p>
-                </div>
-                <span class="text-2xl">🔍</span>
-            </div>
-            <div onclick="switchVendorTab('steadfast')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow flex items-center justify-between">
-                <div>
-                    <span class="text-slate-400 font-bold text-xs block">STEADFAST</span>
-                    <p class="text-amber-400 font-bold mt-1">Courier</p>
-                </div>
-                <span class="text-2xl">⚡</span>
-            </div>
-            <div onclick="switchVendorTab('pathao')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow flex items-center justify-between col-span-2">
-                <div>
-                    <span class="text-slate-400 font-bold text-xs block">PATHAO COURIER API</span>
-                    <p class="text-rose-400 font-bold mt-1">Instant Parcel Dispatch</p>
-                </div>
-                <span class="text-2xl">🚀</span>
-            </div>
-            <div onclick="switchVendorTab('addproduct')" class="bg-gradient-to-r from-rose-600 to-amber-600 text-white p-4 rounded-2xl cursor-pointer shadow-lg col-span-2 text-center font-bold">
+            <div onclick="switchVendorTab('addproduct')" class="bg-gradient-to-r from-rose-600 to-amber-600 text-white p-4 rounded-2xl cursor-pointer shadow-lg col-span-2 text-center font-bold text-sm">
                 ➕ Add New Product
             </div>
         </div>
 
-        <!-- Recent Orders Section -->
+        <!-- Recent Orders & Low Stock Warnings -->
         <div class="bg-[#0b132b] border border-slate-800 rounded-2xl p-4 space-y-3 shadow-xl">
             <div class="flex justify-between items-center">
-                <h3 class="font-bold text-sm text-white">Recent Orders</h3>
+                <h3 class="font-bold text-sm text-white">Recent Orders & Stock Alerts</h3>
                 <span class="text-xs text-rose-500 cursor-pointer" onclick="switchVendorTab('orders')">View all</span>
+            </div>
+            <div id="lowStockWarningBox" class="bg-rose-500/10 border border-rose-500/30 p-2.5 rounded-xl text-[11px] text-rose-300 hidden">
+                ⚠️ Low Stock Alert: 2 items have less than 5 units remaining!
             </div>
             <div class="bg-[#1c2541] border border-slate-700 p-3 rounded-xl text-xs space-y-1">
                 <div class="flex justify-between font-bold">
@@ -178,12 +148,12 @@
 
     <!-- Script Engine -->
     <script>
-        // Colorful Vendor Promo Banners (4s Interval)
+        // Banner Slider
         const vendorBanners = [
-            { tag: "VENDOR INSIGHT", title: "Boost Your Sales by 50%", desc: "Use Velora Express Delivery to get priority listing across Bangladesh.", bg: "from-indigo-700 via-purple-700 to-rose-700" },
-            { tag: "SPECIAL OFFER", title: "Zero Commission Week", desc: "Enjoy 0% commission on all electronics and apparel items this week.", bg: "from-emerald-700 via-teal-800 to-blue-900" },
-            { tag: "LOGISTICS", title: "Steadfast & Pathao Integration", desc: "Automated parcel booking and real-time status updates are now live.", bg: "from-amber-600 via-orange-700 to-rose-800" },
-            { tag: "GROWTH TIP", title: "Optimize Product Images", desc: "Vendors with high-definition photos receive 3x more customer orders.", bg: "from-purple-800 via-pink-700 to-rose-900" }
+            { tag: "PRO VENDOR", title: "Automated Payouts & Courier Live", desc: "Manage your entire e-commerce store inventory and finance seamlessly.", bg: "from-indigo-700 via-purple-700 to-rose-700" },
+            { tag: "FINANCE", title: "Instant bKash/Nagad Payouts", desc: "Withdraw your earnings instantly with zero withdrawal fee.", bg: "from-emerald-700 via-teal-800 to-blue-900" },
+            { tag: "MARKETING", title: "Create Custom Shop Coupons", desc: "Boost sales by offering custom percentage discounts to buyers.", bg: "from-amber-600 via-orange-700 to-rose-800" },
+            { tag: "LOGISTICS", title: "1-Click Steadfast & Pathao Booking", desc: "Dispatch parcels instantly and generate automated shipping labels.", bg: "from-purple-800 via-pink-700 to-rose-900" }
         ];
         let currentVBIndex = 0;
         setInterval(() => {
@@ -210,41 +180,90 @@
             const body = document.getElementById('vModalBody');
 
             if(tab === 'dashboard') {
-                title.innerText = "Vendor Dashboard Overview";
-                body.innerHTML = `<div class="bg-[#1c2541] p-3 rounded-xl space-y-2"><p class="font-bold text-white">Status: Active Vendor</p><p class="text-emerald-400">Total Sales: ৳1398</p><p class="text-slate-300">Pending Settlements: ৳0</p></div>`;
+                title.innerText = "Dashboard & Sales Analytics";
+                body.innerHTML = `
+                    <div class="bg-[#1c2541] p-3 rounded-xl space-y-2">
+                        <p class="font-bold text-white">📊 Weekly Performance</p>
+                        <p class="text-emerald-400">Total Revenue: ৳14,500</p>
+                        <p class="text-slate-300">Completed Orders: 7</p>
+                        <p class="text-amber-400">Store Rating: ⭐ 4.9 / 5.0</p>
+                    </div>`;
+            } else if(tab === 'wallet') {
+                title.innerText = "Vendor Wallet & Payouts";
+                body.innerHTML = `
+                    <div class="bg-[#1c2541] p-3 rounded-xl space-y-3">
+                        <p class="font-bold text-amber-400">Available Balance: ৳12,450</p>
+                        <div class="space-y-1">
+                            <label class="text-slate-400 block">Withdraw Amount (BDT)</label>
+                            <input type="number" id="withdrawAmt" placeholder="Enter amount" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-slate-400 block">Payout Method</label>
+                            <select class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
+                                <option>bKash Personal</option>
+                                <option>Nagad Personal</option>
+                                <option>Bank Account</option>
+                            </select>
+                        </div>
+                        <button onclick="alert('Withdraw request submitted successfully!'); closeVendorModal();" class="w-full bg-rose-600 text-white font-bold py-2.5 rounded-xl">Request Payout</button>
+                    </div>`;
             } else if(tab === 'products') {
-                title.innerText = "My Products Inventory";
-                body.innerHTML = `<div class="bg-[#1c2541] p-3 rounded-xl"><p class="text-slate-300">You currently have active items listed in Velora global store.</p></div>`;
+                title.innerText = "Inventory & Stock Management";
+                body.innerHTML = `
+                    <div class="bg-[#1c2541] p-3 rounded-xl space-y-2">
+                        <div class="flex justify-between items-center border-b border-slate-700 pb-2">
+                            <span>Stainless Steel Tool Set</span>
+                            <span class="text-emerald-400 font-bold">Stock: 15</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-slate-700 pb-2">
+                            <span>Electric Kettle 2L</span>
+                            <span class="text-rose-400 font-bold">Stock: 3 (Low)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>Wireless Earbuds Pro</span>
+                            <span class="text-emerald-400 font-bold">Stock: 25</span>
+                        </div>
+                    </div>`;
+            } else if(tab === 'coupons') {
+                title.innerText = "Create & Manage Custom Coupons";
+                body.innerHTML = `
+                    <div class="bg-[#1c2541] p-3 rounded-xl space-y-2">
+                        <input type="text" id="couponCode" placeholder="Coupon Code (e.g. SHOP20)" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white uppercase">
+                        <input type="number" id="couponDisc" placeholder="Discount Percentage (%)" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
+                        <button onclick="alert('Custom Coupon Created Successfully!'); closeVendorModal();" class="w-full bg-rose-600 text-white font-bold py-2.5 rounded-xl">Publish Coupon</button>
+                    </div>`;
             } else if(tab === 'orders') {
                 title.innerText = "Total Orders List";
-                body.innerHTML = `<div class="bg-[#1c2541] p-3 rounded-xl space-y-2"><p class="font-bold text-rose-400">Order #SN-2518</p><p>Product Item - ৳1398[span_2](start_span)[span_2](end_span)</p><p>Customer: MD Hossain khan[span_3](start_span)[span_3](end_span)</p></div>`;
-            } else if(tab === 'confirmed') {
-                title.innerText = "Confirmed Orders";
-                body.innerHTML = `<div class="bg-[#1c2541] p-3 rounded-xl"><p class="text-blue-400 font-bold">2 Confirmed orders ready for dispatch.</p></div>`;
-            } else if(tab === 'shipped') {
-                title.innerText = "Shipped Orders";
-                body.innerHTML = `<div class="bg-[#1c2541] p-3 rounded-xl"><p class="text-amber-400">No active shipments in transit.</p></div>`;
-            } else if(tab === 'delivered') {
-                title.innerText = "Total Delivered Orders";
-                body.innerHTML = `<div class="bg-[#1c2541] p-3 rounded-xl"><p class="text-emerald-400">Delivered history log is up to date.</p></div>`;
-            } else if(tab === 'canceled') {
-                title.innerText = "Canceled Orders";
-                body.innerHTML = `<div class="bg-[#1c2541] p-3 rounded-xl"><p class="text-rose-400">4 orders were canceled due to customer unavailability.</p></div>`;
-            } else if(tab === 'pending') {
-                title.innerText = "Pending Orders";
-                body.innerHTML = `<div class="bg-[#1c2541] p-3 rounded-xl"><p class="text-amber-300">All orders have been processed.</p></div>`;
-            } else if(tab === 'tracking') {
-                title.innerText = "Order Tracking System";
-                body.innerHTML = `<div class="space-y-2"><input type="text" placeholder="Enter Tracking ID..." class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white"><button onclick="alert('Tracking ID verified')" class="w-full bg-rose-600 text-white font-bold py-2 rounded-xl">Track Status</button></div>`;
-            } else if(tab === 'steadfast') {
-                title.innerText = "Steadfast Courier Integration";
-                body.innerHTML = `<div class="bg-[#1c2541] p-3 rounded-xl space-y-2"><p class="font-bold text-amber-400">Steadfast API Status: Connected</p><p>API Key: Active & Verified</p></div>`;
-            } else if(tab === 'pathao') {
-                title.innerText = "Pathao Courier Integration";
-                body.innerHTML = `<div class="bg-[#1c2541] p-3 rounded-xl space-y-2"><p class="font-bold text-rose-400">Pathao Merchant ID: VELORA-503</p><p>Instant pickup request is enabled.</p></div>`;
+                body.innerHTML = `<div class="bg-[#1c2541] p-3 rounded-xl space-y-2"><p class="font-bold text-rose-400">Order #SN-2518</p><p>Product Item - ৳1398[span_2](start_span)[span_2](end_span)</p><p>Customer: MD Hossain khan[span_3](start_span)[span_3](end_span)</p><span class="text-emerald-400 block font-bold">Status: Confirmed</span></div>`;
+            } else if(tab === 'courier') {
+                title.innerText = "1-Click Courier Parcel Booking";
+                body.innerHTML = `
+                    <div class="bg-[#1c2541] p-3 rounded-xl space-y-3">
+                        <p class="font-bold text-white">Select Courier Provider:</p>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="alert('Parcel booked successfully via Steadfast! Tracking ID: STF-9821')" class="bg-amber-600 text-black font-bold p-2.5 rounded-xl">Steadfast API</button>
+                            <button onclick="alert('Parcel booked successfully via Pathao! Tracking ID: PTH-4412')" class="bg-rose-600 text-white font-bold p-2.5 rounded-xl">Pathao API</button>
+                        </div>
+                    </div>`;
+            } else if(tab === 'profile') {
+                title.innerText = "Shop Profile & Customization";
+                body.innerHTML = `
+                    <div class="bg-[#1c2541] p-3 rounded-xl space-y-2">
+                        <label class="text-slate-400 block">Shop Brand Name</label>
+                        <input type="text" id="inputShopName" value="VELORA SHOP" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
+                        <label class="text-slate-400 block">Store Bio / Description</label>
+                        <textarea rows="2" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">Official Velora Partner Store</textarea>
+                        <button onclick="document.getElementById('shopNameDisplay').innerText = document.getElementById('inputShopName').value; alert('Shop Profile Updated!'); closeVendorModal();" class="w-full bg-rose-600 text-white font-bold py-2.5 rounded-xl">Save Profile</button>
+                    </div>`;
             } else if(tab === 'addproduct') {
                 title.innerText = "Add New Product";
-                body.innerHTML = `<div class="space-y-2"><input type="text" placeholder="Product Name" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white"><input type="number" placeholder="Price in BDT" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white"><button onclick="alert('Product added successfully!'); closeVendorModal();" class="w-full bg-rose-600 text-white font-bold py-2.5 rounded-xl">Publish Product</button></div>`;
+                body.innerHTML = `
+                    <div class="space-y-2">
+                        <input type="text" placeholder="Product Name" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
+                        <input type="number" placeholder="Price in BDT" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
+                        <input type="number" placeholder="Initial Stock Quantity" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white">
+                        <button onclick="alert('Product published successfully to inventory!'); closeVendorModal();" class="w-full bg-rose-600 text-white font-bold py-2.5 rounded-xl">Publish Product</button>
+                    </div>`;
             }
             modal.classList.remove('hidden');
         }
@@ -257,6 +276,11 @@
             alert("Vendor Token Cleared. Logged out successfully.");
             location.reload();
         }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // Show low stock warning automatically
+            document.getElementById('lowStockWarningBox').classList.remove('hidden');
+        });
     </script>
 </body>
 </html>
