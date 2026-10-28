@@ -26,7 +26,7 @@
 </head>
 <body class="bg-slate-950 text-slate-100 pb-24 transition-colors duration-300">
 
-    <!-- Top Header: Left Brand Name VELORA & Right Full Search Bar -->
+    <!-- Top Header -->
     <header class="sticky top-0 z-40 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 px-4 py-3">
         <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
             <h1 class="text-base md:text-xl font-black tracking-widest text-rose-500 uppercase cursor-pointer whitespace-nowrap" onclick="switchTab('home')">VELORA</h1>
@@ -134,7 +134,7 @@
         </div>
     </main>
 
-    <!-- Payment Gateway & Delivery Info Modal -->
+    <!-- Payment Gateway Modal -->
     <div id="paymentModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl p-6 relative space-y-4 max-h-[90vh] overflow-y-auto">
             <button onclick="closePaymentModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
@@ -172,7 +172,7 @@
         </div>
     </div>
 
-    <!-- Custom In-App Success Modal -->
+    <!-- Success Modal -->
     <div id="orderSuccessModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 w-full max-w-sm rounded-2xl p-6 relative space-y-4 text-center">
             <div class="w-16 h-16 bg-emerald-500/20 text-emerald-500 rounded-full flex items-center justify-center text-3xl font-bold mx-auto">✓</div>
@@ -195,7 +195,7 @@
         </div>
     </div>
 
-    <!-- FULL SETTINGS MODAL -->
+    <!-- SETTINGS MODAL -->
     <div id="settingsModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl p-6 relative max-h-[90vh] overflow-y-auto space-y-4">
             <div class="flex justify-between items-center border-b border-slate-800 pb-3">
@@ -290,8 +290,8 @@
             if(timerEl) timerEl.innerText = `${hrs} : ${mins} : ${secs}`;
         }, 1000);
 
-        // 100+ Dummy Products
-        let products = JSON.parse(localStorage.getItem('vendor_products')) || [
+        // 100+ Dummy Products (LocalStorage cleared to force fresh load)
+        const products = [
             { id: 1, name: "6-Piece Stainless Steel Kitchen Tool Set", price: 709, isPaid: true, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" },
             { id: 2, name: "Electric Kettle 2L - Perfect for Tea & Coffee", price: 659, isPaid: false, image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500" },
             { id: 3, name: "Wireless Bluetooth Earbuds Pro", price: 1299, isPaid: true, image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500" },
@@ -539,9 +539,7 @@
             const phone = document.getElementById('chkPhone').value;
             const address = document.getElementById('chkAddress').value;
 
-            if(!name || !email || !phone || !address) {
-                return;
-            }
+            if(!name || !email || !phone || !address) return;
 
             const shipping = Number(document.querySelector('input[name="shipping"]:checked')?.value || 80);
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
@@ -554,7 +552,6 @@
             localStorage.setItem('cust_phone', phone);
             localStorage.setItem('cust_address', address);
 
-            // Send silent Email via EmailJS
             emailjs.send('service_ce4fpfe', 'template_py8f1yp', {
                 to_name: name,
                 to_email: email,
@@ -565,13 +562,10 @@
                 total_amount: grandTotal
             });
 
-            localStorage.setItem(orderId, JSON.stringify({ orderId, name, status: "Processing", grandTotal }));
-
             cart = [];
             document.getElementById('cartBadge').innerText = '0';
             closePaymentModal();
             
-            // Show custom in-app success modal
             document.getElementById('successTrackId').innerText = orderId;
             document.getElementById('orderSuccessModal').classList.remove('hidden');
         }
@@ -612,16 +606,10 @@
 
         function saveCustomerSettings(e) {
             e.preventDefault();
-            const name = document.getElementById('settingsName').value;
-            const email = document.getElementById('settingsEmail').value;
-            const phone = document.getElementById('settingsPhone').value;
-            const address = document.getElementById('settingsAddress').value;
-
-            localStorage.setItem('cust_name', name);
-            localStorage.setItem('cust_email', email);
-            localStorage.setItem('cust_phone', phone);
-            localStorage.setItem('cust_address', address);
-
+            localStorage.setItem('cust_name', document.getElementById('settingsName').value);
+            localStorage.setItem('cust_email', document.getElementById('settingsEmail').value);
+            localStorage.setItem('cust_phone', document.getElementById('settingsPhone').value);
+            localStorage.setItem('cust_address', document.getElementById('settingsAddress').value);
             loadCustomerData();
             closeSettingsModal();
         }
@@ -637,9 +625,8 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             loadCustomerData();
+            renderProducts();
         });
-
-        renderProducts();
     </script>
 </body>
 </html>
