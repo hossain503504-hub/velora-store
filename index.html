@@ -63,6 +63,15 @@
                 <div class="font-bold text-slate-300">🔄 Easy Return</div>
             </div>
 
+            <!-- Category Filter Tabs -->
+            <div class="flex gap-2 overflow-x-auto pb-1 text-xs">
+                <button onclick="filterCategory('All')" id="cat-All" class="cat-btn px-4 py-2 bg-rose-600 text-white font-bold rounded-xl whitespace-nowrap transition">All Products</button>
+                <button onclick="filterCategory('Kitchen')" id="cat-Kitchen" class="cat-btn px-4 py-2 bg-slate-900 border border-slate-800 text-slate-300 font-bold rounded-xl whitespace-nowrap transition">Kitchen</button>
+                <button onclick="filterCategory('Electronics')" id="cat-Electronics" class="cat-btn px-4 py-2 bg-slate-900 border border-slate-800 text-slate-300 font-bold rounded-xl whitespace-nowrap transition">Electronics</button>
+                <button onclick="filterCategory('Fashion')" id="cat-Fashion" class="cat-btn px-4 py-2 bg-slate-900 border border-slate-800 text-slate-300 font-bold rounded-xl whitespace-nowrap transition">Fashion</button>
+                <button onclick="filterCategory('Accessories')" id="cat-Accessories" class="cat-btn px-4 py-2 bg-slate-900 border border-slate-800 text-slate-300 font-bold rounded-xl whitespace-nowrap transition">Accessories</button>
+            </div>
+
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-rose-500 font-extrabold text-base">⚡ All Products</h3>
@@ -89,6 +98,13 @@
             <div id="cartItemsList" class="space-y-3"></div>
 
             <div id="checkoutBox" class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-4 hidden">
+                <!-- Coupon Code Section -->
+                <div class="flex gap-2">
+                    <input type="text" id="couponInput" placeholder="Enter Coupon (e.g. VELORA10)" class="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+                    <button type="button" onclick="applyCoupon()" class="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-xl text-xs font-bold">Apply</button>
+                </div>
+                <p id="couponMsg" class="text-[11px] text-emerald-400 hidden"></p>
+
                 <h3 class="font-bold text-sm text-slate-300">Delivery Location Charge</h3>
                 <div class="grid grid-cols-2 gap-3 text-xs">
                     <label class="flex items-center gap-2 bg-slate-800 p-3 rounded-xl cursor-pointer border border-slate-700">
@@ -121,6 +137,16 @@
                 <button onclick="openSettingsModal()" class="bg-slate-800 hover:bg-slate-700 p-2.5 rounded-full text-base">⚙️</button>
             </div>
 
+            <!-- Order Tracking Section -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3">
+                <h3 class="font-bold text-sm">Track Your Order</h3>
+                <div class="flex gap-2">
+                    <input type="text" id="trackIdInput" placeholder="Enter Order ID (e.g. VELORA-1234)" class="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+                    <button onclick="trackOrder()" class="bg-rose-600 text-white px-4 py-2 rounded-xl text-xs font-bold">Track</button>
+                </div>
+                <div id="trackResult" class="text-xs text-slate-400 hidden bg-slate-800 p-3 rounded-xl"></div>
+            </div>
+
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
                 <h3 class="font-bold text-sm mb-4">My Orders</h3>
                 <div class="grid grid-cols-5 gap-2 text-center text-[11px] text-slate-400 cursor-pointer">
@@ -133,6 +159,14 @@
             </div>
         </div>
     </main>
+
+    <!-- Product Details Modal -->
+    <div id="productModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-lg rounded-2xl p-6 relative space-y-4 max-h-[90vh] overflow-y-auto">
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
+            <div id="modalProductContent"></div>
+        </div>
+    </div>
 
     <!-- Payment Gateway Modal -->
     <div id="paymentModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
@@ -290,153 +324,92 @@
             if(timerEl) timerEl.innerText = `${hrs} : ${mins} : ${secs}`;
         }, 1000);
 
-        // 100+ Dummy Products (LocalStorage cleared to force fresh load)
+        // Products with Categories & Wishlist status
         const products = [
-            { id: 1, name: "6-Piece Stainless Steel Kitchen Tool Set", price: 709, isPaid: true, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" },
-            { id: 2, name: "Electric Kettle 2L - Perfect for Tea & Coffee", price: 659, isPaid: false, image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500" },
-            { id: 3, name: "Wireless Bluetooth Earbuds Pro", price: 1299, isPaid: true, image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500" },
-            { id: 4, name: "Smart Fitness Tracker Watch", price: 1850, isPaid: true, image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500" },
-            { id: 5, name: "Minimalist Leather Wallet for Men", price: 450, isPaid: false, image: "https://images.unsplash.com/photo-1627123424574-724758594e93?w=500" },
-            { id: 6, name: "Casual Over-Sized Hoodie", price: 1490, isPaid: true, image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500" },
-            { id: 7, name: "Classic Drop-Shoulder Graphic Tee", price: 650, isPaid: false, image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500" },
-            { id: 8, name: "Anti-Glare UV Protection Sunglasses", price: 890, isPaid: true, image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500" },
-            { id: 9, name: "RGB Gaming Mechanical Keyboard", price: 2450, isPaid: true, image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500" },
-            { id: 10, name: "Ergonomic Wireless Optical Mouse", price: 750, isPaid: false, image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500" },
-            { id: 11, name: "Portable Mini USB Desk Fan", price: 520, isPaid: false, image: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=500" },
-            { id: 12, name: "Stainless Steel Insulated Water Bottle 1L", price: 680, isPaid: true, image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=500" },
-            { id: 13, name: "Non-Stick Frying Pan 28cm", price: 1150, isPaid: false, image: "https://images.unsplash.com/photo-1583777926162-d27806b72a9b?w=500" },
-            { id: 14, name: "LED Desk Lamp with Touch Control", price: 950, isPaid: true, image: "https://images.unsplash.com/photo-1534349762230-e0cadf32f57a?w=500" },
-            { id: 15, name: "Waterproof Travel Backpack 35L", price: 1750, isPaid: true, image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500" },
-            { id: 16, name: "Magnetic Phone Car Mount Holder", price: 350, isPaid: false, image: "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=500" },
-            { id: 17, name: "Fast Charging Type-C Cable 2M", price: 250, isPaid: false, image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=500" },
-            { id: 18, name: "10000mAh Power Bank Slim Design", price: 1200, isPaid: true, image: "https://images.unsplash.com/photo-1609592424155-27f12e53376a?w=500" },
-            { id: 19, name: "Silicone Phone Case with Magsafe", price: 420, isPaid: false, image: "https://images.unsplash.com/photo-1601593346740-925622e0325b?w=500" },
-            { id: 20, name: "Bluetooth Soundbar Speaker for TV & PC", price: 2950, isPaid: true, image: "https://images.unsplash.com/photo-1545454675-3531b543be5d?w=500" },
-            { id: 21, name: "Adjustable Laptop Stand Aluminum", price: 1350, isPaid: true, image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500" },
-            { id: 22, name: "Smart Digital Kitchen Food Scale", price: 580, isPaid: false, image: "https://images.unsplash.com/photo-1589782182703-2aaa69037b5b?w=500" },
-            { id: 23, name: "Automatic Sensor Soap Dispenser", price: 890, isPaid: false, image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=500" },
-            { id: 24, name: "Rechargeable Lint Remover for Clothes", price: 650, isPaid: false, image: "https://images.unsplash.com/photo-1582738404164-2c5ab9fb03ba?w=500" },
-            { id: 25, name: "Multifunctional Vegetable Chopper", price: 790, isPaid: true, image: "https://images.unsplash.com/photo-1594807046591-0963d3345672?w=500" },
-            { id: 26, name: "Ceramic Coffee Mug with Spoon", price: 350, isPaid: false, image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=500" },
-            { id: 27, name: "Insulated Lunch Box 3-Tier", price: 990, isPaid: false, image: "https://images.unsplash.com/photo-1577803645773-f96470509666?w=500" },
-            { id: 28, name: "Memory Foam Neck Travel Pillow", price: 720, isPaid: true, image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=500" },
-            { id: 29, name: "Portable Lint Shaver Fabric Care", price: 550, isPaid: false, image: "https://images.unsplash.com/photo-1582738404164-2c5ab9fb03ba?w=500" },
-            { id: 30, name: "USB Rechargeable Handheld Vacuum Cleaner", price: 1650, isPaid: true, image: "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=500" },
-            { id: 31, name: "LED Strip Lights 5M with Remote", price: 600, isPaid: false, image: "https://images.unsplash.com/photo-1550985616-11411d33b6c6?w=500" },
-            { id: 32, name: "Mini Smart Projector HD 1080P", price: 6500, isPaid: true, image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500" },
-            { id: 33, name: "Wireless Charging Pad 15W", price: 780, isPaid: false, image: "https://images.unsplash.com/photo-1622445275576-7243c7d33d82?w=500" },
-            { id: 34, name: "Smart Wi-Fi Bulb Color Changing", price: 690, isPaid: false, image: "https://images.unsplash.com/photo-1550581190-9c1c48021d6c?w=500" },
-            { id: 35, name: "Professional Hair Dryer 2000W", price: 1450, isPaid: true, image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500" },
-            { id: 36, name: "Electric Hair Straightening Brush", price: 1250, isPaid: false, image: "https://images.unsplash.com/photo-1560869713-7d0a29430803?w=500" },
-            { id: 37, name: "Men's Grooming Trimmer Cordless", price: 1100, isPaid: true, image: "https://images.unsplash.com/photo-1621607548881-229202575f64?w=500" },
-            { id: 38, name: "Facial Cleansing Brush Electric", price: 850, isPaid: false, image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=500" },
-            { id: 39, name: "Essential Oil Aroma Diffuser 300ml", price: 1300, isPaid: true, image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=500" },
-            { id: 40, name: "Digital Body Weight Bathroom Scale", price: 950, isPaid: false, image: "https://images.unsplash.com/photo-1512290900672-1c255013b52f?w=500" },
-            { id: 41, name: "Yoga Mat Non-Slip 6mm", price: 890, isPaid: true, image: "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=500" },
-            { id: 42, name: "Resistance Bands Set of 5", price: 550, isPaid: false, image: "https://images.unsplash.com/photo-1598289431512-b97b09177c6e?w=500" },
-            { id: 43, name: "Adjustable Hand Grip Strengthener", price: 320, isPaid: false, image: "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=500" },
-            { id: 44, name: "Skipping Jump Rope Digital Counter", price: 450, isPaid: false, image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=500" },
-            { id: 45, name: "Sports Armband Phone Holder", price: 380, isPaid: false, image: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=500" },
-            { id: 46, name: "Running Waist Pack Fanny Bag", price: 490, isPaid: false, image: "https://images.unsplash.com/photo-1544816155-12df9643f363?w=500" },
-            { id: 47, name: "Cycling Gloves Anti-Slip Full Finger", price: 550, isPaid: false, image: "https://images.unsplash.com/photo-1517649763962-0c623266cf20?w=500" },
-            { id: 48, name: "Waterproof Bicycle Phone Mount", price: 620, isPaid: false, image: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=500" },
-            { id: 49, name: "Rechargeable LED Bicycle Headlight", price: 750, isPaid: true, image: "https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?w=500" },
-            { id: 50, name: "Car Vacuum Cleaner High Power 12V", price: 1250, isPaid: true, image: "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=500" },
-            { id: 51, name: "Car Steering Wheel Cover Leather", price: 650, isPaid: false, image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500" },
-            { id: 52, name: "Car Dashboard Sticky Anti-Slip Mat", price: 250, isPaid: false, image: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=500" },
-            { id: 53, name: "Mini Car Trash Can with Lid", price: 300, isPaid: false, image: "https://images.unsplash.com/photo-1563720223185-11003d516935?w=500" },
-            { id: 54, name: "Car Tissue Holder Sun Visor Pouch", price: 350, isPaid: false, image: "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?w=500" },
-            { id: 55, name: "Portable Car Air Purifier Ionizer", price: 1450, isPaid: true, image: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=500" },
-            { id: 56, name: "Multifunctional Car Seat Organizer", price: 790, isPaid: false, image: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=500" },
-            { id: 57, name: "Car Window Sun Shade 4-Pack", price: 590, isPaid: false, image: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=500" },
-            { id: 58, name: "Heavy Duty Jump Starter Cables", price: 950, isPaid: false, image: "https://images.unsplash.com/photo-1486006920555-c77dce18193b?w=500" },
-            { id: 59, name: "Digital Tire Pressure Gauge", price: 680, isPaid: false, image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=500" },
-            { id: 60, name: "Magnetic Wireless Power Bank 5000mAh", price: 1850, isPaid: true, image: "https://images.unsplash.com/photo-1609592424155-27f12e53376a?w=500" },
-            { id: 61, name: "Type-C Hub Multiport Adapter 7-in-1", price: 1950, isPaid: true, image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=500" },
-            { id: 62, name: "Vertical Ergonomic Optical Mouse", price: 1100, isPaid: false, image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500" },
-            { id: 63, name: "Extended Gaming Mouse Pad XL", price: 550, isPaid: false, image: "https://images.unsplash.com/photo-1616440347437-b1c73416efc2?w=500" },
-            { id: 64, name: "Webcam 1080P HD with Privacy Cover", price: 1650, isPaid: true, image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500" },
-            { id: 65, name: "Condenser Microphone for Streaming & Podcasting", price: 2450, isPaid: true, image: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=500" },
-            { id: 66, name: "Ring Light 10 inch with Tripod Stand", price: 1200, isPaid: true, image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500" },
-            { id: 67, name: "Mini Tripod Stand for Phone & Camera", price: 350, isPaid: false, image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500" },
-            { id: 68, name: "Flexible Phone Overhead Mount Stand", price: 590, isPaid: false, image: "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=500" },
-            { id: 69, name: "Selfie Stick Bluetooth with Tripod", price: 750, isPaid: false, image: "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=500" },
-            { id: 70, name: "Smart LED Ceiling Light with Remote", price: 3200, isPaid: true, image: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=500" },
-            { id: 71, name: "Motion Sensor Night Light LED", price: 380, isPaid: false, image: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=500" },
-            { id: 72, name: "Solar Outdoor Garden Lights 4-Pack", price: 1250, isPaid: true, image: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=500" },
-            { id: 73, name: "Flameless LED Tea Lights 12-Pack", price: 490, isPaid: false, image: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=500" },
-            { id: 74, name: "Decorative Fairy String Lights 10M", price: 350, isPaid: false, image: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=500" },
-            { id: 75, name: "Electric Insect Killer Lamp UV", price: 790, isPaid: false, image: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=500" },
-            { id: 76, name: "Ultrasonic Humidifier 2.5L", price: 1450, isPaid: true, image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=500" },
-            { id: 77, name: "Mini Air Cooler Desktop AC Fan", price: 1850, isPaid: true, image: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=500" },
-            { id: 78, name: "Electric Blanket Heated Throw", price: 2900, isPaid: true, image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=500" },
-            { id: 79, name: "Memory Foam Seat Cushion Pillow", price: 950, isPaid: false, image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=500" },
-            { id: 80, name: "Orthopedic Knee Pillow for Sleeping", price: 780, isPaid: false, image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=500" },
-            { id: 81, name: "Electric Coffee Grinder Stainless Steel", price: 1350, isPaid: true, image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=500" },
-            { id: 82, name: "Manual Coffee Maker French Press", price: 890, isPaid: false, image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=500" },
-            { id: 83, name: "Handheld Milk Frother for Coffee", price: 320, isPaid: false, image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=500" },
-            { id: 84, name: "Thermal Insulated Coffee Tumbler", price: 650, isPaid: false, image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=500" },
-            { id: 85, name: "Glass Tea Infuser Teapot 800ml", price: 990, isPaid: false, image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=500" },
-            { id: 86, name: "Silicone Ice Cube Tray with Lid", price: 250, isPaid: false, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" },
-            { id: 87, name: "Collapsible Dish Drying Rack", price: 850, isPaid: false, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" },
-            { id: 88, name: "Over-the-Sink Colander Strainer", price: 450, isPaid: false, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" },
-            { id: 89, name: "Magnetic Knife Holder Strip", price: 550, isPaid: false, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" },
-            { id: 90, name: "Digital Kitchen Meat Thermometer", price: 480, isPaid: false, image: "https://images.unsplash.com/photo-1589782182703-2aaa69037b5b?w=500" },
-            { id: 91, name: "Stainless Steel Garlic Press Mincer", price: 290, isPaid: false, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" },
-            { id: 92, name: "Rotary Cheese Grater Kitchen Tool", price: 790, isPaid: false, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" },
-            { id: 93, name: "Reusable Silicone Food Storage Bags", price: 600, isPaid: false, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" },
-            { id: 94, name: "Pantry Storage Containers Set of 6", price: 1450, isPaid: true, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" },
-            { id: 95, name: "Under-Sink Sliding Storage Drawer", price: 1100, isPaid: false, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" },
-            { id: 96, name: "Wardrobe Clothes Organizer Boxes", price: 890, isPaid: false, image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500" },
-            { id: 97, name: "Hanging Shoe Organizer for Closet", price: 590, isPaid: false, image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500" },
-            { id: 98, name: "Vacuum Storage Bags for Clothes 6-Pack", price: 950, isPaid: true, image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500" },
-            { id: 99, name: "Portable Lint Roller Pet Hair Remover", price: 320, isPaid: false, image: "https://images.unsplash.com/photo-1582738404164-2c5ab9fb03ba?w=500" },
-            { id: 100, name: "Sticky Notes Colorful Memo Pad Set", price: 220, isPaid: false, image: "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=500" },
-            { id: 101, name: "Desktop Bookshelf Organizer Rack", price: 1250, isPaid: true, image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500" },
-            { id: 102, name: "Magnetic Whiteboard for Fridge", price: 650, isPaid: false, image: "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=500" },
-            { id: 103, name: "Cable Management Box Cord Organizer", price: 490, isPaid: false, image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=500" },
-            { id: 104, name: "Reusable Cable Ties Velcro 50-Pack", price: 280, isPaid: false, image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=500" },
-            { id: 105, name: "Universal Travel Adapter Plug", price: 450, isPaid: false, image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=500" }
+            { id: 1, name: "6-Piece Stainless Steel Kitchen Tool Set", price: 709, category: "Kitchen", image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500", desc: "High quality stainless steel kitchen tool set for everyday cooking.", rating: 4.8 },
+            { id: 2, name: "Electric Kettle 2L - Perfect for Tea & Coffee", price: 659, category: "Kitchen", image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500", desc: "Fast boiling 2L electric kettle with auto shut-off safety feature.", rating: 4.6 },
+            { id: 3, name: "Wireless Bluetooth Earbuds Pro", price: 1299, category: "Electronics", image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500", desc: "Immersive sound with active noise cancellation and long battery life.", rating: 4.9 },
+            { id: 4, name: "Smart Fitness Tracker Watch", price: 1850, category: "Electronics", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500", desc: "Track your health, heart rate, steps, and sports activities easily.", rating: 4.7 },
+            { id: 5, name: "Minimalist Leather Wallet for Men", price: 450, category: "Accessories", image: "https://images.unsplash.com/photo-1627123424574-724758594e93?w=500", desc: "Genuine leather slim wallet with RFID blocking protection.", rating: 4.5 },
+            { id: 6, name: "Casual Over-Sized Hoodie", price: 1490, category: "Fashion", image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500", desc: "Super comfortable fleece cotton oversized hoodie for winter.", rating: 4.8 },
+            { id: 7, name: "Classic Drop-Shoulder Graphic Tee", price: 650, category: "Fashion", image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500", desc: "Trendy drop-shoulder premium cotton t-shirt with custom print.", rating: 4.6 },
+            { id: 8, name: "Anti-Glare UV Protection Sunglasses", price: 890, category: "Accessories", image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500", desc: "Stylish UV400 polarized sunglasses for men and women.", rating: 4.4 }
         ];
 
-        products.sort((a, b) => (b.isPaid === true) - (a.isPaid === true));
-
         let cart = [];
+        let wishlist = [];
+        let currentCategory = 'All';
+        let discountPercent = 0;
 
-        function renderProducts() {
+        function renderProducts(list = products) {
             const grid = document.getElementById('productGrid');
             if(grid) {
-                grid.innerHTML = products.map(p => `
-                    <div class="bg-slate-800/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col justify-between">
-                        <img src="${p.image}" class="w-full h-36 object-cover">
-                        <div class="p-2.5 flex flex-col justify-between flex-1 space-y-2">
-                            <div>
-                                <h3 class="text-xs font-medium line-clamp-2">${p.name}</h3>
-                                <p class="text-rose-500 font-bold text-sm mt-1">৳${p.price}</p>
+                grid.innerHTML = list.map(p => {
+                    const isWishlisted = wishlist.includes(p.id);
+                    return `
+                        <div class="bg-slate-800/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col justify-between relative">
+                            <button onclick="toggleWishlist(${p.id})" class="absolute top-2 right-2 bg-slate-900/80 p-1.5 rounded-full text-sm ${isWishlisted ? 'text-rose-500' : 'text-slate-400'}">❤️</button>
+                            <img src="${p.image}" class="w-full h-36 object-cover cursor-pointer" onclick="openProductModal(${p.id})">
+                            <div class="p-2.5 flex flex-col justify-between flex-1 space-y-2">
+                                <div>
+                                    <h3 class="text-xs font-medium line-clamp-2 cursor-pointer" onclick="openProductModal(${p.id})">${p.name}</h3>
+                                    <div class="flex items-center gap-1 mt-1 text-[10px] text-amber-400"><span>⭐ ${p.rating}</span></div>
+                                    <p class="text-rose-500 font-bold text-sm mt-1">৳${p.price}</p>
+                                </div>
+                                <button onclick="addToCart(${p.id})" class="w-full bg-rose-600 hover:bg-rose-700 text-white text-xs py-1.5 rounded-lg font-semibold">Add to Cart</button>
                             </div>
-                            <button onclick="addToCart(${p.id})" class="w-full bg-rose-600 hover:bg-rose-700 text-white text-xs py-1.5 rounded-lg font-semibold">Add to Cart</button>
                         </div>
-                    </div>
-                `).join('');
+                    `;
+                }).join('');
+            }
+        }
+
+        function filterCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.className = "cat-btn px-4 py-2 bg-slate-900 border border-slate-800 text-slate-300 font-bold rounded-xl whitespace-nowrap transition";
+            });
+            document.getElementById(`cat-${cat}`).className = "cat-btn px-4 py-2 bg-rose-600 text-white font-bold rounded-xl whitespace-nowrap transition";
+
+            if(cat === 'All') {
+                renderProducts(products);
+            } else {
+                renderProducts(products.filter(p => p.category === cat));
             }
         }
 
         function filterProducts() {
             const query = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = products.filter(p => p.name.toLowerCase().includes(query));
-            const grid = document.getElementById('productGrid');
-            grid.innerHTML = filtered.map(p => `
-                <div class="bg-slate-800/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col justify-between">
-                    <img src="${p.image}" class="w-full h-36 object-cover">
-                    <div class="p-2.5 flex flex-col justify-between flex-1 space-y-2">
-                        <div>
-                            <h3 class="text-xs font-medium line-clamp-2">${p.name}</h3>
-                            <p class="text-rose-500 font-bold text-sm mt-1">৳${p.price}</p>
-                        </div>
-                        <button onclick="addToCart(${p.id})" class="w-full bg-rose-600 hover:bg-rose-700 text-white text-xs py-1.5 rounded-lg font-semibold">Add to Cart</button>
-                    </div>
-                </div>
-            `).join('');
+            const filtered = products.filter(p => p.name.toLowerCase().includes(query) && (currentCategory === 'All' || p.category === currentCategory));
+            renderProducts(filtered);
+        }
+
+        function toggleWishlist(id) {
+            if(wishlist.includes(id)) {
+                wishlist = wishlist.filter(item => item !== id);
+            } else {
+                wishlist.push(id);
+            }
+            renderProducts(currentCategory === 'All' ? products : products.filter(p => p.category === currentCategory));
+        }
+
+        function openProductModal(id) {
+            const p = products.find(item => item.id === id);
+            if(!p) return;
+            document.getElementById('modalProductContent').innerHTML = `
+                <img src="${p.image}" class="w-full h-56 rounded-xl object-cover mb-4">
+                <span class="bg-rose-500/20 text-rose-400 text-xs px-2.5 py-1 rounded-full font-bold uppercase">${p.category}</span>
+                <h3 class="text-lg font-bold mt-2 text-white">${p.name}</h3>
+                <p class="text-amber-400 text-xs mt-1">Rating: ⭐ ${p.rating} / 5.0</p>
+                <p class="text-rose-500 font-black text-lg mt-1">৳${p.price}</p>
+                <p class="text-xs text-slate-300 mt-2">${p.desc}</p>
+                <button onclick="addToCart(${p.id}); closeProductModal();" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 rounded-xl text-sm mt-4">Add to Cart</button>
+            `;
+            document.getElementById('productModal').classList.remove('hidden');
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModal').classList.add('hidden');
         }
 
         function addToCart(id) {
@@ -458,6 +431,21 @@
             if(activeNav) { activeNav.classList.remove('text-slate-400'); activeNav.classList.add('text-rose-500'); }
 
             if(tabName === 'cart') renderCartView();
+        }
+
+        function applyCoupon() {
+            const code = document.getElementById('couponInput').value.trim();
+            const msg = document.getElementById('couponMsg');
+            if(code === 'VELORA10') {
+                discountPercent = 10;
+                msg.innerText = "Coupon Applied: 10% OFF!";
+                msg.classList.remove('hidden');
+                renderCartView();
+            } else {
+                msg.innerText = "Invalid Coupon Code!";
+                msg.classList.remove('hidden');
+                msg.className = "text-[11px] text-rose-400";
+            }
         }
 
         function renderCartView() {
@@ -503,9 +491,10 @@
             `).join('');
 
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const discountAmt = (subtotal * discountPercent) / 100;
             const shipping = Number(document.querySelector('input[name="shipping"]:checked')?.value || 80);
-            const grandTotal = subtotal + shipping;
-            document.getElementById('summarySub').innerText = '৳' + grandTotal + ` (Subtotal: ৳${subtotal} + Delivery: ৳${shipping})`;
+            const grandTotal = (subtotal - discountAmt) + shipping;
+            document.getElementById('summarySub').innerText = '৳' + grandTotal + ` (Subtotal: ৳${subtotal}${discountPercent > 0 ? ' - Disc: ৳'+discountAmt : ''} + Delivery: ৳${shipping})`;
         }
 
         function changeQty(index, delta) {
@@ -517,8 +506,9 @@
 
         function openPaymentModal() {
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const discountAmt = (subtotal * discountPercent) / 100;
             const shipping = Number(document.querySelector('input[name="shipping"]:checked')?.value || 80);
-            const grandTotal = subtotal + shipping;
+            const grandTotal = (subtotal - discountAmt) + shipping;
             document.getElementById('modalTotalBill').innerText = '৳' + grandTotal;
 
             document.getElementById('chkName').value = localStorage.getItem('cust_name') || '';
@@ -543,7 +533,8 @@
 
             const shipping = Number(document.querySelector('input[name="shipping"]:checked')?.value || 80);
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            const grandTotal = subtotal + shipping;
+            const discountAmt = (subtotal * discountPercent) / 100;
+            const grandTotal = (subtotal - discountAmt) + shipping;
             const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
             const orderId = "VELORA-" + Math.floor(1000 + Math.random() * 9000);
 
@@ -562,6 +553,8 @@
                 total_amount: grandTotal
             });
 
+            localStorage.setItem(orderId, JSON.stringify({ orderId, name, status: "Processing (To Ship)", grandTotal }));
+
             cart = [];
             document.getElementById('cartBadge').innerText = '0';
             closePaymentModal();
@@ -575,6 +568,19 @@
             switchTab('home');
         }
 
+        function trackOrder() {
+            const id = document.getElementById('trackIdInput').value.trim();
+            const resBox = document.getElementById('trackResult');
+            resBox.classList.remove('hidden');
+            const data = localStorage.getItem(id);
+            if(data) {
+                const order = JSON.parse(data);
+                resBox.innerHTML = `Order ID: <b>${order.orderId}</b><br>Status: <span class="text-rose-400 font-bold">${order.status}</span><br>Total: ৳${order.grandTotal}`;
+            } else {
+                resBox.innerHTML = "No order found with this Tracking ID.";
+            }
+        }
+
         function loadCustomerData() {
             if(localStorage.getItem('cust_name')) {
                 document.getElementById('displayUserName').innerText = localStorage.getItem('cust_name');
@@ -584,7 +590,7 @@
 
         function openOrderStatus(statusType) {
             document.getElementById('modalOrderStatusTitle').innerText = `${statusType} Orders`;
-            document.getElementById('modalOrderStatusDesc').innerText = `You have 0 active items under ${statusType}.`;
+            document.getElementById('modalOrderStatusDesc').innerText = `You have active items under ${statusType}.`;
             document.getElementById('orderStatusModal').classList.remove('hidden');
         }
 
