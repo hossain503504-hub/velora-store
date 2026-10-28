@@ -10,7 +10,12 @@
         tailwind.config = {
             darkMode: 'class',
             theme: {
-                extend: { colors: { brand: { 500: '#f43f5e', 600: '#e11d48' } } }
+                extend: { 
+                    colors: { 
+                        brand: { 500: '#f43f5e', 600: '#e11d48' },
+                        darknavy: { 900: '#0b132b', 800: '#1c2541', 700: '#3a506b' }
+                    } 
+                }
             }
         }
     </script>
@@ -22,19 +27,21 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 pb-24 transition-colors duration-300">
+<body class="bg-[#070b19] text-slate-100 pb-24 transition-colors duration-300">
 
     <!-- Top Header -->
-    <header class="sticky top-0 z-40 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 px-4 py-3">
+    <header class="sticky top-0 z-40 bg-[#0b132b]/95 backdrop-blur-md border-b border-slate-800 px-4 py-3">
         <div class="max-w-7xl mx-auto flex items-center justify-between gap-2">
             <h1 class="text-base md:text-xl font-black tracking-widest text-rose-500 uppercase cursor-pointer whitespace-nowrap" onclick="switchTab('home')">VELORA</h1>
             <div class="flex-1 relative flex items-center">
-                <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Search in VELORA..." class="w-full bg-slate-800 border border-slate-700 rounded-full py-2 pl-4 pr-10 text-sm focus:outline-none focus:border-rose-500 text-white">
+                <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Search in VELORA..." class="w-full bg-[#1c2541] border border-slate-700 rounded-full py-2 pl-4 pr-10 text-sm focus:outline-none focus:border-rose-500 text-white">
                 <span class="absolute right-3 text-slate-400">🔍</span>
             </div>
-            <select id="langSwitcher" onchange="switchLanguage(this.value)" class="bg-slate-800 border border-slate-700 text-white text-xs rounded-xl px-2 py-2 focus:outline-none">
+            <select id="langSwitcher" onchange="switchLanguage(this.value)" class="bg-[#1c2541] border border-slate-700 text-white text-xs rounded-xl px-2 py-2 focus:outline-none">
                 <option value="en">EN</option>
                 <option value="bn">বাং</option>
             </select>
@@ -62,14 +69,14 @@
             </div>
 
             <!-- Trust Badges -->
-            <div class="grid grid-cols-3 gap-2 text-center text-xs bg-slate-900 border border-slate-800 p-2.5 rounded-2xl">
+            <div class="grid grid-cols-3 gap-2 text-center text-xs bg-[#0b132b] border border-slate-800 p-2.5 rounded-2xl">
                 <div class="font-bold text-slate-300 text-[11px]" data-i18n="safe_pay">🛡️ Safe Payment</div>
                 <div class="font-bold text-slate-300 text-[11px]" data-i18n="fast_delivery">⚡ Fast Delivery</div>
                 <div class="font-bold text-slate-300 text-[11px]" data-i18n="easy_return">🔄 Free Return</div>
             </div>
 
-            <!-- Daily Check-in & Coins Real Feature -->
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3 flex justify-between items-center">
+            <!-- Daily Rewards -->
+            <div class="bg-[#0b132b] border border-slate-800 rounded-2xl p-3 flex justify-between items-center">
                 <div class="flex items-center gap-3">
                     <span class="text-2xl">🪙</span>
                     <div>
@@ -82,14 +89,14 @@
 
             <!-- Sorting & Filters -->
             <div class="flex justify-between items-center gap-2 text-xs">
-                <div class="flex gap-2 overflow-x-auto pb-1 text-xs flex-1">
+                <div class="flex gap-2 overflow-x-auto pb-1 text-xs flex-1 no-scrollbar">
                     <button onclick="filterCategory('All')" id="cat-All" class="cat-btn px-3 py-1.5 bg-rose-600 text-white font-bold rounded-xl whitespace-nowrap transition">All</button>
-                    <button onclick="filterCategory('Kitchen')" id="cat-Kitchen" class="cat-btn px-3 py-1.5 bg-slate-900 border border-slate-800 text-slate-300 font-bold rounded-xl whitespace-nowrap transition">Kitchen</button>
-                    <button onclick="filterCategory('Electronics')" id="cat-Electronics" class="cat-btn px-3 py-1.5 bg-slate-900 border border-slate-800 text-slate-300 font-bold rounded-xl whitespace-nowrap transition">Electronics</button>
-                    <button onclick="filterCategory('Fashion')" id="cat-Fashion" class="cat-btn px-3 py-1.5 bg-slate-900 border border-slate-800 text-slate-300 font-bold rounded-xl whitespace-nowrap transition">Fashion</button>
-                    <button onclick="filterCategory('Accessories')" id="cat-Accessories" class="cat-btn px-3 py-1.5 bg-slate-900 border border-slate-800 text-slate-300 font-bold rounded-xl whitespace-nowrap transition">Accessories</button>
+                    <button onclick="filterCategory('Kitchen')" id="cat-Kitchen" class="cat-btn px-3 py-1.5 bg-[#0b132b] border border-slate-800 text-slate-300 font-bold rounded-xl whitespace-nowrap transition">Kitchen</button>
+                    <button onclick="filterCategory('Electronics')" id="cat-Electronics" class="cat-btn px-3 py-1.5 bg-[#0b132b] border border-slate-800 text-slate-300 font-bold rounded-xl whitespace-nowrap transition">Electronics</button>
+                    <button onclick="filterCategory('Fashion')" id="cat-Fashion" class="cat-btn px-3 py-1.5 bg-[#0b132b] border border-slate-800 text-slate-300 font-bold rounded-xl whitespace-nowrap transition">Fashion</button>
+                    <button onclick="filterCategory('Accessories')" id="cat-Accessories" class="cat-btn px-3 py-1.5 bg-[#0b132b] border border-slate-800 text-slate-300 font-bold rounded-xl whitespace-nowrap transition">Accessories</button>
                 </div>
-                <select id="sortSelect" onchange="sortProducts(this.value)" class="bg-slate-900 border border-slate-800 text-slate-300 text-xs rounded-xl px-2 py-1.5 focus:outline-none">
+                <select id="sortSelect" onchange="sortProducts(this.value)" class="bg-[#0b132b] border border-slate-800 text-slate-300 text-xs rounded-xl px-2 py-1.5 focus:outline-none">
                     <option value="default">Default</option>
                     <option value="lowToHigh">Price: Low to High</option>
                     <option value="highToLow">Price: High to Low</option>
@@ -97,7 +104,7 @@
             </div>
 
             <!-- Product Grid -->
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+            <div class="bg-[#0b132b] border border-slate-800 rounded-2xl p-4">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-rose-500 font-extrabold text-base" data-i18n="all_products">⚡ Daily Shera Deals</h3>
                     <span class="text-xs text-slate-400" data-i18n="trending">Shop Now</span>
@@ -106,83 +113,117 @@
             </div>
         </div>
 
+        <!-- 1.5 VELORA EXCLUSIVE TAB (CENTER CIRCLE TAB) -->
+        <div id="tab-velora" class="tab-content hidden space-y-4">
+            <div class="bg-gradient-to-r from-rose-900 to-amber-900 border border-rose-500/30 rounded-2xl p-5 text-white shadow-xl text-center">
+                <h2 class="text-2xl font-black uppercase tracking-widest text-amber-400">VELORA COLLECTION</h2>
+                <p class="text-xs text-slate-200 mt-1">Exclusive & Premium Handpicked Items</p>
+            </div>
+
+            <!-- Scrollable Categories Bar -->
+            <div class="flex gap-2 overflow-x-auto pb-2 text-xs no-scrollbar">
+                <button onclick="filterVeloraCat('All')" class="vcat-btn px-4 py-2 bg-rose-600 text-white font-bold rounded-full whitespace-nowrap shadow">All Exclusive</button>
+                <button onclick="filterVeloraCat('Jewelry')" class="vcat-btn px-4 py-2 bg-[#1c2541] border border-slate-700 text-slate-300 font-bold rounded-full whitespace-nowrap">Jewelry & Luxury</button>
+                <button onclick="filterVeloraCat('Gadgets')" class="vcat-btn px-4 py-2 bg-[#1c2541] border border-slate-700 text-slate-300 font-bold rounded-full whitespace-nowrap">Smart Gadgets</button>
+                <button onclick="filterVeloraCat('Apparel')" class="vcat-btn px-4 py-2 bg-[#1c2541] border border-slate-700 text-slate-300 font-bold rounded-full whitespace-nowrap">Premium Apparel</button>
+                <button onclick="filterVeloraCat('Footwear')" class="vcat-btn px-4 py-2 bg-[#1c2541] border border-slate-700 text-slate-300 font-bold rounded-full whitespace-nowrap">Footwear</button>
+            </div>
+
+            <!-- Exclusive Products Grid -->
+            <div class="bg-[#0b132b] border border-slate-800 rounded-2xl p-4">
+                <h3 class="text-amber-400 font-black text-sm mb-3">🔥 Trending Velora Exclusives</h3>
+                <div id="veloraProductGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+            </div>
+        </div>
+
         <!-- 2. MESSAGES TAB -->
         <div id="tab-messages" class="tab-content hidden space-y-4">
             <h2 class="text-xl font-bold">Messages & System Alerts</h2>
             <div id="messageList" class="space-y-3">
-                <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl text-xs space-y-1">
+                <div class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl text-xs space-y-1">
                     <p class="font-bold text-rose-400">Welcome to VELORA!</p>
                     <p class="text-slate-300">Enjoy 10% discount on your first order with coupon <span class="text-amber-400 font-bold">VELORA10</span>.</p>
                 </div>
             </div>
         </div>
 
-        <!-- 3. CART TAB -->
-        <div id="tab-cart" class="tab-content hidden space-y-4">
-            <h2 class="text-xl font-bold">My Shopping Cart</h2>
+        <!-- 3. CART TAB (STYLISH DARK BLUE THEME WITH RECOMMENDED PRODUCTS) -->
+        <div id="tab-cart" class="tab-content hidden space-y-6">
+            <h2 class="text-xl font-bold text-slate-100">My Shopping Cart</h2>
             <div id="cartItemsList" class="space-y-3"></div>
 
-            <div id="checkoutBox" class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-4 hidden">
+            <div id="checkoutBox" class="bg-[#0b132b] border border-slate-800 rounded-2xl p-4 space-y-4 hidden shadow-xl">
                 <div class="flex gap-2">
-                    <input type="text" id="couponInput" placeholder="Coupon Code (VELORA10)" class="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-                    <button type="button" onclick="applyCoupon()" class="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-xl text-xs font-bold">Apply</button>
+                    <input type="text" id="couponInput" placeholder="Coupon Code (VELORA10)" class="flex-1 bg-[#1c2541] border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+                    <button type="button" onclick="applyCoupon()" class="bg-rose-600 hover:bg-rose-700 text-white px-4 py-2 rounded-xl text-xs font-bold shadow">Apply</button>
                 </div>
                 <p id="couponMsg" class="text-[11px] text-emerald-400 hidden"></p>
 
                 <h3 class="font-bold text-sm text-slate-300">Delivery Location Charge</h3>
                 <div class="grid grid-cols-2 gap-3 text-xs">
-                    <label class="flex items-center gap-2 bg-slate-800 p-3 rounded-xl cursor-pointer border border-slate-700">
+                    <label class="flex items-center gap-2 bg-[#1c2541] p-3 rounded-xl cursor-pointer border border-slate-700">
                         <input type="radio" name="shipping" value="80" checked onchange="renderCartView()" class="accent-rose-500">
                         <div><p class="font-bold">Inside Dhaka</p><p class="text-slate-400">৳80</p></div>
                     </label>
-                    <label class="flex items-center gap-2 bg-slate-800 p-3 rounded-xl cursor-pointer border border-slate-700">
+                    <label class="flex items-center gap-2 bg-[#1c2541] p-3 rounded-xl cursor-pointer border border-slate-700">
                         <input type="radio" name="shipping" value="130" onchange="renderCartView()" class="accent-rose-500">
                         <div><p class="font-bold">Outside Dhaka</p><p class="text-slate-400">৳130</p></div>
                     </label>
                 </div>
 
-                <div class="flex justify-between items-center bg-slate-800 p-3 rounded-xl font-bold text-sm pt-2">
+                <div class="flex justify-between items-center bg-[#1c2541] p-3 rounded-xl font-bold text-sm pt-2 border border-slate-700">
                     <span>Total Bill: <span id="summarySub" class="text-rose-500">৳0</span></span>
-                    <button type="button" onclick="openPaymentModal()" class="bg-rose-600 hover:bg-rose-700 text-white px-6 py-2 rounded-lg text-xs shadow-lg">Proceed to Payment</button>
+                    <button type="button" onclick="openPaymentModal()" class="bg-rose-600 hover:bg-rose-700 text-white px-6 py-2.5 rounded-xl text-xs shadow-lg">Proceed to Payment</button>
                 </div>
+            </div>
+
+            <!-- Recommended Products Section on Cart Scroll -->
+            <div class="bg-[#0b132b] border border-slate-800 rounded-2xl p-4 space-y-3">
+                <h3 class="font-bold text-sm text-rose-400">Recommended Products for You</h3>
+                <div id="cartRecommendedGrid" class="grid grid-cols-2 md:grid-cols-4 gap-3"></div>
             </div>
         </div>
 
-        <!-- 4. ACCOUNT TAB (FULL EXPANDED SYSTEM) -->
+        <!-- 4. ACCOUNT TAB (WITH FACEBOOK STYLE PHOTO UPLOAD & MORE PRODUCTS) -->
         <div id="tab-account" class="tab-content hidden space-y-4">
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex items-center justify-between">
+            <!-- Facebook-Style Profile Section with Real Image Upload -->
+            <div class="bg-[#0b132b] border border-slate-800 rounded-2xl p-4 flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                    <div class="w-14 h-14 bg-rose-500/20 text-rose-500 rounded-full flex items-center justify-center text-2xl font-bold">👤</div>
+                    <div class="relative group cursor-pointer" onclick="document.getElementById('avatarUploadInput').click()">
+                        <img id="userAvatarImg" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" class="w-16 h-16 rounded-full object-cover border-2 border-rose-500">
+                        <div class="absolute inset-0 bg-black/50 rounded-full flex items-center justify-center text-white text-xs opacity-80 group-hover:opacity-100">📷</div>
+                        <input type="file" id="avatarUploadInput" accept="image/*" class="hidden" onchange="handleAvatarUpload(event)">
+                    </div>
                     <div>
                         <h2 class="font-bold text-lg" id="displayUserName">MD Hossain Khan</h2>
-                        <p class="text-xs text-slate-400 line-clamp-1" id="displayUserEmail">No address saved</p>
+                        <p class="text-xs text-slate-400 line-clamp-1" id="displayUserEmail">Tap photo to change profile picture</p>
                     </div>
                 </div>
-                <button onclick="openSettingsModal()" class="bg-slate-800 hover:bg-slate-700 p-2.5 rounded-full text-base">⚙️</button>
+                <button onclick="openSettingsModal()" class="bg-[#1c2541] hover:bg-slate-700 p-2.5 rounded-full text-base">⚙️</button>
             </div>
 
-            <!-- Account Options Grid 1 -->
+            <!-- Account Options Grid -->
             <div class="grid grid-cols-2 gap-3 text-xs">
-                <div onclick="openWishlistModal()" class="bg-slate-900 border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition flex items-center gap-3">
+                <div onclick="openWishlistModal()" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition flex items-center gap-3">
                     <span class="text-2xl">❤️</span>
                     <div><h4 class="font-bold text-white">My Wishlist</h4><p class="text-[10px] text-slate-400" id="wishlistCountText">0 Saved items</p></div>
                 </div>
-                <div onclick="openAddressModal()" class="bg-slate-900 border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition flex items-center gap-3">
+                <div onclick="openAddressModal()" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition flex items-center gap-3">
                     <span class="text-2xl">📍</span>
                     <div><h4 class="font-bold text-white">Addresses</h4><p class="text-[10px] text-slate-400">Saved locations</p></div>
                 </div>
-                <div onclick="openVouchersModal()" class="bg-slate-900 border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition flex items-center gap-3">
+                <div onclick="openVouchersModal()" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition flex items-center gap-3">
                     <span class="text-2xl">🎟️</span>
                     <div><h4 class="font-bold text-white">Vouchers</h4><p class="text-[10px] text-slate-400">Active coupons</p></div>
                 </div>
-                <div onclick="openReferralModal()" class="bg-slate-900 border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition flex items-center gap-3">
+                <div onclick="openReferralModal()" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition flex items-center gap-3">
                     <span class="text-2xl">🎁</span>
                     <div><h4 class="font-bold text-white">Refer & Earn</h4><p class="text-[10px] text-slate-400">Invite friends</p></div>
                 </div>
             </div>
 
             <!-- My Orders Status Grid -->
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+            <div class="bg-[#0b132b] border border-slate-800 rounded-2xl p-4">
                 <div class="flex justify-between items-center mb-3">
                     <h3 class="font-bold text-sm">My Orders</h3>
                     <span class="text-xs text-rose-500 cursor-pointer" onclick="openOrderStatus('All')">View All ></span>
@@ -197,15 +238,15 @@
             </div>
 
             <!-- Recently Viewed Products -->
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3">
+            <div class="bg-[#0b132b] border border-slate-800 rounded-2xl p-4 space-y-3">
                 <h3 class="font-bold text-sm">Recently Viewed</h3>
-                <div id="recentlyViewedContainer" class="flex gap-2 overflow-x-auto pb-1 text-xs">
+                <div id="recentlyViewedContainer" class="flex gap-2 overflow-x-auto pb-1 text-xs no-scrollbar">
                     <p class="text-slate-500 text-[11px]">No recently viewed products yet.</p>
                 </div>
             </div>
 
-            <!-- Account Services Row 2 -->
-            <div class="grid grid-cols-4 gap-2 text-center text-[10px] bg-slate-900 border border-slate-800 p-3 rounded-2xl font-bold text-slate-300">
+            <!-- Account Services Row -->
+            <div class="grid grid-cols-4 gap-2 text-center text-[10px] bg-[#0b132b] border border-slate-800 p-3 rounded-2xl font-bold text-slate-300">
                 <div onclick="openHelpCenter()" class="cursor-pointer hover:text-rose-500"><span class="text-xl block">❓</span>Help Center</div>
                 <div onclick="openMyReviewsModal()" class="cursor-pointer hover:text-rose-500"><span class="text-xl block">⭐</span>My Reviews</div>
                 <div onclick="openPaymentOptionsModal()" class="cursor-pointer hover:text-rose-500"><span class="text-xl block">💳</span>Payments</div>
@@ -213,64 +254,61 @@
             </div>
 
             <!-- Visual Order Tracking Timeline -->
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3">
+            <div class="bg-[#0b132b] border border-slate-800 rounded-2xl p-4 space-y-3">
                 <h3 class="font-bold text-sm">Real Visual Order Tracking</h3>
                 <div class="flex gap-2">
-                    <input type="text" id="trackIdInput" placeholder="Enter Order ID (e.g. VELORA-1234)" class="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
-                    <button onclick="trackOrderVisual()" class="bg-rose-600 text-white px-4 py-2 rounded-xl text-xs font-bold">Track</button>
+                    <input type="text" id="trackIdInput" placeholder="Enter Order ID (e.g. VELORA-1234)" class="flex-1 bg-[#1c2541] border border-slate-700 rounded-xl px-3 py-2 text-xs text-white">
+                    <button onclick="trackOrderVisual()" class="bg-rose-600 text-white px-4 py-2 rounded-xl text-xs font-bold shadow">Track</button>
                 </div>
                 <div id="trackResultVisual" class="hidden space-y-3 pt-2"></div>
+            </div>
+
+            <!-- More Products on Account Scroll -->
+            <div class="bg-[#0b132b] border border-slate-800 rounded-2xl p-4 space-y-3">
+                <h3 class="font-bold text-sm text-amber-400">More Recommended Items</h3>
+                <div id="accountMoreProductsGrid" class="grid grid-cols-2 md:grid-cols-4 gap-3"></div>
             </div>
         </div>
     </main>
 
-    <!-- WhatsApp Support Floating Button -->
+    <!-- Floating WhatsApp Support Button -->
     <a href="https://wa.me/8801886759596?text=Hello%20Velora,%20I%20need%20support!" target="_blank" class="fixed bottom-20 right-4 z-40 bg-emerald-600 hover:bg-emerald-700 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-xl text-2xl transition transform hover:scale-110">
         💬
     </a>
 
     <!-- Product Details Modal -->
     <div id="productModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 w-full max-w-lg rounded-2xl p-6 relative space-y-4 max-h-[90vh] overflow-y-auto">
+        <div class="bg-[#0b132b] border border-slate-800 w-full max-w-lg rounded-2xl p-6 relative space-y-4 max-h-[90vh] overflow-y-auto">
             <button onclick="closeProductModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
             <div id="modalProductContent"></div>
         </div>
     </div>
 
-    <!-- Multi-purpose Extra Modal -->
+    <!-- Extra Multi-purpose Modal -->
     <div id="extraModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl p-6 relative space-y-4 max-h-[90vh] overflow-y-auto">
+        <div class="bg-[#0b132b] border border-slate-800 w-full max-w-md rounded-2xl p-6 relative space-y-4 max-h-[90vh] overflow-y-auto">
             <button onclick="closeExtraModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
             <h3 id="extraModalTitle" class="text-base font-bold text-rose-500"></h3>
             <div id="extraModalBody" class="text-xs text-slate-300 space-y-2"></div>
         </div>
     </div>
 
-    <!-- Order Status Category Modal -->
-    <div id="orderStatusModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 w-full max-w-sm rounded-2xl p-6 relative space-y-4 text-center">
-            <button onclick="closeOrderStatusModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
-            <h3 class="text-lg font-bold text-rose-500" id="modalOrderStatusTitle">Order Status</h3>
-            <p class="text-xs text-slate-400" id="modalOrderStatusDesc">No active orders found in this category.</p>
-        </div>
-    </div>
-
     <!-- Payment Gateway Modal -->
     <div id="paymentModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl p-6 relative space-y-4 max-h-[90vh] overflow-y-auto">
+        <div class="bg-[#0b132b] border border-slate-800 w-full max-w-md rounded-2xl p-6 relative space-y-4 max-h-[90vh] overflow-y-auto">
             <button onclick="closePaymentModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
             <h3 class="text-base font-bold text-rose-500">Select Payment & Delivery Info</h3>
             
             <div class="space-y-3 text-xs">
                 <label class="block font-bold text-slate-300">Payment Method</label>
                 <div class="grid grid-cols-3 gap-2">
-                    <label class="bg-slate-800 p-2.5 rounded-xl text-center cursor-pointer border border-slate-700 font-bold">
+                    <label class="bg-[#1c2541] p-2.5 rounded-xl text-center cursor-pointer border border-slate-700 font-bold">
                         <input type="radio" name="paymentMethod" value="bKash" checked class="accent-rose-500 block mx-auto mb-1"> bKash
                     </label>
-                    <label class="bg-slate-800 p-2.5 rounded-xl text-center cursor-pointer border border-slate-700 font-bold">
+                    <label class="bg-[#1c2541] p-2.5 rounded-xl text-center cursor-pointer border border-slate-700 font-bold">
                         <input type="radio" name="paymentMethod" value="Nagad" class="accent-rose-500 block mx-auto mb-1"> Nagad
                     </label>
-                    <label class="bg-slate-800 p-2.5 rounded-xl text-center cursor-pointer border border-slate-700 font-bold">
+                    <label class="bg-[#1c2541] p-2.5 rounded-xl text-center cursor-pointer border border-slate-700 font-bold">
                         <input type="radio" name="paymentMethod" value="COD" class="accent-rose-500 block mx-auto mb-1"> COD
                     </label>
                 </div>
@@ -278,13 +316,13 @@
 
             <div class="space-y-2 text-xs pt-2">
                 <label class="block font-bold text-slate-300">Delivery Information</label>
-                <input type="text" id="chkName" required placeholder="Full Name" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
-                <input type="email" id="chkEmail" required placeholder="Email Address (Gmail)" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
-                <input type="tel" id="chkPhone" required placeholder="Phone Number" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
-                <textarea id="chkAddress" required rows="2" placeholder="Delivery Address" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white"></textarea>
+                <input type="text" id="chkName" required placeholder="Full Name" class="w-full bg-[#1c2541] border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                <input type="email" id="chkEmail" required placeholder="Email Address (Gmail)" class="w-full bg-[#1c2541] border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                <input type="tel" id="chkPhone" required placeholder="Phone Number" class="w-full bg-[#1c2541] border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                <textarea id="chkAddress" required rows="2" placeholder="Delivery Address" class="w-full bg-[#1c2541] border border-slate-700 rounded-xl p-2.5 text-sm text-white"></textarea>
             </div>
 
-            <div class="bg-slate-800 p-3 rounded-xl text-xs font-bold flex justify-between">
+            <div class="bg-[#1c2541] p-3 rounded-xl text-xs font-bold flex justify-between border border-slate-700">
                 <span>Total Bill (Inc. Shipping):</span>
                 <span id="modalTotalBill" class="text-rose-500">৳0</span>
             </div>
@@ -295,11 +333,11 @@
 
     <!-- Order Success Modal -->
     <div id="orderSuccessModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 w-full max-w-sm rounded-2xl p-6 relative space-y-4 text-center">
+        <div class="bg-[#0b132b] border border-slate-800 w-full max-w-sm rounded-2xl p-6 relative space-y-4 text-center">
             <div class="w-16 h-16 bg-emerald-500/20 text-emerald-500 rounded-full flex items-center justify-center text-3xl font-bold mx-auto">✓</div>
             <h3 class="text-lg font-bold text-white">Order Confirmed!</h3>
             <p class="text-xs text-slate-300">Thank you for shopping with <span class="text-rose-500 font-bold">VELORA</span>.</p>
-            <div class="bg-slate-800 p-3 rounded-xl text-xs space-y-1">
+            <div class="bg-[#1c2541] p-3 rounded-xl text-xs space-y-1">
                 <p class="text-slate-400">Tracking ID: <span id="successTrackId" class="text-rose-400 font-bold"></span></p>
                 <p class="text-emerald-400">Confirmation saved to system.</p>
             </div>
@@ -307,9 +345,9 @@
         </div>
     </div>
 
-    <!-- SETTINGS MODAL -->
+    <!-- Settings Modal -->
     <div id="settingsModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl p-6 relative max-h-[90vh] overflow-y-auto space-y-4">
+        <div class="bg-[#0b132b] border border-slate-800 w-full max-w-md rounded-2xl p-6 relative max-h-[90vh] overflow-y-auto space-y-4">
             <div class="flex justify-between items-center border-b border-slate-800 pb-3">
                 <h3 class="text-base font-bold text-white">Settings</h3>
                 <button onclick="closeSettingsModal()" class="text-slate-400 hover:text-white text-lg">✕</button>
@@ -320,21 +358,21 @@
                     <h4 class="font-bold text-rose-400 uppercase text-[11px]">Account Information</h4>
                     <div>
                         <label class="text-slate-400 block mb-1">Full Name</label>
-                        <input type="text" id="settingsName" placeholder="Enter name" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                        <input type="text" id="settingsName" placeholder="Enter name" class="w-full bg-[#1c2541] border border-slate-700 rounded-xl p-2.5 text-sm text-white">
                     </div>
                     <div>
                         <label class="text-slate-400 block mb-1">Email Address (Gmail)</label>
-                        <input type="email" id="settingsEmail" placeholder="Enter email" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                        <input type="email" id="settingsEmail" placeholder="Enter email" class="w-full bg-[#1c2541] border border-slate-700 rounded-xl p-2.5 text-sm text-white">
                     </div>
                     <div>
                         <label class="text-slate-400 block mb-1">Phone Number</label>
-                        <input type="tel" id="settingsPhone" placeholder="Enter phone" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                        <input type="tel" id="settingsPhone" placeholder="Enter phone" class="w-full bg-[#1c2541] border border-slate-700 rounded-xl p-2.5 text-sm text-white">
                     </div>
                 </div>
 
                 <div class="space-y-2 pt-2 border-t border-slate-800">
                     <h4 class="font-bold text-rose-400 uppercase text-[11px]">Address Book</h4>
-                    <textarea id="settingsAddress" rows="2" placeholder="Full delivery address..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white"></textarea>
+                    <textarea id="settingsAddress" rows="2" placeholder="Full delivery address..." class="w-full bg-[#1c2541] border border-slate-700 rounded-xl p-2.5 text-sm text-white"></textarea>
                 </div>
 
                 <button type="submit" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 rounded-xl text-sm shadow-lg">Save Settings</button>
@@ -347,7 +385,7 @@
     </div>
 
     <!-- Bottom Navigation Bar -->
-    <nav class="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 z-50 px-4 py-2 flex justify-around items-center text-xs">
+    <nav class="fixed bottom-0 left-0 right-0 bg-[#0b132b]/95 backdrop-blur-md border-t border-slate-800 z-50 px-4 py-2 flex justify-around items-center text-xs">
         <button onclick="switchTab('home')" id="nav-home" class="flex flex-col items-center text-rose-500 font-medium">
             <span class="text-lg">🏠</span><span data-i18n="nav_home">Home</span>
         </button>
@@ -355,7 +393,7 @@
             <span class="text-lg">💬</span><span data-i18n="nav_messages">Messages</span>
         </button>
         <div class="relative -top-3">
-            <button onclick="switchTab('home')" class="w-12 h-12 bg-gradient-to-tr from-orange-500 to-rose-600 rounded-full flex flex-col items-center justify-center text-[9px] font-black text-white shadow-lg border-2 border-slate-950">
+            <button onclick="switchTab('velora')" id="nav-velora" class="w-12 h-12 bg-gradient-to-tr from-orange-500 to-rose-600 rounded-full flex flex-col items-center justify-center text-[9px] font-black text-white shadow-lg border-2 border-[#070b19] transition transform hover:scale-105">
                 <span>VELORA</span>
             </button>
         </div>
@@ -368,7 +406,7 @@
         </button>
     </nav>
 
-    <!-- Functional Script Engine -->
+    <!-- Script Engine -->
     <script>
         const translations = {
             en: { flash_offer: "Flash Offer", safe_pay: "🛡️ Safe Payment", fast_delivery: "⚡ Fast Delivery", easy_return: "🔄 Free Return", all_products: "⚡ Daily Shera Deals", trending: "Shop Now", nav_home: "Home", nav_messages: "Messages", nav_cart: "Cart", nav_account: "Account" },
@@ -388,6 +426,13 @@
             { id: 2, name: "Electric Kettle 2L - Perfect for Tea & Coffee", price: 659, category: "Kitchen", images: ["https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500", "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500"], desc: "Fast boiling 2L electric kettle with auto shut-off safety feature.", rating: 4.6 },
             { id: 3, name: "Wireless Bluetooth Earbuds Pro", price: 1299, category: "Electronics", images: ["https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500", "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500"], desc: "Immersive sound with active noise cancellation and long battery life.", rating: 4.9 },
             { id: 4, name: "Smart Fitness Tracker Watch", price: 1850, category: "Electronics", images: ["https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500", "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500"], desc: "Track your health, heart rate, steps, and sports activities easily.", rating: 4.7 }
+        ];
+
+        const veloraExclusiveProducts = [
+            { id: 101, name: "Velora Royal Diamond Gold Necklace", price: 4999, category: "Jewelry", images: ["https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500"], desc: "Luxury handcrafted 22k gold plated necklace set.", rating: 5.0 },
+            { id: 102, name: "Luxury Chronograph Leather Watch", price: 3450, category: "Gadgets", images: ["https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500"], desc: "Premium genuine leather chronograph water-resistant watch.", rating: 4.9 },
+            { id: 103, name: "Velora Silk Designer Party Saree", price: 2890, category: "Apparel", images: ["https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=500"], desc: "Exclusive ethnic silk saree with zari embroidery.", rating: 4.8 },
+            { id: 104, name: "Premium Leather Driving Shoes", price: 2150, category: "Footwear", images: ["https://images.unsplash.com/photo-1533867617858-e7b97e060509?w=500"], desc: "Comfortable anti-slip breathable leather loafers.", rating: 4.7 }
         ];
 
         let cart = JSON.parse(localStorage.getItem('velora_cart')) || [];
@@ -410,8 +455,8 @@
                 grid.innerHTML = list.map(p => {
                     const isWishlisted = wishlist.includes(p.id);
                     return `
-                        <div class="bg-slate-800/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col justify-between relative">
-                            <button onclick="toggleWishlist(${p.id})" class="absolute top-2 right-2 bg-slate-900/80 p-1.5 rounded-full text-sm ${isWishlisted ? 'text-rose-500' : 'text-slate-400'}">❤️</button>
+                        <div class="bg-[#1c2541]/80 border border-slate-800 rounded-xl overflow-hidden flex flex-col justify-between relative shadow">
+                            <button onclick="toggleWishlist(${p.id})" class="absolute top-2 right-2 bg-[#0b132b]/80 p-1.5 rounded-full text-sm ${isWishlisted ? 'text-rose-500' : 'text-slate-400'}">❤️</button>
                             <img src="${p.images[0]}" class="w-full h-36 object-cover cursor-pointer" onclick="openProductModal(${p.id})">
                             <div class="p-2.5 flex flex-col justify-between flex-1 space-y-2">
                                 <div>
@@ -419,11 +464,69 @@
                                     <div class="flex items-center gap-1 mt-1 text-[10px] text-amber-400"><span>⭐ ${p.rating}</span></div>
                                     <p class="text-rose-500 font-bold text-sm mt-1">৳${p.price}</p>
                                 </div>
-                                <button onclick="addToCart(${p.id})" class="w-full bg-rose-600 hover:bg-rose-700 text-white text-xs py-1.5 rounded-lg font-semibold">Add to Cart</button>
+                                <button onclick="addToCart(${p.id})" class="w-full bg-rose-600 hover:bg-rose-700 text-white text-xs py-1.5 rounded-lg font-semibold shadow">Add to Cart</button>
                             </div>
                         </div>
                     `;
                 }).join('');
+            }
+        }
+
+        function renderVeloraProducts(list = veloraExclusiveProducts) {
+            const grid = document.getElementById('veloraProductGrid');
+            if(grid) {
+                grid.innerHTML = list.map(p => `
+                    <div class="bg-[#1c2541] border border-rose-500/30 rounded-xl overflow-hidden flex flex-col justify-between shadow-lg">
+                        <img src="${p.images[0]}" class="w-full h-36 object-cover cursor-pointer" onclick="openProductModal(${p.id}, true)">
+                        <div class="p-2.5 flex flex-col justify-between flex-1 space-y-2">
+                            <div>
+                                <h3 class="text-xs font-bold line-clamp-2 text-amber-300 cursor-pointer" onclick="openProductModal(${p.id}, true)">${p.name}</h3>
+                                <p class="text-rose-400 font-black text-sm mt-1">৳${p.price}</p>
+                            </div>
+                            <button onclick="addVeloraToCart(${p.id})" class="w-full bg-gradient-to-r from-amber-500 to-rose-600 text-black font-extrabold text-xs py-1.5 rounded-lg shadow">Buy Exclusive</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function renderSecondaryGrids() {
+            const allItems = [...products, ...veloraExclusiveProducts];
+            
+            // Cart recommended grid
+            const cartGrid = document.getElementById('cartRecommendedGrid');
+            if(cartGrid) {
+                cartGrid.innerHTML = allItems.map(p => `
+                    <div class="bg-[#1c2541] p-2 rounded-xl border border-slate-700 text-xs flex flex-col justify-between">
+                        <img src="${p.images[0]}" class="w-full h-24 object-cover rounded-lg mb-1">
+                        <h4 class="text-[11px] font-bold text-white line-clamp-1">${p.name}</h4>
+                        <p class="text-rose-400 font-bold text-xs mt-0.5">৳${p.price}</p>
+                        <button onclick="addToCart(${p.id})" class="w-full bg-rose-600 hover:bg-rose-700 text-white text-[10px] py-1 rounded-lg font-bold mt-1">Add to Cart</button>
+                    </div>
+                `).join('');
+            }
+
+            // Account scroll more products grid
+            const accGrid = document.getElementById('accountMoreProductsGrid');
+            if(accGrid) {
+                accGrid.innerHTML = allItems.map(p => `
+                    <div class="bg-[#1c2541] p-2 rounded-xl border border-slate-700 text-xs flex flex-col justify-between">
+                        <img src="${p.images[0]}" class="w-full h-24 object-cover rounded-lg mb-1">
+                        <h4 class="text-[11px] font-bold text-white line-clamp-1">${p.name}</h4>
+                        <p class="text-rose-400 font-bold text-xs mt-0.5">৳${p.price}</p>
+                        <button onclick="addToCart(${p.id})" class="w-full bg-rose-600 hover:bg-rose-700 text-white text-[10px] py-1 rounded-lg font-bold mt-1">Add to Cart</button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function filterVeloraCat(cat) {
+            document.querySelectorAll('.vcat-btn').forEach(btn => btn.className = "vcat-btn px-4 py-2 bg-[#1c2541] border border-slate-700 text-slate-300 font-bold rounded-full whitespace-nowrap");
+            event.target.className = "vcat-btn px-4 py-2 bg-rose-600 text-white font-bold rounded-full whitespace-nowrap shadow";
+            if(cat === 'All') {
+                renderVeloraProducts(veloraExclusiveProducts);
+            } else {
+                renderVeloraProducts(veloraExclusiveProducts.filter(p => p.category === cat));
             }
         }
 
@@ -437,7 +540,7 @@
         function filterCategory(cat) {
             currentCategory = cat;
             document.querySelectorAll('.cat-btn').forEach(btn => {
-                btn.className = "cat-btn px-3 py-1.5 bg-slate-900 border border-slate-800 text-slate-300 font-bold rounded-xl whitespace-nowrap transition";
+                btn.className = "cat-btn px-3 py-1.5 bg-[#0b132b] border border-slate-800 text-slate-300 font-bold rounded-xl whitespace-nowrap transition";
             });
             document.getElementById(`cat-${cat}`).className = "cat-btn px-3 py-1.5 bg-rose-600 text-white font-bold rounded-xl whitespace-nowrap transition";
 
@@ -482,11 +585,24 @@
             alert("Congratulations! 50 Coins added to your account.");
         }
 
-        function openProductModal(id) {
-            const p = products.find(item => item.id === id);
+        function handleAvatarUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgUrl = e.target.result;
+                    document.getElementById('userAvatarImg').src = imgUrl;
+                    localStorage.setItem('velora_avatar', imgUrl);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function openProductModal(id, isVelora = false) {
+            const list = isVelora ? veloraExclusiveProducts : [...products, ...veloraExclusiveProducts];
+            const p = list.find(item => item.id === id);
             if(!p) return;
 
-            // Save to recently viewed
             if(!recentlyViewed.includes(id)) {
                 recentlyViewed.unshift(id);
                 if(recentlyViewed.length > 5) recentlyViewed.pop();
@@ -494,53 +610,26 @@
                 loadRecentlyViewed();
             }
 
-            const prodReviews = reviewsData[id] || [
-                { user: "Rahim", text: "Great quality product! Very satisfied.", rating: 5 }
-            ];
-
-            const related = products.filter(item => item.category === p.category && item.id !== p.id);
+            const prodReviews = reviewsData[id] || [{ user: "Rahim", text: "Great quality product! Very satisfied.", rating: 5 }];
 
             document.getElementById('modalProductContent').innerHTML = `
                 <div class="space-y-3">
                     <img id="mainModalImg" src="${p.images[0]}" class="w-full h-56 rounded-xl object-cover">
-                    <div class="flex gap-2">
-                        ${p.images.map(img => `<img src="${img}" onclick="document.getElementById('mainModalImg').src='${img}'" class="w-14 h-14 rounded-lg object-cover cursor-pointer border border-slate-700 hover:border-rose-500">`).join('')}
-                    </div>
                 </div>
                 <span class="bg-rose-500/20 text-rose-400 text-xs px-2.5 py-1 rounded-full font-bold uppercase inline-block mt-2">${p.category}</span>
                 <h3 class="text-lg font-bold text-white">${p.name}</h3>
-                <p class="text-amber-400 text-xs">Rating: ⭐ ${p.rating} / 5.0</p>
+                <p class="text-amber-400 text-xs">Rating: ⭐ ${p.rating || 5.0} / 5.0</p>
                 <p class="text-rose-500 font-black text-lg">৳${p.price}</p>
                 <p class="text-xs text-slate-300">${p.desc}</p>
                 
-                <button onclick="addToCart(${p.id}); closeProductModal();" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 rounded-xl text-sm">Add to Cart</button>
+                <button onclick="addToCart(${p.id}); closeProductModal();" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 rounded-xl text-sm shadow-lg">Add to Cart</button>
 
-                <!-- Customer Reviews Section -->
                 <div class="border-t border-slate-800 pt-3 space-y-2">
                     <h4 class="font-bold text-xs text-rose-400">Customer Reviews & Ratings</h4>
                     <div class="space-y-2 max-h-32 overflow-y-auto">
-                        ${prodReviews.map(r => `<div class="bg-slate-800 p-2 rounded-lg text-[11px]"><p class="font-bold text-white">${r.user} - <span class="text-amber-400">⭐ ${r.rating}</span></p><p class="text-slate-400">${r.text}</p></div>`).join('')}
+                        ${prodReviews.map(r => `<div class="bg-[#1c2541] p-2 rounded-lg text-[11px]"><p class="font-bold text-white">${r.user} - <span class="text-amber-400">⭐ ${r.rating}</span></p><p class="text-slate-400">${r.text}</p></div>`).join('')}
                     </div>
-                    <form onsubmit="submitReview(event, ${p.id})" class="flex gap-2 pt-1">
-                        <input type="text" id="revText" required placeholder="Write a review..." class="flex-1 bg-slate-800 border border-slate-700 text-xs rounded-xl px-2 py-1 text-white">
-                        <button type="submit" class="bg-slate-700 text-white text-xs px-3 py-1 rounded-xl font-bold">Submit</button>
-                    </form>
                 </div>
-
-                <!-- Related Products -->
-                ${related.length > 0 ? `
-                    <div class="border-t border-slate-800 pt-3">
-                        <h4 class="font-bold text-xs text-slate-300 mb-2">You May Also Like</h4>
-                        <div class="grid grid-cols-2 gap-2">
-                            ${related.map(r => `
-                                <div onclick="openProductModal(${r.id})" class="bg-slate-800 p-2 rounded-xl cursor-pointer flex gap-2 items-center">
-                                    <img src="${r.images[0]}" class="w-10 h-10 rounded-lg object-cover">
-                                    <div><p class="text-[10px] font-bold text-white line-clamp-1">${r.name}</p><p class="text-[10px] text-rose-500">৳${r.price}</p></div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                ` : ''}
             `;
             document.getElementById('productModal').classList.remove('hidden');
         }
@@ -551,9 +640,10 @@
                 container.innerHTML = `<p class="text-slate-500 text-[11px]">No recently viewed products yet.</p>`;
                 return;
             }
-            const viewedProds = products.filter(p => recentlyViewed.includes(p.id));
+            const all = [...products, ...veloraExclusiveProducts];
+            const viewedProds = all.filter(p => recentlyViewed.includes(p.id));
             container.innerHTML = viewedProds.map(p => `
-                <div onclick="openProductModal(${p.id})" class="bg-slate-800 p-2 rounded-xl cursor-pointer min-w-[100px] text-center border border-slate-700">
+                <div onclick="openProductModal(${p.id})" class="bg-[#1c2541] p-2 rounded-xl cursor-pointer min-w-[100px] text-center border border-slate-700">
                     <img src="${p.images[0]}" class="w-full h-16 rounded-lg object-cover mb-1">
                     <p class="text-[10px] font-bold text-white line-clamp-1">${p.name}</p>
                     <p class="text-[10px] text-rose-500 font-bold">৳${p.price}</p>
@@ -561,33 +651,27 @@
             `).join('');
         }
 
-        function submitReview(e, prodId) {
-            e.preventDefault();
-            const text = document.getElementById('revText').value;
-            const userName = localStorage.getItem('cust_name') || 'MD Hossain Khan';
-            
-            if(!reviewsData[prodId]) reviewsData[prodId] = [];
-            reviewsData[prodId].push({ user: userName, text: text, rating: 5 });
-            localStorage.setItem('velora_reviews', JSON.stringify(reviewsData));
-            
-            alert("Thank you for your review!");
-            openProductModal(prodId);
-        }
-
         function closeProductModal() { document.getElementById('productModal').classList.add('hidden'); }
 
         function addToCart(id) {
-            const prod = products.find(p => p.id === id);
+            const all = [...products, ...veloraExclusiveProducts];
+            const prod = all.find(p => p.id === id);
+            if(!prod) return;
             const existing = cart.find(c => c.id === id);
             if(existing) { existing.qty += 1; } else { cart.push({ ...prod, qty: 1 }); }
             saveCart();
+        }
+
+        function addVeloraToCart(id) {
+            addToCart(id);
+            alert("Exclusive Product Added to Cart!");
         }
 
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.getElementById(`tab-${tabName}`).classList.remove('hidden');
 
-            ['home', 'messages', 'cart', 'account'].forEach(name => {
+            ['home', 'messages', 'cart', 'account', 'velora'].forEach(name => {
                 const btn = document.getElementById(`nav-${name}`);
                 if(btn) { btn.classList.remove('text-rose-500'); btn.classList.add('text-slate-400'); }
             });
@@ -624,16 +708,16 @@
 
             checkoutBox.classList.remove('hidden');
             list.innerHTML = cart.map((item, index) => `
-                <div class="bg-slate-900 border border-slate-800 p-3 rounded-2xl flex items-center gap-3">
-                    <img src="${item.images[0]}" class="w-16 h-16 rounded-xl object-cover">
+                <div class="bg-[#0b132b] border border-slate-800 p-3 rounded-2xl flex items-center gap-3 shadow-lg">
+                    <img src="${item.images[0]}" class="w-16 h-16 rounded-xl object-cover border border-slate-700">
                     <div class="flex-1">
-                        <h4 class="text-xs font-bold">${item.name}</h4>
+                        <h4 class="text-xs font-bold text-white">${item.name}</h4>
                         <p class="text-rose-500 font-bold text-sm mt-0.5">৳${item.price}</p>
                     </div>
-                    <div class="flex items-center gap-2 bg-slate-800 rounded-lg px-2 py-1">
-                        <button onclick="changeQty(${index}, -1)" class="text-xs font-bold px-1">-</button>
-                        <span class="text-xs font-bold">${item.qty}</span>
-                        <button onclick="changeQty(${index}, 1)" class="text-xs font-bold px-1">+</button>
+                    <div class="flex items-center gap-2 bg-[#1c2541] rounded-lg px-2 py-1 border border-slate-700">
+                        <button onclick="changeQty(${index}, -1)" class="text-xs font-bold px-1 text-slate-300">-</button>
+                        <span class="text-xs font-bold text-white">${item.qty}</span>
+                        <button onclick="changeQty(${index}, 1)" class="text-xs font-bold px-1 text-slate-300">+</button>
                     </div>
                 </div>
             `).join('');
@@ -737,11 +821,10 @@
         }
 
         function openOrderStatus(type) {
-            document.getElementById('modalOrderStatusTitle').innerText = `${type} Orders`;
-            document.getElementById('modalOrderStatusDesc').innerText = `You have 0 active items under ${type}.`;
-            document.getElementById('orderStatusModal').classList.remove('hidden');
+            document.getElementById('extraModalTitle').innerText = `${type} Orders`;
+            document.getElementById('extraModalBody').innerHTML = `<p class="text-slate-400">You have 0 active items under ${type}.</p>`;
+            document.getElementById('extraModal').classList.remove('hidden');
         }
-        function closeOrderStatusModal() { document.getElementById('orderStatusModal').classList.add('hidden'); }
 
         function openWishlistModal() {
             document.getElementById('extraModalTitle').innerText = "My Wishlist";
@@ -749,8 +832,9 @@
             if(wishlist.length === 0) {
                 body.innerHTML = "<p>Your wishlist is empty.</p>";
             } else {
-                const liked = products.filter(p => wishlist.includes(p.id));
-                body.innerHTML = liked.map(p => `<div class="flex justify-between items-center bg-slate-800 p-2.5 rounded-xl mb-2"><span>${p.name}</span><span class="text-rose-500 font-bold">৳${p.price}</span></div>`).join('');
+                const all = [...products, ...veloraExclusiveProducts];
+                const liked = all.filter(p => wishlist.includes(p.id));
+                body.innerHTML = liked.map(p => `<div class="flex justify-between items-center bg-[#1c2541] p-2.5 rounded-xl mb-2"><span>${p.name}</span><span class="text-rose-500 font-bold">৳${p.price}</span></div>`).join('');
             }
             document.getElementById('extraModal').classList.remove('hidden');
         }
@@ -758,19 +842,19 @@
         function openAddressModal() {
             document.getElementById('extraModalTitle').innerText = "Saved Addresses";
             const addr = localStorage.getItem('cust_address') || 'No default address saved.';
-            document.getElementById('extraModalBody').innerHTML = `<div class="bg-slate-800 p-3 rounded-xl"><p class="font-bold text-white">Default Address:</p><p class="text-slate-400 mt-1">${addr}</p></div>`;
+            document.getElementById('extraModalBody').innerHTML = `<div class="bg-[#1c2541] p-3 rounded-xl"><p class="font-bold text-white">Default Address:</p><p class="text-slate-400 mt-1">${addr}</p></div>`;
             document.getElementById('extraModal').classList.remove('hidden');
         }
 
         function openVouchersModal() {
             document.getElementById('extraModalTitle').innerText = "Available Vouchers";
-            document.getElementById('extraModalBody').innerHTML = `<div class="bg-slate-800 p-3 rounded-xl border border-rose-500/30"><p class="font-bold text-rose-400">VELORA10</p><p class="text-slate-400 text-[11px] mt-1">Get 10% discount on your total order value!</p></div>`;
+            document.getElementById('extraModalBody').innerHTML = `<div class="bg-[#1c2541] p-3 rounded-xl border border-rose-500/30"><p class="font-bold text-rose-400">VELORA10</p><p class="text-slate-400 text-[11px] mt-1">Get 10% discount on your total order value!</p></div>`;
             document.getElementById('extraModal').classList.remove('hidden');
         }
 
         function openReferralModal() {
             document.getElementById('extraModalTitle').innerText = "Refer & Earn";
-            document.getElementById('extraModalBody').innerHTML = `<div class="bg-slate-800 p-3 rounded-xl text-center space-y-2"><p>Share your referral link with friends and earn ৳50 bonus!</p><input type="text" readonly value="https://velora.com/ref/hossain" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-center text-white text-xs"></div>`;
+            document.getElementById('extraModalBody').innerHTML = `<div class="bg-[#1c2541] p-3 rounded-xl text-center space-y-2"><p>Share your referral link with friends and earn ৳50 bonus!</p><input type="text" readonly value="https://velora.com/ref/hossain" class="w-full bg-[#0b132b] border border-slate-700 rounded-lg p-2 text-center text-white text-xs"></div>`;
             document.getElementById('extraModal').classList.remove('hidden');
         }
 
@@ -782,13 +866,13 @@
 
         function openMyReviewsModal() {
             document.getElementById('extraModalTitle').innerText = "My Reviews";
-            document.getElementById('extraModalBody').innerHTML = `<div class="bg-slate-800 p-3 rounded-xl"><p class="font-bold text-white">Submitted Reviews:</p><p class="text-slate-400 mt-1">You have submitted 0 product reviews so far.</p></div>`;
+            document.getElementById('extraModalBody').innerHTML = `<div class="bg-[#1c2541] p-3 rounded-xl"><p class="font-bold text-white">Submitted Reviews:</p><p class="text-slate-400 mt-1">You have submitted 0 product reviews so far.</p></div>`;
             document.getElementById('extraModal').classList.remove('hidden');
         }
 
         function openPaymentOptionsModal() {
             document.getElementById('extraModalTitle').innerText = "Payment Options";
-            document.getElementById('extraModalBody').innerHTML = `<div class="bg-slate-800 p-3 rounded-xl space-y-2"><p class="font-bold text-white">Supported Payment Methods:</p><p class="text-emerald-400">✓ bKash Mobile Banking</p><p class="text-orange-400">✓ Nagad Mobile Banking</p><p class="text-rose-400">✓ Cash on Delivery (COD)</p></div>`;
+            document.getElementById('extraModalBody').innerHTML = `<div class="bg-[#1c2541] p-3 rounded-xl space-y-2"><p class="font-bold text-white">Supported Payment Methods:</p><p class="text-emerald-400">✓ bKash Mobile Banking</p><p class="text-orange-400">✓ Nagad Mobile Banking</p><p class="text-rose-400">✓ Cash on Delivery (COD)</p></div>`;
             document.getElementById('extraModal').classList.remove('hidden');
         }
 
@@ -798,10 +882,15 @@
             if(localStorage.getItem('cust_name')) {
                 document.getElementById('displayUserName').innerText = localStorage.getItem('cust_name');
             }
-            document.getElementById('displayUserEmail').innerText = localStorage.getItem('cust_address') || 'No address saved';
+            document.getElementById('displayUserEmail').innerText = localStorage.getItem('cust_address') || 'Tap photo to change profile picture';
             document.getElementById('userCoinsCount').innerText = localStorage.getItem('velora_coins') || 0;
             document.getElementById('wishlistCountText').innerText = `${wishlist.length} Saved items`;
             
+            const savedAvatar = localStorage.getItem('velora_avatar');
+            if(savedAvatar) {
+                document.getElementById('userAvatarImg').src = savedAvatar;
+            }
+
             const savedLang = localStorage.getItem('velora_lang') || 'en';
             document.getElementById('langSwitcher').value = savedLang;
             switchLanguage(savedLang);
@@ -838,6 +927,8 @@
         window.addEventListener('DOMContentLoaded', () => {
             loadCustomerData();
             renderProducts();
+            renderVeloraProducts();
+            renderSecondaryGrids();
         });
     </script>
 </body>
