@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+  // আপনার ফায়ারবেস কনসোল থেকে কপি করা কনফিগারেশন এখানে পেস্ট করুন
+  const firebaseConfig = {
+    apiKey: "AIzaSyA57eBAGVuhk4gsGkEN1A325SZmznkvhOE",
+    authDomain: "velora-shop-3dc6a.firebaseapp.com",
+    projectId: "velora-shop-3dc6a",
+    storageBucket: "velora-shop-3dc6a.appspot.com",
+    messagingSenderId: "852885966833",
+    appId: "1:852885966833:web:86985d50eb7cab87343e50"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+</script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VELORA - Premium Global E-Commerce Store</title>
