@@ -89,6 +89,19 @@
                     <p class="text-slate-400">ORDER TRACKING</p>
                     <h3 class="text-sm font-bold text-sky-400 mt-2">🔍 Track Now</h3>
                 </div>
+                <!-- Newly added dashboard boxes to fill empty spaces -->
+                <div onclick="switchAdminTab('steadfast')" class="bg-[#111827] border border-slate-800 p-4 rounded-2xl space-y-1 cursor-pointer hover:border-orange-500 transition">
+                    <p class="text-slate-400">STEADFAST</p>
+                    <h3 class="text-sm font-bold text-orange-400 mt-2">⚡ Courier</h3>
+                </div>
+                <div onclick="switchAdminTab('pathao')" class="bg-[#111827] border border-slate-800 p-4 rounded-2xl space-y-1 cursor-pointer hover:border-red-500 transition">
+                    <p class="text-slate-400">PATHAO</p>
+                    <h3 class="text-sm font-bold text-red-400 mt-2">🚀 Courier</h3>
+                </div>
+                <div onclick="switchAdminTab('addproduct')" class="bg-[#111827] border border-slate-800 p-4 rounded-2xl space-y-1 cursor-pointer hover:border-rose-500 transition">
+                    <p class="text-slate-400">ADD PRODUCT</p>
+                    <h3 class="text-sm font-bold text-rose-400 mt-2">➕ Create New</h3>
+                </div>
             </div>
         </div>
 
@@ -156,13 +169,14 @@
             </div>
         </div>
 
-        <!-- 10. Add Product Tab (Direct Photo Upload & Optional URL) -->
+        <!-- 10. Add Product Tab (Up to 7 Photos Upload & Optional URL) -->
         <div id="tab-addproduct" class="admin-tab hidden space-y-4 max-w-2xl mx-auto">
             <h2 class="text-base font-bold text-rose-500">Add New Product</h2>
             <form onsubmit="handleAddNewProduct(event)" class="bg-[#111827] border border-slate-800 p-5 rounded-2xl space-y-4 text-xs">
                 <div>
-                    <label class="text-slate-400 block mb-1 font-bold">Product Photo (Select from Device) *</label>
-                    <input type="file" id="prodFile" accept="image/*" required class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-slate-300 text-xs">
+                    <label class="text-slate-400 block mb-1 font-bold">Product Photos (Select up to 7 images) *</label>
+                    <input type="file" id="prodFiles" accept="image/*" multiple required class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-slate-300 text-xs">
+                    <p class="text-[10px] text-slate-500 mt-1">You can select a maximum of 7 images.</p>
                 </div>
                 <div>
                     <label class="text-slate-400 block mb-1 font-bold">Product Image URL (Optional)</label>
@@ -460,10 +474,10 @@
 
         function handleAddNewProduct(e) {
             e.preventDefault();
-            const fileInput = document.getElementById('prodFile');
+            const fileInput = document.getElementById('prodFiles');
             const urlInput = document.getElementById('prodImage').value;
             
-            let imageUrl = urlInput;
+            let imageUrl = urlInput || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500';
             if(fileInput.files && fileInput.files[0]) {
                 imageUrl = URL.createObjectURL(fileInput.files[0]);
             }
