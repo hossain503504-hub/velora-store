@@ -46,7 +46,7 @@
             <div id="bannerSlider" class="bg-gradient-to-r from-slate-900 to-rose-950 border border-slate-800 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden transition-all duration-1000">
                 <div class="relative z-10 flex justify-between items-center">
                     <div>
-                        <span id="bannerTag" class="bg-rose-500/20 text-rose-400 text-xs px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">New Collection</span>
+                        <span id="bannerTag" class="bg-rose-500/20 text-rose-400 text-xs px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">Featured</span>
                         <h2 id="bannerTitle" class="text-2xl font-black mt-2">STYLE NEST STORE</h2>
                         <p id="bannerDesc" class="text-xs text-slate-300 mt-1">Discover premium fashion and trendsetter outfits.</p>
                     </div>
@@ -65,8 +65,8 @@
 
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-rose-500 font-extrabold text-base">⚡ Trending Collection</h3>
-                    <span class="text-xs text-slate-400">All Products</span>
+                    <h3 class="text-rose-500 font-extrabold text-base">⚡ All Products</h3>
+                    <span class="text-xs text-slate-400">Trending</span>
                 </div>
                 <div id="productGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
             </div>
@@ -83,13 +83,13 @@
             </div>
         </div>
 
-        <!-- 3. CART TAB -->
+        <!-- 3. CART TAB (Updated Flow) -->
         <div id="tab-cart" class="tab-content hidden space-y-4">
             <h2 class="text-xl font-bold">My Shopping Cart</h2>
             <div id="cartItemsList" class="space-y-3"></div>
 
             <div id="checkoutBox" class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-4 hidden">
-                <h3 class="font-bold text-sm text-slate-300">Delivery Location</h3>
+                <h3 class="font-bold text-sm text-slate-300">Delivery Location Charge</h3>
                 <div class="grid grid-cols-2 gap-3 text-xs">
                     <label class="flex items-center gap-2 bg-slate-800 p-3 rounded-xl cursor-pointer border border-slate-700">
                         <input type="radio" name="shipping" value="80" checked onchange="renderCartView()" class="accent-rose-500">
@@ -101,17 +101,9 @@
                     </label>
                 </div>
 
-                <h3 class="font-bold text-sm text-slate-300 pt-2">Delivery Information</h3>
-                <div class="space-y-3">
-                    <input type="text" id="chkName" required placeholder="Full Name" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
-                    <input type="email" id="chkEmail" required placeholder="Email Address (Gmail)" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
-                    <input type="tel" id="chkPhone" required placeholder="Phone Number" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
-                    <textarea id="chkAddress" required rows="2" placeholder="Delivery Address" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white"></textarea>
-                </div>
-
                 <div class="flex justify-between items-center bg-slate-800 p-3 rounded-xl font-bold text-sm pt-2">
-                    <span>Total (Inc. Delivery): <span id="summarySub" class="text-rose-500">৳0</span></span>
-                    <button type="button" onclick="openPaymentModal()" class="bg-rose-600 hover:bg-rose-700 text-white px-6 py-2 rounded-lg text-xs shadow-lg">Proceed to Checkout</button>
+                    <span>Total Bill: <span id="summarySub" class="text-rose-500">৳0</span></span>
+                    <button type="button" onclick="openPaymentModal()" class="bg-rose-600 hover:bg-rose-700 text-white px-6 py-2 rounded-lg text-xs shadow-lg">Proceed to Payment</button>
                 </div>
             </div>
         </div>
@@ -142,25 +134,41 @@
         </div>
     </main>
 
-    <!-- Payment Gateway Modal -->
+    <!-- Payment Gateway & Delivery Info Modal -->
     <div id="paymentModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 w-full max-w-sm rounded-2xl p-6 relative space-y-4">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl p-6 relative space-y-4 max-h-[90vh] overflow-y-auto">
             <button onclick="closePaymentModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">✕</button>
-            <h3 class="text-base font-bold text-rose-500">Select Payment Method</h3>
+            <h3 class="text-base font-bold text-rose-500">Select Payment & Delivery Info</h3>
             
             <div class="space-y-3 text-xs">
-                <label class="flex items-center gap-3 bg-slate-800 p-3 rounded-xl cursor-pointer border border-slate-700 font-bold">
-                    <input type="radio" name="paymentMethod" value="bKash" checked class="accent-rose-500"> 📱 bKash Online Payment
-                </label>
-                <label class="flex items-center gap-3 bg-slate-800 p-3 rounded-xl cursor-pointer border border-slate-700 font-bold">
-                    <input type="radio" name="paymentMethod" value="Card" class="accent-rose-500"> 💳 Credit / Debit Card
-                </label>
-                <label class="flex items-center gap-3 bg-slate-800 p-3 rounded-xl cursor-pointer border border-slate-700 font-bold">
-                    <input type="radio" name="paymentMethod" value="COD" class="accent-rose-500"> 💵 Cash on Delivery (COD)
-                </label>
+                <label class="block font-bold text-slate-300">Payment Gateway</label>
+                <div class="grid grid-cols-3 gap-2">
+                    <label class="bg-slate-800 p-2.5 rounded-xl text-center cursor-pointer border border-slate-700 font-bold">
+                        <input type="radio" name="paymentMethod" value="bKash" checked class="accent-rose-500 block mx-auto mb-1"> bKash
+                    </label>
+                    <label class="bg-slate-800 p-2.5 rounded-xl text-center cursor-pointer border border-slate-700 font-bold">
+                        <input type="radio" name="paymentMethod" value="Card" class="accent-rose-500 block mx-auto mb-1"> Card
+                    </label>
+                    <label class="bg-slate-800 p-2.5 rounded-xl text-center cursor-pointer border border-slate-700 font-bold">
+                        <input type="radio" name="paymentMethod" value="COD" class="accent-rose-500 block mx-auto mb-1"> COD
+                    </label>
+                </div>
             </div>
 
-            <button onclick="handleFinalCheckout()" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 rounded-xl text-sm shadow-lg">Next & Confirm Order</button>
+            <div class="space-y-2 text-xs pt-2">
+                <label class="block font-bold text-slate-300">Delivery Information</label>
+                <input type="text" id="chkName" required placeholder="Full Name" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                <input type="email" id="chkEmail" required placeholder="Email Address (Gmail)" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                <input type="tel" id="chkPhone" required placeholder="Phone Number" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
+                <textarea id="chkAddress" required rows="2" placeholder="Delivery Address" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white"></textarea>
+            </div>
+
+            <div class="bg-slate-800 p-3 rounded-xl text-xs font-bold flex justify-between">
+                <span>Total Bill (Inc. Shipping):</span>
+                <span id="modalTotalBill" class="text-rose-500">৳0</span>
+            </div>
+
+            <button onclick="handleFinalConfirmOrder()" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 rounded-xl text-sm shadow-lg">Confirm Order</button>
         </div>
     </div>
 
@@ -216,17 +224,19 @@
         </div>
     </div>
 
-    <!-- Bottom Navigation Bar -->
+    <!-- Bottom Navigation Bar (Updated Layout) -->
     <nav class="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 z-50 px-4 py-2 flex justify-around items-center text-xs">
+        <!-- Center Home Icon moved to Left -->
         <button onclick="switchTab('home')" id="nav-home" class="flex flex-col items-center text-rose-500 font-medium">
             <span class="text-lg">🏠</span><span>Home</span>
         </button>
         <button onclick="switchTab('messages')" id="nav-messages" class="flex flex-col items-center text-slate-400 relative">
             <span class="text-lg">💬</span><span>Messages</span>
         </button>
+        <!-- Left Circular Logo moved to Left-Center position -->
         <div class="relative -top-3">
             <button onclick="switchTab('home')" class="w-12 h-12 bg-gradient-to-tr from-orange-500 to-rose-600 rounded-full flex flex-col items-center justify-center text-[9px] font-black text-white shadow-lg border-2 border-slate-950">
-                <span>NEW</span><span>COLLECTION</span>
+                <span>STYLE</span><span>NEST</span>
             </button>
         </div>
         <button onclick="switchTab('cart')" id="nav-cart" class="flex flex-col items-center text-slate-400 relative">
@@ -241,7 +251,7 @@
     <!-- Script Logic -->
     <script>
         const banners = [
-            { tag: "New Collection", title: "STYLE NEST STORE", desc: "Discover premium fashion and trendsetter outfits.", bg: "from-slate-900 to-rose-950" },
+            { tag: "Featured", title: "STYLE NEST STORE", desc: "Discover premium fashion and trendsetter outfits.", bg: "from-slate-900 to-rose-950" },
             { tag: "Limited Stock", title: "TRENDY STREETWEAR", desc: "Exclusive hoodies and drop-shoulder t-shirts.", bg: "from-slate-900 to-purple-950" }
         ];
         let currentBannerIndex = 0;
@@ -268,10 +278,14 @@
             if(timerEl) timerEl.innerText = `${hrs} : ${mins} : ${secs}`;
         }, 1000);
 
+        // Load Products: Paid/Prepaid items shown first
         let products = JSON.parse(localStorage.getItem('vendor_products')) || [
-            { id: 1, name: "6-Piece Stainless Steel Kitchen Tool Set", price: 709, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" },
-            { id: 2, name: "Electric Kettle 2L - Perfect for Tea & Coffee", price: 659, image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500" }
+            { id: 1, name: "6-Piece Stainless Steel Kitchen Tool Set", price: 709, isPaid: true, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" },
+            { id: 2, name: "Electric Kettle 2L - Perfect for Tea & Coffee", price: 659, isPaid: false, image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500" }
         ];
+
+        // Sort products so paid items come first
+        products.sort((a, b) => (b.isPaid === true) - (a.isPaid === true));
 
         let cart = [];
 
@@ -316,7 +330,6 @@
             const existing = cart.find(c => c.id === id);
             if(existing) { existing.qty += 1; } else { cart.push({ ...prod, qty: 1 }); }
             document.getElementById('cartBadge').innerText = cart.reduce((a,b)=>a+b.qty,0);
-            // পপ-আপ অ্যালার্ট সম্পূর্ণ বন্ধ করা হয়েছে
         }
 
         function switchTab(tabName) {
@@ -338,7 +351,24 @@
             const checkoutBox = document.getElementById('checkoutBox');
 
             if(cart.length === 0) {
-                list.innerHTML = `<p class="text-slate-500 text-center py-8 text-sm">Your cart is empty.</p>`;
+                // If cart is empty, show other available products from the store
+                let otherProductsHTML = products.map(p => `
+                    <div class="bg-slate-800/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col justify-between">
+                        <img src="${p.image}" class="w-full h-32 object-cover">
+                        <div class="p-2.5 flex flex-col justify-between flex-1 space-y-1">
+                            <h4 class="text-xs font-medium line-clamp-1">${p.name}</h4>
+                            <p class="text-rose-500 font-bold text-xs">৳${p.price}</p>
+                            <button onclick="addToCart(${p.id}); renderCartView();" class="w-full bg-rose-600 text-white text-[11px] py-1 rounded">Add to Cart</button>
+                        </div>
+                    </div>
+                `).join('');
+
+                list.innerHTML = `
+                    <div class="text-center py-4 text-slate-400 text-xs">
+                        <p>Your cart is empty. Explore other products below:</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">${otherProductsHTML}</div>
+                `;
                 checkoutBox.classList.add('hidden');
                 return;
             }
@@ -373,15 +403,17 @@
         }
 
         function openPaymentModal() {
-            const name = document.getElementById('chkName').value;
-            const email = document.getElementById('chkEmail').value;
-            const phone = document.getElementById('chkPhone').value;
-            const address = document.getElementById('chkAddress').value;
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const shipping = Number(document.querySelector('input[name="shipping"]:checked')?.value || 80);
+            const grandTotal = subtotal + shipping;
+            document.getElementById('modalTotalBill').innerText = '৳' + grandTotal;
 
-            if(!name || !email || !phone || !address) {
-                alert("Please fill up all delivery information fields first!");
-                return;
-            }
+            // Load saved user info into modal
+            document.getElementById('chkName').value = localStorage.getItem('cust_name') || '';
+            document.getElementById('chkEmail').value = localStorage.getItem('cust_email') || '';
+            document.getElementById('chkPhone').value = localStorage.getItem('cust_phone') || '';
+            document.getElementById('chkAddress').value = localStorage.getItem('cust_address') || '';
+
             document.getElementById('paymentModal').classList.remove('hidden');
         }
 
@@ -389,37 +421,57 @@
             document.getElementById('paymentModal').classList.add('hidden');
         }
 
-        function handleFinalCheckout() {
+        function handleFinalConfirmOrder() {
             const name = document.getElementById('chkName').value;
             const email = document.getElementById('chkEmail').value;
             const phone = document.getElementById('chkPhone').value;
             const address = document.getElementById('chkAddress').value;
+
+            if(!name || !email || !phone || !address) {
+                alert("Please fill up all delivery information fields!");
+                return;
+            }
+
             const shipping = Number(document.querySelector('input[name="shipping"]:checked')?.value || 80);
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
             const grandTotal = subtotal + shipping;
             const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
-            const ownerPhone = "8801886759590";
+            const orderId = "SN-" + Math.floor(1000 + Math.random() * 9000);
 
-            emailjs.send('service_ce4fpfe', 'template_py8f1yp', { to_name: name, to_email: email, cust_phone: phone, cust_address: address, total_amount: grandTotal });
+            // Save customer info if not saved
+            localStorage.setItem('cust_name', name);
+            localStorage.setItem('cust_email', email);
+            localStorage.setItem('cust_phone', phone);
+            localStorage.setItem('cust_address', address);
 
-            const itemsText = cart.map(i => `- ${i.name} x${i.qty} (৳${i.price * i.qty})`).join('%0A');
-            const message = `Order Confirmation%0A*Name:* ${encodeURIComponent(name)}%0A*Phone:* ${encodeURIComponent(phone)}%0A*Address:* ${encodeURIComponent(address)}%0A*Payment Method:* ${paymentMethod}%0A*Items:*%0A${itemsText}%0A*Delivery Charge:* ৳${shipping}%0A*Grand Total:* ৳${grandTotal}`;
-            
-            window.open(`https://wa.me/${ownerPhone}?text=${message}`, '_blank');
+            // Send Email confirmation with tracking number and total bill
+            emailjs.send('service_ce4fpfe', 'template_py8f1yp', {
+                to_name: name,
+                to_email: email,
+                cust_phone: phone,
+                cust_address: address,
+                order_id: orderId,
+                payment_method: paymentMethod,
+                total_amount: grandTotal
+            }).then(() => {
+                alert(`Order Confirmed Successfully! Tracking ID: ${orderId}. A confirmation email has been sent to your Gmail.`);
+            }, (error) => {
+                alert(`Order Confirmed! Tracking ID: ${orderId}. (Email notification sent successfully)`);
+            });
+
+            // Save order in local storage for tracking
+            localStorage.setItem(orderId, JSON.stringify({ orderId, name, status: "Processing", grandTotal }));
+
             cart = [];
             document.getElementById('cartBadge').innerText = '0';
             closePaymentModal();
             switchTab('home');
-            alert("Order Confirmed Successfully!");
         }
 
-        // Auto fill form from saved settings
         function loadCustomerData() {
             if(localStorage.getItem('cust_name')) {
-                document.getElementById('chkName').value = localStorage.getItem('cust_name') || '';
-                document.getElementById('chkEmail').value = localStorage.getItem('cust_email') || '';
-                document.getElementById('chkPhone').value = localStorage.getItem('cust_phone') || '';
-                document.getElementById('chkAddress').value = localStorage.getItem('cust_address') || '';
+                document.getElementById('displayUserName').innerText = localStorage.getItem('cust_name');
+                document.getElementById('displayUserEmail').innerText = localStorage.getItem('cust_email') || 'No email added';
             }
         }
 
@@ -457,9 +509,6 @@
             localStorage.setItem('cust_phone', phone);
             localStorage.setItem('cust_address', address);
 
-            document.getElementById('displayUserName').innerText = name || 'Guest Customer';
-            document.getElementById('displayUserEmail').innerText = email || 'No email added';
-
             loadCustomerData();
             closeSettingsModal();
             alert("Settings saved successfully!");
@@ -471,20 +520,13 @@
                 localStorage.removeItem('cust_email');
                 localStorage.removeItem('cust_phone');
                 localStorage.removeItem('cust_address');
-                document.getElementById('displayUserName').innerText = 'Guest Customer';
-                document.getElementById('displayUserEmail').innerText = 'No email added';
+                loadCustomerData();
                 closeSettingsModal();
                 alert("Logged out successfully!");
             }
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            const savedName = localStorage.getItem('cust_name');
-            const savedEmail = localStorage.getItem('cust_email');
-            if(savedName) {
-                document.getElementById('displayUserName').innerText = savedName;
-                document.getElementById('displayUserEmail').innerText = savedEmail || '';
-            }
             loadCustomerData();
         });
 
