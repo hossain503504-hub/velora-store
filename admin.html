@@ -23,17 +23,14 @@
 
     <!-- Mobile Header Bar -->
     <div class="md:hidden bg-[#111827] border-b border-slate-800 p-4 flex justify-between items-center">
-        <div class="flex items-center gap-3">
-            <h1 class="text-rose-500 font-extrabold tracking-wider text-base uppercase">VELORA ADMIN</h1>
-            <button onclick="openAdminSettings()" class="bg-slate-800 hover:bg-slate-700 p-1.5 rounded-full text-sm text-slate-200">⚙️ Settings</button>
-        </div>
+        <h1 class="text-rose-500 font-extrabold tracking-wider text-base uppercase">VELORA ADMIN</h1>
         <button onclick="toggleMobileMenu()" class="text-xl">☰</button>
     </div>
 
-    <!-- Sidebar Navigation -->
+    <!-- Sidebar Navigation (Hidden until hamburger menu is clicked on mobile) -->
     <div id="sidebar" class="w-full md:w-64 bg-[#111827] border-r border-slate-800 p-4 hidden md:flex flex-col justify-between">
         <div class="space-y-4">
-            <div class="flex items-center justify-between px-2 py-1">
+            <div class="flex items-center justify-between px-2 py-1 border-b border-slate-800 pb-3">
                 <div class="flex items-center gap-2">
                     <div class="w-8 h-8 bg-rose-600 rounded-lg flex items-center justify-center font-bold text-white">V</div>
                     <div>
@@ -41,7 +38,7 @@
                         <p class="text-[10px] text-slate-400">Admin Panel</p>
                     </div>
                 </div>
-                <!-- Settings Button next to VELORA Admin Panel -->
+                <!-- Settings Button appears right beside VELORA Admin Panel inside menu -->
                 <button onclick="openAdminSettings()" class="bg-slate-800 hover:bg-slate-700 p-2 rounded-full text-sm text-slate-200" title="Shop Settings">⚙️</button>
             </div>
             <nav class="space-y-1 text-xs pt-2">
@@ -70,25 +67,37 @@
                 <span class="bg-emerald-500/20 text-emerald-400 font-bold text-xs px-3 py-1 rounded-full">System Active</span>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-xs">
-                <div class="bg-[#111827] border border-slate-800 p-4 rounded-2xl space-y-1">
+                <div onclick="switchAdminTab('products')" class="bg-[#111827] border border-slate-800 p-4 rounded-2xl space-y-1 cursor-pointer hover:border-rose-500 transition">
                     <p class="text-slate-400">MY PRODUCTS</p>
                     <h3 class="text-xl font-black text-rose-500" id="statProducts">0</h3>
                 </div>
-                <div class="bg-[#111827] border border-slate-800 p-4 rounded-2xl space-y-1">
+                <div onclick="switchAdminTab('orders')" class="bg-[#111827] border border-slate-800 p-4 rounded-2xl space-y-1 cursor-pointer hover:border-emerald-500 transition">
                     <p class="text-slate-400">TOTAL ORDERS</p>
                     <h3 class="text-xl font-black text-emerald-500" id="statOrders">0</h3>
                 </div>
-                <div class="bg-[#111827] border border-slate-800 p-4 rounded-2xl space-y-1">
+                <div onclick="switchAdminTab('delivered')" class="bg-[#111827] border border-slate-800 p-4 rounded-2xl space-y-1 cursor-pointer hover:border-indigo-500 transition">
                     <p class="text-slate-400">TOTAL DELIVERED</p>
                     <h3 class="text-xl font-black text-indigo-400" id="statDelivered">0</h3>
                 </div>
-                <div class="bg-[#111827] border border-slate-800 p-4 rounded-2xl space-y-1">
+                <div onclick="switchAdminTab('cancel')" class="bg-[#111827] border border-slate-800 p-4 rounded-2xl space-y-1 cursor-pointer hover:border-rose-400 transition">
                     <p class="text-slate-400">CANCELED</p>
                     <h3 class="text-xl font-black text-rose-400" id="statCancel">0</h3>
                 </div>
-                <div class="bg-[#111827] border border-slate-800 p-4 rounded-2xl space-y-1">
+                <div onclick="switchAdminTab('pending')" class="bg-[#111827] border border-slate-800 p-4 rounded-2xl space-y-1 cursor-pointer hover:border-amber-500 transition">
                     <p class="text-slate-400">PENDING</p>
                     <h3 class="text-xl font-black text-amber-500" id="statPending">0</h3>
+                </div>
+                <div onclick="switchAdminTab('track')" class="bg-[#111827] border border-slate-800 p-4 rounded-2xl space-y-1 cursor-pointer hover:border-sky-500 transition">
+                    <p class="text-slate-400">ORDER TRACKING</p>
+                    <h3 class="text-sm font-bold text-sky-400 mt-2">🔍 Track Now</h3>
+                </div>
+                <div onclick="switchAdminTab('steadfast')" class="bg-[#111827] border border-slate-800 p-4 rounded-2xl space-y-1 cursor-pointer hover:border-orange-500 transition">
+                    <p class="text-slate-400">STEADFAST</p>
+                    <h3 class="text-sm font-bold text-orange-400 mt-2">⚡ Courier</h3>
+                </div>
+                <div onclick="switchAdminTab('pathao')" class="bg-[#111827] border border-slate-800 p-4 rounded-2xl space-y-1 cursor-pointer hover:border-red-500 transition">
+                    <p class="text-slate-400">PATHAO</p>
+                    <h3 class="text-sm font-bold text-red-400 mt-2">🚀 Courier</h3>
                 </div>
             </div>
         </div>
@@ -139,7 +148,7 @@
             <h2 class="text-base font-bold">Order Tracking</h2>
             <div class="bg-[#111827] border border-slate-800 p-4 rounded-2xl space-y-3 text-xs">
                 <div class="flex gap-2">
-                    <input type="text" id="adminTrackInput" placeholder="Enter Order ID (e.g. SN-4921)" class="flex-1 bg-slate-900 border border-slate-700 p-2.5 rounded-xl text-white">
+                    <input type="text" id="adminTrackInput" placeholder="Enter Order ID (e.g. VELORA-4921)" class="flex-1 bg-slate-900 border border-slate-700 p-2.5 rounded-xl text-white">
                     <button onclick="adminTrackOrder()" class="bg-rose-600 px-4 py-2.5 rounded-xl font-bold text-white">Track</button>
                 </div>
                 <p id="adminTrackResult" class="text-slate-400"></p>
@@ -206,7 +215,7 @@
 
     </main>
 
-    <!-- Admin Settings Modal -->
+    <!-- Admin Settings Modal (Opens from Menu Gear Icon) -->
     <div id="adminSettingsModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl p-6 relative max-h-[90vh] overflow-y-auto space-y-4">
             <div class="flex justify-between items-center border-b border-slate-800 pb-3">
@@ -232,11 +241,11 @@
                     <input type="email" id="vendorEmail" placeholder="example@gmail.com" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
                 </div>
                 <div>
-                    <label class="text-slate-400 block mb-1">bKash Number</label>
+                    <label class="text-slate-400 block mb-1">bKash Number (Optional)</label>
                     <input type="text" id="bkashNum" placeholder="018XXXXXXXX" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
                 </div>
                 <div>
-                    <label class="text-slate-400 block mb-1">Nagad Number</label>
+                    <label class="text-slate-400 block mb-1">Nagad Number (Optional)</label>
                     <input type="text" id="nagadNum" placeholder="018XXXXXXXX" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-2.5 text-sm text-white">
                 </div>
                 <div>
@@ -343,7 +352,6 @@
             }
         }
 
-        // Admin Settings Modal Functions
         function openAdminSettings() {
             document.getElementById('adminSettingsModal').classList.remove('hidden');
             document.getElementById('shopName').value = localStorage.getItem('admin_shopName') || '';
