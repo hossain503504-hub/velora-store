@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Style Nest - Shopping Store</title>
+    <title>VELORA - Global E-Commerce Store</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -26,13 +26,13 @@
 </head>
 <body class="bg-slate-950 text-slate-100 pb-24 transition-colors duration-300">
 
-    <!-- Top Header: Left Company Name & Right Full Search Bar -->
+    <!-- Top Header: Left Brand Name VELORA & Right Full Search Bar -->
     <header class="sticky top-0 z-40 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 px-4 py-3">
         <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
-            <h1 class="text-base md:text-xl font-extrabold tracking-wider text-rose-500 uppercase cursor-pointer whitespace-nowrap" onclick="switchTab('home')">Style Nest</h1>
+            <h1 class="text-base md:text-xl font-black tracking-widest text-rose-500 uppercase cursor-pointer whitespace-nowrap" onclick="switchTab('home')">VELORA</h1>
             
             <div class="flex-1 relative">
-                <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Search products in Style Nest..." class="w-full bg-slate-800 border border-slate-700 rounded-full py-2 pl-4 pr-10 text-sm focus:outline-none focus:border-rose-500 text-white">
+                <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Search products in VELORA..." class="w-full bg-slate-800 border border-slate-700 rounded-full py-2 pl-4 pr-10 text-sm focus:outline-none focus:border-rose-500 text-white">
                 <span class="absolute right-3 top-2.5 text-slate-400">🔍</span>
             </div>
         </div>
@@ -46,9 +46,9 @@
             <div id="bannerSlider" class="bg-gradient-to-r from-slate-900 to-rose-950 border border-slate-800 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden transition-all duration-1000">
                 <div class="relative z-10 flex justify-between items-center">
                     <div>
-                        <span id="bannerTag" class="bg-rose-500/20 text-rose-400 text-xs px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">Featured</span>
-                        <h2 id="bannerTitle" class="text-2xl font-black mt-2">STYLE NEST STORE</h2>
-                        <p id="bannerDesc" class="text-xs text-slate-300 mt-1">Discover premium fashion and trendsetter outfits.</p>
+                        <span id="bannerTag" class="bg-rose-500/20 text-rose-400 text-xs px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">FEATURED</span>
+                        <h2 id="bannerTitle" class="text-2xl font-black mt-2">VELORA STORE</h2>
+                        <p id="bannerDesc" class="text-xs text-slate-300 mt-1">Discover premium fashion and luxury lifestyle items.</p>
                     </div>
                     <div class="bg-slate-900/80 border border-slate-700 p-3 rounded-xl text-center">
                         <span class="text-[10px] uppercase font-bold text-slate-400 block">Flash Offer</span>
@@ -83,7 +83,7 @@
             </div>
         </div>
 
-        <!-- 3. CART TAB (Updated Flow) -->
+        <!-- 3. CART TAB -->
         <div id="tab-cart" class="tab-content hidden space-y-4">
             <h2 class="text-xl font-bold">My Shopping Cart</h2>
             <div id="cartItemsList" class="space-y-3"></div>
@@ -172,6 +172,20 @@
         </div>
     </div>
 
+    <!-- Custom In-App Success Modal (Replaces browser alert popup) -->
+    <div id="orderSuccessModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-sm rounded-2xl p-6 relative space-y-4 text-center">
+            <div class="w-16 h-16 bg-emerald-500/20 text-emerald-500 rounded-full flex items-center justify-center text-3xl font-bold mx-auto">✓</div>
+            <h3 class="text-lg font-bold text-white">Order Confirmed!</h3>
+            <p class="text-xs text-slate-300">Thank you for shopping with <span class="text-rose-500 font-bold">VELORA</span>.</p>
+            <div class="bg-slate-800 p-3 rounded-xl text-xs space-y-1">
+                <p class="text-slate-400">Tracking ID: <span id="successTrackId" class="text-rose-400 font-bold"></span></p>
+                <p class="text-emerald-400">A confirmation receipt has been sent to your Gmail.</p>
+            </div>
+            <button onclick="closeSuccessModal()" class="w-full bg-rose-600 text-white font-bold py-2.5 rounded-xl text-xs">Continue Shopping</button>
+        </div>
+    </div>
+
     <!-- Order Status Modal -->
     <div id="orderStatusModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 w-full max-w-sm rounded-2xl p-6 relative space-y-4 text-center">
@@ -224,19 +238,17 @@
         </div>
     </div>
 
-    <!-- Bottom Navigation Bar (Updated Layout) -->
+    <!-- Bottom Navigation Bar -->
     <nav class="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 z-50 px-4 py-2 flex justify-around items-center text-xs">
-        <!-- Center Home Icon moved to Left -->
         <button onclick="switchTab('home')" id="nav-home" class="flex flex-col items-center text-rose-500 font-medium">
             <span class="text-lg">🏠</span><span>Home</span>
         </button>
         <button onclick="switchTab('messages')" id="nav-messages" class="flex flex-col items-center text-slate-400 relative">
             <span class="text-lg">💬</span><span>Messages</span>
         </button>
-        <!-- Left Circular Logo moved to Left-Center position -->
         <div class="relative -top-3">
             <button onclick="switchTab('home')" class="w-12 h-12 bg-gradient-to-tr from-orange-500 to-rose-600 rounded-full flex flex-col items-center justify-center text-[9px] font-black text-white shadow-lg border-2 border-slate-950">
-                <span>STYLE</span><span>NEST</span>
+                <span>VELORA</span>
             </button>
         </div>
         <button onclick="switchTab('cart')" id="nav-cart" class="flex flex-col items-center text-slate-400 relative">
@@ -251,8 +263,8 @@
     <!-- Script Logic -->
     <script>
         const banners = [
-            { tag: "Featured", title: "STYLE NEST STORE", desc: "Discover premium fashion and trendsetter outfits.", bg: "from-slate-900 to-rose-950" },
-            { tag: "Limited Stock", title: "TRENDY STREETWEAR", desc: "Exclusive hoodies and drop-shoulder t-shirts.", bg: "from-slate-900 to-purple-950" }
+            { tag: "FEATURED", title: "VELORA STORE", desc: "Discover premium fashion and luxury lifestyle items.", bg: "from-slate-900 to-rose-950" },
+            { tag: "EXCLUSIVE", title: "TRENDY COLLECTION", desc: "Exclusive hoodies and drop-shoulder t-shirts.", bg: "from-slate-900 to-purple-950" }
         ];
         let currentBannerIndex = 0;
 
@@ -278,13 +290,11 @@
             if(timerEl) timerEl.innerText = `${hrs} : ${mins} : ${secs}`;
         }, 1000);
 
-        // Load Products: Paid/Prepaid items shown first
         let products = JSON.parse(localStorage.getItem('vendor_products')) || [
             { id: 1, name: "6-Piece Stainless Steel Kitchen Tool Set", price: 709, isPaid: true, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" },
             { id: 2, name: "Electric Kettle 2L - Perfect for Tea & Coffee", price: 659, isPaid: false, image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500" }
         ];
 
-        // Sort products so paid items come first
         products.sort((a, b) => (b.isPaid === true) - (a.isPaid === true));
 
         let cart = [];
@@ -351,7 +361,6 @@
             const checkoutBox = document.getElementById('checkoutBox');
 
             if(cart.length === 0) {
-                // If cart is empty, show other available products from the store
                 let otherProductsHTML = products.map(p => `
                     <div class="bg-slate-800/50 border border-slate-800 rounded-xl overflow-hidden flex flex-col justify-between">
                         <img src="${p.image}" class="w-full h-32 object-cover">
@@ -408,7 +417,6 @@
             const grandTotal = subtotal + shipping;
             document.getElementById('modalTotalBill').innerText = '৳' + grandTotal;
 
-            // Load saved user info into modal
             document.getElementById('chkName').value = localStorage.getItem('cust_name') || '';
             document.getElementById('chkEmail').value = localStorage.getItem('cust_email') || '';
             document.getElementById('chkPhone').value = localStorage.getItem('cust_phone') || '';
@@ -428,7 +436,6 @@
             const address = document.getElementById('chkAddress').value;
 
             if(!name || !email || !phone || !address) {
-                alert("Please fill up all delivery information fields!");
                 return;
             }
 
@@ -436,15 +443,14 @@
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
             const grandTotal = subtotal + shipping;
             const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
-            const orderId = "SN-" + Math.floor(1000 + Math.random() * 9000);
+            const orderId = "VELORA-" + Math.floor(1000 + Math.random() * 9000);
 
-            // Save customer info if not saved
             localStorage.setItem('cust_name', name);
             localStorage.setItem('cust_email', email);
             localStorage.setItem('cust_phone', phone);
             localStorage.setItem('cust_address', address);
 
-            // Send Email confirmation with tracking number and total bill
+            // Send silent Email via EmailJS
             emailjs.send('service_ce4fpfe', 'template_py8f1yp', {
                 to_name: name,
                 to_email: email,
@@ -453,18 +459,21 @@
                 order_id: orderId,
                 payment_method: paymentMethod,
                 total_amount: grandTotal
-            }).then(() => {
-                alert(`Order Confirmed Successfully! Tracking ID: ${orderId}. A confirmation email has been sent to your Gmail.`);
-            }, (error) => {
-                alert(`Order Confirmed! Tracking ID: ${orderId}. (Email notification sent successfully)`);
             });
 
-            // Save order in local storage for tracking
             localStorage.setItem(orderId, JSON.stringify({ orderId, name, status: "Processing", grandTotal }));
 
             cart = [];
             document.getElementById('cartBadge').innerText = '0';
             closePaymentModal();
+            
+            // Show custom in-app success modal instead of alert popup
+            document.getElementById('successTrackId').innerText = orderId;
+            document.getElementById('orderSuccessModal').classList.remove('hidden');
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('orderSuccessModal').classList.add('hidden');
             switchTab('home');
         }
 
@@ -511,19 +520,15 @@
 
             loadCustomerData();
             closeSettingsModal();
-            alert("Settings saved successfully!");
         }
 
         function handleLogout() {
-            if(confirm("Are you sure you want to logout?")) {
-                localStorage.removeItem('cust_name');
-                localStorage.removeItem('cust_email');
-                localStorage.removeItem('cust_phone');
-                localStorage.removeItem('cust_address');
-                loadCustomerData();
-                closeSettingsModal();
-                alert("Logged out successfully!");
-            }
+            localStorage.removeItem('cust_name');
+            localStorage.removeItem('cust_email');
+            localStorage.removeItem('cust_phone');
+            localStorage.removeItem('cust_address');
+            loadCustomerData();
+            closeSettingsModal();
         }
 
         window.addEventListener('DOMContentLoaded', () => {
