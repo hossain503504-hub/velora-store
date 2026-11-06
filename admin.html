@@ -5,7 +5,6 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
   import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-  // আপনার ফায়ারবেস কনসোল থেকে কপি করা কনফিগারেশন এখানে পেস্ট করুন
   const firebaseConfig = {
     apiKey: "AIzaSyA57eBAGVuhk4gsGkEN1A325SZmznkvhOE",
     authDomain: "velora-shop-3dc6a.firebaseapp.com",
@@ -108,7 +107,7 @@
             <button onclick="switchVendorTab('profile')" class="bg-[#1c2541] hover:bg-slate-700 p-2.5 rounded-full text-base border border-slate-700">⚙️</button>
         </div>
 
-        <!-- Low Stock Warning Notification Bar (Scrollable on Home) -->
+        <!-- Low Stock Warning Notification Bar -->
         <div id="lowStockWarningBox" class="bg-rose-500/15 border border-rose-500/40 p-3 rounded-2xl text-xs text-rose-300 flex items-center justify-between shadow">
             <div class="flex items-center gap-2">
                 <span class="text-lg">⚠️</span>
@@ -120,7 +119,7 @@
             <button onclick="switchVendorTab('products')" class="bg-rose-600 text-white px-3 py-1.5 rounded-xl font-bold text-[10px]">Refill</button>
         </div>
 
-        <!-- Quick Stats & Feature Grid (All brought to Home Scroll) -->
+        <!-- Quick Stats & Feature Grid -->
         <div class="grid grid-cols-2 gap-3 text-xs">
             <div onclick="switchVendorTab('wallet')" class="bg-[#0b132b] border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-rose-500 transition shadow">
                 <span class="text-amber-400 font-bold text-xs block">AVAILABLE BALANCE</span>
@@ -192,7 +191,7 @@
             </div>
         </div>
 
-        <!-- Visual Sales Chart & Traffic Analytics Section on Scroll -->
+        <!-- Visual Sales Chart & Traffic Analytics Section -->
         <div class="bg-[#0b132b] border border-slate-800 rounded-2xl p-4 space-y-3 shadow-xl">
             <div class="flex justify-between items-center">
                 <h3 class="font-bold text-sm text-white">Visual Sales & Traffic Graph (Last 7 Days)</h3>
@@ -212,7 +211,7 @@
             </div>
         </div>
 
-        <!-- Recent Admin Notice & Marketplace Info on Scroll -->
+        <!-- Recent Admin Notice & Marketplace Info -->
         <div class="bg-[#0b132b] border border-slate-800 rounded-2xl p-4 space-y-3 shadow-xl">
             <div class="flex justify-between items-center">
                 <h3 class="font-bold text-sm text-white">Marketplace & Admin Notices</h3>
@@ -356,7 +355,7 @@
                 body.innerHTML = `
                     <div class="bg-[#1c2541] p-3 rounded-xl space-y-3">
                         <p class="font-bold text-amber-400">Storefront URL:</p>
-                        <input type="text" readonly value="https://velora.com/store/velora-shop" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white text-center">
+                        <input type="text" readonly value="https://hossain503504-hub.github.io/velora-store/" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl p-2.5 text-white text-center">
                         <p class="text-slate-300">All your verified products are displayed here exclusively for your customers.</p>
                         <button onclick="alert('Storefront link copied to clipboard!'); closeVendorModal();" class="w-full bg-rose-600 text-white font-bold py-2.5 rounded-xl">Copy Store Link</button>
                     </div>`;
